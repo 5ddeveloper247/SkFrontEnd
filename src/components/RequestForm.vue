@@ -111,6 +111,7 @@
               <input type="button" name="next" class="next action-button" @click="handleSubmission" value="Submit" />
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
             </fieldset>
+            
             <fieldset>
               <div class="form-card">
                 <div class="row">
@@ -136,8 +137,7 @@
   </div>
 </template>
 
-
-
+   
 <script>
 import { ref, onMounted } from 'vue';
 
@@ -157,11 +157,28 @@ export default {
       propertyType: ''
     });
 
+    const validateForm = () => {
+      const requiredFields = [
+        'firstName', 'lastName', 'phone', 'email', 
+        'city', 'location', 'address', 'size', 
+        'totalPrice', 'purpose', 'propertyType'
+      ];
+      for (const field of requiredFields) {
+        if (!propertyRequestform.value[field]) {
+          return false;
+        }
+      }
+      return true;
+    };
+
     const handleSubmission = () => {
-      // Perform validation if necessary
-      console.log('loca:', propertyRequestform.value);
-      const base_url = 'http://127.0.0.1:8000'
-      // Make API call
+      if (!validateForm()) {
+        alert('Please fill out all required fields.');
+        return;
+      }
+
+      console.log('Form data:', propertyRequestform.value);
+      const base_url = 'http://127.0.0.1:8000';
       fetch(base_url + '/api/frontend/home/register/property', {
         method: 'POST',
         headers: {
@@ -178,12 +195,11 @@ export default {
           console.error('Error:', error);
           // Handle error (e.g., show an error message)
         });
-    }
+    };
 
     const handlePurpose = (purpose) => {
       propertyRequestform.value.purpose = purpose;
-
-    }
+    };
 
     onMounted(() => {
       $(document).ready(function () {

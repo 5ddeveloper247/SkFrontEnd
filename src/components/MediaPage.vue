@@ -4,13 +4,27 @@ import { onMounted, ref } from 'vue';
 const mediaData = ref([]);
 const currentTopVideo = ref(1);
 const currentBottomVideo = ref(1);
+const showMatchMedia = ref('');
 
 function showTopVideo(index) {
   currentTopVideo.value = index;
+  this.getMediaUrlFromMediaData(index)
 }
 
 function showBottomVideo(index) {
   currentBottomVideo.value = index;
+}
+
+
+function getMediaUrlFromMediaData(id) {
+  const mediaItem = mediaData.value.find(media => media.id === id);
+  if (mediaItem) {
+    const media_uri = mediaItem.url;
+    showMatchMedia.value = media_uri;
+    alert(media_uri);
+  } else {
+    alert('Media not found for the given id.');
+  }
 }
 
 onMounted(() => {
@@ -41,20 +55,20 @@ onMounted(() => {
   <div>
 
 
-    <!-- <li v-for="media in mediaData">
+    <li v-for="media in mediaData">
       {{ media.url }}
-    </li> -->
+      {{ mediaData[0].url }}
+    </li>
 
 
 
     <div class="media mx-md-5 px-md-5 mt-3 pt-5">
       <div class="d-flex flex-column align-items-center justify-content-center pt-5">
-        <iframe v-show="currentTopVideo === 1" class="Uvideo-1"
-          src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
-        <iframe v-show="currentTopVideo === 2" class="Uvideo-2"
+        <iframe class="Uvideo-1" :src="mediaData[0]?.url"></iframe>
+        <!-- <iframe v-show="currentTopVideo === 2" class="Uvideo-2"
           src="https://www.youtube.com/embed/3WrZMzqpFTc?si=PIqTmb58BLs8ftEQ"></iframe>
         <iframe v-show="currentTopVideo === 3" class="Uvideo-3"
-          src="https://www.youtube.com/embed/wexzvClUcUk?si=e0btNBYWjsyozHtb"></iframe>
+          src="https://www.youtube.com/embed/wexzvClUcUk?si=e0btNBYWjsyozHtb"></iframe> -->
         <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"
           class="btn subscribe-btn d-flex align-items-center my-2">
           <i class="fa-brands fa-youtube pe-2"></i>Subscribe
