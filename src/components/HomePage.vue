@@ -3,8 +3,7 @@
     <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade">
         <div class="carousel-inner">
             <div class="carousel-item top-carousal active">
-                <img src="../assets/Images/construction1.jpg"
-                    class="d-block w-100" alt="...">
+                <img src="../assets/Images/construction1.jpg" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
                         <h1 class="text-white p-5 text-center">Biggest Comapny
@@ -15,8 +14,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/construction2.jpg"
-                    class="d-block w-100" alt="...">
+                <img src="../assets/Images/construction2.jpg" class="d-block w-100" alt="...">
                 <div class="slider-text text-end">
                     <div class="anim-2">
                         <h1 class="text-white p-5 text-center">Biggest Comapny
@@ -27,8 +25,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/construction3.jpg"
-                    class="d-block w-100" alt="...">
+                <img src="../assets/Images/construction3.jpg" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
                         <h1 class="text-white p-5 text-center">Biggest Comapny
@@ -38,63 +35,71 @@
                 </div>
                 <div class="overlay"></div>
             </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon prev-carousal-btn" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon next-carousal-btn" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    <div class="row justify-content-center pb-4 mt-3 properties-calculation-card">
-                <div class="col-10 mt-md-5">
-                    <form action="" class="rounded-2" style="background-color: #111111b8">
-                        <div class="d-flex flex-wrap justify-content-between align-items-center p-3 all-property-form">
-                            <ul class="d-flex flex-wrap mb-0 p-0">
-                                <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white active"
-                                        href="#">All</a>
-                                </li>
-                                <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#">Sale</a>
-                                </li>
-                                <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#">Rent</a>
-                                </li>
-                            </ul>
-                            <div>
-                                <p class="text-white mt-md-0 mt-2 mx-2">(50,000) Properties</p>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-md-nowrap flex-wrap align-items-center m-2 mb-4">
-                            <form>
-                                <div class="form-floating m-2 mb-4 w-100">
-                                    <input type="text" class="form-control" id="floatingInput"
-                                        placeholder="New York, San Francisco, etc">
-                                    <label for="floatingInput">New York, San Francisco, etc</label>
-                                </div>
-                                <div class="m-2 mb-4 w-100">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Select Property Type</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                                <div class="m-2 mb-4 w-100">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Select Rooms</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn main-button px-5 mb-4 m-2 btn-round">Submit</button>
-                            </form>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon prev-carousal-btn" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon next-carousal-btn" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
+
+
+
+        <div class="row justify-content-center pb-4 mt-3 properties-calculation-card">
+            <div class="col-10 mt-md-5">
+                <form action="" class="rounded-2" style="background-color: #111111b8">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center p-3 all-property-form">
+                        <ul class="d-flex flex-wrap mb-0 p-0">
+                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white active"
+                                    href="#">All</a>
+                            </li>
+                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#">Sale</a>
+                            </li>
+                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#">Rent</a>
+                            </li>
+                        </ul>
+                        <div>
+                            <p class="text-white mt-md-0 mt-2 mx-2">(50,000) Properties</p>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-md-nowrap flex-wrap align-items-center m-2 mb-4">
+                        <form>
+                            <div class="form-floating m-2 mb-4 w-100">
+                                <input type="text" class="form-control" id="floatingInput"
+                                    placeholder="New York, San Francisco, etc">
+                                <label for="floatingInput">New York, San Francisco, etc</label>
+                            </div>
+                            <div class="m-2 mb-4 w-100">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Select Property Type</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="m-2 mb-4 w-100">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Select Rooms</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn main-button px-5 mb-4 m-2 btn-round">Submit</button>
+                        </form>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
 
     <div class="container main-body-content mt-5">
         <!-- ======================Hero Section================== -->
@@ -321,6 +326,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="container">
         <!-- ======================Manual Slider================== -->
 
@@ -346,6 +353,10 @@
             </div>
         </div>
 
+
+
+
+
         <!-- ======================Listing================== -->
         <div class="row my-5 px-md-5">
             <span>CHECKOUT OUR NEW</span>
@@ -360,8 +371,8 @@
                 </ul>
             </div>
             <p>Donec porttitor euismod dignissim. Nullam a lacinia ipsum, <br> nec dignissim purus. </p>
-            <div class="owl-carousel owl-theme mt-4 property-listed">
-                <div class="item mx-3">
+            <div class="owl-carousel owl-theme mt-4 property-listed d-flex ">
+                <!-- <div class="item mx-3">    
                     <div class="card border-0 bg-transparent">
                         <img class="img-fluid card-img-top" src="../assets/Images/listed-propery-1.webp" alt="Image">
                         <div
@@ -465,13 +476,15 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="item mx-3">
+                </div>  -->
+
+
+                <div class="item mx-3" v-for="media in mediaData " :key="media.id">
                     <div class="card border-0 bg-transparent">
                         <img class="img-fluid card-img-top" src="../assets/Images/listed-propery-3.jpeg" alt="Image">
                         <div
                             class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                            <h5 class="card-title">$ 5,970</h5>
+                            <h5 class="card-title">${{ media.price }}</h5>
                             <p class="card-text">Tranquil Haven in the Woods</p>
                             <p><small>103 Wright CourtBurien, WA 98168</small></p>
                             <div class="d-flex align-items-center">
@@ -708,8 +721,8 @@
             </div>
         </div>
     </div>
-     <!-- ======================Modals================== -->
-     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- ======================Modals================== -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content p-md-3 p-2">
                 <div class="d-flex justify-content-between px-md-3">
@@ -749,8 +762,26 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+// Create the toast instance
+const $toast = useToast();
+
+const mediaData = ref([]);
+
+////////////////////////
 
 const carousel = ref(null);
 const autoplayInterval = ref(null);
@@ -823,15 +854,11 @@ onMounted(() => {
             dots: false,
             autoplay: true,
             autoplayHoverPause: true,
-            responsive: {
-                0: { items: 1 },
-                768: { items: 2 },
-                1000: { items: 3 },
-            },
+
         });
 
         $('.right-testimonial-carousel').owlCarousel({
-            items: 1,
+            // items: 1,
             loop: true,
             autoplay: true,
             autoplayTimeout: 4000,
@@ -850,5 +877,42 @@ onMounted(() => {
             $(this).addClass('active');
         });
     });
+});
+
+
+
+onMounted(() => {
+    // $toast.open({
+    //   message: 'Fetching media data...',
+    //   type: 'info',
+    //   position:'top-right'
+    // });
+
+    // Make API call
+    const base_url = import.meta.env.VITE_BASE_URL;
+    fetch(base_url + '/api/frontend/home/property/get', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data.propertyInfo);
+            mediaData.value = data.propertyInfo;
+            $toast.open({
+                message: 'Property data fetched successfully!',
+                type: 'success',
+                position: 'top-right'
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            $toast.open({
+                message: 'Failed to fetch property data.',
+                type: 'error',
+                position: 'top-right'
+            });
+        });
 });
 </script>

@@ -14,6 +14,14 @@
                     <i class="fa-solid fa-share-from-square px-2"></i>
                 </div>
             </div>
+
+
+
+
+
+
+
+
             <div class="col-md-8">
                 <div id="society-detail-carousel" class="carousel slide">
                     <div class="carousel-inner">
@@ -54,15 +62,15 @@
                 <div class="d-flex justify-content-start my-4 mx-md-5">
                     <div class="d-flex flex-column justify-content-center align-items-center mx-3">
                         <i class="fa-solid fa-bed px-4"></i>
-                        <p class="mt-3 text-center">5 Beds</p>
+                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_bathrooms }}</p>
                     </div>
                     <div class="d-flex flex-column justify-content-center align-items-center mx-3">
                         <i class="fa-solid fa-bath px-4"></i>
-                        <p class="mt-3 text-center">6 Bathrooms</p>
+                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_bedrooms }}</p>
                     </div>
                     <div class="d-flex flex-column justify-content-center align-items-center mx-3">
                         <i class="fa-solid fa-arrows-up-down px-4"></i>
-                        <p class="mt-3 text-center">1.5 Kanal</p>
+                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_area_unit }} / {{ propertyData.property_listing_pape?.propertyDetail_area }}</p>
                     </div>
                 </div>
                 <hr>
@@ -323,6 +331,20 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="col-md-4">
                 <div class="property-detail d-flex flex-column py-4 px-2 shadow rounded-4 my-2">
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
@@ -425,7 +447,7 @@
                                 <p class="card-text">Tranquil Haven in the Woods</p>
                                 <p><small>103 Wright CourtBurien, WA 98168</small></p>
                                 <div class="d-flex align-items-center">
-                                    <div><i class="fa-solid fa-bed pe-2"></i>4 beds</div>
+                                    <div><i class="fa-solid fa-bed pe-2"></i>40 beds</div>
                                     <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>3 bath</div>
                                 </div>
                                 <div class="d-flex align-items-center mt-2">
@@ -542,3 +564,53 @@
         </div>
     </div>
 </template>
+
+
+
+
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const propertyId = ref(route.params.id);
+
+// Create the toast instance
+const $toast = useToast();
+
+const propertyData = ref([]);
+
+// Fetch the media data when the component is mounted
+onMounted(() => {
+  // Fetch the media data
+  const base_url = import.meta.env.VITE_BASE_URL;
+  fetch(`${base_url}/api/frontend/home/property/getbyid/${propertyId.value}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data.propertyInfo.id);
+      console.log('Success:', data.propertyInfo);
+      propertyData .value = data.propertyInfo;
+      $toast.open({
+        message: 'Property data fetched successfully!',
+        type: 'success',
+        position: 'top-right',
+      });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      $toast.open({
+        message: 'Failed to fetch property data.',
+        type: 'error',
+        position: 'top-right',
+      });
+    });
+});
+</script>

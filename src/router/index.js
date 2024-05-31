@@ -73,11 +73,12 @@ const router = createRouter({
     },
 
     {
-      path: '/land-detail',
+      path: '/land-detail/:id',
       name: 'land-detail',
       component: LandDetaiPage
     },
-    
+
+
   ]
 })
 

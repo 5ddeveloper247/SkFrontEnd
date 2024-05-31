@@ -1,9 +1,7 @@
-<script setup>
-</script>
-
 <template>
     <div class="container pt-5">
-        <nav class="pt-5" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+        <nav class="pt-5"
+            style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
             aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -146,6 +144,16 @@
 
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
             <div class="col-md-9 col-8 my-2 properties-listed">
                 <div class="row listing">
                     <div class="row justify-content-between align-items-center properties-for-sale">
@@ -161,12 +169,13 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 my-1">
-                        <RouterLink to="/land-detail">
+                    <div class="col-md-4 my-1" v-for="media in mediaData " :key="media.id">
+                        <RouterLink :to="{ name: 'land-detail', params: { id: media.id } }">
+                            <!-- <RouterLink to="/land-detail"> -->
                             <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png"  alt="Image">
+                                <img class="img-fluid" src="../assets/Images/listing1.png" alt="Image">
                                 <div class="card-body">
-                                    <h5 class="card-title">$ 5,970</h5>
+                                    <h5 class="card-title">$ 5,97098</h5>
                                     <p class="card-text">Tranquil Haven in the Woods</p>
                                     <p><small>103 Wright CourtBurien, WA 98168</small></p>
                                     <div class="d-flex align-items-center">
@@ -188,222 +197,8 @@
                             </div>
                         </RouterLink>
                     </div>
-                    <div class="col-md-4 my-1">
-                        <a href="detailpage.html">
-                            <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png"  alt="Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">$ 5,970</h5>
-                                    <p class="card-text">Tranquil Haven in the Woods</p>
-                                    <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>4 beds</p>
-                                        </div>
-                                        <div class="mx-3 d-flex align-items-center"><i
-                                                class="fa-solid fa-toilet pe-2"></i>
-                                            <p>3 bath</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4 my-1">
-                        <a href="detailpage.html">
-                            <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png"  alt="Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">$ 5,970</h5>
-                                    <p class="card-text">Tranquil Haven in the Woods</p>
-                                    <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>4 beds</p>
-                                        </div>
-                                        <div class="mx-3 d-flex align-items-center"><i
-                                                class="fa-solid fa-toilet pe-2"></i>
-                                            <p>3 bath</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4 my-1">
-                        <a href="detailpage.html">
-                            <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png"  alt="Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">$ 5,970</h5>
-                                    <p class="card-text">Tranquil Haven in the Woods</p>
-                                    <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>4 beds</p>
-                                        </div>
-                                        <div class="mx-3 d-flex align-items-center"><i
-                                                class="fa-solid fa-toilet pe-2"></i>
-                                            <p>3 bath</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4 my-1">
-                        <a href="detailpage.html">
-                            <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png"  alt="Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">$ 5,970</h5>
-                                    <p class="card-text">Tranquil Haven in the Woods</p>
-                                    <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>4 beds</p>
-                                        </div>
-                                        <div class="mx-3 d-flex align-items-center"><i
-                                                class="fa-solid fa-toilet pe-2"></i>
-                                            <p>3 bath</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4 my-1">
-                        <a href="detailpage.html">
-                            <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png"  alt="Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">$ 5,970</h5>
-                                    <p class="card-text">Tranquil Haven in the Woods</p>
-                                    <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>4 beds</p>
-                                        </div>
-                                        <div class="mx-3 d-flex align-items-center"><i
-                                                class="fa-solid fa-toilet pe-2"></i>
-                                            <p>3 bath</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4 my-1">
-                        <a href="detailpage.html">
-                            <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png"  alt="Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">$ 5,970</h5>
-                                    <p class="card-text">Tranquil Haven in the Woods</p>
-                                    <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>4 beds</p>
-                                        </div>
-                                        <div class="mx-3 d-flex align-items-center"><i
-                                                class="fa-solid fa-toilet pe-2"></i>
-                                            <p>3 bath</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4 my-1">
-                        <a href="detailpage.html">
-                            <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png"  alt="Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">$ 5,970</h5>
-                                    <p class="card-text">Tranquil Haven in the Woods</p>
-                                    <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>4 beds</p>
-                                        </div>
-                                        <div class="mx-3 d-flex align-items-center"><i
-                                                class="fa-solid fa-toilet pe-2"></i>
-                                            <p>3 bath</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4 my-1">
-                        <a href="detailpage.html">
-                            <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png"  alt="Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">$ 5,970</h5>
-                                    <p class="card-text">Tranquil Haven in the Woods</p>
-                                    <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>4 beds</p>
-                                        </div>
-                                        <div class="mx-3 d-flex align-items-center"><i
-                                                class="fa-solid fa-toilet pe-2"></i>
-                                            <p>3 bath</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                        <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+
+
                 </div>
                 <div class="row justify-content-center">
                     <a style="width: fit-content;" href="requestform.html"
@@ -414,3 +209,61 @@
         </div>
     </div>
 </template>
+
+
+
+
+
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const mediaId = ref(route.params.id);
+// Create the toast instance
+const $toast = useToast();
+
+const mediaData = ref([]);
+
+////////////////////////
+
+onMounted(() => {
+    const route = useRoute();
+   const id = route.params.id;
+   console.log(id)
+    // $toast.open({
+    //   message: 'Fetching media data...',
+    //   type: 'info',
+    //   position:'top-right'
+    // });
+
+    // Make API call
+    const base_url = import.meta.env.VITE_BASE_URL;
+    fetch(base_url + '/api/frontend/home/property/get', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data.propertyInfo);
+            mediaData.value = data.propertyInfo;
+            $toast.open({
+                message: 'Property data fetched successfully!',
+                type: 'success',
+                position: 'top-right'
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            $toast.open({
+                message: 'Failed to fetch property data.',
+                type: 'error',
+                position: 'top-right'
+            });
+        });
+});
+</script>

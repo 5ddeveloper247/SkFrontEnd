@@ -1,35 +1,56 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
+// Create the toast instance
+const $toast = useToast();
+
+// Define reactive state variables
 const mediaData = ref([]);
 const currentTopVideo = ref(1);
 const currentBottomVideo = ref(1);
 const showMatchMedia = ref('');
 
+// Function to show the top video
 function showTopVideo(index) {
   currentTopVideo.value = index;
-  this.getMediaUrlFromMediaData(index)
+  getMediaUrlFromMediaData(index);
 }
 
+// Function to show the bottom video
 function showBottomVideo(index) {
   currentBottomVideo.value = index;
 }
 
-
+// Function to get media URL from media data by ID
 function getMediaUrlFromMediaData(id) {
   const mediaItem = mediaData.value.find(media => media.id === id);
   if (mediaItem) {
     const media_uri = mediaItem.url;
     showMatchMedia.value = media_uri;
-    alert(media_uri);
+    $toast.open({
+      message: `Media URL: ${media_uri}`,
+      type: 'success'
+    });
   } else {
-    alert('Media not found for the given id.');
+    $toast.open({
+      message: 'Media not found for the given ID.',
+      type: 'error'
+    });
   }
 }
 
+// Fetch media data on component mount
 onMounted(() => {
+  // $toast.open({
+  //   message: 'Fetching media data...',
+  //   type: 'info',
+  //   position:'top-right'
+  // });
+
   // Make API call
-  const base_url = 'http://127.0.0.1:8000';
+  const base_url = import.meta.env.VITE_BASE_URL;
   fetch(base_url + '/api/frontend/home/media/get', {
     method: 'GET',
     headers: {
@@ -39,26 +60,34 @@ onMounted(() => {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data.media);
-      mediaData.value = data.media; // Correct assignment
-
-      // Handle success (e.g., show a success message)
+      mediaData.value = data.media;
+      $toast.open({
+        message: 'Media data fetched successfully!',
+        type: 'success',
+        position: 'top-right'
+      });
     })
     .catch(error => {
       console.error('Error:', error);
-      // Handle error (e.g., show an error message)
+      $toast.open({
+        message: 'Failed to fetch media data.',
+        type: 'error',
+        position: 'top-right'
+      });
     });
 });
 </script>
+
 
 
 <template>
   <div>
 
 
-    <li v-for="media in mediaData">
+    <!-- <li v-for="media in mediaData">
       {{ media.url }}
       {{ mediaData[0].url }}
-    </li>
+    </li> -->
 
 
 

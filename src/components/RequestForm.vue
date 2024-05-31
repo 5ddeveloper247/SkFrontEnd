@@ -111,7 +111,7 @@
               <input type="button" name="next" class="next action-button" @click="handleSubmission" value="Submit" />
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
             </fieldset>
-            
+
             <fieldset>
               <div class="form-card">
                 <div class="row">
@@ -137,9 +137,22 @@
   </div>
 </template>
 
-   
+
+
+
+
+
+
+
+
+
 <script>
 import { ref, onMounted } from 'vue';
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+
+// Create the toast instance
+const $toast = useToast();
 
 export default {
   setup() {
@@ -159,8 +172,8 @@ export default {
 
     const validateForm = () => {
       const requiredFields = [
-        'firstName', 'lastName', 'phone', 'email', 
-        'city', 'location', 'address', 'size', 
+        'firstName', 'lastName', 'phone', 'email',
+        'city', 'location', 'address', 'size',
         'totalPrice', 'purpose', 'propertyType'
       ];
       for (const field of requiredFields) {
@@ -169,16 +182,21 @@ export default {
         }
       }
       return true;
-    };
+    }
+
 
     const handleSubmission = () => {
       if (!validateForm()) {
-        alert('Please fill out all required fields.');
+        $toast.open({
+          message: 'Please fill out all required fields.',
+          type: 'info',
+          position: 'top-right'
+        });
         return;
       }
 
       console.log('Form data:', propertyRequestform.value);
-      const base_url = 'http://127.0.0.1:8000';
+      const base_url = import.meta.env.VITE_BASE_URL;
       fetch(base_url + '/api/frontend/home/register/property', {
         method: 'POST',
         headers: {
@@ -188,18 +206,52 @@ export default {
       })
         .then(response => response.json())
         .then(data => {
-          console.log('Success:', data);
-          // Handle success (e.g., show a success message)
+          if (data.success) {
+            $toast.open({
+              message: 'Submitted Successfully',
+              type: 'success',
+              position: 'top-right'
+            });
+            console.log('Success:', data);
+          }
+          else {
+            $toast.open({
+              message: 'An error occured!',
+              type: 'error',
+              position: 'top-right'
+            });
+            console.error('Error:', data);
+            if (data.errors) {
+              Object.keys(data.errors).forEach(field => {
+                data.errors[field].forEach(errorMessage => {
+                  $toast.open({
+                    message: `${field}: ${errorMessage}`,
+                    type: 'error',
+                    position: 'top-right'
+                  });
+                });
+              });
+            }
+          }
         })
         .catch(error => {
+
+          $toast.open({
+            message: 'An unexpected error occurred.',
+            type: 'error',
+            position: 'top-right'
+          });
           console.error('Error:', error);
-          // Handle error (e.g., show an error message)
         });
-    };
+    }
+
+
 
     const handlePurpose = (purpose) => {
       propertyRequestform.value.purpose = purpose;
-    };
+    }
+
+
 
     onMounted(() => {
       $(document).ready(function () {
