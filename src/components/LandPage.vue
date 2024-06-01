@@ -173,25 +173,27 @@
                         <RouterLink :to="{ name: 'land-detail', params: { id: media.id } }">
                             <!-- <RouterLink to="/land-detail"> -->
                             <div class="card border-0 bg-transparent">
-                                <img class="img-fluid" src="../assets/Images/listing1.png" alt="Image">
+                                <img class="img-fluid" :src="getImageUrl(media)" alt="Image">
                                 <div class="card-body">
-                                    <h5 class="card-title">$ 5,97098</h5>
-                                    <p class="card-text">Tranquil Haven in the Woods</p>
-                                    <p><small>103 Wright CourtBurien, WA 98168</small></p>
+                                    <h5 class="card-title">${{ media?.price }}</h5>
+                                    <p class="card-text">{{ media?.property_listing_pape?.extra_info_title }}</p>
+                                    <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p>
                                     <div class="d-flex align-items-center">
                                         <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>4 beds</p>
+                                            <p>{{ media?.property_listing_pape?.propertyDetail_bedrooms }}</p>
                                         </div>
                                         <div class="mx-3 d-flex align-items-center"><i
                                                 class="fa-solid fa-toilet pe-2"></i>
-                                            <p>3 bath</p>
+                                            <p>{{ media?.property_listing_pape?.propertyDetail_bathrooms }}</p>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center mt-2">
                                         <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
+                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>{{
+                                                media?.pInfo_email }}</a>
                                         <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
+                                            role="button"><i class="fa-solid fa-phone pe-2"></i>{{
+                                                media?.pInfo_phoneNumber }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -215,30 +217,36 @@
 
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, onUnmounted } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import { useFormDataStore } from '../stores/HomeDataFilterStore';
 import { useRoute } from 'vue-router';
-
 const route = useRoute();
 const mediaId = ref(route.params.id);
 // Create the toast instance
 const $toast = useToast();
 
+
 const mediaData = ref([]);
 
+
 ////////////////////////
+const getImageUrl = (media) => {
+    return `${import.meta.env.VITE_BASE_URL}/${media?.property_record_files[0]?.image_uri}`;
+};
+
+
+onMounted(() => {
+    const formDataStore = useFormDataStore();
+    const filterCriteria = formDataStore.filterData
+    console.log('Retrieved data from store:', filterCriteria);
+})
+
 
 onMounted(() => {
     const route = useRoute();
-   const id = route.params.id;
-   console.log(id)
-    // $toast.open({
-    //   message: 'Fetching media data...',
-    //   type: 'info',
-    //   position:'top-right'
-    // });
-
+    const id = route.params.id;
     // Make API call
     const base_url = import.meta.env.VITE_BASE_URL;
     fetch(base_url + '/api/frontend/home/property/get', {

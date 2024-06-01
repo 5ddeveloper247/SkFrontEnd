@@ -22,25 +22,14 @@
 
 
 
+
+
+
             <div class="col-md-8">
                 <div id="society-detail-carousel" class="carousel slide">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../assets/Images/about-us-bg.avif" class="d-block w-100" alt="Image 1">
-                            <div class="verified-society rounded-2">
-                                <p class="text-white p-2 d-flex align-items-center"><i
-                                        class="fa-solid fa-check pe-2"></i>Verified</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/Images/services-bg.avif" class="d-block w-100" alt="Image 2">
-                            <div class="verified-society rounded-2">
-                                <p class="text-white p-2 d-flex align-items-center"><i
-                                        class="fa-solid fa-check pe-2"></i>Verified</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../assets/Images/about-us-bg.avif" class="d-block w-100" alt="Image 3">
+                        <div class="" v-for="media in propertyData.property_record_files" :key="media.id">
+                            <img :src="getImageUrl(media)" class="d-block w-100" alt="Image 3">
                             <div class="verified-society rounded-2">
                                 <p class="text-white p-2 d-flex align-items-center"><i
                                         class="fa-solid fa-check pe-2"></i>Verified</p>
@@ -62,15 +51,18 @@
                 <div class="d-flex justify-content-start my-4 mx-md-5">
                     <div class="d-flex flex-column justify-content-center align-items-center mx-3">
                         <i class="fa-solid fa-bed px-4"></i>
-                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_bathrooms }}</p>
+                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_bathrooms }}
+                        </p>
                     </div>
                     <div class="d-flex flex-column justify-content-center align-items-center mx-3">
                         <i class="fa-solid fa-bath px-4"></i>
-                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_bedrooms }}</p>
+                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_bedrooms }}
+                        </p>
                     </div>
                     <div class="d-flex flex-column justify-content-center align-items-center mx-3">
                         <i class="fa-solid fa-arrows-up-down px-4"></i>
-                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_area_unit }} / {{ propertyData.property_listing_pape?.propertyDetail_area }}</p>
+                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_area }} / {{
+                            propertyData.property_listing_pape?.propertyDetail_area_unit }}</p>
                     </div>
                 </div>
                 <hr>
@@ -100,7 +92,7 @@
                                             <p class="text-start text-nowrap">Type</p>
                                         </div>
                                         <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">Residential Plot</p>
+                                            <p class="text-start text-nowrap">{{ propertyDetail?.pupose_home }}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -180,59 +172,37 @@
                                 <div class="col-md-5 col-12">
                                     <div class="d-flex align-items-center justify-content-between m-2">
                                         <p>Type</p>
-                                        <p>Residential Plot</p>
+                                        <p>{{propertyData?.property_listing_pape?.purpose_plot }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-5 col-12">
                                     <div class="d-flex align-items-center justify-content-between m-2">
                                         <p>Area</p>
-                                        <p>1 Kanal</p>
+                                        <p>{{ propertyData.property_listing_pape?.propertyDetail_area }} / {{
+                            propertyData?.property_listing_pape?.propertyDetail_area_unit }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-5 col-12">
                                     <div class="d-flex align-items-center justify-content-between m-2">
                                         <p>Price</p>
-                                        <p>PKR 4.35 Crore</p>
+                                        <p>{{propertyData?.price }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-5 col-12">
                                     <div class="d-flex align-items-center justify-content-between m-2">
                                         <p>Purpose</p>
-                                        <p>For Sale</p>
+                                        <p>{{propertyData?.property_listing_pape?.purpose_purpose }}</p>
                                     </div>
                                 </div>
-                                <div class="col-md-5 col-12">
-                                    <div class="d-flex align-items-center justify-content-between m-2">
-                                        <p>Type</p>
-                                        <p>Residential Plot</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-5 col-12">
-                                    <div class="d-flex align-items-center justify-content-between m-2">
-                                        <p>Area</p>
-                                        <p>1 Kanal</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-5 col-12">
-                                    <div class="d-flex align-items-center justify-content-between m-2">
-                                        <p>Price</p>
-                                        <p>PKR 4.35 Crore</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-5 col-12">
-                                    <div class="d-flex align-items-center justify-content-between m-2">
-                                        <p>Purpose</p>
-                                        <p>For Sale</p>
-                                    </div>
-                                </div>
+                              
+                        
                             </div>
                         </div>
                         <div class="description shadow p-2 rounded-4">
                             <h5>Description</h5>
                             <p>
-                                <small>BEAUTIFUL HOUSE FOR SALE IN DHA DEFENCE <br>
-                                    LOCATION DHA PHASE 2 ISLAMABAD <br>HOUSE TYPE BUNGLOW
-                                    <br>BEDROOMS 05
+                                <small>
+                                   {{propertyData?.property_listing_pape?.extra_info_description }}
                                 </small>
                             </p>
                         </div>
@@ -246,25 +216,24 @@
                                     <div class="d-flex flex-column justify-content-between">
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-bolt pe-1"></i><small>Possesion</small></p>
+                                                    class="fa-solid fa-bolt pe-1"></i><small>{{propertyData?.amenities[0]?.value==1?propertyData?.amenities[0]?.amenities:" " }}</small></p>
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-check-to-slot pe-1"></i><small>Balloted</small>
+                                                    class="fa-solid fa-check-to-slot pe-1"></i><small>{{propertyData?.amenities[1]?.value==1?propertyData?.amenities[1]?.amenities:" " }}</small>
                                             </p>
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-plate-wheat pe-1"></i><small>Sewerage</small></p>
+                                                    class="fa-solid fa-plate-wheat pe-1"></i><small>{{propertyData?.amenities[2]?.value==1?propertyData?.amenities[2]?.amenities:" " }}</small></p>
                                         </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-bolt pe-1"></i><small>Electricity</small></p>
+                                                    class="fa-solid fa-bolt pe-1"></i><small>{{propertyData?.amenities[3]?.value==1?propertyData?.amenities[3]?.amenities:" " }}</small></p>
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-water pe-1"></i><small>Water Supply</small></p>
+                                                    class="fa-solid fa-water pe-1"></i><small>{{propertyData?.amenities[4]?.value==1?propertyData?.amenities[4]?.amenities:" " }}</small></p>
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-fire-flame-simple pe-1"></i><small>Sui
-                                                    Gas</small></p>
+                                                    class="fa-solid fa-fire-flame-simple pe-1"></i><small>{{propertyData?.amenities[5]?.value==1?propertyData?.amenities[5]?.amenities:" " }}</small></p>
                                         </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-border-all pe-1"></i><small>Boundary Wall</small>
+                                                    class="fa-solid fa-border-all pe-1"></i><small>{{propertyData?.amenities[6]?.value==1?propertyData?.amenities[6]?.amenities:" " }}</small>
                                             </p>
                                         </div>
                                     </div>
@@ -278,21 +247,19 @@
                                     <div class="d-flex flex-column justify-content-between">
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-bolt pe-1"></i><small>Nearby Schools</small></p>
+                                                    class="fa-solid fa-bolt pe-1"></i><small>{{propertyData?.amenities[6]?.value==1?propertyData?.amenities[6]?.amenities:" " }}</small></p>
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-check-to-slot pe-1"></i><small>Nearby
-                                                    Hospitals</small></p>
+                                                    class="fa-solid fa-check-to-slot pe-1"></i><small>{{propertyData?.amenities[7]?.value==1?propertyData?.amenities[7]?.amenities:" " }}</small></p>
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-plate-wheat pe-1"></i><small>Nearby Shopping
-                                                    Malls</small></p>
+                                                    class="fa-solid fa-plate-wheat pe-1"></i><small>{{propertyData?.amenities[7]?.value==1?propertyData?.amenities[7]?.amenities:" " }}</small></p>
                                         </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-bolt pe-1"></i><small>Nearby Restaurants</small>
+                                                    class="fa-solid fa-bolt pe-1"></i><small>{{propertyData?.amenities[8]?.value==1?propertyData?.amenities[8]?.amenities:" " }}</small>
                                             </p>
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-water pe-1"></i><small>Nearby Public Transport
-                                                    <br> Service</small></p>
+                                                    class="fa-solid fa-water pe-1"></i><small>{{propertyData?.amenities[9]?.value==1?propertyData?.amenities[9]?.amenities:" " }}
+                                                    <br></small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -305,8 +272,7 @@
                                     <div class="d-flex flex-column justify-content-between">
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
                                             <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-person-rifle pe-1"></i><small>Security
-                                                    Staff</small></p>
+                                                    class="fa-solid fa-person-rifle pe-1"></i><small>{{propertyData?.amenities[10]?.value==1?propertyData?.amenities[10]?.amenities:" " }}</small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -437,7 +403,7 @@
             </div>
 
             <div class="row px-md-5">
-                    <h2>Relevent Properties</h2>
+                <h2>Relevent Properties</h2>
                 <div class="owl-carousel owl-theme mt-4 property-listed">
                     <div class="item mx-3">
                         <div class="card border-0 bg-transparent">
@@ -570,7 +536,7 @@
 
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted,onBeforeMount  } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useRoute } from 'vue-router';
@@ -582,9 +548,11 @@ const propertyId = ref(route.params.id);
 const $toast = useToast();
 
 const propertyData = ref([]);
-
+const getImageUrl = (media) => {
+  return `${import.meta.env.VITE_BASE_URL}/${media?.image_uri}`;
+};
 // Fetch the media data when the component is mounted
-onMounted(() => {
+onBeforeMount(() => {
   // Fetch the media data
   const base_url = import.meta.env.VITE_BASE_URL;
   fetch(`${base_url}/api/frontend/home/property/getbyid/${propertyId.value}`, {
@@ -595,7 +563,7 @@ onMounted(() => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log('Success:', data.propertyInfo.id);
+     
       console.log('Success:', data.propertyInfo);
       propertyData .value = data.propertyInfo;
       $toast.open({

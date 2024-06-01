@@ -69,12 +69,13 @@
                     <div class="d-flex flex-md-nowrap flex-wrap align-items-center m-2 mb-4">
                         <form>
                             <div class="form-floating m-2 mb-4 w-100">
-                                <input type="text" class="form-control" id="floatingInput"
-                                    placeholder="New York, San Francisco, etc">
+                                <input type="text" class="form-control" v-model="filterCriteria.location"
+                                    id="floatingInput" placeholder="New York, San Francisco, etc">
                                 <label for="floatingInput">New York, San Francisco, etc</label>
                             </div>
                             <div class="m-2 mb-4 w-100">
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" v-model="filterCriteria.property_type"
+                                    aria-label="Default select example">
                                     <option selected>Select Property Type</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
@@ -82,14 +83,16 @@
                                 </select>
                             </div>
                             <div class="m-2 mb-4 w-100">
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" v-model="filterCriteria.rooms"
+                                    aria-label="Default select example">
                                     <option selected>Select Rooms</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn main-button px-5 mb-4 m-2 btn-round">Submit</button>
+                            <button type="button" class="btn main-button px-5 mb-4 m-2 btn-round"
+                                @click="handleFilterCriteria">Submit</button>
                         </form>
                     </div>
                 </form>
@@ -480,23 +483,28 @@
 
 
                 <div class="item mx-3" v-for="media in mediaData " :key="media.id">
-                    {{ console.log(media?.property_listing_pape?.extra_info_title) }}
+                    <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
                     <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/listed-propery-3.jpeg" alt="Image">
+                        <img class="img-fluid card-img-top" :src="getImageUrl(media)" alt="Image">
                         <div
                             class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
                             <h5 class="card-title">${{ media?.price }}</h5>
                             <p class="card-text">{{ media?.property_listing_pape?.extra_info_title }}</p>
-                            <p><small>{{media?.property_listing_pape?.extra_info_description}}</small></p>
+                            <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p>
                             <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>{{media?.property_listing_pape?.propertyDetail_bedrooms }}</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{ media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
+                                <div><i class="fa-solid fa-bed pe-2"></i>{{
+                                    media?.property_listing_pape?.propertyDetail_bedrooms
+                                }}</div>
+                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
+                                    media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
                             </div>
                             <div class="d-flex align-items-center mt-2">
                                 <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>{{ media?.pInfo_email }}</a>
+                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>{{ media?.pInfo_email
+                                    }}</a>
                                 <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-solid fa-phone pe-2"></i>{{media?.pInfo_phoneNumber}}</a>
+                                    role="button"><i class="fa-solid fa-phone pe-2"></i>{{ media?.pInfo_phoneNumber
+                                    }}</a>
                             </div>
                         </div>
                     </div>
@@ -775,29 +783,70 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import emitter from '../../emitter';
+import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
-// Create the toast instance
+import { useFormDataStore } from '.././stores/HomeDataFilterStore'; // Adjust the path as necessary
+const formDataStore = useFormDataStore();
+//Create the toast instance
 const $toast = useToast();
+const router = useRouter();
 
 const mediaData = ref([]);
 
 ////////////////////////
 
+
 const carousel = ref(null);
 const autoplayInterval = ref(null);
+const filterCriteria = ref({
+    property_type: '',
+    rooms:'',
+    location:'',
+    min_price: '',
+    max_price: '',
+    min_area: '',
+    max_area: '',
+    min_bedrooms: '',
+    max_bedrooms: '',
+    min_bathrooms: '',
+    max_bathrooms: '',
+    min_garages: '',
+    max_garages: '',
+    min_year: '',
+
+});
+
+
+
 const autoplaySpeed = 5000;
+
+
+const handleFilterCriteria = () => {
+    formDataStore.setFilterData(filterCriteria.value);
+    router.push({ name: 'land' }); // Use named route
+}
+
+
+
+
+//creating image url
+const getImageUrl = (media) => {
+    return `${import.meta.env.VITE_BASE_URL}/${media?.property_record_files[0]?.image_uri}`;
+}
+
 const startAutoplay = () => {
     autoplayInterval.value = setInterval(() => {
         carousel.value.querySelector('.carousel-control-next').click();
     }, autoplaySpeed);
-};
+}
 const stopAutoplay = () => {
     if (autoplayInterval.value) {
         clearInterval(autoplayInterval.value);
         autoplayInterval.value = null;
     }
-};
+}
 const handleSlideChange = () => {
     const activeItem = carousel.value.querySelector('.carousel-item.active');
     const textElements = activeItem.querySelectorAll('.slider-text-1, .slider-text-2, .slider-text-3');
@@ -806,7 +855,7 @@ const handleSlideChange = () => {
         el.offsetHeight;
         el.style.animation = null;
     });
-};
+}
 onMounted(() => {
     startAutoplay();
     carousel.value.addEventListener('slide.bs.carousel', handleSlideChange);
@@ -859,7 +908,7 @@ onMounted(() => {
         });
 
         $('.right-testimonial-carousel').owlCarousel({
-            // items: 1,
+            items: 1,
             loop: true,
             autoplay: true,
             autoplayTimeout: 4000,
