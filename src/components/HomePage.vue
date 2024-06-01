@@ -480,22 +480,23 @@
 
 
                 <div class="item mx-3" v-for="media in mediaData " :key="media.id">
+                    {{ console.log(media?.property_listing_pape?.extra_info_title) }}
                     <div class="card border-0 bg-transparent">
                         <img class="img-fluid card-img-top" src="../assets/Images/listed-propery-3.jpeg" alt="Image">
                         <div
                             class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                            <h5 class="card-title">${{ media.price }}</h5>
-                            <p class="card-text">Tranquil Haven in the Woods</p>
-                            <p><small>103 Wright CourtBurien, WA 98168</small></p>
+                            <h5 class="card-title">${{ media?.price }}</h5>
+                            <p class="card-text">{{ media?.property_listing_pape?.extra_info_title }}</p>
+                            <p><small>{{media?.property_listing_pape?.extra_info_description}}</small></p>
                             <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>4 beds</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>3 bath</div>
+                                <div><i class="fa-solid fa-bed pe-2"></i>{{media?.property_listing_pape?.propertyDetail_bedrooms }}</div>
+                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{ media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
                             </div>
                             <div class="d-flex align-items-center mt-2">
                                 <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
+                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>{{ media?.pInfo_email }}</a>
                                 <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
+                                    role="button"><i class="fa-solid fa-phone pe-2"></i>{{media?.pInfo_phoneNumber}}</a>
                             </div>
                         </div>
                     </div>
