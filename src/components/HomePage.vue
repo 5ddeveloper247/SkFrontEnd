@@ -77,18 +77,18 @@
                                 <select class="form-select" v-model="filterCriteria.property_type"
                                     aria-label="Default select example">
                                     <option selected>Select Property Type</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="House">House</option>
+                                    <option value="Apartment">Apartment</option>
+                                    <option value="Shop">Shop</option>
                                 </select>
                             </div>
                             <div class="m-2 mb-4 w-100">
                                 <select class="form-select" v-model="filterCriteria.rooms"
                                     aria-label="Default select example">
                                     <option selected>Select Rooms</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
                                 </select>
                             </div>
                             <button type="button" class="btn main-button px-5 mb-4 m-2 btn-round"
@@ -494,7 +494,7 @@
                             <div class="d-flex align-items-center">
                                 <div><i class="fa-solid fa-bed pe-2"></i>{{
                                     media?.property_listing_pape?.propertyDetail_bedrooms
-                                }}</div>
+                                    }}</div>
                                 <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
                                     media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
                             </div>
@@ -796,14 +796,12 @@ const router = useRouter();
 const mediaData = ref([]);
 
 ////////////////////////
-
-
 const carousel = ref(null);
 const autoplayInterval = ref(null);
 const filterCriteria = ref({
     property_type: '',
-    rooms:'',
-    location:'',
+    rooms: '',
+    location: '',
     min_price: '',
     max_price: '',
     min_area: '',

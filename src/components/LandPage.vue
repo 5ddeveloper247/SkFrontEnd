@@ -41,107 +41,124 @@
                         <h6>Minimum Price - Maximum Price</h6>
                     </div>
                     <div class="range-slider-container">
-                        <input type="range" min="0" max="100" value="25" class="range-slider" id="minRange">
-                        <input type="range" min="0" max="100" value="75" class="range-slider" id="maxRange">
-                        <div class="price-range d-flex flex-nowrap">Price : <span id="minPrice">25</span> - <span
-                                id="maxPrice">75</span></div>
+                        <input v-model="Landfilters.minPrice" type="range" min="0" max="100" value="25"
+                            class="range-slider" id="minRange">
+                        <input v-model="Landfilters.maxPrice" type="range" min="0" max="100" value="75"
+                            class="range-slider" id="maxRange">
+                        <div class="price-range d-flex flex-nowrap">Price : <span id="minPrice">{{ Landfilters.minPrice
+                                }}</span> - <span id="maxPrice">{{ Landfilters.maxPrice }}</span></div>
                     </div>
                     <div class="mt-2">
-                        <h6>Property Type</h6>
+                        <h6>Purpose</h6>
                     </div>
                     <div class="d-flex flex-column">
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckDefault"
-                                checked>
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
+                        <div class="m-2 mb-4 w-100">
+                            <select v-model="Landfilters.purpose" class="form-select">
+                                <option :value="Landfilters.purpose" selected disabled>{{ Landfilters.purpose }}
+                                </option>
+                                <option value="Sale">Sale</option>
+                                <option value="Rent">Rent</option>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+
+                        <div class="mt-2">
+                            <h6>Home Type</h6>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+                        <div class="m-2 mb-4 w-100">
+                            <select v-model="Landfilters.homeType" class="form-select"
+                                aria-label="Default select example">
+                                <option :value="Landfilters.homeType" disabled>{{ Landfilters.homeType }}</option>
+                                <option value="House">House</option>
+                                <option value="Flat">Flat</option>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+
+                        <div class="mt-2">
+                            <h6>Plot</h6>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+                        <div class="m-2 mb-4 w-100">
+                            <select v-model="Landfilters.plot" class="form-select" aria-label="Default select example">
+                                <option :value="Landfilters.plot" disabled>{{ Landfilters.plot }}</option>
+                                <option value="Residential Plot">Residential Plot</option>
+                                <option value="Commercial Plot">Commercial Plot</option>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+
+                        <div class="mt-2">
+                            <h6>Commercial</h6>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+                        <div class="m-2 mb-4 w-100">
+                            <select v-model="Landfilters.commercial" class="form-select"
+                                aria-label="Default select example">
+                                <option :value="Landfilters.commercial" disabled>{{ Landfilters.commercial }}</option>
+                                <option value="Office">Office</option>
+                                <option value="Shop">Shop</option>
+                                <option value="Building">Building</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="mt-2">
-                        <h6>Property Sub Type</h6>
-                    </div>
-                    <div class="d-flex flex-column">
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
+
+                        <div class="mt-2">
+                            <h6>City</h6>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+                        <div class="m-2 mb-4 w-100">
+                            <select v-model="Landfilters.city" class="form-select" aria-label="Default select example">
+                                <option :value="Landfilters.city" disabled>{{ Landfilters.city }}</option>
+                                <option value="Islamabad">Islamabad</option>
+                                <option value="Lahore">Lahore</option>
+                                <option value="Karachi">Karachi</option>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+
+                        <div class="mt-2">
+                            <h6>Area</h6>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+                        <div class="m-2 mb-4 w-100">
+                            <select v-model="Landfilters.area" class="form-select" aria-label="Default select example">
+                                <option :value="Landfilters.area" disabled>{{ Landfilters.area }}</option>
+                                <option value="Bahria Phase 1">Bahria Phase 1</option>
+                                <option value="Bahria Phase 2">Bahria Phase 2</option>
+                                <option value="Bahria Phase 3">Bahria Phase 3</option>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+
+                        <div class="mt-2">
+                            <h6>Sector</h6>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
+                        <div class="m-2 mb-4 w-100">
+                            <select v-model="Landfilters.sector" class="form-select"
+                                aria-label="Default select example">
+                                <option :value="Landfilters.sector" selected disabled>{{ Landfilters.sector }}</option>
+                                <option value="Sector f1">Sector f1</option>
+                                <option value="Sector f2">Sector f2</option>
+                                <option value="Sector f3">Sector f3</option>
+                            </select>
                         </div>
                     </div>
 
+                    <!-- <div class="d-flex flex-column">
+                        <div class="form-check">
+                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Checked checkbox
+                            </label>
+                        </div>
+                    </div> -->
+
+
+                    <!-- search filter button -->
+
+                    <div class="d-flex flex-row">
+                        <div class="row justify-content-center p-2 m-1">
+                            <a @click.prevent="handleSearchBtn" style="width: fit-content;" href=""
+                                class="mx-1 my-4 nav-sub-links-2 nav-link text-nowrap px-2 px-md-3 py-1 d-flex flex-column align-items-center justify-content-center"
+                                role="button">Search</a>
+                        </div>
+                        <div class="row justify-content-center p-2 m-1">
+                            <a @click.prevent="handleClearFilter" style="width: fit-content;" href=""
+                                class="mx-1 my-4 nav-sub-links-2 nav-link text-nowrap px-2 px-md-3 py-1 d-flex flex-column align-items-center justify-content-center"
+                                role="button">Clear Filter</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -169,8 +186,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 my-1" v-for="media in mediaData " :key="media.id">
-                        <RouterLink :to="{ name: 'land-detail', params: { id: media.id } }">
+                    <div class="col-md-4 my-1" v-for="media in mediaData " :key="media?.id">
+                        <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
                             <!-- <RouterLink to="/land-detail"> -->
                             <div class="card border-0 bg-transparent">
                                 <img class="img-fluid" :src="getImageUrl(media)" alt="Image">
@@ -217,47 +234,74 @@
 
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, onUnmounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '../stores/HomeDataFilterStore';
 import { useRoute } from 'vue-router';
+
 const route = useRoute();
-const mediaId = ref(route.params.id);
-// Create the toast instance
 const $toast = useToast();
 
-
 const mediaData = ref([]);
+const Landfilters = ref({
+    HomePageFilters: '',
+    minPrice: 0,
+    maxPrice: 0,
+    purpose: 'Select Purpose',
+    homeType: 'Select Home Type',
+    plot: 'Select Plot',
+    commercial: 'Select Commercail',
+    city: 'Select City',
+    area: 'Select Area',
+    sector: 'Select Sector'
+});
 
-
-////////////////////////
 const getImageUrl = (media) => {
     return `${import.meta.env.VITE_BASE_URL}/${media?.property_record_files[0]?.image_uri}`;
 };
 
-
-onMounted(() => {
-    const formDataStore = useFormDataStore();
-    const filterCriteria = formDataStore.filterData
-    console.log('Retrieved data from store:', filterCriteria);
-})
+const handleSearchBtn = () => {
+    console.log('Applying all filters filters:', Landfilters.value);
+    fetchPropertyData(Landfilters.value);
+};
 
 
-onMounted(() => {
-    const route = useRoute();
-    const id = route.params.id;
-    // Make API call
+const handleClearFilter = () => {
+    console.log("clearing all filter")
+    Landfilters.value = {
+        HomePageFilters: '',
+        minPrice: '',
+        maxPrice: '',
+    };
+    fetchPropertyData();
+};
+
+const fetchPropertyData = (HomePagefilterCriteria = null) => {
     const base_url = import.meta.env.VITE_BASE_URL;
-    fetch(base_url + '/api/frontend/home/property/get', {
+    let url = `${base_url}/api/frontend/home/property/get`;
+    let options = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+            'Content-Type': 'application/json',
+        },
+    };
+
+    if (HomePagefilterCriteria) {
+        // alert("fkajslf");
+        url = `${base_url}/api/frontend/home/property/getByFilters`; // Assuming you have an endpoint for filtered results
+        options = {
+            ...options,
+            method: 'POST',
+            body: JSON.stringify(HomePagefilterCriteria),
+        };
+    }
+
+    fetch(url, options)
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data.propertyInfo);
+
             mediaData.value = data.propertyInfo;
             $toast.open({
                 message: 'Property data fetched successfully!',
@@ -273,5 +317,33 @@ onMounted(() => {
                 position: 'top-right'
             });
         });
+};
+
+onMounted(() => {
+    const formDataStore = useFormDataStore();
+    const HomePagefilterCriteria = formDataStore.filterData;
+
+    // Assigning HomePagefilterCriteria to Landfilters.HomePageFilters
+    Landfilters.value.HomePageFilters = HomePagefilterCriteria;
+    console.log("Home filter criteria", HomePagefilterCriteria);
+    console.log("Land home page filter criteria", Landfilters.value.HomePageFilters);
+
+    if (Object.keys(Landfilters.value.HomePageFilters).length) {
+        console.log('Applying Home filters:', Landfilters.value.HomePageFilters);
+        fetchPropertyData(Landfilters.value.HomePageFilters);
+    } else {
+        console.log('Fetching default property data');
+        fetchPropertyData();
+    }
 });
+
+// Watch for changes to minPrice and maxPrice
+watch(
+    () => [Landfilters.value.minPrice, Landfilters.value.maxPrice],
+    ([newMinPrice, newMaxPrice]) => {
+        console.log('minPrice or maxPrice changed:', newMinPrice, newMaxPrice);
+        console.log(Landfilters.value)
+        // fetchPropertyData(Landfilters.value);
+    }
+);
 </script>
