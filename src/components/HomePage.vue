@@ -54,45 +54,75 @@
                 <form action="" class="rounded-2" style="background-color: #111111b8">
                     <div class="d-flex flex-wrap justify-content-between align-items-center p-3 all-property-form">
                         <ul class="d-flex flex-wrap mb-0 p-0">
-                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white active"
-                                    href="#">All</a>
+                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white active" href="#"
+                                    @click.prevent="setPurpose('All')">All</a>
                             </li>
-                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#">Sale</a>
+                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#"
+                                    @click.prevent="setPurpose('Sale')">Sale</a>
                             </li>
-                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#">Rent</a>
+                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#"
+                                    @click.prevent="setPurpose('Rent')">Rent</a>
                             </li>
                         </ul>
                         <div>
                             <p class="text-white mt-md-0 mt-2 mx-2">(50,000) Properties</p>
                         </div>
                     </div>
-                    <div class="d-flex flex-md-nowrap flex-wrap align-items-center m-2 mb-4">
-                        <form>
-                            <div class="form-floating m-2 mb-4 w-100">
-                                <input type="text" class="form-control" v-model="filterCriteria.location"
-                                    id="floatingInput" placeholder="New York, San Francisco, etc">
-                                <label for="floatingInput">New York, San Francisco, etc</label>
-                            </div>
+
+                    <div class="d-flex flex-direction-row align-items-center m-2 mb-4">
+                        <form class="d-flex flex-row w-100">
                             <div class="m-2 mb-4 w-100">
-                                <select class="form-select" v-model="filterCriteria.property_type"
+                                <select class="form-select" v-model="filterCriteria.city"
                                     aria-label="Default select example">
-                                    <option selected>Select Property Type</option>
-                                    <option value="House">House</option>
-                                    <option value="Apartment">Apartment</option>
-                                    <option value="Shop">Shop</option>
+                                    <option :value="filterCriteria.city" disabled>{{ filterCriteria.city }}</option>
+                                    <option value="Islamabad">Islamabad</option>
+                                    <option value="Lahore">Lahore</option>
+                                    <option value="Karachi">Karachi</option>
                                 </select>
                             </div>
+
+                            <div class="m-2 mb-4 w-100">
+                                <select class="form-select" v-model="filterCriteria.homeType"
+                                    aria-label="Default select example">
+                                    <option :value="filterCriteria.homeType" disabled>{{ filterCriteria.homeType }}
+                                    </option>
+                                    <option value="House">House</option>
+                                    <option value="Flat">Flat</option>
+                                </select>
+                            </div>
+
+                            <div class="m-2 mb-4 w-100">
+                                <select class="form-select" v-model="filterCriteria.plot"
+                                    aria-label="Default select example">
+                                    <option :value="filterCriteria.plot" disabled>{{ filterCriteria.plot }}</option>
+                                    <option value="Residential Plot">Residential Plot</option>
+                                    <option value="Commercial Plot">Commercial Plot</option>
+                                </select>
+                            </div>
+
+                            <div class="m-2 mb-4 w-100" v-if="filterCriteria.plot === 'Commercial Plot'">
+                                <select class="form-select" v-model="filterCriteria.commercial"
+                                    aria-label="Default select example">
+                                    <option :value="filterCriteria.commercial" disabled>{{ filterCriteria.commercial }}
+                                    </option>
+                                    <option value="Office">Office</option>
+                                    <option value="Shop">Shop</option>
+                                    <option value="Building">Building</option>
+                                </select>
+                            </div>
+
                             <div class="m-2 mb-4 w-100">
                                 <select class="form-select" v-model="filterCriteria.rooms"
                                     aria-label="Default select example">
-                                    <option selected>Select Rooms</option>
+                                    <option :value="filterCriteria.rooms" disabled>{{ filterCriteria.rooms }}</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                 </select>
                             </div>
+
                             <button type="button" class="btn main-button px-5 mb-4 m-2 btn-round"
-                                @click="handleFilterCriteria">Submit</button>
+                                @click="handleFilterCriteria">Search</button>
                         </form>
                     </div>
                 </form>
@@ -366,10 +396,13 @@
             <div class="d-flex justify-content-between listing-ul">
                 <h2>Latest Listed Properties</h2>
                 <ul class="d-flex flex-nowrap mb-0 p-0">
-                    <li class="nav-item mx-1"><a class="listed-properties py-2 px-3 text-black active" href="#">All</a>
+                    <li class="nav-item mx-1"><a class="listed-properties py-2 px-3 text-black active" href="#"
+                            @click.prevent="setMediaType('All')">All</a>
                     </li>
-                    <li class="nav-item mx-1"><a class="listed-properties py-2 px-3 text-black" href="#">Sale</a></li>
-                    <li class="nav-item mx-1"><a class="listed-properties py-2 px-3 text-black" href="#">Rent</a>
+                    <li class="nav-item mx-1"><a class="listed-properties py-2 px-3 text-black" href="#"
+                            @click.prevent="setMediaType('Sale')">Sale</a></li>
+                    <li class="nav-item mx-1"><a class="listed-properties py-2 px-3 text-black" href="#"
+                            @click.prevent="setMediaType('Rent')">Rent</a>
                     </li>
                 </ul>
             </div>
@@ -480,36 +513,46 @@
                         </div>
                     </div>
                 </div>  -->
+            </div>
 
-
-                <div class="item mx-3" v-for="media in mediaData " :key="media.id">
-                    <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" :src="getImageUrl(media)" alt="Image">
-                        <div
-                            class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                            <h5 class="card-title">${{ media?.price }}</h5>
-                            <p class="card-text">{{ media?.property_listing_pape?.extra_info_title }}</p>
-                            <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p>
-                            <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>{{
-                                    media?.property_listing_pape?.propertyDetail_bedrooms
+            <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :navigation="true" :modules="modules"
+                :breakpoints="{
+                    320: { slidesPerView: 1, spaceBetween: 5 },
+                    480: { slidesPerView: 1, spaceBetween: 5 },
+                    640: { slidesPerView: 1, spaceBetween: 5 },
+                    768: { slidesPerView: 2, spaceBetween: 3 },
+                    1024: { slidesPerView: 3, spaceBetween: 5 }
+                }" class="mySwiper">
+                <swiper-slide v-for="media in mediaData " :key="media.id" :slidesPerView="3">
+                    <div class="item mx-3">
+                        <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
+                        <div class="card border-0 bg-transparent">
+                            <img class="card-img-top rounded-5" :src="getImageUrl(media)" height="270" alt="Image">
+                            <div
+                                class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
+                                <h5 class="card-title">${{ media?.price }}</h5>
+                                <p class="card-text">{{ media?.property_listing_pape?.extra_info_title }}</p>
+                                <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p>
+                                <div class="d-flex align-items-center">
+                                    <div><i class="fa-solid fa-bed pe-2"></i>{{
+                                        media?.property_listing_pape?.propertyDetail_bedrooms
                                     }}</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
-                                    media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
-                            </div>
-                            <div class="d-flex align-items-center mt-2">
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>{{ media?.pInfo_email
-                                    }}</a>
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-solid fa-phone pe-2"></i>{{ media?.pInfo_phoneNumber
-                                    }}</a>
+                                    <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
+                                        media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
+                                </div>
+                                <div class="d-flex flex-column align-items-center mt-2">
+                                    <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
+                                        role="button"><i class="fa-regular fa-envelope pe-2"></i>
+                                        {{ media?.pInfo_email }}</a>
+                                    <a class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
+                                        role="button"><i class="fa-solid fa-phone pe-2"></i>
+                                        {{ media?.pInfo_phoneNumber }}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </swiper-slide>
+            </swiper>
         </div>
     </div>
 
@@ -773,14 +816,6 @@
 
 
 
-
-
-
-
-
-
-
-
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import emitter from '../../emitter';
@@ -788,6 +823,18 @@ import { useRouter } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '.././stores/HomeDataFilterStore'; // Adjust the path as necessary
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+import { Navigation, Autoplay } from 'swiper/modules';
+// Modules for Swiper
+const modules = ref([Navigation, Autoplay]);
+// Autoplay configuration
+const autoplay = {
+    delay: 3000, // 3 seconds delay between slides
+    disableOnInteraction: false // Keep autoplay running even after user interaction
+};
 const formDataStore = useFormDataStore();
 //Create the toast instance
 const $toast = useToast();
@@ -798,9 +845,18 @@ const mediaData = ref([]);
 ////////////////////////
 const carousel = ref(null);
 const autoplayInterval = ref(null);
+const mediaSliderType = ref(null);
+const autoplaySpeed = 5000;
+
 const filterCriteria = ref({
-    property_type: '',
-    rooms: '',
+    purpose: 'All',
+    city: 'select city',
+    homeType: 'select home type',
+    plot: 'select plot type',
+    commercial: 'select commercial type',
+
+    //inactive still
+    rooms: 'Select rooms',
     location: '',
     min_price: '',
     max_price: '',
@@ -816,17 +872,39 @@ const filterCriteria = ref({
 
 });
 
-
-
-const autoplaySpeed = 5000;
-
-
 const handleFilterCriteria = () => {
+    const cityVal = filterCriteria.value.city;
+    const homeTypeVal = filterCriteria.value.homeType;
+    const plotVal = filterCriteria.value.plot;
+    const commercialVal = filterCriteria.value.commercial;
+    //  alert(cityVal+homeTypeVal+plotVal+commercialVal)
+    if (cityVal.includes('select')) {
+        filterCriteria.value.city = '';
+        //alert(filterCriteria.value.city)
+    }
+    if (homeTypeVal.includes('select')) {
+        filterCriteria.value.homeType = '';
+        //alert(filterCriteria.value.homeType)
+    }
+    if (plotVal.includes('select')) {
+        filterCriteria.value.plot = '';
+        //alert(filterCriteria.value.plot)
+    }
+    if (commercialVal.includes('select')) {
+        filterCriteria.value.commercial = '';
+        //alert(filterCriteria.value.commercial)
+    }
+    console.log(filterCriteria)
+    console.log("kfjsakjfkadsjfkajsdkfjksad")
     formDataStore.setFilterData(filterCriteria.value);
     router.push({ name: 'land' }); // Use named route
 }
 
+const setPurpose = (purpose) => {
 
+    filterCriteria.value.purpose = purpose;
+    //alert(filterCriteria.purpose)
+}
 
 
 //creating image url
@@ -865,67 +943,49 @@ onBeforeUnmount(() => {
     }
 });
 
-onMounted(() => {
 
-    gsap.to(".hero-left-section", { x: 0, opacity: 1, duration: 0.8 });
-    gsap.to(".hero-right-section", { x: 0, opacity: 1, duration: 0.8 });
 
-    gsap.to(".photto-gallery-1, .photto-gallery-2, .photto-gallery-3", {
-        opacity: 1,
-        scale: 1,
-        duration: 0.7,
-        scrollTrigger: {
-            trigger: ".photto-gallery-1",
-            scroller: "body",
-            start: "top 60%",
-            end: "top 35%",
+const setMediaType = (type) => {
+    alert("clicked")
+    mediaSliderType.value = type;
+    getMediabyType();
+};
+
+const getMediabyType = () => {
+    const base_url = import.meta.env.VITE_BASE_URL;
+    fetch(base_url + '/api/frontend/home/property/post', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         },
-    });
-
-    gsap.to(".area-images-1, .area-images-2, .area-images-3, .area-images-4, .area-images-5", {
-        opacity: 1,
-        scale: 1,
-        duration: 0.7,
-        scrollTrigger: {
-            trigger: ".area-images-1",
-            scroller: "body",
-            start: "top 60%",
-            end: "top 35%",
-        },
-    });
-
-    $(document).ready(() => {
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            nav: false,
-            dots: false,
-            autoplay: true,
-            autoplayHoverPause: true,
-
+        body: JSON.stringify({ 'mediaSliderType': mediaSliderType.value }) // Use 'body' instead of 'data'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data.propertyInfo);
+            mediaData.value = data.propertyInfo;
+            $toast.open({
+                message: 'Property data fetched successfully!',
+                type: 'success',
+                position: 'top-right'
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            $toast.open({
+                message: 'Failed to fetch property data.',
+                type: 'error',
+                position: 'top-right'
+            });
         });
+};
 
-        $('.right-testimonial-carousel').owlCarousel({
-            items: 1,
-            loop: true,
-            autoplay: true,
-            autoplayTimeout: 4000,
-            autoplayHoverPause: true,
-        });
 
-        $('.nav-links-property').on('click', function (event) {
-            event.preventDefault();
-            $('.nav-links-property').removeClass('active');
-            $(this).addClass('active');
-        });
-
-        $('.listed-properties').on('click', function (event) {
-            event.preventDefault();
-            $('.listed-properties').removeClass('active');
-            $(this).addClass('active');
-        });
-    });
-});
 
 
 
@@ -963,4 +1023,97 @@ onMounted(() => {
             });
         });
 });
+
+
+
+onMounted(() => {
+
+    gsap.to(".hero-left-section", { x: 0, opacity: 1, duration: 0.8 });
+    gsap.to(".hero-right-section", { x: 0, opacity: 1, duration: 0.8 });
+
+    gsap.to(".photto-gallery-1, .photto-gallery-2, .photto-gallery-3", {
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
+        scrollTrigger: {
+            trigger: ".photto-gallery-1",
+            scroller: "body",
+            start: "top 60%",
+            end: "top 35%",
+        },
+    });
+
+    gsap.to(".area-images-1, .area-images-2, .area-images-3, .area-images-4, .area-images-5", {
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
+        scrollTrigger: {
+            trigger: ".area-images-1",
+            scroller: "body",
+            start: "top 60%",
+            end: "top 35%",
+        },
+    });
+
+
+    $(document).ready(() => {
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayHoverPause: true,
+
+        });
+
+        $('.right-testimonial-carousel').owlCarousel({
+            items: 1,
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+        });
+
+        $('.nav-links-property').on('click', function (event) {
+            event.preventDefault();
+            $('.nav-links-property').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('.listed-properties').on('click', function (event) {
+            event.preventDefault();
+            $('.listed-properties').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+});
 </script>
+
+
+
+<style>
+.swiper-button-prev {
+    color: var(--second--main-color);
+}
+
+.swiper-button-next {
+    color: var(--second--main-color);
+}
+
+.card-body {
+    width: 100%;
+}
+
+.card-body p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+img {
+    object-fit: cover;
+}
+</style>

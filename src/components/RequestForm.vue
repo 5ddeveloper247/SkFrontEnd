@@ -16,32 +16,36 @@
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
                 aria-valuemax="100"></div>
-            </div> <br> <!-- fieldsets -->
+            </div> <br>
+            <!-- fieldsets -->
             <fieldset>
               <div class="form-card">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" v-model="propertyRequestform.firstName"
-                    placeholder="First Name">
-                  <label for="floatingInput">First Name</label>
+                  <input type="text" class="form-control" id="floatingFirstName" v-model="propertyRequestform.firstName"
+                    placeholder="First Name" />
+                  <label for="floatingFirstName">First Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" v-model="propertyRequestform.lastName"
-                    placeholder="Last Name">
-                  <label for="floatingInput">Last Name</label>
+                  <input type="text" class="form-control" id="floatingLastName" v-model="propertyRequestform.lastName"
+                    placeholder="Last Name" />
+                  <label for="floatingLastName">Last Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatingInput" v-model="propertyRequestform.email"
-                    placeholder="sk@gmail.com">
-                  <label for="floatingInput">Email address</label>
+                  <input type="email" class="form-control" id="floatingEmail" v-model="propertyRequestform.email"
+                    placeholder="sk@gmail.com" />
+                  <label for="floatingEmail">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" class="form-control" id="floatingInput" v-model="propertyRequestform.phone"
-                    placeholder="Phone">
-                  <label for="floatingInput">Phone</label>
+                  <input type="number" class="form-control" id="floatingPhone" v-model="propertyRequestform.phone"
+                    placeholder="Phone" />
+                  <label for="floatingPhone">Phone</label>
                 </div>
+                <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
               </div>
-              <input type="button" name="next" class="next action-button" value="Next" />
+              <input type="button" name="next" class="next action-button" value="Next" @click="validateAndProceed" />
             </fieldset>
+
+            <!-- Second Step Fieldset -->
             <fieldset>
               <div class="form-card">
                 <div class="d-flex justify-content-start align-items-center">
@@ -50,28 +54,62 @@
                   </div>
                   <div class="col-md-2 mx-1 mt-3 ms-5">
                     <button type="button" class="btn main-button ms-md-3 px-md-2 py-0 mb-4 btn-round w-100"
-                      @click="handlePurpose('Sale')">Sale</button>
+                      @click.prevent="handlePurpose('Sale')">Sale</button>
                   </div>
                   <div class="col-md-2 mx-1 mt-3 ms-5">
                     <button type="button" class="btn main-button-2 px-md-2 py-0 mb-4 btn-round w-100"
-                      @click="handlePurpose('Rent')">Rent</button>
+                      @click.prevent="handlePurpose('Rent')">Rent</button>
                   </div>
                 </div>
                 <div class="row justify-content-start my-2">
                   <div class="col-md-10">
                     <h5>Property Type:</h5>
-                    <select class="form-select" v-model="propertyRequestform.propertyType">
-                      <option value="" disabled selected>Select Property Type</option>
-                      <option value="House">House</option>
-                      <option value="Apartment">Apartment</option>
-                      <option value="Shop">Shop</option>
-                    </select>
+                    <div class="d-flex flex-direction-row align-items-center m-2 mb-4">
+                      <form class="d-flex flex-row w-100">
+                        <div class="m-2 mb-4 w-100">
+                          <select v-model="propertyRequestform.city" name="city" class="form-select"
+                            aria-label="Default select example">
+                            <option value="" selected disabled>Select City</option>
+                            <option value="Islamabad">Islamabad</option>
+                            <option value="Lahore">Lahore</option>
+                            <option value="Karachi">Karachi</option>
+                          </select>
+                        </div>
+                        <div class="m-2 mb-4 w-100">
+                          <select v-model="propertyRequestform.homeType" name="homeType" class="form-select"
+                            aria-label="Default select example">
+                            <option value="" selected disabled>Select Home type</option>
+                            <option value="House">House</option>
+                            <option value="Flat">Flat</option>
+                          </select>
+                        </div>
+                        <div class="m-2 mb-4 w-100">
+                          <select v-model="propertyRequestform.plot" name="plot" class="form-select"
+                            aria-label="Default select example">
+                            <option value="" selected disabled>Select Plot Type</option>
+                            <option value="Residential Plot">Residential Plot</option>
+                            <option value="Commercial Plot">Commercial Plot</option>
+                          </select>
+                        </div>
+                        <div class="m-2 mb-4 w-100">
+                          <select v-model="propertyRequestform.commercial" class="form-select"
+                            aria-label="Default select example">
+                            <option value="" selected disabled>Select Commercial</option>
+                            <option value="Office">Office</option>
+                            <option value="Shop">Shop</option>
+                            <option value="Building">Building</option>
+                          </select>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
               <input type="button" name="next" class="next action-button" value="Next" />
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
             </fieldset>
+
+
             <fieldset>
               <div class="form-card">
                 <div class="row">
@@ -124,9 +162,7 @@
                 </div> <br>
                 <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
                 <div class="row justify-content-center">
-                  <div class="col-7 text-center">
-                    <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
-                  </div>
+
                 </div>
               </div>
             </fieldset>
@@ -162,6 +198,9 @@ export default {
       phone: '',
       email: '',
       city: '',
+      homeType: '',
+      commercial: '',
+      plot: '',
       location: '',
       address: '',
       size: '',
@@ -174,7 +213,7 @@ export default {
       const requiredFields = [
         'firstName', 'lastName', 'phone', 'email',
         'city', 'location', 'address', 'size',
-        'totalPrice', 'purpose', 'propertyType'
+        'totalPrice', 'purpose'
       ];
       for (const field of requiredFields) {
         if (!propertyRequestform.value[field]) {
@@ -186,14 +225,15 @@ export default {
 
 
     const handleSubmission = () => {
-      if (!validateForm()) {
-        $toast.open({
-          message: 'Please fill out all required fields.',
-          type: 'info',
-          position: 'top-right'
-        });
-        return;
-      }
+      // alert("clicked")
+      // if (!validateForm()) {
+      //   $toast.open({
+      //     message: 'Please fill out all required fields.',
+      //     type: 'info',
+      //     position: 'top-right'
+      //   });
+      //   return;
+      // }
 
       console.log('Form data:', propertyRequestform.value);
       const base_url = import.meta.env.VITE_BASE_URL;
@@ -263,6 +303,23 @@ export default {
         setProgressBar(current);
 
         $(".next").click(function () {
+          // Validation check for input fields
+          var isValid = true;
+          $(this).parent().find('input[type="text"], input[type="number"], input[type="email"], select').each(function () {
+            if ($.trim($(this).val()) == '') {
+              isValid = false;
+              $(this).addClass('input-error'); // Add class to highlight empty fields
+            } else {
+              $(this).removeClass('input-error'); // Remove class if field is filled
+            }
+          });
+
+          if (!isValid) {
+            // If any input field is empty, do not proceed
+            return;
+          }
+
+          // If all input fields are filled, proceed to the next fieldset
           current_fs = $(this).parent();
           next_fs = $(this).parent().next();
 
@@ -287,6 +344,8 @@ export default {
           });
           setProgressBar(++current);
         });
+
+
 
         $(".previous").click(function () {
           current_fs = $(this).parent();
@@ -335,3 +394,11 @@ export default {
   }
 };
 </script>
+
+
+
+<style scoped>
+.input-error {
+  border: 1px solid red !important;
+}
+</style>
