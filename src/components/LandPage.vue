@@ -14,7 +14,7 @@
                 <div class="filters d-flex flex-column py-4 px-md-2">
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
                         <h5>Final Results</h5>
-                        <p><small>3,876 Land/Properties</small></p>
+                        <p><small>{{ propertiesCounter }} Land/Properties</small></p>
                     </div>
                     <div class="mt-2">
                         <h6>Minimum Price - Maximum Price</h6>
@@ -73,7 +73,7 @@
                             </label>
                         </div>
 
-                        <div class="mt-2">
+                         <div class="mt-2">
                             <h6>Commercial</h6>
                         </div>
                         <div class="m-2 mb-4 w-100">
@@ -156,7 +156,7 @@
 
                     <!-- search filter button -->
 
-                    <div class="d-flex flex-row">
+                    <!-- <div class="d-flex flex-row">
                         <div class="row justify-content-center p-2 m-1">
                             <a @click.prevent="handleSearchBtn" style="width: fit-content;" href=""
                                 class="mx-1 my-4 nav-sub-links-2 nav-link text-nowrap px-2 px-md-3 py-1 d-flex flex-column align-items-center justify-content-center"
@@ -167,7 +167,7 @@
                                 class="mx-1 my-4 nav-sub-links-2 nav-link text-nowrap px-2 px-md-3 py-1 d-flex flex-column align-items-center justify-content-center"
                                 role="button">Clear Filter</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -195,9 +195,8 @@
                             </select>
                         </div> -->
                     </div>
-                    <div class="col-md-4 my-1" v-for="media in mediaData " :key="media?.id">
+                    <div class="col-md-4 my-1" v-for="media in mediaData" :key="media?.id">
                         <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
-                            <!-- <RouterLink to="/land-detail"> -->
                             <div class="card border-0 bg-transparent">
                                 <img :src="getImageUrl(media)" height="300" alt="Image">
                                 <div class="card-body">
@@ -215,11 +214,14 @@
                                     </div>
                                     <div class="d-flex flex-column align-items-center mt-2">
                                         <a class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-regular fa-envelope pe-2"></i>{{
-                                                media?.pInfo_email }}</a>
-                                        <a class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i>{{
-                                                media?.pInfo_phoneNumber }}</a>
+                                            role="button" @click="redirectToEmail"><i
+                                                class="fa-regular fa-envelope pe-2"></i></a>
+                                        <!-- {{media?.pInfo_email }} -->
+                                        <!-- Call useContact directly on button click -->
+                                        <button @click="redirectToPhoneDialer"
+                                            class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
+                                            role="button"><i class="fa-solid fa-phone pe-2"></i></button>
+                                        <!-- {{media?.pInfo_phoneNumber }} -->
                                     </div>
                                 </div>
                             </div>
@@ -241,19 +243,23 @@
 
 
 
-
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';
+import { ref, onMounted, watch, computed } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '../stores/HomeDataFilterStore';
 import { useRoute } from 'vue-router';
 
+//define objects
 const route = useRoute();
 const $toast = useToast();
 
 // Define reactive variables
+const propertiesCounter = ref(0);
+const isMobile = ref(false);
 const mediaData = ref([]);
+const initialFetchCompleted = ref(false); // Flag to indicate if the initial fetch is completed
 const Landfilters = ref({
     HomePageFilters: '',
     minPrice: '',
@@ -325,22 +331,31 @@ const generateFilterData = (HomefilterData) => {
     return true;
 };
 
-// Function to handle search button click
-const handleSearchBtn = () => {
-    console.log('Applying all filters filters:', Landfilters.value);
-    fetchPropertyData(Landfilters.value);
-};
 
-// Function to handle clear filter button click
-const handleClearFilter = () => {
-    console.log("Clearing all filters");
-    Landfilters.value = {
-        HomePageFilters: '',
-        minPrice: '',
-        maxPrice: '',
-    };
-    fetchPropertyData();
-};
+
+// Function to handle search button click
+
+// const handleSearchBtn = () => {
+//     console.log('Applying all filters filters:', Landfilters.value);
+//     fetchPropertyData(Landfilters.value);
+// };
+
+// // Function to handle clear filter button click
+
+// const handleClearFilter = () => {
+//     console.log("Clearing all filters");
+//     Landfilters.value = {
+//         HomePageFilters: '',
+//         minPrice: '',
+//         maxPrice: '',
+//     };
+
+//     fetchPropertyData();
+// };
+
+
+
+
 
 // Function to fetch property data based on filters
 const fetchPropertyData = (HomePagefilterCriteria = null) => {
@@ -391,22 +406,22 @@ const fetchPropertyData = (HomePagefilterCriteria = null) => {
         });
 };
 
-// Watch for changes to minPrice and maxPrice
-// Watch for changes in Landfilters
-// watch(
-//     () => Landfilters.value,
-//     (newValue, oldValue) => {
-//         console.log('Landfilters changed:', newValue);
-//         fetchPropertyData(newValue);
-//     },
-//     { deep: true } // Deep watch to detect nested changes
-// );
+// Watch for changes in Landfilters, but skip the initial mount
+watch(
+    () => Landfilters.value,
+    (newValue, oldValue) => {
+        if (initialFetchCompleted.value) {
+            fetchPropertyData(newValue);
+        }
+    },
+    { deep: true } // Deep watch to detect nested changes
+);
 
 // Initialize on component mount
 onMounted(() => {
     const formDataStore = useFormDataStore();
     const HomePagefilterCriteria = formDataStore.filterData;
-    generateFilterData(HomePagefilterCriteria)
+    generateFilterData(HomePagefilterCriteria);
 
     if (Object.keys(Landfilters.value.HomePageFilters).length) {
         console.log('Applying Home filters:', Landfilters.value);
@@ -415,8 +430,48 @@ onMounted(() => {
         console.log('Fetching default property data');
         fetchPropertyData();
     }
+
+    // Set the initial fetch completed flag to true after a delay to ensure the watcher does not trigger on initial setup
+    setTimeout(() => {
+        initialFetchCompleted.value = true;
+    }, 5000); // Delay to ensure the watcher does not trigger prematurely
 });
+
+
+
+
+//counting landproperties 
+const LandPropertiesCount = computed(() => {
+    return mediaData.value.length;
+});
+
+// Watcher to log the count whenever it changes
+watch(LandPropertiesCount, (newCount) => {
+    propertiesCounter.value = newCount;
+});
+
+//counting landproperties ended
+
+/* // handle the onclick on mobile and email  */
+
+const useContact = (media) => {
+    if (checkIsMobile()) {
+        window.location.href = 'tel:' + media.pInfo_phoneNumber;
+    } else {
+        // Handle non-mobile devices (e.g., show a contact form)
+        alert('Please contact us through the provided phone number: ' + media.pInfo_phoneNumber);
+    }
+}
+
+// Function to check if the device is mobile
+const checkIsMobile = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    isMobile.value = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+};
+
 </script>
+
+
 
 
 

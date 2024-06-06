@@ -26,19 +26,20 @@
                 <div class="col-md-3 services-footer">
                     <h5>Services</h5>
                     <ul class="list-unstyled">
-                        <li class="mt-2"><a href="#" class="px-2">Home</a></li>
-                        <li class="mt-2"><a href="#" class="px-2">About</a></li>
-                        <li class="mt-2"><a href="#" class="px-2">Listing</a></li>
-                        <li class="mt-2"><a href="#" class="px-2">Services</a></li>
-                        <li class="mt-2"><a href="#" class="px-2">Blogs</a></li>
-                        <li class="mt-2"><a href="#" class="px-2">Become a Agent</a></li>
+                        <li class="mt-2"><router-link to="/" class="px-2">Home</router-link></li>
+                        <li class="mt-2"><router-link to="/about" class="px-2">About</router-link></li>
+                        <li class="mt-2"><router-link to="/land" class="px-2">Listing</router-link></li>
+                        <li class="mt-2"><router-link to="/societies" class="px-2">Socities</router-link></li>
+                        <li class="mt-2"><router-link to="/media" class="px-2">Media</router-link></li>
+                        <li class="mt-2"><router-link to="/requestform" class="px-2">Request</router-link></li>
+
                     </ul>
                 </div>
                 <!-- Column 4 -->
                 <div class="col-md-5 ps-md-5">
                     <div class="d-flex flex-column">
                         <h5>Address</h5>
-                        
+
                         <p class="pt-3"><i class="fa-solid fa-location-dot pe-3"></i>Lorem ipsum dolor sit amet
                             consectetur
                             adipisicing elit.
@@ -65,5 +66,3 @@
         </div>
     </footer>
 </template>
-
-

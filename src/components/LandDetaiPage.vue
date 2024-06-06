@@ -9,10 +9,10 @@
                     <h5>signature properties offer beautiful plot sector B park face dha phase 2 islamabad</h5>
                     <p><small>DHA Defence Phase 2, DHA Defence, Islamabad, Islamabad Capital</small></p>
                 </div>
-                <div>
+                <!-- <div>
                     <i class="fa-solid fa-print px-2"></i>
                     <i class="fa-solid fa-share-from-square px-2"></i>
-                </div>
+                </div> -->
             </div>
 
 
@@ -355,8 +355,9 @@
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
                         <h5>PKR {{ propertyData.price }}</h5>
                         <div class="d-flex align-items-center justify-content-center">
-                            <i class="fa-brands fa-whatsapp px-2"></i>
-                            <i class="fa-solid fa-phone px-2"></i>
+
+                            <i class="fa-brands fa-whatsapp px-2" @click="redirectToWhatsApp"></i>
+                            <i class="fa-solid fa-phone px-2" @click="redirectToPhoneDialer"></i>
                         </div>
                     </div>
 
@@ -417,7 +418,7 @@
                     </form>
 
                 </div>
-                <div class="property-detail d-flex flex-column py-4 px-md-2 shadow rounded-4 mt-4">
+                <!-- <div class="property-detail d-flex flex-column py-4 px-md-2 shadow rounded-4 mt-4">
                     <div class="d-flex flex-wrap align-items-center justify-content-center">
                         <h5 class="text-center">Useful Links</h5>
                     </div>
@@ -426,7 +427,7 @@
                         <a href="">Property for Sale in Lahore</a>
                         <a href="">Property for Sale in Peshawar</a>
                     </div>
-                </div>
+                </div> -->
                 <div class="property-detail d-flex flex-column py-4 px-md-2 shadow rounded-4 mt-4">
                     <div class="d-flex flex-wrap align-items-center justify-content-center">
                         <h5 class="text-center">Signature Properties</h5>
@@ -449,16 +450,15 @@
             </div>
 
             <div class="row px-md-5">
-                <h2 class="pb-3" >Relevent Properties</h2>
+                <h2 class="pb-3">Relevent Properties</h2>
                 <swiper :speed="1000" :autoplay="autoplay" :slidesPerView="3" :navigation="true" :modules="modules"
-                :breakpoints="{
-                    320: { slidesPerView: 1, spaceBetween: 5 },
-                    480: { slidesPerView: 1, spaceBetween: 5 },
-                    640: { slidesPerView: 2, spaceBetween: 10 },
-                    768: { slidesPerView: 2, spaceBetween: 15 },
-                    1024: { slidesPerView: 3, spaceBetween: 25 }
-                }"    
-                class="mySwiper">
+                    :breakpoints="{
+                        320: { slidesPerView: 1, spaceBetween: 5 },
+                        480: { slidesPerView: 1, spaceBetween: 5 },
+                        640: { slidesPerView: 2, spaceBetween: 10 },
+                        768: { slidesPerView: 2, spaceBetween: 15 },
+                        1024: { slidesPerView: 3, spaceBetween: 25 }
+                    }" class="mySwiper">
                     <swiper-slide v-for="media in propertyData.property_record_files" :key="media.id"
                         :slidesPerView="3">
                         <div>
@@ -480,11 +480,15 @@
 
 
 <script setup>
+// YourVueComponent.vue
+
+// Import helper functions
+import { redirectToPhoneDialer, redirectToWhatsApp,redirectToEmail } from '../helpers/redirectHelpers';
 import { ref, onBeforeMount } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useRoute } from 'vue-router';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Swiper, SwiperSlide } from 'swiper/vue'; 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
@@ -617,7 +621,7 @@ onBeforeMount(() => {
 
 
 
-<style scoped >
+<style scoped>
 img {
     object-fit: cover;
 }
