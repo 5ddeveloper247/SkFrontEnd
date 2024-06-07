@@ -524,6 +524,7 @@
                     1024: { slidesPerView: 3, spaceBetween: 5 }
                 }" class="mySwiper">
                 <swiper-slide v-for="media in mediaData " :key="media.id" :slidesPerView="3">
+                <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
                     <div class="item mx-3">
                         <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
                         <div class="card border-0 bg-transparent">
@@ -551,6 +552,7 @@
                             </div>
                         </div>
                     </div>
+                 </RouterLink>
                 </swiper-slide>
             </swiper>
         </div>
