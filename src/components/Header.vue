@@ -1,4 +1,6 @@
 <script>
+import { ref, onUnmounted, onMounted } from 'vue';
+
 export default {
     mounted() {
         $("body").on("scroll", function () {
@@ -21,9 +23,35 @@ export default {
                 // markers: true,
             }
         })
+    },
+    setup() {
+        const navbarCollapse = ref(null);
+        const navbarToggler = ref(null);
+
+        const handleClickOutside = (event) => {
+            if (navbarCollapse.value && navbarToggler.value) {
+                const isClickInside = navbarCollapse.value.contains(event.target) || navbarToggler.value.contains(event.target);
+                const isNavbarExpanded = navbarToggler.value.getAttribute('aria-expanded') === 'true';
+
+                if (!isClickInside && isNavbarExpanded) {
+                    navbarToggler.value.click(); // This will trigger the collapse
+                }
+            }
+        };
+
+        onMounted(() => {
+            document.addEventListener('click', handleClickOutside);
+        });
+
+        onUnmounted(() => {
+            document.removeEventListener('click', handleClickOutside);
+        });
     }
 }
 </script>
+
+
+
 <template>
     <!-- ======================Head================== -->
     <div class="heroandnav">
@@ -33,12 +61,12 @@ export default {
                     class="d-flex flex-md-nowrap flex-wrap justify-content-md-between justify-content-start align-items-center py-2">
                     <div class="d-flex align-items-center">
                         <i class="fa-solid fa-location-dot"></i>
-                        <p class="px-3">Plaza 13, Adjacent D Mall, Main G.T Rd,</p>
+                        <p class="px-3">Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.,</p>
                     </div>
                     <div class="d-flex flex-md-nowrap flex-wrap align-items-center">
                         <div class="d-flex align-items-center mx-md-4">
                             <i class="fa-regular fa-envelope"></i>
-                            <p class="px-2">skmarketing@gmail.com</p>
+                            <a href="/info@skrealestate.com.pk" class="px-2">info@skrealestate.com.pk</a>
                         </div>
                         <div class="d-flex align-items-center mx-md-4">
                             <i class="fa-solid fa-phone"></i>
@@ -60,10 +88,11 @@ export default {
                         <a class="navbar-brand" href="#">
                             <img class="logo" src="../assets/Images/SK-logo.png" alt="">
                         </a>
-                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                        <div class="navbar-collapse collapse" id="navbarNav">
+                        <button ref="navbarToggler" class="navbar-toggler collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                            aria-expanded="false" aria-label="Toggle navigation"><span
+                                class="navbar-toggler-icon"></span></button>
+                        <div ref="navbaCollapse" class="navbar-collapse collapse" id="navbarNav">
                             <ul class="navbar-nav mx-auto">
                                 <li class="nav-item mx-md-2 mx-0">
                                     <RouterLink class="nav-link px-2" to="/">Home</RouterLink>
@@ -101,7 +130,19 @@ export default {
 
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';
-
 </script>
+
+
+<style scoped>
+p {
+    font-size: 10px;
+}
+
+a {
+    font-size: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+</style>

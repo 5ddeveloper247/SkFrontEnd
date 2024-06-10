@@ -10,9 +10,8 @@
                 <!-- Column 1 -->
                 <div class="col-md-4">
                     <h5>SK Marketing</h5>
-                    <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus pariatur nemo
-                        repellat at
-                        veritatis ad, culpa quia vitae consequuntur neque in nam doloribus ipsam atque
+                    <p class="mt-4">
+                        SK Marketing excels in eco-friendly construction, offering premium residential and commercial properties. With innovative designs and sustainable materials, our homes and offices promise luxury and environmental harmony.
                     </p>
                     <div class="d-flex flex-column mt-4">
                         <ul class="list-unstyled d-flex footer-icons">
@@ -40,14 +39,13 @@
                     <div class="d-flex flex-column">
                         <h5>Address</h5>
 
-                        <p class="pt-3"><i class="fa-solid fa-location-dot pe-3"></i>Lorem ipsum dolor sit amet
-                            consectetur
-                            adipisicing elit.
+                        <p class="pt-3"><i class="fa-solid fa-location-dot pe-3"></i>
+                            Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.
                         </p>
                         <p class="pt-3"><i class="fa-solid fa-phone pe-3"></i>+971-52419999 / +44 7894 279999
                         </p>
-                        <p class="py-3"><i class="fa-solid fa-envelope pe-3"></i>info@sk.com
-                        </p>
+                        <a  href="info@skrealestate.com.pk"  class="py-3"><i class="fa-solid fa-envelope pe-3"></i>info@skrealestate.com.pk
+                        </a>
                     </div>
                 </div>
             </div>
@@ -66,3 +64,15 @@
         </div>
     </footer>
 </template>
+
+
+
+<style scoped>
+
+
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+</style>

@@ -1,4 +1,17 @@
 <script setup>
+import { ref } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+import { Navigation, Autoplay } from 'swiper/modules';
+// Modules for Swiper
+const modules = ref([Navigation, Autoplay]);
+// Autoplay configuration
+const autoplay = {
+    delay: 3000, // 3 seconds delay between slides
+    disableOnInteraction: false // Keep autoplay running even after user interaction
+};
 </script>
 
 <template>
@@ -9,15 +22,8 @@
                     About <br> Sk Marketing
                 </h1>
                 <p class="text-white text-start py-5">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui commodi molestias odit perferendis
-                    dignissimos
-                    modi sapiente dolorum incidunt, vitae eos voluptatibus aliquam, maiores est animi doloremque. Modi
-                    asperiores ad eveniet.
+                    SK Marketing specializes in eco-friendly construction and property sales. We deliver premium residential and commercial spaces, blending innovative design with sustainable materials for a perfect balance of luxury and environmental responsibility.
                 </p>
-                <button type="button"
-                    class="mx-1 about-us-btn nav-link text-nowrap px-2 px-md-3 py-1 d-flex flex-column align-items-center justify-content-center mb-5">Add
-                    Listing
-                </button>
             </div>
         </div>
     </div>
@@ -155,8 +161,119 @@
                     </div>
                 </div>
             </div>
+
+            <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :navigation="true" :modules="modules"
+                :breakpoints="{
+                    320: { slidesPerView: 1, spaceBetween: 5 },
+                    480: { slidesPerView: 1, spaceBetween: 5 },
+                    640: { slidesPerView: 1, spaceBetween: 5 },
+                    768: { slidesPerView: 2, spaceBetween: 3 },
+                    1024: { slidesPerView: 3, spaceBetween: 5 }
+                }" class="mySwiper">
+                <swiper-slide :slidesPerView="3">
+                    <div class="item mx-3">
+                        <div class="card border-0 bg-transparent">
+                            <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Umar Aziz</h5>
+                                <p class="card-text text-center">Real Estate Developer</p>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </swiper-slide>
+
+                <swiper-slide :slidesPerView="3">
+                    <div class="item mx-3">
+                    <div class="card border-0 bg-transparent">
+                        <img class="img-fluid card-img-top" src="../assets/Images/team-2.webp" alt="Image">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Hamza Ashfaq</h5>
+                            <p class="card-text text-center">Real Estate Developer</p>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </swiper-slide>
+
+                <swiper-slide :slidesPerView="3">
+                    <div class="item mx-3">
+                    <div class="card border-0 bg-transparent">
+                        <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Umar Aziz</h5>
+                            <p class="card-text text-center">Real Estate Developer</p>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </swiper-slide>
+
+                <swiper-slide :slidesPerView="3">
+                    <div class="item mx-3">
+                        <div class="card border-0 bg-transparent">
+                            <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Umar Aziz</h5>
+                                <p class="card-text text-center">Real Estate Developer</p>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </swiper-slide>
+
+                <swiper-slide :slidesPerView="3">
+                    <div class="item mx-3">
+                    <div class="card border-0 bg-transparent">
+                        <img class="img-fluid card-img-top" src="../assets/Images/team-2.webp" alt="Image">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Hamza Ashfaq</h5>
+                            <p class="card-text text-center">Real Estate Developer</p>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </swiper-slide>
+
+                <swiper-slide :slidesPerView="3">
+                    <div class="item mx-3">
+                    <div class="card border-0 bg-transparent">
+                        <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Umar Aziz</h5>
+                            <p class="card-text text-center">Real Estate Developer</p>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </swiper-slide>
+            </swiper>
         </div>
-        
+
         <div class="p-5">
             <h2 class="text-center">Our Partners</h2>
             <div class="slider-carosal my-4">
@@ -178,6 +295,6 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </template>

@@ -70,8 +70,8 @@
                     </div>
 
                     <div class="d-flex flex-direction-row align-items-center m-2 mb-4">
-                        <form class="d-flex flex-row w-100">
-                            <div class="m-2 mb-4 w-100">
+                        <form class="row align-items-end w-100">
+                            <div class="col-6 col-md mb-4">
                                 <select class="form-select" v-model="filterCriteria.city"
                                     aria-label="Default select example">
                                     <option :value="filterCriteria.city" disabled>{{ filterCriteria.city }}</option>
@@ -81,7 +81,7 @@
                                 </select>
                             </div>
 
-                            <div class="m-2 mb-4 w-100">
+                            <div class="col-6 col-md mb-4">
                                 <select class="form-select" v-model="filterCriteria.homeType"
                                     aria-label="Default select example">
                                     <option :value="filterCriteria.homeType" disabled>{{ filterCriteria.homeType }}
@@ -91,7 +91,7 @@
                                 </select>
                             </div>
 
-                            <div class="m-2 mb-4 w-100">
+                            <div class="col-6 col-md mb-4">
                                 <select class="form-select" v-model="filterCriteria.plot"
                                     aria-label="Default select example">
                                     <option :value="filterCriteria.plot" disabled>{{ filterCriteria.plot }}</option>
@@ -100,7 +100,7 @@
                                 </select>
                             </div>
 
-                            <div class="m-2 mb-4 w-100" v-if="filterCriteria.plot === 'Commercial Plot'">
+                            <div class="col-6 col-md mb-4" v-if="filterCriteria.plot === 'Commercial Plot'">
                                 <select class="form-select" v-model="filterCriteria.commercial"
                                     aria-label="Default select example">
                                     <option :value="filterCriteria.commercial" disabled>{{ filterCriteria.commercial }}
@@ -111,7 +111,7 @@
                                 </select>
                             </div>
 
-                            <div class="m-2 mb-4 w-100">
+                            <div class="col-6 col-md mb-4">
                                 <select class="form-select" v-model="filterCriteria.rooms"
                                     aria-label="Default select example">
                                     <option :value="filterCriteria.rooms" disabled>{{ filterCriteria.rooms }}</option>
@@ -121,20 +121,19 @@
                                 </select>
                             </div>
 
-                            <button type="button" class="btn main-button px-5 mb-4 m-2 btn-round"
+                            <button type="button" class="btn col-12 col-md main-button px-3 mb-4 m-2 btn-round"
                                 @click="handleFilterCriteria">Search</button>
                         </form>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 
 
 
 
-    <div class="container main-body-content mt-5">
+    <div class="container main-body-content mt-5 pt-5">
         <!-- ======================Hero Section================== -->
         <div class="hero-section mt-3 d-none">
             <div class="row px-md-5">
@@ -540,13 +539,17 @@
                                     <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
                                         media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
                                 </div>
-                                <div class="d-flex flex-column align-items-center mt-2">
-                                    <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                        role="button"><i class="fa-regular fa-envelope pe-2"></i>
-                                        {{ media?.pInfo_email }}</a>
-                                    <a class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                        role="button"><i class="fa-solid fa-phone pe-2"></i>
-                                        {{ media?.pInfo_phoneNumber }}</a>
+                                <div class="d-flex align-items-center mt-3">
+                                    <a class="btn btn-sm  nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                        role="button">
+                                        <i class="fa-regular fa-envelope pe-2"></i>
+                                        <!-- {{ media?.pInfo_email }} -->
+                                    </a>
+                                    <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                        role="button">
+                                        <i class="fa-solid fa-phone pe-2"></i>
+                                        <!-- {{ media?.pInfo_phoneNumber }} -->
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -557,7 +560,7 @@
     </div>
 
     <!-- ======================Our Services================== -->
-    <div class="our-services">
+    <div class="our-services py-5">
         <div class="container">
             <div class="row py-md-5 px-md-5 justify-content-center">
                 <p class="text-center">Our Services</p>
@@ -706,7 +709,6 @@
                             recusandae expedita laudantium! Tempora ipsum perferendis debitis!</p>
                     </div>
                     <div class="col-md-5">
-
                         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner bg-transparent">
                                 <div class="carousel-item bg-transparent active">
@@ -760,21 +762,22 @@
             <div class="inside-agent px-md-5 px-1 pt-2 pb-md-0 pb-2 m-5 rounded-4">
                 <div class="d-flex align-items-center justify-content-between flex-md-nowrap flex-wrap">
                     <img class="img-fluid" src="../assets/Images/agent.png">
-                    <div class="d-flex flex-column">
+                    <div class="d-flex flex-column p-3">
                         <h2 class="text-white">Become a Partner.</h2>
                         <p class="text-white">Fusce venenatis tellus a felis scelerisque. <br> venenatis tellus a felis
                             scelerisque. </p>
                     </div>
-                    <button type="button"
-                        class="mx-1 rounded-pill nav-link text-nowrap px-2 px-md-4 py-1 py-1 d-flex flex-column align-items-center justify-content-center"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Enquire
-                        Now</button>
+                    <RouterLink to="/contact" type="button"
+                        class="enquiry-btn mx-3 rounded-pill nav-link text-nowrap px-2 px-md-4 py-1 
+                        py-1 d-flex flex-column align-items-center justify-content-center">
+                        Enquire Now
+                    </RouterLink>
                 </div>
             </div>
         </div>
     </div>
     <!-- ======================Modals================== -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content p-md-3 p-2">
                 <div class="d-flex justify-content-between px-md-3">
@@ -809,7 +812,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
 
 
@@ -819,7 +822,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import emitter from '../../emitter';
-import { useRouter } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '.././stores/HomeDataFilterStore'; // Adjust the path as necessary
@@ -835,6 +838,7 @@ const autoplay = {
     delay: 3000, // 3 seconds delay between slides
     disableOnInteraction: false // Keep autoplay running even after user interaction
 };
+
 const formDataStore = useFormDataStore();
 //Create the toast instance
 const $toast = useToast();
@@ -988,6 +992,12 @@ const getMediabyType = () => {
 
 
 
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
+
+
+
 
 onMounted(() => {
     // $toast.open({
@@ -1088,6 +1098,7 @@ onMounted(() => {
         });
     });
 });
+
 </script>
 
 
@@ -1115,5 +1126,9 @@ onMounted(() => {
 
 img {
     object-fit: cover;
+}
+
+.enquiry-btn {
+    border: 1px solid #fff;
 }
 </style>

@@ -9,142 +9,169 @@
             </ol>
         </nav>
 
-        <div class="row">
-            <div class="col-md-3 col-4 shadow my-4 h-100 rounded-4">
-                <div class="filters d-flex flex-column py-4 px-md-2">
-                    <div class="d-flex flex-wrap align-items-center justify-content-between">
-                        <h5>Final Results</h5>
-                        <p><small>{{ propertiesCounter }} Land/Properties</small></p>
+        <div class="row land-con align-items-start">
+            <nav class="navbar  col-12 col-lg-3 side-bar-checkboxes navbar-expand-lg">
+                <div class="w-100">
+                    <div class="d-flex gap-3">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <h3>
+                            Choose Land Details
+                        </h3>
                     </div>
-                    <div class="mt-2">
-                        <h6>Minimum Price - Maximum Price</h6>
-                    </div>
-                    <div class="range-slider-container">
-                        <input v-model="Landfilters.minPrice" type="range" min="0" max="100" value="25"
-                            class="range-slider" id="minRange">
-                        <input v-model="Landfilters.maxPrice" type="range" min="0" max="100" value="75"
-                            class="range-slider" id="maxRange">
-                        <div class="price-range d-flex flex-nowrap">Price : <span id="minPrice">{{ Landfilters.minPrice
-                                }}</span> - <span id="maxPrice">{{ Landfilters.maxPrice }}</span></div>
-                    </div>
-                    <div class="mt-2">
-                        <h6>Purpose</h6>
-                    </div>
+                    <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
+                        <div class="shadow my-4 p-3 p-lg-0 h-100 w-100 rounded-4">
+                            <div class="filters d-flex flex-column py-4 px-md-2">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between">
+                                    <h5>Final Results</h5>
+                                    <p><small>{{ propertiesCounter }} Land/Properties</small></p>
+                                </div>
+                                <div class="mt-2">
+                                    <h6>Minimum Price - Maximum Price</h6>
+                                </div>
+                                <div class="range-slider-container">
+                                    <input v-model="Landfilters.minPrice" type="range" min="0" max="100" value="25"
+                                        class="range-slider" id="minRange">
+                                    <input v-model="Landfilters.maxPrice" type="range" min="0" max="100" value="75"
+                                        class="range-slider" id="maxRange">
+                                    <div class="price-range d-flex flex-nowrap">Price : <span id="minPrice">{{
+                                        Landfilters.minPrice
+                                            }}</span> -
+                                        <span id="maxPrice">{{ Landfilters.maxPrice }}</span>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <h6>Purpose</h6>
+                                </div>
 
 
-                    <!-- checkx -->
+                                <!-- checkx -->
 
-                    <div class="d-flex flex-column">
-                        <div class="m-2 mb-4 w-100">
-                            <div>
-                                <h6>Purpose</h6>
-                                <label class="d-block">
-                                    <input type="radio" v-model="Landfilters.purpose" value="Sale"> Sale
-                                </label>
-                                <label class="d-block">
-                                    <input type="radio" v-model="Landfilters.purpose" value="Rent"> Rent
-                                </label>
-                            </div>
-                        </div>
+                                <div class="d-flex flex-column">
+                                    <div class="m-2 mb-4 w-100">
+                                        <div>
+                                            <h6>Purpose</h6>
+                                            <label class="d-block">
+                                                <input type="radio" v-model="Landfilters.purpose" value="Sale"> Sale
+                                            </label>
+                                            <label class="d-block">
+                                                <input type="radio" v-model="Landfilters.purpose" value="Rent"> Rent
+                                            </label>
+                                        </div>
+                                    </div>
 
-                        <div class="mt-2">
-                            <h6>Home Type</h6>
-                        </div>
-                        <div class="m-2 mb-4 w-100">
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.homeType" value="House"> House
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.homeType" value="Flat"> Flat
-                            </label>
-                        </div>
+                                    <div class="mt-2">
+                                        <h6>Home Type</h6>
+                                    </div>
+                                    <div class="m-2 mb-4 w-100">
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.homeType" value="House"> House
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.homeType" value="Flat"> Flat
+                                        </label>
+                                    </div>
 
-                        <div class="mt-2">
-                            <h6>Plot</h6>
-                        </div>
-                        <div class="m-2 mb-4 w-100">
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.plot" value="Residential Plot"> Residential
-                                Plot
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.plot" value="Commercial Plot"> Commercial
-                                Plot
-                            </label>
-                        </div>
+                                    <div class="mt-2">
+                                        <h6>Plot</h6>
+                                    </div>
+                                    <div class="m-2 mb-4 w-100">
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.plot" value="Residential Plot">
+                                            Residential
+                                            Plot
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.plot" value="Commercial Plot">
+                                            Commercial
+                                            Plot
+                                        </label>
+                                    </div>
 
-                         <div class="mt-2">
-                            <h6>Commercial</h6>
-                        </div>
-                        <div class="m-2 mb-4 w-100">
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.commercial" value="Office"> Office
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.commercial" value="Shop"> Shop
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.commercial" value="Building"> Building
-                            </label>
-                        </div>
+                                    <div class="mt-2">
+                                        <h6>Commercial</h6>
+                                    </div>
+                                    <div class="m-2 mb-4 w-100">
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.commercial" value="Office">
+                                            Office
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.commercial" value="Shop"> Shop
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.commercial" value="Building">
+                                            Building
+                                        </label>
+                                    </div>
 
-                        <div class="mt-2">
-                            <h6>City</h6>
-                        </div>
-                        <div class="m-2 mb-4 w-100">
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.city" value="Islamabad"> Islamabad
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.city" value="Lahore"> Lahore
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.city" value="Karachi"> Karachi
-                            </label>
-                        </div>
+                                    <div class="mt-2">
+                                        <h6>City</h6>
+                                    </div>
+                                    <div class="m-2 mb-4 w-100">
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.city" value="Islamabad">
+                                            Islamabad
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.city" value="Lahore"> Lahore
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.city" value="Karachi"> Karachi
+                                        </label>
+                                    </div>
 
-                        <div class="mt-2">
-                            <h6>Area</h6>
-                        </div>
-                        <div class="m-2 mb-4 w-100">
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.area" value="Bahria Phase 1"> Bahria Phase 1
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.area" value="Bahria Phase 2"> Bahria Phase 2
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.area" value="Bahria Phase 3"> Bahria Phase 3
-                            </label>
-                        </div>
+                                    <div class="mt-2">
+                                        <h6>Area</h6>
+                                    </div>
+                                    <div class="m-2 mb-4 w-100">
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.area" value="Bahria Phase 1">
+                                            Bahria Phase 1
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.area" value="Bahria Phase 2">
+                                            Bahria Phase 2
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.area" value="Bahria Phase 3">
+                                            Bahria Phase 3
+                                        </label>
+                                    </div>
 
-                        <div class="mt-2">
-                            <h6>Sector</h6>
-                        </div>
-                        <div class="m-2 mb-4 w-100">
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.sector" value="Sector f1"> Sector f1
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.sector" value="Sector f2"> Sector f2
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.sector" value="Sector f3"> Sector f3
-                            </label>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-
+                                    <div class="mt-2">
+                                        <h6>Sector</h6>
+                                    </div>
+                                    <div class="m-2 mb-4 w-100">
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.sector" value="Sector f1">
+                                            Sector f1
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.sector" value="Sector f2">
+                                            Sector f2
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.sector" value="Sector f3">
+                                            Sector f3
+                                        </label>
+                                    </div>
+                                </div>
 
 
-                    <!-- <div class="d-flex flex-column">
+
+
+
+
+
+
+
+
+
+                                <!-- <div class="d-flex flex-column">
                         <div class="form-check">
                             <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
                             <label class="form-check-label" for="flexCheckChecked">
@@ -154,9 +181,9 @@
                     </div> -->
 
 
-                    <!-- search filter button -->
+                                <!-- search filter button -->
 
-                    <!-- <div class="d-flex flex-row">
+                                <!-- <div class="d-flex flex-row">
                         <div class="row justify-content-center p-2 m-1">
                             <a @click.prevent="handleSearchBtn" style="width: fit-content;" href=""
                                 class="mx-1 my-4 nav-sub-links-2 nav-link text-nowrap px-2 px-md-3 py-1 d-flex flex-column align-items-center justify-content-center"
@@ -168,19 +195,13 @@
                                 role="button">Clear Filter</a>
                         </div>
                     </div> -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </nav>
 
-
-
-
-
-
-
-
-
-
-            <div class="col-md-9 col-8 my-2 properties-listed">
+            <div class="col-12 col-lg-9 col-8 my-5 properties-listed">
                 <div class="row listing">
                     <div class="row justify-content-between align-items-center properties-for-sale">
                         <div class="col-9">
@@ -212,14 +233,14 @@
                                             <p>{{ media?.property_listing_pape?.propertyDetail_bathrooms }}</p>
                                         </div>
                                     </div>
-                                    <div class="d-flex flex-column align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
+                                    <div class="d-flex align-items-center mt-2">
+                                        <a class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
                                             role="button" @click="redirectToEmail"><i
                                                 class="fa-regular fa-envelope pe-2"></i></a>
                                         <!-- {{media?.pInfo_email }} -->
                                         <!-- Call useContact directly on button click -->
                                         <button @click="redirectToPhoneDialer"
-                                            class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
+                                            class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
                                             role="button"><i class="fa-solid fa-phone pe-2"></i></button>
                                         <!-- {{media?.pInfo_phoneNumber }} -->
                                     </div>
@@ -487,5 +508,19 @@ const checkIsMobile = () => {
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@media (max-width:992px) {
+    .side-bar-checkboxes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-color: #fff;
+    }
+
+    .land-con {
+        position: relative
+    }
 }
 </style>
