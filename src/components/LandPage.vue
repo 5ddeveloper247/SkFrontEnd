@@ -92,34 +92,30 @@
                                         </label>
                                     </div>
 
-                        <div class="mt-2">
-                            <h6>Commercial</h6>
-                        </div>
-                        <div class="m-2 mb-4 w-100">
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.commercial" value="Office"> Office
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.commercial" value="Shop"> Shop
-                            </label>
-                            <label class="d-block">
-                                <input type="checkbox" v-model="Landfilters.commercial" value="Building"> Building
-                            </label>
-                        </div>
+                                    <div class="mt-2">
+                                        <h6>Commercial</h6>
+                                    </div>
+                                    <div class="m-2 mb-4 w-100">
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.commercial" value="Office">
+                                            Office
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.commercial" value="Shop"> Shop
+                                        </label>
+                                        <label class="d-block">
+                                            <input type="checkbox" v-model="Landfilters.commercial" value="Building">
+                                            Building
+                                        </label>
+                                    </div>
 
                                     <div class="mt-2">
                                         <h6>City</h6>
                                     </div>
                                     <div class="m-2 mb-4 w-100">
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.city" value="Islamabad">
-                                            Islamabad
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.city" value="Lahore"> Lahore
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.city" value="Karachi"> Karachi
+                                        <label class="d-block" v-for="city in cityList" :key="city">
+                                            <input type="checkbox" v-model="Landfilters.city" :value="city">
+                                            {{ city }}
                                         </label>
                                     </div>
 
@@ -271,10 +267,12 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '../stores/HomeDataFilterStore';
 import { useRoute } from 'vue-router';
 import Loader from './Loader.vue';
+import { useCityData } from '@/composables/useCityData';
 
 //define objects
 const route = useRoute();
 const $toast = useToast();
+const { cityData, error, cityList, fetchCityData } = useCityData();
 
 // Define reactive variables
 const propertiesCounter = ref(0);

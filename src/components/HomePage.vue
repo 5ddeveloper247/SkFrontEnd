@@ -78,9 +78,10 @@
                                 <select class="form-select" v-model="filterCriteria.city"
                                     aria-label="Default select example">
                                     <option :value="filterCriteria.city" disabled>{{ filterCriteria.city }}</option>
-                                    <option value="Islamabad">Islamabad</option>
+                                    <option v-for="city in cityList" :key="city" :value="city">{{ city }}</option>
+                                    <!-- <option value="Islamabad">Islamabad</option>
                                     <option value="Lahore">Lahore</option>
-                                    <option value="Karachi">Karachi</option>
+                                    <option value="Karachi">Karachi</option> -->
                                 </select>
                             </div>
 
@@ -837,6 +838,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
 import Loader from './Loader.vue';
+import { useCityData } from '@/composables/useCityData';
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
 // Autoplay configuration
@@ -846,6 +848,7 @@ const autoplay = {
 };
 
 const formDataStore = useFormDataStore();
+const { cityData, error, cityList, fetchCityData } = useCityData();
 //Create the toast instance
 const $toast = useToast();
 const router = useRouter();

@@ -32,7 +32,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(87, 86, 86, 0.5);
   z-index: 9999;
 }
 
@@ -45,9 +45,9 @@ export default {
 
 .door {
   position: absolute;
-  width: 75px;
-  height: 200px;
-  background: #8b4513;
+  width: 65px;
+  height: 170px;
+  background: #F45D08;
   border: 2px solid #654321;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   transition: transform 2s;
@@ -79,14 +79,14 @@ export default {
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 50px solid #321bfe;
+  border-bottom: 50px solid #1811e461;
 }
 
 .walls {
   width: 100px;
   height: 50px;
   background: #f63809;
-  border: 2px solid #ff440b;
+  border: 2px solid #ff0b30;
 }
 
 @keyframes open-left-door {

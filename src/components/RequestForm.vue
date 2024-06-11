@@ -56,8 +56,8 @@
                   <div>
 
                     <label class="label--radio-1 d-flex align-items-center px-4 rounded-5">
-                      <input type="radio" class="radio-sale" name="city">
-                        Sale
+                      <input type="radio" class="radio-sale" name="city" @click.prevent="handlePurpose('Sale')">
+                      Sale
                       <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 100 100">
                         <path fill="#000" d="m44.105 55.641l3.598-2.079l-4.666-3.925z" />
                         <path fill="#000"
@@ -77,7 +77,7 @@
                       </svg>
                     </button> -->
                     <label class="label--radio-1 d-flex align-items-center px-4 ms-2 rounded-5">
-                      <input type="radio" class="radio-sale" name="city">
+                      <input type="radio" class="radio-sale" name="city" @click.prevent="handlePurpose('Rent')">
                       Rent
                       <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
                         <path fill="black"
@@ -133,47 +133,47 @@
 
                       <form class="w-100">
                         <div class="row">
-
                           <div class="col-6 col-lg">
-                            <h6 class="heading mt-4 text-uppercase">
-                              Select city
-                            </h6>
+                            <h6 class="heading mt-4 text-uppercase">Select city</h6>
                             <ul class="list">
-                              <li class="list__item">
+                              <li class="list__item" v-for="(city, index) in cityList" :key="index">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" checked name="city">
-                                  Islamabad
+                                  <input type="radio" class="radio" v-model="propertyRequestform.city" :value="city"
+                                    name="city">
+                                  {{ city }}
                                 </label>
                               </li>
-                              <li class="list__item">
+                              <!-- <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" name="city">
+                                  <input type="radio" class="radio" v-model="propertyRequestform.city" value="Lahore"
+                                    name="city">
                                   Lahore
                                 </label>
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" name="city">
+                                  <input type="radio" class="radio" v-model="propertyRequestform.city" value="Karachi"
+                                    name="city">
                                   Karachi
                                 </label>
-                              </li>
+                              </li> -->
                             </ul>
                           </div>
 
                           <div class="col-6 col-lg">
-                            <h6 class="heading mt-4 text-uppercase">
-                              home type
-                            </h6>
+                            <h6 class="heading mt-4 text-uppercase">Home type</h6>
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" checked name="home-type">
+                                  <input type="radio" class="radio" v-model="propertyRequestform.homeType" value="Flat"
+                                    name="homeType">
                                   Flat
                                 </label>
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" name="home-type">
+                                  <input type="radio" class="radio" v-model="propertyRequestform.homeType" value="House"
+                                    name="homeType">
                                   House
                                 </label>
                               </li>
@@ -181,19 +181,19 @@
                           </div>
 
                           <div class="col-6 col-lg">
-                            <h6 class="heading mt-4 text-uppercase">
-                              Plot Type
-                            </h6>
+                            <h6 class="heading mt-4 text-uppercase">Plot type</h6>
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" checked name="plot-type">
+                                  <input type="radio" class="radio" v-model="propertyRequestform.plot"
+                                    value="Residencial" name="plot">
                                   Residencial
                                 </label>
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" name="plot-type">
+                                  <input type="radio" class="radio" v-model="propertyRequestform.plot"
+                                    value="Commercial" name="plot">
                                   Commercial
                                 </label>
                               </li>
@@ -201,31 +201,31 @@
                           </div>
 
                           <div class="col-6 col-lg">
-                            <h6 class="heading mt-4 text-uppercase">
-                              commercial type
-                            </h6>
+                            <h6 class="heading mt-4 text-uppercase">Commercial type</h6>
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" checked name="commercial-type">
+                                  <input type="radio" class="radio" v-model="propertyRequestform.commercial"
+                                    value="Office" name="commercial">
                                   Office
                                 </label>
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" name="commercial-type">
+                                  <input type="radio" class="radio" v-model="propertyRequestform.commercial"
+                                    value="Shop" name="commercial">
                                   Shop
                                 </label>
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" name="commercial-type">
+                                  <input type="radio" class="radio" v-model="propertyRequestform.commercial"
+                                    value="Building" name="commercial">
                                   Building
                                 </label>
                               </li>
                             </ul>
                           </div>
-
                         </div>
                       </form>
                     </div>
@@ -310,6 +310,7 @@ import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Loader from './Loader.vue';
+import { useCityData } from '@/composables/useCityData';
 
 // Create the toast instance
 const $toast = useToast();
@@ -319,6 +320,7 @@ export default {
     Loader
   },
   setup() {
+    const { cityData, error, cityList, fetchCityData } = useCityData();
     const propertyRequestform = ref({
       firstName: '',
       lastName: '',
@@ -368,14 +370,14 @@ export default {
           loading.value = false;
           if (data.success) {
             console.log('Success:', data);
-            loading.value=false;
+            loading.value = false;
             $toast.open({
               message: 'Submitted Successfully',
               type: 'success',
               position: 'top-right'
             });
           } else {
-            loading.value=false;
+            loading.value = false;
             $toast.open({
               message: 'An error occurred!',
               type: 'error',
@@ -384,7 +386,7 @@ export default {
             console.error('Error:', data);
 
             if (data.errors) {
-              loading.value=false;
+              loading.value = false;
               Object.keys(data.errors).forEach(field => {
                 data.errors[field].forEach(errorMessage => {
                   $toast.open({
@@ -409,6 +411,7 @@ export default {
     };
 
     const handlePurpose = (purpose) => {
+
       propertyRequestform.value.purpose = purpose;
     };
 
@@ -507,7 +510,13 @@ export default {
       propertyRequestform,
       handleSubmission,
       handlePurpose,
-      loading
+      loading,
+      //composable
+      cityData,
+      error,
+      loading,
+      fetchCityData,
+      cityList
     };
   }
 };
