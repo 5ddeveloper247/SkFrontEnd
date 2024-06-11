@@ -461,13 +461,15 @@
                     }" class="mySwiper">
                     <swiper-slide v-for="media in propertyData.property_record_files" :key="media.id"
                         :slidesPerView="3">
-                        <div>
-                            <img :src="getImageUrl(media)" class="d-block" height="270" width="100%" alt="Image 3">
-                            <div class="verified-society rounded-2">
-                                <p class="text-white p-2 d-flex align-items-center"><i
-                                        class="fa-solid fa-check pe-2"></i>Verified</p>
+                        <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
+                            <div>
+                                <img :src="getImageUrl(media)" class="d-block" height="270" width="100%" alt="Image 3">
+                                <div class="verified-society rounded-2">
+                                    <p class="text-white p-2 d-flex align-items-center"><i
+                                            class="fa-solid fa-check pe-2"></i>Verified</p>
+                                </div>
                             </div>
-                        </div>
+                        </RouterLink>
                     </swiper-slide>
                 </swiper>
             </div>
