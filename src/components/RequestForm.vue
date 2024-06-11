@@ -1,6 +1,7 @@
 <template>
   <!-- ======================Multi Step Form================== -->
-  <div class="container-fluid call-to-action pt-5">
+  <Loader :isLoading="loading" />
+  <div class="container-fluid call-to-action pt-5" v-if="!loading">
     <div class="row justify-content-center pt-md-5 pt-3">
       <div class="col-md-8 col-12 text-center p-0">
         <div class="card px-md-0 px-2 pt-4 pb-0 mt-3 mb-3">
@@ -178,19 +179,19 @@
 
 
 
-
-
-
-
 <script>
 import { ref, onMounted } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import Loader from './Loader.vue';
 
 // Create the toast instance
 const $toast = useToast();
 
 export default {
+  components: {
+    Loader
+  },
   setup() {
     const propertyRequestform = ref({
       firstName: '',
@@ -209,6 +210,8 @@ export default {
       propertyType: ''
     });
 
+    const loading = ref(false);
+
     const validateForm = () => {
       const requiredFields = [
         'firstName', 'lastName', 'phone', 'email',
@@ -221,22 +224,12 @@ export default {
         }
       }
       return true;
-    }
-
+    };
 
     const handleSubmission = () => {
-      // alert("clicked")
-      // if (!validateForm()) {
-      //   $toast.open({
-      //     message: 'Please fill out all required fields.',
-      //     type: 'info',
-      //     position: 'top-right'
-      //   });
-      //   return;
-      // }
-
       console.log('Form data:', propertyRequestform.value);
       const base_url = import.meta.env.VITE_BASE_URL;
+      loading.value = true;
       fetch(base_url + '/api/frontend/home/register/property', {
         method: 'POST',
         headers: {
@@ -246,22 +239,26 @@ export default {
       })
         .then(response => response.json())
         .then(data => {
+          loading.value = false;
           if (data.success) {
+            console.log('Success:', data);
+            loading.value=false;
             $toast.open({
               message: 'Submitted Successfully',
               type: 'success',
               position: 'top-right'
             });
-            console.log('Success:', data);
-          }
-          else {
+          } else {
+            loading.value=false;
             $toast.open({
-              message: 'An error occured!',
+              message: 'An error occurred!',
               type: 'error',
               position: 'top-right'
             });
             console.error('Error:', data);
+
             if (data.errors) {
+              loading.value=false;
               Object.keys(data.errors).forEach(field => {
                 data.errors[field].forEach(errorMessage => {
                   $toast.open({
@@ -275,7 +272,7 @@ export default {
           }
         })
         .catch(error => {
-
+          loading.value = false;
           $toast.open({
             message: 'An unexpected error occurred.',
             type: 'error',
@@ -283,15 +280,11 @@ export default {
           });
           console.error('Error:', error);
         });
-    }
-
-
+    };
 
     const handlePurpose = (purpose) => {
       propertyRequestform.value.purpose = purpose;
-    }
-
-
+    };
 
     onMounted(() => {
       $(document).ready(function () {
@@ -345,8 +338,6 @@ export default {
           setProgressBar(++current);
         });
 
-
-
         $(".previous").click(function () {
           current_fs = $(this).parent();
           previous_fs = $(this).parent().prev();
@@ -389,7 +380,8 @@ export default {
     return {
       propertyRequestform,
       handleSubmission,
-      handlePurpose
+      handlePurpose,
+      loading
     };
   }
 };

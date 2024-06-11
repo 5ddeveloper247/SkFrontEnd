@@ -1,6 +1,9 @@
-<template>
 
-    <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade">
+
+<template >
+    <Loader :isLoading="loading" />
+
+    <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade" v-show="!loading">
         <div class="carousel-inner">
             <div class="carousel-item top-carousal active">
                 <img src="../assets/Images/construction1.jpg" class="d-block w-100" alt="...">
@@ -830,6 +833,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
+import Loader from './Loader.vue';
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
 // Autoplay configuration
@@ -843,6 +847,7 @@ const $toast = useToast();
 const router = useRouter();
 
 const mediaData = ref([]);
+const loading=ref(true);
 
 ////////////////////////
 const carousel = ref(null);
@@ -954,6 +959,7 @@ const setMediaType = (type) => {
 };
 
 const getMediabyType = () => {
+    loading.value=true;
     const base_url = import.meta.env.VITE_BASE_URL;
     fetch(base_url + '/api/frontend/home/property/post', {
         method: 'POST',
@@ -963,22 +969,30 @@ const getMediabyType = () => {
         body: JSON.stringify({ 'mediaSliderType': mediaSliderType.value }) // Use 'body' instead of 'data'
     })
         .then(response => {
+            setTimeout(() => {
+                loading.value=false;
+            }, 2000);
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
             return response.json();
         })
         .then(data => {
+
             console.log('Success:', data.propertyInfo);
             mediaData.value = data.propertyInfo;
-            $toast.open({
-                message: 'Property data fetched successfully!',
-                type: 'success',
-                position: 'top-right'
-            });
+            setTimeout(() => {
+                loading.value=false;
+            }, 2000);
+            // $toast.open({
+            //     message: 'Property data fetched successfully!',
+            //     type: 'success',
+            //     position: 'top-right'
+            // });
         })
         .catch(error => {
             console.error('Error:', error);
+            loading.value=false;
             $toast.open({
                 message: 'Failed to fetch property data.',
                 type: 'error',
@@ -999,6 +1013,7 @@ onMounted(() => {
     // });
 
     // Make API call
+    loading.value=true;
     const base_url = import.meta.env.VITE_BASE_URL;
     fetch(base_url + '/api/frontend/home/property/get', {
         method: 'GET',
@@ -1008,15 +1023,21 @@ onMounted(() => {
     })
         .then(response => response.json())
         .then(data => {
+            setTimeout(() => {
+                loading.value=false;
+            }, 2000);
             console.log('Success:', data.propertyInfo);
             mediaData.value = data.propertyInfo;
-            $toast.open({
-                message: 'Property data fetched successfully!',
-                type: 'success',
-                position: 'top-right'
-            });
+            // $toast.open({
+            //     message: 'Property data fetched successfully!',
+            //     type: 'success',
+            //     position: 'top-right'
+            // });
         })
         .catch(error => {
+            setTimeout(() => {
+                loading.value=false;
+            }, 2000);
             console.error('Error:', error);
             $toast.open({
                 message: 'Failed to fetch property data.',
