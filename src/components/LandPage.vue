@@ -1,5 +1,6 @@
 <template>
-    <div class="container pt-5">
+    <Loader :isLoading="loading" />
+    <div class="container pt-5" v-show="!loading">
         <nav class="pt-5"
             style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
             aria-label="breadcrumb">
@@ -91,22 +92,20 @@
                                         </label>
                                     </div>
 
-                                    <div class="mt-2">
-                                        <h6>Commercial</h6>
-                                    </div>
-                                    <div class="m-2 mb-4 w-100">
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.commercial" value="Office">
-                                            Office
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.commercial" value="Shop"> Shop
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.commercial" value="Building">
-                                            Building
-                                        </label>
-                                    </div>
+                        <div class="mt-2">
+                            <h6>Commercial</h6>
+                        </div>
+                        <div class="m-2 mb-4 w-100">
+                            <label class="d-block">
+                                <input type="checkbox" v-model="Landfilters.commercial" value="Office"> Office
+                            </label>
+                            <label class="d-block">
+                                <input type="checkbox" v-model="Landfilters.commercial" value="Shop"> Shop
+                            </label>
+                            <label class="d-block">
+                                <input type="checkbox" v-model="Landfilters.commercial" value="Building"> Building
+                            </label>
+                        </div>
 
                                     <div class="mt-2">
                                         <h6>City</h6>
@@ -271,6 +270,7 @@ import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '../stores/HomeDataFilterStore';
 import { useRoute } from 'vue-router';
+import Loader from './Loader.vue';
 
 //define objects
 const route = useRoute();
@@ -294,6 +294,8 @@ const Landfilters = ref({
     sector: [],
     rooms: ''
 });
+
+const loading = ref(false);
 
 // Fetch image URL
 const getImageUrl = (media) => {
@@ -400,22 +402,26 @@ const fetchPropertyData = (HomePagefilterCriteria = null) => {
     }
 
     // Fetch data from the API
+    loading.value = true;
     fetch(url, options)
+
         .then(response => response.json())
         .then(data => {
+            loading.value = false;
             console.log('Success:', data.propertyInfo);
 
             // Update mediaData with property information
             mediaData.value = data.propertyInfo;
 
             // Show success toast message
-            $toast.open({
-                message: 'Property data fetched successfully!',
-                type: 'success',
-                position: 'top-right'
-            });
+            // $toast.open({
+            //     message: 'Property data fetched successfully!',
+            //     type: 'success',
+            //     position: 'top-right'
+            // });
         })
         .catch(error => {
+            loading.value = false;
             console.error('Error:', error);
 
             // Show error toast message
@@ -491,9 +497,6 @@ const checkIsMobile = () => {
 };
 
 </script>
-
-
-
 
 
 <style scoped>

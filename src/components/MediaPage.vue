@@ -150,81 +150,66 @@ const mediaOnly = ref([]);
 const currentTopVideo = ref(1);
 const currentBottomVideo = ref(1);
 const showMatchMedia = ref('');
-
+const loading = ref(false);
 
 // Function to show the top video
 function showTopVideo(index) {
-
   const parsed_uri = getMediaUrlFromMediaData(index);
   currentTopVideo.value = parsed_uri;
-  // alert(currentTopVideo.value)
 }
 
 // Function to show the bottom video
 function showBottomVideo(index) {
-
   const parsed_uri = getMediaUrlFromMediaData(index);
   currentBottomVideo.value = parsed_uri;
-  // alert(currentBottomVideo.value)
-
 }
 
 // Function to get media URL from media data by ID
 function getMediaUrlFromMediaData(id) {
+  loading.value = true;
   const mediaItem = mediaData.value.find(media => media.id === id);
   if (mediaItem) {
     const media_uri = mediaItem.url;
     const uriSpliter = media_uri.split('/');
-    const parsed_uri = `${uriSpliter[0] + '/' + uriSpliter[1] + '/' + uriSpliter[2] + '/' + 'embed' + '/' + uriSpliter[3]}`
+    const parsed_uri = `${uriSpliter[0] + '/' + uriSpliter[1] + '/' + uriSpliter[2] + '/' + 'embed' + '/' + uriSpliter[3]}`;
 
     showMatchMedia.value = media_uri;
-    $toast.open({
-      message: `media loaded successfully`,
-      type: 'success'
-    });
+    setTimeout(() => {
+      loading.value = false;
+    }, 2000);
     return parsed_uri;
-  }
-  else {
+  } else {
+    loading.value = false;
     $toast.open({
-      message: 'Media not found for the given url.',
-      type: 'error'
+      message: 'Media not found or removed for the given url.',
+      type: 'error',
     });
   }
 }
 
 // Fetch media data on component mount
 onMounted(() => {
-  // $toast.open({
-  //   message: 'Fetching media data...',
-  //   type: 'info',
-  //   position:'top-right'
-  // });
-  // Make API call
+  loading.value = false;
   const base_url = import.meta.env.VITE_BASE_URL;
   fetch(base_url + '/api/frontend/home/media/get', {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   })
     .then(response => response.json())
     .then(data => {
-      console.log('Success:', data.media);
-      console.log('Success mediaOnly:', data.mediaOnly);
       mediaData.value = data.media;
       mediaOnly.value = data.mediaOnly;
-      $toast.open({
-        message: 'Media data fetched successfully!',
-        type: 'success',
-        position: 'top-right'
-      });
+      loading.value = false;
+    
     })
     .catch(error => {
-      console.error('Error:', error);
+      loading.value = false;
       $toast.open({
         message: 'Failed to fetch media data.',
         type: 'error',
-        position: 'top-right'
+        position: 'top-right',
       });
     });
 });

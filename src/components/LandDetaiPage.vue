@@ -2,6 +2,7 @@
 </script>
 
 <template>
+
     <div class="container pt-5">
         <div class="row justify-content-start px-md-4 pb-md-4 p-2 pt-2 pt-md-5">
             <div class="mb-2 d-flex justify-content-between pt-5">
@@ -23,9 +24,9 @@
 
 
 
+            <Loader :isLoading="loading" />
 
-
-            <div class="col-md-8">
+            <div class="col-md-8" v-show="!loading">
                 <swiper :speed="1000" :spaceBetween="5" :slidesPerView="1" :navigation="true" :modules="modules"
                     class="mySwiper">
                     <swiper-slide v-for="media in propertyData.property_record_files" :key="media.id"
@@ -495,6 +496,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
+import Loader from './Loader.vue';
+
 
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
@@ -505,19 +508,18 @@ const autoplay = {
 };
 // Create the toast instance
 const $toast = useToast();
-
 // Define reactive references for form data and property data
 const inquiryData = ref({
   location: '',
   email: '',
   phone: '',
   description: '',
-  agent: [],
-  informedMe: false
+  agent: [], 
+  informedMe: false 
 });
 
 const propertyData = ref([]);
-
+const loading=ref(false);
 // Retrieve the property ID from the route parameters
 const route = useRoute();
 const propertyId = ref(route.params.id);
@@ -529,11 +531,11 @@ const getImageUrl = (media) => {
 
 // Function to handle form submission
 // Function to handle form submission
-const handleInquiryFormSubmission = () => {
+const handleInquiryFormSubmission = () => {      
   // Make POST request to backend with form data
   console.log(inquiryData.value);
   const base_url = import.meta.env.VITE_BASE_URL;
-
+  loading.value=true;
   fetch(`${base_url}/api/frontend/inquiry/store`, {
     method: 'POST',
     headers: {
@@ -551,6 +553,7 @@ const handleInquiryFormSubmission = () => {
     return response.json();
   })
   .then(data => {
+    loading.value=false;
     // Handle successful form submission response
     console.log('Form submission successful:', data);
     $toast.open({
@@ -569,6 +572,7 @@ const handleInquiryFormSubmission = () => {
     };
   })
   .catch(error => {
+    loading.value=false; 
     // Handle form submission error
     console.error('Error submitting form data:', error);
     const errorMessage = JSON.parse(error.message);
@@ -593,6 +597,7 @@ const handleInquiryFormSubmission = () => {
 // Fetch the media data when the component is mounted
 onBeforeMount(() => {
   // Fetch the media data
+  loading.value=true;
   const base_url = import.meta.env.VITE_BASE_URL;
   fetch(`${base_url}/api/frontend/home/property/getbyid/${propertyId.value}`, {
     method: 'GET',
@@ -604,14 +609,16 @@ onBeforeMount(() => {
   .then(data => {
     console.log('Success:', data.propertyInfo);
     propertyData.value = data.propertyInfo;
-    $toast.open({
-      message: 'Property data fetched successfully!',
-      type: 'success',
-      position: 'top-right',
-    });
+    // $toast.open({
+    //   message: 'Property data fetched successfully!',
+    //   type: 'success',
+    //   position: 'top-right',
+    // });
+    loading.value=false;
   })
   .catch(error => {
     console.error('Error:', error);
+    loading.value=false;
     $toast.open({
       message: 'Failed to fetch property data.',
       type: 'error',
