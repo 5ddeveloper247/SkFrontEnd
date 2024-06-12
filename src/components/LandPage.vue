@@ -114,45 +114,56 @@
                                     </div>
                                     <div class="m-2 mb-4 w-100">
                                         <label class="d-block" v-for="city in cityList" :key="city">
-                                            <input type="checkbox" v-model="Landfilters.city" :value="city">
+                                            <input type="checkbox" @change="onCityChange" v-model="Landfilters.city"
+                                                :value="city">
                                             {{ city }}
                                         </label>
                                     </div>
 
-                                    <div class="mt-2">
+
+
+
+                                    <!-- Area -->
+                                    <div class="mt-2" v-if="selectedAreas.length > 0">
                                         <h6>Area</h6>
                                     </div>
                                     <div class="m-2 mb-4 w-100">
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.area" value="Bahria Phase 1">
-                                            Bahria Phase 1
+
+                                        <label class="d-block" v-for="area in selectedAreas">
+                                            <input type="checkbox" @change="onAreaChange" v-model="Landfilters.area"
+                                                :value="area.NAME">
+                                            {{ area.NAME }}
                                         </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.area" value="Bahria Phase 2">
-                                            Bahria Phase 2
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.area" value="Bahria Phase 3">
-                                            Bahria Phase 3
-                                        </label>
+
                                     </div>
 
-                                    <div class="mt-2">
+
+                                    <div class="mt-2" v-if="selectedLocation.length > 0">
+                                        <h6>Location</h6>
+                                    </div>
+                                    <div class="m-2 mb-4 w-100">
+
+                                        <label class="d-block" v-for="location in selectedLocation">
+                                            <input type="checkbox" @change="onLocationChange"
+                                                v-model="Landfilters.location" :value="location.NAME">
+                                            {{ location.NAME }}
+                                        </label>
+
+                                    </div>
+
+                                    <!-- Location -->
+
+
+                                    <!-- Sectors -->
+                                    <div class="mt-2" v-if="selectedSectors.length > 0">
                                         <h6>Sector</h6>
                                     </div>
                                     <div class="m-2 mb-4 w-100">
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.sector" value="Sector f1">
-                                            Sector f1
+                                        <label class="d-block" v-for="sector in selectedSectors">
+                                            <input type="checkbox" v-model="Landfilters.sector" :value="sector.NAME">
+                                            {{ sector.NAME }}
                                         </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.sector" value="Sector f2">
-                                            Sector f2
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.sector" value="Sector f3">
-                                            Sector f3
-                                        </label>
+
                                     </div>
                                 </div>
 
@@ -260,16 +271,16 @@
 
 
 <script setup>
-import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';
 import { ref, onMounted, watch, computed } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '../stores/HomeDataFilterStore';
 import { useRoute } from 'vue-router';
 import Loader from './Loader.vue';
+import axios from 'axios';
 import { useCityData } from '@/composables/useCityData';
 
-//define objects
+// Define objects
 const route = useRoute();
 const $toast = useToast();
 const { cityData, error, cityList, fetchCityData } = useCityData();
@@ -290,10 +301,16 @@ const Landfilters = ref({
     city: [],
     area: [],
     sector: [],
+    location: [],
     rooms: ''
 });
 
+const areaList = ref([]);
+const sectorList = ref([]);
 const loading = ref(false);
+const selectedAreas = ref([]);
+const selectedLocation = ref([]);
+const selectedSectors = ref([]);
 
 // Fetch image URL
 const getImageUrl = (media) => {
@@ -352,32 +369,6 @@ const generateFilterData = (HomefilterData) => {
     return true;
 };
 
-
-
-// Function to handle search button click
-
-// const handleSearchBtn = () => {
-//     console.log('Applying all filters filters:', Landfilters.value);
-//     fetchPropertyData(Landfilters.value);
-// };
-
-// // Function to handle clear filter button click
-
-// const handleClearFilter = () => {
-//     console.log("Clearing all filters");
-//     Landfilters.value = {
-//         HomePageFilters: '',
-//         minPrice: '',
-//         maxPrice: '',
-//     };
-
-//     fetchPropertyData();
-// };
-
-
-
-
-
 // Function to fetch property data based on filters
 const fetchPropertyData = (HomePagefilterCriteria = null) => {
     const base_url = import.meta.env.VITE_BASE_URL;
@@ -402,7 +393,6 @@ const fetchPropertyData = (HomePagefilterCriteria = null) => {
     // Fetch data from the API
     loading.value = true;
     fetch(url, options)
-
         .then(response => response.json())
         .then(data => {
             loading.value = false;
@@ -430,6 +420,10 @@ const fetchPropertyData = (HomePagefilterCriteria = null) => {
             });
         });
 };
+
+
+
+
 
 // Watch for changes in Landfilters, but skip the initial mount
 watch(
@@ -462,10 +456,7 @@ onMounted(() => {
     }, 5000); // Delay to ensure the watcher does not trigger prematurely
 });
 
-
-
-
-//counting landproperties 
+// Counting land properties 
 const LandPropertiesCount = computed(() => {
     return mediaData.value.length;
 });
@@ -475,10 +466,7 @@ watch(LandPropertiesCount, (newCount) => {
     propertiesCounter.value = newCount;
 });
 
-//counting landproperties ended
-
-/* // handle the onclick on mobile and email  */
-
+// Handle the onclick on mobile and email
 const useContact = (media) => {
     if (checkIsMobile()) {
         window.location.href = 'tel:' + media.pInfo_phoneNumber;
@@ -494,7 +482,46 @@ const checkIsMobile = () => {
     isMobile.value = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
 };
 
+
+
+
+const onCityChange = () => {
+    const selectedCityObject = cityData.value.find((city) => city.NAME === Landfilters.value.city[0]);
+    if (selectedCityObject) {
+        selectedAreas.value = selectedCityObject.areas;
+    } else {
+        selectedAreas.value = [];
+    }
+    // Reset dependent values
+    selectedSectors.value = [];
+    selectedLocation.value = [];
+};
+
+const onAreaChange = () => {
+    const selectedAreaObject = selectedAreas.value.find((area) => area.NAME === Landfilters.value.area[0]);
+    if (selectedAreaObject) {
+        selectedLocation.value = selectedAreaObject.locations;
+    } else {
+        selectedLocation.value = [];
+    }
+    // Reset dependent values
+    selectedSectors.value = [];
+};
+
+const onLocationChange = () => {
+    const selectedLocationObject = selectedLocation.value.find((location) => location.NAME === Landfilters.value.location[0]);
+    if (selectedLocationObject) {
+        selectedSectors.value = selectedLocationObject.sectors;
+    } else {
+        selectedSectors.value = [];
+    }
+    // No dependent values to reset in this function
+};
+
+
+
 </script>
+
 
 
 <style scoped>

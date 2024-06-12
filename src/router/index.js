@@ -14,9 +14,12 @@ import LandDetaiPage from "../components/LandDetaiPage.vue"
 
 
 const router = createRouter({
+
+  mode:"history",
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      
       path: '/',
       name: 'home',
       component: HomePage
@@ -81,7 +84,7 @@ const router = createRouter({
 
   ],
 
-  scrollBehavior () {
+  scrollBehavior() {
     return { left: 0, top: 0 };
   }
 
