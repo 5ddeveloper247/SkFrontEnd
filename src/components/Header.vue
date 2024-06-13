@@ -58,19 +58,19 @@ export default {
         <div class="navTop d-md-block" style="display: block;">
             <div class="container">
                 <div
-                    class="d-flex flex-md-nowrap flex-wrap justify-content-md-between justify-content-start align-items-center py-2">
-                    <div class="d-flex align-items-center">
+                    class="d-flex flex-md-nowrap flex-wrap justify-content-between align-items-center py-2">
+                    <div class="d-flex align-items-center d-none d-lg-flex">
                         <i class="fa-solid fa-location-dot"></i>
                         <p class="px-3">Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.,</p>
                     </div>
-                    <div class="d-flex flex-md-nowrap flex-wrap align-items-center">
+                    <div class="d-flex flex-md-nowrap flex-wrap align-items-center justify-content-between justify-lg-content-end w-100">
                         <div class="d-flex align-items-center mx-md-4">
                             <i class="fa-regular fa-envelope"></i>
                             <a href="/info@skrealestate.com.pk" class="px-2">info@skrealestate.com.pk</a>
                         </div>
                         <div class="d-flex align-items-center mx-md-4">
                             <i class="fa-solid fa-phone"></i>
-                            <p class="px-2">+92 222222222</p>
+                            <p class="px-2">+92 333 5702234</p>
                         </div>
                         <ul class="list-unstyled d-flex m-0 mx-md-4">
                             <li class="px-2"><i class="fa-brands fa-linkedin-in"></i></li>

@@ -42,7 +42,7 @@
                         <p class="pt-3"><i class="fa-solid fa-location-dot pe-3"></i>
                             Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.
                         </p>
-                        <p class="pt-3"><i class="fa-solid fa-phone pe-3"></i>+971-52419999 / +44 7894 279999
+                        <p class="pt-3"><i class="fa-solid fa-phone pe-3"></i>+92 333 5702234 / +44 7894 279999
                         </p>
                         <a  href="info@skrealestate.com.pk"  class="py-3"><i class="fa-solid fa-envelope pe-3"></i>info@skrealestate.com.pk
                         </a>
@@ -53,7 +53,7 @@
         <div class="bg-black">
             <div class="container">
                 <div class="d-flex justify-content-between px-5 py-2 flex-md-nowrap flex-wrap">
-                    <p class="text-white">© Rezilla – All rights reserved</p>
+                    <p class="text-white">© copyright – All rights reserved</p>
                     <div class="d-flex footer-bottom">
                         <a class="px-3" href="">Terms and Conditions</a>
                         <a class="px-3" href="">Privacy Policy</a>

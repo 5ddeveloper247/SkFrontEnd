@@ -5,9 +5,9 @@
       <div class="media mt-3 pt-5">
         <div class="d-flex flex-column align-items-center id_sxy justify-content-center pt-5">
           <iframe class="Uvideo-1" width="100%" :src="currentTopVideo"></iframe>
-          <a :href="currentTopVideo" target="_blank" class="btn subscribe-btn d-flex align-items-center my-2">
+          <!-- <a :href="currentTopVideo" target="_blank" class="btn subscribe-btn d-flex align-items-center my-2">
             <i class="fa-brands fa-youtube pe-2"></i>Subscribe
-          </a>
+          </a> -->
         </div>
       </div>
 
@@ -45,10 +45,10 @@
       <div class="media ">
         <div class="d-flex flex-column align-items-center justify-content-center">
           <img :src="currentBottomVideo" width="100%" height="350" alt="">
-          <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"
+          <!-- <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"
             class="btn subscribe-btn d-flex align-items-center my-2">
             <i class="fa-brands fa-youtube pe-2"></i>Subscribe
-          </a>
+          </a> -->
         </div>
       </div>
 

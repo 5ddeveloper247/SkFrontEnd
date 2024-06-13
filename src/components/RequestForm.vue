@@ -338,6 +338,7 @@ export default {
       propertyType: ''
     });
 
+    const isValid = ref(true);
     const loading = ref(false);
 
     const validateForm = () => {
@@ -354,7 +355,28 @@ export default {
       return true;
     };
 
+    // const isValid = ref(true);
+
     const handleSubmission = () => {
+      alert("2nb");
+      alert(isValid.value);
+
+      // Validation check for input fields
+      isValid.value = true;
+      $('input[type="text"], input[type="number"], input[type="email"]').each(function () {
+        if ($.trim($(this).val()) === '') {
+          isValid.value = false;
+          $(this).addClass('input-error'); // Add class to highlight empty fields
+        } else {
+          $(this).removeClass('input-error'); // Remove class if field is filled
+        }
+      });
+
+      if (!isValid.value) {
+        alert("failed");
+        return; // If validation fails, do not proceed with submission
+      }
+
       console.log('Form data:', propertyRequestform.value);
       const base_url = import.meta.env.VITE_BASE_URL;
       loading.value = true;
@@ -410,6 +432,7 @@ export default {
         });
     };
 
+
     const handlePurpose = (purpose) => {
 
       propertyRequestform.value.purpose = purpose;
@@ -417,6 +440,7 @@ export default {
 
     onMounted(() => {
       $(document).ready(function () {
+        alert("1")
         var current_fs, next_fs, previous_fs; // fieldsets
         var opacity;
         var current = 1;
@@ -426,17 +450,19 @@ export default {
 
         $(".next").click(function () {
           // Validation check for input fields
-          var isValid = true;
-          $(this).parent().find('input[type="text"], input[type="number"], input[type="email"], input[type="radio"]').each(function () {
+
+          $(this).parent().find('input[type="text"], input[type="number"], input[type="email"]').each(function () {
             if ($.trim($(this).val()) == '') {
-              isValid = false;
+              alert("doing false")
+              isValid.value = false;
               $(this).addClass('input-error'); // Add class to highlight empty fields
             } else {
+              alert("else")
               $(this).removeClass('input-error'); // Remove class if field is filled
             }
           });
 
-          if (!isValid) {
+          if (!isValid.value) {
             // If any input field is empty, do not proceed
             return;
           }

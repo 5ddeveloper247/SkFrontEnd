@@ -1,49 +1,49 @@
-
-
-<template >
+<template>
     <Loader :isLoading="loading" />
 
     <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade" v-show="!loading">
         <div class="carousel-inner">
             <div class="carousel-item top-carousal active">
-                <img src="../assets/Images/construction1.jpg" class="d-block w-100" alt="...">
+                <img src="../assets/Images/main-slider-img-2.jpg" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
-                        <h1 class="text-white p-5 text-center">Biggest Comapny
-                            to Deal with <u>Properties</u>
+                        <h1 class="text-white p-0 p-md-5 text-center">
+                            Find Your Dream Home with
+                            <br>
+                            <span>SK Marketing</span>
                         </h1>
                     </div>
                 </div>
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/construction2.jpg" class="d-block w-100" alt="...">
+                <img src="../assets/Images/main-slider-img-1.jpg" class="d-block w-100" alt="...">
                 <div class="slider-text text-end">
                     <div class="anim-2">
-                        <h1 class="text-white p-5 text-center">Biggest Comapny
-                            to Deal with <u>Properties2</u>
+                        <h1 class="text-white p-0 p-md-5 text-center text-capitalize">
+                            <b>Explore DHA Islamabad Homes</b>
                         </h1>
                     </div>
                 </div>
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/construction3.jpg" class="d-block w-100" alt="...">
+                <img src="../assets/Images/main-slider-img-3.jpg" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
-                        <h1 class="text-white p-5 text-center">Biggest Comapny
-                            to Deal with <u>Properties3</u>
+                        <h1 class="text-white p-0 p-md-5 text-center text-uppercase">
+                            <b>Discover Bahria Town Properties</b>
                         </h1>
                     </div>
                 </div>
                 <div class="overlay"></div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+            <button class="carousel-control-prev d-none" type="button" data-bs-target="#carouselExampleFade"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon prev-carousal-btn" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+            <button class="carousel-control-next d-none" type="button" data-bs-target="#carouselExampleFade"
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon next-carousal-btn" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
@@ -52,7 +52,7 @@
 
 
 
-        <div class="row justify-content-center pb-4 mt-3 properties-calculation-card">
+        <div class="row justify-content-center pb-4 mt-5 pt-3 properties-calculation-card">
             <div class="col-10 mt-md-5">
                 <form action="" class="rounded-2" style="background-color: #111111b8">
                     <div class="d-flex flex-wrap justify-content-between align-items-center p-3 all-property-form">
@@ -67,9 +67,6 @@
                                     @click.prevent="setPurpose('Rent')">Rent</a>
                             </li>
                         </ul>
-                        <div>
-                            <p class="text-white mt-md-0 mt-2 mx-2">(50,000) Properties</p>
-                        </div>
                     </div>
 
                     <div class="d-flex flex-direction-row align-items-center m-2 mb-4">
@@ -233,35 +230,41 @@
             </div>
         </div>
         <!-- ======================About Us================== -->
-        <div class="row px-md-5 d-flex justify-content-center">
-            <div class="col-md-6 d-flex flex-column">
+        <div class="row px-md-5 d-flex justify-content-center pb-5">
+            <div class="col-lg-6 d-flex flex-column">
                 <span>
                     WHO ARE WE
                 </span>
-                <h2>
+                <h2 class="text-capitalize">
                     Assisting individuals in <br> locating the appropriate <br> real estate.
                 </h2>
-                <p>Donec porttitor euismod dignissim. Nullam a lacinia ipsum, <br> nec dignissim purus. Nulla convallis
-                    ipsum molestie nibh <br> malesuada, ac malesuada leo volutpat.</p>
+                <p>Your trusted partner for Bahria Town and DHA Islamabad properties. We offer personalized service to
+                    make finding your dream home easy and enjoyable. Experience excellence with us.
+                </p>
                 <div class="who-we-are-card d-flex align-items-center px-4 py-2 shadow rounded-4 mt-3">
                     <i class="fa-solid fa-house"></i>
                     <div class="d-flex flex-column px-4">
-                        <span>Donec porttitor euismod</span>
-                        <p>Nullam a lacinia ipsum, nec <br> dignissim purus. Nulla</p>
+                        <span>Rent and Buy Homes</span>
+                        <p>
+                            Discover top properties in Bahria Town <br> and DHA Islamabad with SK Marketing.
+                        </p>
                     </div>
                 </div>
                 <div class="who-we-are-card d-flex align-items-center px-4 py-2 shadow rounded-4 mt-3">
                     <i class="fa-regular fa-user"></i>
                     <div class="d-flex flex-column px-4">
-                        <span>Donec porttitor euismod</span>
-                        <p>Nullam a lacinia ipsum, nec <br> dignissim purus. Nulla</p>
+                        <span>Your Satisfaction Guaranteed</span>
+                        <p>
+                            we ensure your satisfaction. Find your <br> ideal home in Bahria Town and DHA <br> Islamabad
+                            with us.
+                        </p>
                     </div>
                 </div>
-                <a href="requestform.html"
+                <RouterLink to="/requestform"
                     class="mx-1 mt-4 nav-sub-links-main shadow text-nowrap px-2 px-md-5 py-1 py-md-2 d-flex flex-nowrap align-items-center justify-content-center"
-                    role="button"><i class="far fa-paper-plane pe-2"></i>Request Form</a>
+                    role="button"><i class="far fa-paper-plane pe-2"></i>Request Form</RouterLink>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="d-flex flex-md-nowrap flex-wrap photo-gallery justify-content-center">
                     <img class="mt-5 photto-gallery-1" src="../assets/Images/home1.png">
                     <div class="d-flex flex-column">
@@ -279,21 +282,27 @@
             <div class="row justify-content-center mt-4">
                 <div class="col-md-4">
                     <div class="card border-0 bg-transparent">
-                        <img class="img-fluid rounded-4 card-img-top" src="../assets/Images/project-1.jpeg" alt="Image">
-                        <div class="card-body d-flex flex-column align-items-center">
-                            <h5 class="card-title text-white ">Top 10 Home Buying Mistakes to Avoid</h5>
-                            <p><small class="text-white">Etiam eget elementum elit. Aenean dignissim dapibus
-                                    vestibulum</small></p>
+                        <img class="img-fluid rounded-4 card-img-top" src="../assets/Images/project-img-1.jpg"
+                            alt="Image">
+                        <div class="card-body d-flex flex-column align-items-start">
+                            <h5 class="card-title text-white">Exclusive Bahria Town Offering</h5>
+                            <p><small class="text-white">
+                                    Explore our latest project in Bahria Town, where we offer exceptional homes for sale
+                                    and rent.</small></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card border-0 bg-transparent">
-                        <img class="img-fluid rounded-4 card-img-top" src="../assets/Images/blogs.jpeg" alt="Image">
-                        <div class="card-body d-flex flex-column align-items-center">
-                            <h5 class="card-title text-white">Top 10 Home Buying Mistakes to Avoid</h5>
-                            <p><small class="text-white">Etiam eget elementum elit. Aenean dignissim dapibus
-                                    vestibulum</small></p>
+                        <img class="img-fluid rounded-4 card-img-top" src="../assets/Images/project-img-2.jpg"
+                            alt="Image">
+                        <div class="card-body d-flex flex-column align-items-start">
+                            <h5 class="card-title text-white">
+                                Our Diverse Portfolio of Projects
+                            </h5>
+                            <p><small class="text-white">
+                                    Discover SK Marketing's diverse projects in Bahria Town and DHA Islamabad, offering
+                                    luxurious and affordable homes tailored to your needs.</small></p>
                         </div>
                     </div>
                 </div>
@@ -390,9 +399,6 @@
         </div>
 
 
-
-
-
         <!-- ======================Listing================== -->
         <div class="row my-5 px-md-5">
             <span>CHECKOUT OUR NEW</span>
@@ -409,7 +415,9 @@
                     </li>
                 </ul>
             </div>
-            <p>Donec porttitor euismod dignissim. Nullam a lacinia ipsum, <br> nec dignissim purus. </p>
+            <p>
+                Explore the Latest Properties Listed by SK Marketing <br> in Bahria Town and DHA Islamabad.
+            </p>
             <div class="owl-carousel owl-theme mt-4 property-listed d-flex ">
                 <!-- <div class="item mx-3">    
                     <div class="card border-0 bg-transparent">
@@ -527,39 +535,39 @@
                     1024: { slidesPerView: 3, spaceBetween: 5 }
                 }" class="mySwiper">
                 <swiper-slide v-for="media in mediaData " :key="media.id" :slidesPerView="3">
-                <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
-                    <div class="item mx-3">
-                        <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
-                        <div class="card border-0 bg-transparent">
-                            <img class="card-img-top rounded-5" :src="getImageUrl(media)" height="270" alt="Image">
-                            <div
-                                class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                                <h5 class="card-title">${{ media?.price }}</h5>
-                                <p class="card-text">{{ media?.property_listing_pape?.extra_info_title }}</p>
-                                <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p>
-                                <div class="d-flex align-items-center">
-                                    <div><i class="fa-solid fa-bed pe-2"></i>{{
-                                        media?.property_listing_pape?.propertyDetail_bedrooms
-                                    }}</div>
-                                    <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
-                                        media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
-                                </div>
-                                <div class="d-flex align-items-center mt-3">
-                                    <a class="btn btn-sm  nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                        role="button">
-                                        <i class="fa-regular fa-envelope pe-2"></i>
-                                        <!-- {{ media?.pInfo_email }} -->
-                                    </a>
-                                    <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                        role="button">
-                                        <i class="fa-solid fa-phone pe-2"></i>
-                                        <!-- {{ media?.pInfo_phoneNumber }} -->
-                                    </a>
+                    <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
+                        <div class="item mx-3">
+                            <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
+                            <div class="card border-0 bg-transparent">
+                                <img class="card-img-top rounded-5" :src="getImageUrl(media)" height="270" alt="Image">
+                                <div
+                                    class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
+                                    <h5 class="card-title">${{ media?.price }}</h5>
+                                    <p class="card-text">{{ media?.property_listing_pape?.extra_info_title }}</p>
+                                    <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p>
+                                    <div class="d-flex align-items-center">
+                                        <div><i class="fa-solid fa-bed pe-2"></i>{{
+                                            media?.property_listing_pape?.propertyDetail_bedrooms
+                                        }}</div>
+                                        <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
+                                            media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-3">
+                                        <a class="btn btn-sm  nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                            role="button">
+                                            <i class="fa-regular fa-envelope pe-2"></i>
+                                            <!-- {{ media?.pInfo_email }} -->
+                                        </a>
+                                        <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                            role="button">
+                                            <i class="fa-solid fa-phone pe-2"></i>
+                                            <!-- {{ media?.pInfo_phoneNumber }} -->
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                 </RouterLink>
+                    </RouterLink>
                 </swiper-slide>
             </swiper>
         </div>
@@ -570,7 +578,7 @@
         <div class="container">
             <div class="row py-md-5 px-md-5 justify-content-center">
                 <p class="text-center">Our Services</p>
-                <h2 class="text-center">Donec porttitor euismod dignissim</h2>
+                <h2 class="text-center pb-4">Real Estate Services in Bahria Town, DHA Islamabad</h2>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card rounded-4 py-5 my-1">
@@ -579,8 +587,9 @@
                             </div>
                             <div class="card-body px-5 d-flex flex-column align-items-center pb-0 pt-3">
                                 <h5 class="card-title text-center">Buy a New Home</h5>
-                                <p class="card-text text-center">Donec porttitor euismod dignissim. Nullam a lacinia
-                                    ipsum, nec dignissim purus. </p>
+                                <p class="card-text text-center">
+                                    Purchase Your Ideal Home with SK Marketing in Bahria Town and DHA Islamabad.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -591,8 +600,10 @@
                             </div>
                             <div class="card-body px-5 d-flex flex-column align-items-center pb-0 pt-3">
                                 <h5 class="card-title text-center">Sell a House</h5>
-                                <p class="card-text text-center">Donec porttitor euismod dignissim. Nullam a lacinia
-                                    ipsum, nec dignissim purus. </p>
+                                <p class="card-text text-center">
+                                    Let SK Marketing help you sell your house in Bahria Town or DHA Islamabad
+                                    efficiently.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -603,8 +614,9 @@
                             </div>
                             <div class="card-body px-5 d-flex flex-column align-items-center pb-0 pt-3">
                                 <h5 class="card-title text-center">Rent a House</h5>
-                                <p class="card-text text-center">Donec porttitor euismod dignissim. Nullam a lacinia
-                                    ipsum, nec dignissim purus. </p>
+                                <p class="card-text text-center">
+                                    Rent out your property securely in Bahria Town or DHA Islamabad.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -709,24 +721,26 @@
                     <div class="col-md-7">
                         <span>TESTIMONIALS</span>
                         <h2>Look What Our Customers Say!</h2>
-                        <p>Fusce venenatis tellus a felis scelerisque, non pulvinar est pellentesque. Lorem ipsum dolor
-                            sit amet consectetur adipisicing elit. Beatae fuga illum magnam pariatur, enim deleniti
-                            consectetur earum quae veritatis rerum quo repudiandae officiis quasi ab vero debitis
-                            recusandae expedita laudantium! Tempora ipsum perferendis debitis!</p>
+                        <p>
+                            Discover the glowing reviews and heartfelt testimonials from our valued clients who have
+                            experienced the exceptional real estate services provided by SK Marketing in Bahria Town and
+                            DHA Islamabad. Our dedication to excellence ensures that every client finds their perfect
+                            property with ease and satisfaction.
+                        </p>
                     </div>
                     <div class="col-md-5">
                         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner bg-transparent">
                                 <div class="carousel-item bg-transparent active">
                                     <div class="right-testimonial border p-4 rounded-4 bg-transparent">
-                                        <p>I highly recommend Jodi J. Appleby. She was attentive to our needs and worked
-                                            tirelessly
-                                            to find us the perfect home. We couldn't be happier with our new place!</p>
+                                        <p>
+                                            Explore the insightful and positive feedback from our valued clients regarding their experiences with SK Marketing's services in Bahria Town and DHA Islamabad. Our commitment to excellence ensures that each client finds their ideal property with satisfaction and confidence.
+                                        </p>
                                         <hr>
                                         <div class="d-flex align-items-center justify-content-between ">
                                             <div class="d-flex align-items-center">
                                                 <img class="img-fluid" src="../assets/Images/listing.png" alt="">
-                                                <p class="px-2">Barbara D. Smith</p>
+                                                <p class="px-2">BILAL AHSEN</p>
                                             </div>
                                             <img src="../assets/Images/ratings.png" alt="">
                                         </div>
@@ -734,14 +748,30 @@
                                 </div>
                                 <div class="carousel-item ">
                                     <div class="right-testimonial border bg-transparent p-4 rounded-4 bg-transparent">
-                                        <p>dadsa nsbanm I highly recommend Jodi J. Appleby. She was attentive to our
-                                            needs and worked tirelessly
-                                            to find us the perfect home. We couldn't be happier with our new place!</p>
+                                        <p>
+                                            Explore the insightful reviews and heartfelt testimonials from our valued clients who have experienced SK Marketing's exceptional services in Bahria Town and DHA Islamabad. Our commitment to providing personalized real estate solutions ensures that every client finds their perfect property with ease and satisfaction. 
+                                        </p>
                                         <hr>
                                         <div class="d-flex align-items-center justify-content-between ">
                                             <div class="d-flex align-items-center">
                                                 <img class="img-fluid" src="../assets/Images/listing.png" alt="">
-                                                <p class="px-2">Barbara D. Smith</p>
+                                                <p class="px-2">HASSAAN AHMED</p>
+                                            </div>
+                                            <img src="../assets/Images/ratings.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item ">
+                                    <div class="right-testimonial border bg-transparent p-4 rounded-4 bg-transparent">
+                                        <p>
+                                            Delve into the extensive client feedback and glowing reviews that highlight SK Marketing's excellence in real estate services across Bahria Town and DHA Islamabad. Experience firsthand why our clients trust us for their property needs. 
+                                        </p>
+                                        <hr>
+                                        <div class="d-flex align-items-center justify-content-between ">
+                                            <div class="d-flex align-items-center">
+                                                <img class="img-fluid" src="../assets/Images/listing.png" alt="">
+                                                <p class="px-2">USMAN TAUQEER</p>
                                             </div>
                                             <img src="../assets/Images/ratings.png" alt="">
                                         </div>
@@ -770,11 +800,11 @@
                     <img class="img-fluid" src="../assets/Images/agent.png">
                     <div class="d-flex flex-column p-3">
                         <h2 class="text-white">Become a Partner.</h2>
-                        <p class="text-white">Fusce venenatis tellus a felis scelerisque. <br> venenatis tellus a felis
-                            scelerisque. </p>
+                        <p class="text-white">
+                            Join forces with SK Marketing and explore <br> partnership opportunities in Bahria Town and DHA Islamabad. 
+                        </p>
                     </div>
-                    <RouterLink to="/contact" type="button"
-                        class="enquiry-btn mx-3 rounded-pill nav-link text-nowrap px-2 px-md-4 py-1 
+                    <RouterLink to="/contact" type="button" class="enquiry-btn mx-3 rounded-pill nav-link text-nowrap px-2 px-md-4 py-1 
                         py-1 d-flex flex-column align-items-center justify-content-center">
                         Enquire Now
                     </RouterLink>
@@ -854,7 +884,7 @@ const $toast = useToast();
 const router = useRouter();
 
 const mediaData = ref([]);
-const loading=ref(true);
+const loading = ref(true);
 
 ////////////////////////
 const carousel = ref(null);
@@ -966,7 +996,7 @@ const setMediaType = (type) => {
 };
 
 const getMediabyType = () => {
-    loading.value=true;
+    loading.value = true;
     const base_url = import.meta.env.VITE_BASE_URL;
     fetch(base_url + '/api/frontend/home/property/post', {
         method: 'POST',
@@ -977,7 +1007,7 @@ const getMediabyType = () => {
     })
         .then(response => {
             setTimeout(() => {
-                loading.value=false;
+                loading.value = false;
             }, 2000);
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
@@ -989,7 +1019,7 @@ const getMediabyType = () => {
             console.log('Success:', data.propertyInfo);
             mediaData.value = data.propertyInfo;
             setTimeout(() => {
-                loading.value=false;
+                loading.value = false;
             }, 2000);
             // $toast.open({
             //     message: 'Property data fetched successfully!',
@@ -999,7 +1029,7 @@ const getMediabyType = () => {
         })
         .catch(error => {
             console.error('Error:', error);
-            loading.value=false;
+            loading.value = false;
             $toast.open({
                 message: 'Failed to fetch property data.',
                 type: 'error',
@@ -1012,7 +1042,7 @@ const getMediabyType = () => {
 
 
 onMounted(() => {
-  window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 });
 
 
@@ -1026,7 +1056,7 @@ onMounted(() => {
     // });
 
     // Make API call
-    loading.value=true;
+    loading.value = true;
     const base_url = import.meta.env.VITE_BASE_URL;
     fetch(base_url + '/api/frontend/home/property/get', {
         method: 'GET',
@@ -1037,7 +1067,7 @@ onMounted(() => {
         .then(response => response.json())
         .then(data => {
             setTimeout(() => {
-                loading.value=false;
+                loading.value = false;
             }, 2000);
             console.log('Success:', data.propertyInfo);
             mediaData.value = data.propertyInfo;
@@ -1049,7 +1079,7 @@ onMounted(() => {
         })
         .catch(error => {
             setTimeout(() => {
-                loading.value=false;
+                loading.value = false;
             }, 2000);
             console.error('Error:', error);
             $toast.open({
@@ -1129,7 +1159,7 @@ onMounted(() => {
 
 
 
-<style>
+<style scoped>
 .swiper-button-prev {
     color: var(--second--main-color);
 }
@@ -1156,5 +1186,14 @@ img {
 
 .enquiry-btn {
     border: 1px solid #fff;
+}
+
+h1 {
+    font-size: clamp(45px, 10vw, 60px);
+    font-weight: 300;
+}
+
+span {
+    font-weight: 700;
 }
 </style>

@@ -3,7 +3,8 @@
 
 <template>
     <div class="societies-detail-page">
-        <img class="societies-detail-page-img" src="../assets/Images/dha.jpg" alt="">
+        <img class="societies-detail-page-img" src="../assets/Images/main-slider-img-1.jpg" alt="">
+        <!-- <div class="banner-overlay"></div> -->
     </div>
     <div class="container societies-detail-page p-md-5 p-2">
         <div>
@@ -89,7 +90,7 @@
                 Walk also commits to becoming a top-notch business district. The society offers the best opportunities
                 for business and shopping.
             </p>
-            <img class="img-fluid dha-map mt-3" src="../assets/Images/dha-map.jpeg" alt="">
+            <img class="img-fluid dha-map mt-3" src="../assets/Images/zameenlocaterMap.jpg" alt="">
         </div>
     </div>
 </template>
