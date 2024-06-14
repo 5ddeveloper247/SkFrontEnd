@@ -1,5 +1,3 @@
-<script setup>
-</script>
 
 <template>
 
@@ -25,8 +23,7 @@
 
 
             <Loader :isLoading="loading" />
-
-            <div class="col-md-8" v-show="!loading">
+            <div class="col-md-8" >
                 <swiper :speed="1000" :spaceBetween="5" :slidesPerView="1" :navigation="true" :modules="modules"
                     class="mySwiper">
                     <swiper-slide v-for="media in propertyData.property_record_files" :key="media.id"
