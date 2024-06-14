@@ -3,7 +3,7 @@
 
 <template>
     <div class="societies-detail-page">
-        <img class="societies-detail-page-img" src="../assets/Images/bahria-town.jpeg" alt="">
+        <img class="societies-detail-page-img" src="../assets/Images/civic.webp" alt="">
     </div>
     <div class="container societies-detail-page p-md-5 p-2">
         <div>
@@ -89,7 +89,7 @@
                 Walk also commits to becoming a top-notch business district. The society offers the best opportunities
                 for business and shopping.
             </p>
-            <img class="img-fluid Bahria Town-map mt-3" src="../assets/Images/Bahria Town-map.jpeg" alt="">
+            <img class="img-fluid Bahria Town-map mt-3" src="../assets/Images/bahria-map.webp" alt="">
         </div>
     </div>
 </template>

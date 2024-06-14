@@ -32,6 +32,16 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,153,148,1) 
     --subbuttons-bg-color: #f2f7ff;
 }
 
+/* ::-webkit-scrollbar {
+    background-color: red;
+    position: fixed;
+    z-index: 10;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #000;
+} */
+
 p {
     margin: 0;
 }
@@ -381,6 +391,7 @@ input#floatingInput {
     top: 50%;
     transform: translate(-50%,-50%);
     left: 50%;
+    width: 72rem;
 }
 .properties-calculation-card{
    margin-top: -16rem !important;
@@ -399,10 +410,11 @@ input#floatingInput {
         height: 100vh;
     }
     .properties-calculation-card{
-        margin-top: -26rem !important;
+        margin-top: -22rem !important;
      }
      .slider-text{
-        top: 27%;
+        top: 40%;
+        width: 22rem;
     }
 }
 
@@ -811,10 +823,28 @@ footer .footer-icons i {
 
 /* =====================================================Services Page=============================================== */
 .services-banner {
-    background-image: url(../assets/Images/services-bg.avif);
-    background-position: center;
-    background-repeat: no-repeat;
+    background-image: url(../assets/Images/society-banner-img.jpeg);
+    background-position: bottom;
     background-size: cover;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.banner-text {
+    position: relative;
+    z-index: 1;
+}
+
+.banner-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, #00000088, transparent);
+
 }
 
 /* =====================================================Contact Page=============================================== */
@@ -1114,7 +1144,7 @@ figure img:hover {
 .range-slider {
     -webkit-appearance: none;
     width: 100%;
-    height: 10px;
+    height: 7px;
     border-radius: 5px;
     background: #d3d3d3;
     outline: none;
@@ -1125,8 +1155,8 @@ figure img:hover {
 .range-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 13px;
+    height: 13px;
     border-radius: 50%;
     background: var(--second--main-color);
     cursor: pointer;
@@ -1764,7 +1794,8 @@ header h2 {
 /* /////////////////////////////societies-detail-page//////////////////////// */
 .societies-detail-page-img {
     width: 100%;
-    height: 30rem;
+    height: 100vh;
+    object-fit: cover;
 }
 
 .societies-detail-page h3::after {
@@ -1775,6 +1806,11 @@ header h2 {
     background: var(--second--main-color);
     border-radius: 3px;
     margin: 4px 0 0;
+}
+
+.Town-map {
+    object-fit: cover;
+    width: 50%;
 }
 
 .dha-map {

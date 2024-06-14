@@ -6,10 +6,7 @@
                     Contact <br> Sk Marketing
                 </h1>
                 <p class="text-white text-start py-5">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui commodi molestias odit perferendis
-                    dignissimos
-                    modi sapiente dolorum incidunt, vitae eos voluptatibus aliquam, maiores est animi doloremque. Modi
-                    asperiores ad eveniet.
+                    Get in touch with SK Marketing today for expert guidance and personalized assistance in exploring real estate opportunities in Bahria Town and DHA Islamabad. Our dedicated team is ready to assist you in finding your dream home or investment property. Whether you are looking to buy, sell, or rent, we are here to ensure a smooth and successful real estate experience. Reach out to us via phone, email, or visit our office to start your journey with SK Marketing.
                 </p>
             </div>
         </div>
