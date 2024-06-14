@@ -20,35 +20,38 @@
                 aria-valuemax="100"></div>
             </div> <br>
             <!-- fieldsets -->
-            <fieldset>
-              <div class="form-card">
+            <fieldset :class="{ 'd_block': fs_step1, 'fs_step_show': fs_step_show }">
+
+              <div class="'form-card'">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingFirstName" v-model="propertyRequestform.firstName"
+                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.firstName }"
+                    class="form-control" id="floatingFirstName" v-model="propertyRequestform.firstName"
                     placeholder="First Name" />
+
                   <label for="floatingFirstName">First Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingLastName" v-model="propertyRequestform.lastName"
-                    placeholder="Last Name" />
+                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.firstName }"
+                    id="floatingLastName" v-model="propertyRequestform.lastName" placeholder="Last Name" />
                   <label for="floatingLastName">Last Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatingEmail" v-model="propertyRequestform.email"
-                    placeholder="sk@gmail.com" />
+                  <input type="email" :class="{ 'form-control': true, 'input-error': errors.firstName }"
+                    id="floatingEmail" v-model="propertyRequestform.email" placeholder="sk@gmail.com" />
                   <label for="floatingEmail">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" class="form-control" id="floatingPhone" v-model="propertyRequestform.phone"
-                    placeholder="Phone" />
+                  <input type="number" :class="{ 'form-control': true, 'input-error': errors.firstName }"
+                    id="floatingPhone" v-model="propertyRequestform.phone" placeholder="Phone" />
                   <label for="floatingPhone">Phone</label>
                 </div>
                 <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
               </div>
-              <input type="button" name="next" class="next action-button" value="Next" @click="validateAndProceed" />
+              <input type="button" name="next" class="action-button" value="Next" @click="handleStepFirst" />
             </fieldset>
 
             <!-- Second Step Fieldset -->
-            <fieldset>
+            <fieldset :class="{ 'd-block': fs_step2 }">
               <div class="form-card">
                 <div class="d-flex justify-content-start align-items-center">
                   <div class="col-md-2">
@@ -57,7 +60,9 @@
                   <div>
 
                     <label class="label--radio-1 d-flex align-items-center px-4 rounded-5">
-                      <input type="radio" class="radio-sale" name="city" @click.prevent="handlePurpose('Sale')">
+                      <input type="radio"
+                        :class="{ 'radio-sale': true, 'form-control': true, 'input-error': errors.purpose }"
+                        name="purpose" @click.prevent="handlePurpose('Sale')">
                       Sale
                       <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 100 100">
                         <path fill="#000" d="m44.105 55.641l3.598-2.079l-4.666-3.925z" />
@@ -70,7 +75,9 @@
                   <div>
 
                     <label class="label--radio-1 d-flex align-items-center px-4 ms-2 rounded-5">
-                      <input type="radio" class="radio-sale" name="city" @click.prevent="handlePurpose('Rent')">
+                      <input type="radio"
+                        :class="{ 'radio-sale': true, 'form-control': true, 'input-error': errors.purpose }"
+                        name="purpose" @click.prevent="handlePurpose('Rent')">
                       Rent
                       <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
                         <path fill="black"
@@ -90,8 +97,9 @@
                             <ul class="list">
                               <li class="list__item" v-for="(city, index) in cityList" :key="index">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" v-model="propertyRequestform.city" :value="city"
-                                    name="city">
+                                  <input type="radio"
+                                    :class="{ 'radio': true, 'form-control': true, 'input-error': errors.city }"
+                                    v-model="propertyRequestform.city" :value="city" name="city">
                                   {{ city }}
                                 </label>
                               </li>
@@ -104,15 +112,17 @@
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" v-model="propertyRequestform.homeType" value="Flat"
-                                    name="homeType">
+                                  <input type="radio"
+                                    :class="{ 'radio': true, 'form-control': true, 'input-error': errors.homeType }"
+                                    v-model="propertyRequestform.homeType" value="Flat" name="homeType">
                                   Flat
                                 </label>
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" v-model="propertyRequestform.homeType" value="House"
-                                    name="homeType">
+                                  <input type="radio"
+                                    :class="{ 'radio': true, 'form-control': true, 'input-error': errors.homeType }"
+                                    v-model="propertyRequestform.homeType" value="House" name="homeType">
                                   House
                                 </label>
                               </li>
@@ -124,15 +134,17 @@
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" v-model="propertyRequestform.plot"
-                                    value="Residencial" name="plot">
+                                  <input type="radio"
+                                    :class="{ 'radio': true, 'form-control': true, 'input-error': errors.plot }"
+                                    v-model="propertyRequestform.plot" value="Residencial" name="plot">
                                   Residencial
                                 </label>
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" v-model="propertyRequestform.plot"
-                                    value="Commercial" name="plot">
+                                  <input type="radio"
+                                    :class="{ 'radio': true, 'form-control': true, 'input-error': errors.plot }"
+                                    v-model="propertyRequestform.plot" value="Commercial" name="plot">
                                   Commercial
                                 </label>
                               </li>
@@ -144,22 +156,25 @@
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" v-model="propertyRequestform.commercial"
-                                    value="Office" name="commercial">
+                                  <input type="radio"
+                                    :class="{ 'radio': true, 'form-control': true, 'input-error': errors.commercial }"
+                                    v-model="propertyRequestform.commercial" value="Office" name="commercial">
                                   Office
                                 </label>
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" v-model="propertyRequestform.commercial"
-                                    value="Shop" name="commercial">
+                                  <input type="radio"
+                                    :class="{ 'radio': true, 'form-control': true, 'input-error': errors.commercial }"
+                                    v-model="propertyRequestform.commercial" value="Shop" name="commercial">
                                   Shop
                                 </label>
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio" class="radio" v-model="propertyRequestform.commercial"
-                                    value="Building" name="commercial">
+                                  <input type="radio"
+                                    :class="{ 'radio': true, 'form-control': true, 'input-error': errors.commercial }"
+                                    v-model="propertyRequestform.commercial" value="Building" name="commercial">
                                   Building
                                 </label>
                               </li>
@@ -171,12 +186,12 @@
                   </div>
                 </div>
               </div>
-              <input type="button" name="next" class="next action-button" value="Next" />
-              <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+              <input type="button" name="next" class="action-button" value="Next" @click="handleStepSecond" />
+              <input type="button" name="previous" class="action-button-previous" value="Previous" />
             </fieldset>
 
 
-            <fieldset>
+            <fieldset :class="{ 'd-block': fs_step3 }">
               <div class="form-card">
                 <div class="row">
                   <div class="col-7">
@@ -187,36 +202,36 @@
                   </div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" v-model="propertyRequestform.city"
-                    placeholder="City">
+                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.city }" id="floatingInput"
+                    v-model="propertyRequestform.city" placeholder="City">
                   <label for="floatingInput">City</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" v-model="propertyRequestform.location"
-                    placeholder="Location">
+                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.location }"
+                    id="floatingInput" v-model="propertyRequestform.location" placeholder="Location">
                   <label for="floatingInput">Location</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" v-model="propertyRequestform.address"
-                    placeholder="Address">
+                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.address }" id="floatingInput"
+                    v-model="propertyRequestform.address" placeholder="Address">
                   <label for="floatingInput">Address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" class="form-control" id="floatingInput" v-model="propertyRequestform.size"
-                    placeholder="Size">
+                  <input type="number" :class="{ 'form-control': true, 'input-error': errors.size }" id="floatingInput"
+                    v-model="propertyRequestform.size" placeholder="Size">
                   <label for="floatingInput">Size</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" class="form-control" id="floatingInput" v-model="propertyRequestform.totalPrice"
-                    placeholder="Total Price">
+                  <input type="number" :class="{ 'form-control': true, 'input-error': errors.totalPrice }"
+                    id="floatingInput" v-model="propertyRequestform.totalPrice" placeholder="Total Price">
                   <label for="floatingInput">Total Price</label>
                 </div>
               </div>
-              <input type="button" name="next" class="next action-button" @click="handleSubmission" value="Submit" />
+              <input type="button" name="next" class="action-button" @click="handleStepThird" value="Submit" />
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
             </fieldset>
 
-            <fieldset>
+            <fieldset :class="{ 'd-block': fs_step4 }">
               <div class="form-card">
                 <div class="row">
                   <div class="col-7">
@@ -251,15 +266,12 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import Loader from './Loader.vue';
 import { useCityData } from '@/composables/useCityData';
 
-// Create the toast instance
-const $toast = useToast();
-const loading = ref(false);
-
 export default {
   components: {
     Loader
   },
   setup() {
+    const $toast = useToast();
     const { cityData, error, cityList, fetchCityData } = useCityData();
     const propertyRequestform = ref({
       firstName: '',
@@ -280,6 +292,30 @@ export default {
 
     const isValid = ref(true);
     const loading = ref(false);
+    const curStep = ref(1);
+    const steps = ref(4);
+
+    const fs_step1 = ref(true);
+    const fs_step2 = ref(false);
+    const fs_step3 = ref(false);
+    const fs_step4 = ref(false);
+    const fs_step_show = ref(false);
+
+    const errors = ref({
+      firstName: false,
+      lastName: false,
+      phone: false,
+      email: false,
+      city: false,
+      purpose: false,
+      homeType: false,
+      commercial: false,
+      plot: false,
+      location: false,
+      address: false,
+      size: false,
+      totalPrice: false
+    });
 
     const validateForm = () => {
       const requiredFields = [
@@ -289,35 +325,20 @@ export default {
       ];
       for (const field of requiredFields) {
         if (!propertyRequestform.value[field]) {
+          errors.value[field] = true;
           return false;
         }
+        errors.value[field] = false;
       }
       return true;
     };
 
-    // const isValid = ref(true);
-
     const handleSubmission = () => {
-      alert("2nb");
-      alert(isValid.value);
-
-      // Validation check for input fields
-      isValid.value = true;
-      $('input[type="text"], input[type="number"], input[type="email"]').each(function () {
-        if ($.trim($(this).val()) === '') {
-          isValid.value = false;
-          $(this).addClass('input-error'); // Add class to highlight empty fields
-        } else {
-          $(this).removeClass('input-error'); // Remove class if field is filled
-        }
-      });
-
+      isValid.value = validateForm();
       if (!isValid.value) {
-        alert("failed");
         return; // If validation fails, do not proceed with submission
       }
 
-      console.log('Form data:', propertyRequestform.value);
       const base_url = import.meta.env.VITE_BASE_URL;
       loading.value = true;
       fetch(base_url + '/api/frontend/home/register/property', {
@@ -331,37 +352,21 @@ export default {
         .then(data => {
           loading.value = false;
           if (data.success) {
-            console.log('Success:', data);
-            loading.value = false;
             $toast.open({
               message: 'Submitted Successfully',
               type: 'success',
               position: 'top-right'
             });
+            resetForm();
+            curStep.value++;
+            setProgressBar();
+            handleNext();
           } else {
-            loading.value = false;
-            $toast.open({
-              message: 'An error occurred!',
-              type: 'error',
-              position: 'top-right'
-            });
-            console.error('Error:', data);
-
-            if (data.errors) {
-              loading.value = false;
-              Object.keys(data.errors).forEach(field => {
-                data.errors[field].forEach(errorMessage => {
-                  $toast.open({
-                    message: `${field}: ${errorMessage}`,
-                    type: 'error',
-                    position: 'top-right'
-                  });
-                });
-              });
-            }
+            handleErrors(data);
           }
         })
         .catch(error => {
+
           loading.value = false;
           $toast.open({
             message: 'An unexpected error occurred.',
@@ -372,117 +377,233 @@ export default {
         });
     };
 
+    const handleErrors = (data) => {
+      if (data.errors) {
+        Object.keys(data.errors).forEach(field => {
+          data.errors[field].forEach(errorMessage => {
+            $toast.open({
+              message: `${field}: ${errorMessage}`,
+              type: 'error',
+              position: 'top-right'
+            });
+          });
+        });
+      } else {
+        $toast.open({
+          message: 'An error occurred!',
+          type: 'error',
+          position: 'top-right'
+        });
+        console.error('Error:', data);
+      }
+    };
+
+    const resetForm = () => {
+      propertyRequestform.value = {
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        city: '',
+        homeType: '',
+        commercial: '',
+        plot: '',
+        location: '',
+        address: '',
+        size: '',
+        totalPrice: '',
+        purpose: '',
+        propertyType: ''
+      };
+      curStep.value = 1;
+      setProgressBar();
+    };
 
     const handlePurpose = (purpose) => {
-
       propertyRequestform.value.purpose = purpose;
     };
 
     onMounted(() => {
-      $(document).ready(function () {
-
-        var current_fs, next_fs, previous_fs; // fieldsets
-        var opacity;
-        var current = 1;
-        var steps = $("fieldset").length;
-
-        setProgressBar(current);
-
-        $(".next").click(function () {
-          // Validation check for input fields
-
-          $(this).parent().find('input[type="text"], input[type="number"], input[type="email"]').each(function () {
-            if ($.trim($(this).val()) == '') {
-
-              isValid.value = false;
-              $(this).addClass('input-error'); // Add class to highlight empty fields
-            } else {
-
-              $(this).removeClass('input-error'); // Remove class if field is filled
-            }
-          });
-
-          if (!isValid.value) {
-            // If any input field is empty, do not proceed
-            return;
-          }
-
-          // If all input fields are filled, proceed to the next fieldset
-          current_fs = $(this).parent();
-          next_fs = $(this).parent().next();
-
-          // Add Class Active
-          $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-          // Show the next fieldset
-          next_fs.show();
-          // Hide the current fieldset with style
-          current_fs.animate({ opacity: 0 }, {
-            step: function (now) {
-              // for making fieldset appear animation
-              opacity = 1 - now;
-
-              current_fs.css({
-                'display': 'none',
-                'position': 'relative'
-              });
-              next_fs.css({ 'opacity': opacity });
-            },
-            duration: 500
-          });
-          setProgressBar(++current);
-        });
-
-        $(".previous").click(function () {
-          current_fs = $(this).parent();
-          previous_fs = $(this).parent().prev();
-
-          // Remove class active
-          $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-          // Show the previous fieldset
-          previous_fs.show();
-
-          // Hide the current fieldset with style
-          current_fs.animate({ opacity: 0 }, {
-            step: function (now) {
-              // for making fieldset appear animation
-              opacity = 1 - now;
-
-              current_fs.css({
-                'display': 'none',
-                'position': 'relative'
-              });
-              previous_fs.css({ 'opacity': opacity });
-            },
-            duration: 500
-          });
-          setProgressBar(--current);
-        });
-
-        function setProgressBar(curStep) {
-          var percent = parseFloat(100 / steps) * curStep;
-          percent = percent.toFixed();
-          $(".progress-bar").css("width", percent + "%");
-        }
-
-        $(".submit").click(function () {
-          return false;
-        });
-      });
+      setProgressBar();
     });
+
+    const setProgressBar = () => {
+      var percent = parseFloat(100 / steps.value) * curStep.value;
+      percent = percent.toFixed();
+      document.querySelector(".progress-bar").style.width = percent + "%";
+    };
+
+    const handleStepFirst = () => {
+      const { firstName, lastName, phone, email } = propertyRequestform.value;
+      let valid = true;
+
+      if (!firstName) {
+        errors.value.firstName = true;
+        valid = false;
+      } else {
+        errors.value.firstName = false;
+      }
+
+      if (!lastName) {
+        errors.value.lastName = true;
+        valid = false;
+      } else {
+        errors.value.lastName = false;
+      }
+
+      if (!phone) {
+        errors.value.phone = true;
+        valid = false;
+      } else {
+        errors.value.phone = false;
+      }
+
+      if (!email) {
+        errors.value.email = true;
+        valid = false;
+      } else {
+        errors.value.email = false;
+      }
+
+      if (!valid) {
+        alert('Please fill all required fields');
+        return;
+      }
+      handleNext();
+    };
+
+    const handleStepSecond = () => {
+      const { homeType, plot, commercial, purpose } = propertyRequestform.value;
+      let valid = true;
+
+      if (!purpose) {
+        errors.value.purpose = true;
+        valid = false;
+      } else {
+        errors.value.purpose = false;
+      }
+
+      if (!homeType) {
+        errors.value.homeType = true;
+        valid = false;
+      } else {
+        errors.value.homeType = false;
+      }
+
+      if (!plot) {
+        errors.value.plot = true;
+        valid = false;
+      } else {
+        errors.value.plot = false;
+      }
+
+      if (!commercial) {
+        errors.value.commercial = true;
+        valid = false;
+      } else {
+        errors.value.commercial = false;
+      }
+
+      if (!valid) {
+        alert('Please fill all required fields');
+        return;
+      }
+      handleNext();
+    };
+
+    const handleStepThird = () => {
+      const { location, address, size, totalPrice } = propertyRequestform.value;
+      let valid = true;
+
+      if (!location) {
+        errors.value.location = true;
+        valid = false;
+      } else {
+        errors.value.location = false;
+      }
+
+      if (!address) {
+        errors.value.address = true;
+        valid = false;
+      } else {
+        errors.value.address = false;
+      }
+
+      if (!size) {
+        errors.value.size = true;
+        valid = false;
+      } else {
+        errors.value.size = false;
+      }
+
+      if (!totalPrice) {
+        errors.value.totalPrice = true;
+        valid = false;
+      } else {
+        errors.value.totalPrice = false;
+      }
+
+      if (!valid) {
+        alert('Please fill all required fields');
+        return;
+      }
+      handleSubmission();
+    };
+
+    const handleStepFourth = () => {
+      fs_step4.value = false;
+      fs_step1.value = true;
+      fs_step_show.value = false;
+      curStep.value = 1;
+      setProgressBar();
+    };
+
+    const handleNext = () => {
+      if (curStep.value < steps.value) {
+        curStep.value++;
+        setProgressBar();
+      }
+      fs_step1.value = curStep.value === 1;
+      fs_step2.value = curStep.value === 2;
+      fs_step3.value = curStep.value === 3;
+      fs_step4.value = curStep.value === 4;
+      fs_step_show.value = curStep.value !== 1;
+    };
+
+    const handlePrevious = () => {
+      if (curStep.value > 1) {
+        curStep.value--;
+        setProgressBar();
+      }
+      fs_step1.value = curStep.value === 1;
+      fs_step2.value = curStep.value === 2;
+      fs_step3.value = curStep.value === 3;
+      fs_step4.value = curStep.value === 4;
+      fs_step_show.value = curStep.value !== 1;
+    };
 
     return {
       propertyRequestform,
       handleSubmission,
       handlePurpose,
+      handleStepFirst,
+      handleStepSecond,
+      handleStepThird,
+      handleNext,
+      handlePrevious,
       loading,
-      //composable
+      errors,
+      // composable
       cityData,
       error,
-      loading,
       fetchCityData,
-      cityList
+      cityList,
+      curStep,
+      fs_step1,
+      fs_step2,
+      fs_step3,
+      fs_step4,
+      fs_step_show,
     };
   }
 };
@@ -490,7 +611,20 @@ export default {
 
 
 
+
 <style scoped>
+.fs_step {
+  display: block;
+  opacity: 1;
+  position: relative;
+}
+
+.fs_step_show {
+  display: none;
+  opacity: 0;
+  position: relative;
+}
+
 .input-error {
   border: 1px solid red !important;
 }
