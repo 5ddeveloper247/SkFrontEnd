@@ -10,10 +10,10 @@
           <form id="msform">
             <!-- progressbar -->
             <ul id="progressbar" class="p-0">
-              <li class="active" id="account"><strong>Personal Information</strong></li>
-              <li id="personal"><strong>Property Type</strong></li>
-              <li id="payment"><strong>Address</strong></li>
-              <li id="confirm"><strong>Finish</strong></li>
+              <li :class="{ active: curStep >= 1 }" id="account"><strong>Personal Information</strong></li>
+              <li :class="{ active: curStep >= 2 }" id="personal"><strong>Property Type</strong></li>
+              <li :class="{ active: curStep >= 3 }" id="payment"><strong>Address</strong></li>
+              <li :class="{ active: curStep >= 4 }" id="confirm"><strong>Finish</strong></li>
             </ul>
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
@@ -59,7 +59,9 @@
                   </div>
                   <div>
 
-                    <label class="label--radio-1 d-flex align-items-center px-4 rounded-5">
+
+                    <label
+                      :class="{ 'label--radio-1': true, 'd-flex': true, 'align-items-center': true, 'px-4': true, 'rounded-5': true, 'active_purpose': handle_purpose_active_sale }">
                       <input type="radio"
                         :class="{ 'radio-sale': true, 'form-control': true, 'input-error': errors.purpose }"
                         name="purpose" @click.prevent="handlePurpose('Sale')">
@@ -74,7 +76,8 @@
                   </div>
                   <div>
 
-                    <label class="label--radio-1 d-flex align-items-center px-4 ms-2 rounded-5">
+                    <label
+                      :class="{ 'label--radio-1': true, 'd-flex': true, 'align-items-center': true, 'px-4': true, 'rounded-5': true, 'active_purpose': handle_purpose_active_rent }">
                       <input type="radio"
                         :class="{ 'radio-sale': true, 'form-control': true, 'input-error': errors.purpose }"
                         name="purpose" @click.prevent="handlePurpose('Rent')">
@@ -112,7 +115,7 @@
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('homeType')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.homeType }"
                                     v-model="propertyRequestform.homeType" value="Flat" name="homeType">
                                   Flat
@@ -120,7 +123,7 @@
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('homeType')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.homeType }"
                                     v-model="propertyRequestform.homeType" value="House" name="homeType">
                                   House
@@ -134,7 +137,7 @@
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('plot')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.plot }"
                                     v-model="propertyRequestform.plot" value="Residencial" name="plot">
                                   Residencial
@@ -142,7 +145,7 @@
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('plot')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.plot }"
                                     v-model="propertyRequestform.plot" value="Commercial" name="plot">
                                   Commercial
@@ -156,7 +159,7 @@
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('commercial')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.commercial }"
                                     v-model="propertyRequestform.commercial" value="Office" name="commercial">
                                   Office
@@ -164,7 +167,7 @@
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('commercial')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.commercial }"
                                     v-model="propertyRequestform.commercial" value="Shop" name="commercial">
                                   Shop
@@ -172,7 +175,7 @@
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('commercial')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.commercial }"
                                     v-model="propertyRequestform.commercial" value="Building" name="commercial">
                                   Building
@@ -187,7 +190,8 @@
                 </div>
               </div>
               <input type="button" name="next" class="action-button" value="Next" @click="handleStepSecond" />
-              <input type="button" name="previous" class="action-button-previous" value="Previous" />
+              <input type="button" name="previous" class="action-button-previous" @click="handlePrevious"
+                value="Previous" />
             </fieldset>
 
 
@@ -228,7 +232,8 @@
                 </div>
               </div>
               <input type="button" name="next" class="action-button" @click="handleStepThird" value="Submit" />
-              <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+              <input type="button" name="previous" class="previous action-button-previous" @click="handlePrevious"
+                value="Previous" />
             </fieldset>
 
             <fieldset :class="{ 'd-block': fs_step4 }">
@@ -286,7 +291,7 @@ export default {
       address: '',
       size: '',
       totalPrice: '',
-      purpose: '',
+      purpose: 'Sale',
       propertyType: ''
     });
 
@@ -294,6 +299,8 @@ export default {
     const loading = ref(false);
     const curStep = ref(1);
     const steps = ref(4);
+    const handle_purpose_active_sale = ref(true)
+    const handle_purpose_active_rent = ref(false)
 
     const fs_step1 = ref(true);
     const fs_step2 = ref(false);
@@ -317,302 +324,353 @@ export default {
       totalPrice: false
     });
 
-    const validateForm = () => {
-      const requiredFields = [
-        'firstName', 'lastName', 'phone', 'email',
-        'city', 'location', 'address', 'size',
-        'totalPrice', 'purpose'
-      ];
-      for (const field of requiredFields) {
-        if (!propertyRequestform.value[field]) {
-          errors.value[field] = true;
-          return false;
-        }
-        errors.value[field] = false;
-      }
-      return true;
-    };
-
-    const handleSubmission = () => {
-      isValid.value = validateForm();
-      if (!isValid.value) {
-        return; // If validation fails, do not proceed with submission
+    const handleClick = (e) => {
+      if (e == 'homeType') {
+        // alert(propertyRequestform.value.homeType)
+        propertyRequestform.value.commercial = " "
+        propertyRequestform.value.plot = " "
       }
 
-      const base_url = import.meta.env.VITE_BASE_URL;
-      loading.value = true;
-      fetch(base_url + '/api/frontend/home/register/property', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(propertyRequestform.value)
-      })
-        .then(response => response.json())
-        .then(data => {
-          loading.value = false;
-          if (data.success) {
-            $toast.open({
-              message: 'Submitted Successfully',
-              type: 'success',
-              position: 'top-right'
-            });
-            resetForm();
-            curStep.value++;
-            setProgressBar();
-            handleNext();
-          } else {
-            handleErrors(data);
+      if (e == 'plot') {
+        // alert(propertyRequestform.value.homeType)
+        propertyRequestform.value.homeType = " "
+        propertyRequestform.value.commercial = " "
+      }
+
+      if (e == 'commercial') {
+        // alert(propertyRequestform.value.homeType)
+        propertyRequestform.value.homeType = " "
+        propertyRequestform.value.plot = " "
+      }
+    }
+      const validateForm = () => {
+        const requiredFields = [
+          'firstName', 'lastName', 'phone', 'email',
+          'city', 'location', 'address', 'size',
+          'totalPrice', 'purpose'
+        ];
+        for (const field of requiredFields) {
+          if (!propertyRequestform.value[field]) {
+            errors.value[field] = true;
+            return false;
           }
+          errors.value[field] = false;
+        }
+        return true;
+      };
+
+      const handleSubmission = () => {
+        isValid.value = validateForm();
+        if (!isValid.value) {
+          return; // If validation fails, do not proceed with submission
+        }
+
+        const base_url = import.meta.env.VITE_BASE_URL;
+        loading.value = true;
+        fetch(base_url + '/api/frontend/home/register/property', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(propertyRequestform.value)
         })
-        .catch(error => {
-
-          loading.value = false;
-          $toast.open({
-            message: 'An unexpected error occurred.',
-            type: 'error',
-            position: 'top-right'
-          });
-          console.error('Error:', error);
-        });
-    };
-
-    const handleErrors = (data) => {
-      if (data.errors) {
-        Object.keys(data.errors).forEach(field => {
-          data.errors[field].forEach(errorMessage => {
+          .then(response => response.json())
+          .then(data => {
+            loading.value = false;
+            if (data.success) {
+              $toast.open({
+                message: 'Submitted Successfully',
+                type: 'success',
+                position: 'top-right'
+              });
+              resetForm();
+            } else {
+              handleErrors(data);
+            }
+          })
+          .catch(error => {
+            loading.value = false;
             $toast.open({
-              message: `${field}: ${errorMessage}`,
+              message: 'An unexpected error occurred.',
               type: 'error',
               position: 'top-right'
             });
+            console.error('Error:', error);
           });
-        });
-      } else {
-        $toast.open({
-          message: 'An error occurred!',
-          type: 'error',
-          position: 'top-right'
-        });
-        console.error('Error:', data);
-      }
-    };
-
-    const resetForm = () => {
-      propertyRequestform.value = {
-        firstName: '',
-        lastName: '',
-        phone: '',
-        email: '',
-        city: '',
-        homeType: '',
-        commercial: '',
-        plot: '',
-        location: '',
-        address: '',
-        size: '',
-        totalPrice: '',
-        purpose: '',
-        propertyType: ''
       };
-      curStep.value = 1;
-      setProgressBar();
-    };
 
-    const handlePurpose = (purpose) => {
-      propertyRequestform.value.purpose = purpose;
-    };
+      const handleErrors = (data) => {
+        if (data.errors) {
+          Object.keys(data.errors).forEach(field => {
+            data.errors[field].forEach(errorMessage => {
+              $toast.open({
+                message: `${field}: ${errorMessage}`,
+                type: 'error',
+                position: 'top-right'
+              });
+            });
+          });
+        } else {
+          $toast.open({
+            message: 'An error occurred!',
+            type: 'error',
+            position: 'top-right'
+          });
+          console.error('Error:', data);
+        }
+      };
 
-    onMounted(() => {
-      setProgressBar();
-    });
-
-    const setProgressBar = () => {
-      var percent = parseFloat(100 / steps.value) * curStep.value;
-      percent = percent.toFixed();
-      document.querySelector(".progress-bar").style.width = percent + "%";
-    };
-
-    const handleStepFirst = () => {
-      const { firstName, lastName, phone, email } = propertyRequestform.value;
-      let valid = true;
-
-      if (!firstName) {
-        errors.value.firstName = true;
-        valid = false;
-      } else {
-        errors.value.firstName = false;
-      }
-
-      if (!lastName) {
-        errors.value.lastName = true;
-        valid = false;
-      } else {
-        errors.value.lastName = false;
-      }
-
-      if (!phone) {
-        errors.value.phone = true;
-        valid = false;
-      } else {
-        errors.value.phone = false;
-      }
-
-      if (!email) {
-        errors.value.email = true;
-        valid = false;
-      } else {
-        errors.value.email = false;
-      }
-
-      if (!valid) {
-        alert('Please fill all required fields');
-        return;
-      }
-      handleNext();
-    };
-
-    const handleStepSecond = () => {
-      const { homeType, plot, commercial, purpose } = propertyRequestform.value;
-      let valid = true;
-
-      if (!purpose) {
-        errors.value.purpose = true;
-        valid = false;
-      } else {
-        errors.value.purpose = false;
-      }
-
-      if (!homeType) {
-        errors.value.homeType = true;
-        valid = false;
-      } else {
-        errors.value.homeType = false;
-      }
-
-      if (!plot) {
-        errors.value.plot = true;
-        valid = false;
-      } else {
-        errors.value.plot = false;
-      }
-
-      if (!commercial) {
-        errors.value.commercial = true;
-        valid = false;
-      } else {
-        errors.value.commercial = false;
-      }
-
-      if (!valid) {
-        alert('Please fill all required fields');
-        return;
-      }
-      handleNext();
-    };
-
-    const handleStepThird = () => {
-      const { location, address, size, totalPrice } = propertyRequestform.value;
-      let valid = true;
-
-      if (!location) {
-        errors.value.location = true;
-        valid = false;
-      } else {
-        errors.value.location = false;
-      }
-
-      if (!address) {
-        errors.value.address = true;
-        valid = false;
-      } else {
-        errors.value.address = false;
-      }
-
-      if (!size) {
-        errors.value.size = true;
-        valid = false;
-      } else {
-        errors.value.size = false;
-      }
-
-      if (!totalPrice) {
-        errors.value.totalPrice = true;
-        valid = false;
-      } else {
-        errors.value.totalPrice = false;
-      }
-
-      if (!valid) {
-        alert('Please fill all required fields');
-        return;
-      }
-      handleSubmission();
-    };
-
-    const handleStepFourth = () => {
-      fs_step4.value = false;
-      fs_step1.value = true;
-      fs_step_show.value = false;
-      curStep.value = 1;
-      setProgressBar();
-    };
-
-    const handleNext = () => {
-      if (curStep.value < steps.value) {
-        curStep.value++;
+      const resetForm = () => {
+        propertyRequestform.value = {
+          firstName: '',
+          lastName: '',
+          phone: '',
+          email: '',
+          city: '',
+          homeType: '',
+          commercial: '',
+          plot: '',
+          location: '',
+          address: '',
+          size: '',
+          totalPrice: '',
+          purpose: '',
+          propertyType: ''
+        };
+        curStep.value = 1;
+        fs_step1.value = true;
+        fs_step2.value = false;
+        fs_step3.value = false;
+        fs_step4.value = false;
+        fs_step_show.value = false;
         setProgressBar();
-      }
-      fs_step1.value = curStep.value === 1;
-      fs_step2.value = curStep.value === 2;
-      fs_step3.value = curStep.value === 3;
-      fs_step4.value = curStep.value === 4;
-      fs_step_show.value = curStep.value !== 1;
-    };
+      };
 
-    const handlePrevious = () => {
-      if (curStep.value > 1) {
-        curStep.value--;
+      const handlePurpose = (purpose) => {
+        propertyRequestform.value.purpose = purpose;
+        if (purpose == "Sale") {
+          handle_purpose_active_sale.value = true;
+          handle_purpose_active_rent.value = false;
+        }
+        else {
+          handle_purpose_active_rent.value = true;
+          handle_purpose_active_sale.value = false;
+        }
+
+      };
+
+      onMounted(() => {
         setProgressBar();
-      }
-      fs_step1.value = curStep.value === 1;
-      fs_step2.value = curStep.value === 2;
-      fs_step3.value = curStep.value === 3;
-      fs_step4.value = curStep.value === 4;
-      fs_step_show.value = curStep.value !== 1;
-    };
 
-    return {
-      propertyRequestform,
-      handleSubmission,
-      handlePurpose,
-      handleStepFirst,
-      handleStepSecond,
-      handleStepThird,
-      handleNext,
-      handlePrevious,
-      loading,
-      errors,
-      // composable
-      cityData,
-      error,
-      fetchCityData,
-      cityList,
-      curStep,
-      fs_step1,
-      fs_step2,
-      fs_step3,
-      fs_step4,
-      fs_step_show,
-    };
-  }
-};
+      });
+
+      const setProgressBar = () => {
+        var percent = parseFloat(100 / steps.value) * curStep.value;
+        percent = percent.toFixed();
+        document.querySelector(".progress-bar").style.width = percent + "%";
+      };
+
+      const handleStepFirst = () => {
+        const { firstName, lastName, phone, email } = propertyRequestform.value;
+        let valid = true;
+
+        if (!firstName) {
+          errors.value.firstName = true;
+          valid = false;
+        } else {
+          errors.value.firstName = false;
+        }
+
+        if (!lastName) {
+          errors.value.lastName = true;
+          valid = false;
+        } else {
+          errors.value.lastName = false;
+        }
+
+        if (!phone) {
+          errors.value.phone = true;
+          valid = false;
+        } else {
+          errors.value.phone = false;
+        }
+
+        if (!email) {
+          errors.value.email = true;
+          valid = false;
+        } else {
+          errors.value.email = false;
+        }
+
+        if (!valid) {
+          $toast.open({
+            message: 'Please fill all required fields.',
+            type: 'error',
+            position: 'top-right'
+          });
+          return;
+        }
+        handleNext();
+      };
+
+      const handleStepSecond = () => {
+        const { homeType, plot, commercial, purpose, city } = propertyRequestform.value;
+        let valid = true;
+
+        if (!city) {
+          errors.value.city = true;
+          valid = false;
+        } else {
+          errors.value.city = false;
+        }
+        if (!purpose) {
+          errors.value.purpose = true;
+          valid = false;
+        } else {
+          errors.value.purpose = false;
+        }
+
+
+
+        if (!plot && !commercial && !homeType) {
+          errors.value.plot = true;
+          errors.value.commercial = true;
+          errors.value.homeType = true;
+          valid = false;
+        } else {
+          errors.value.plot = false;
+          errors.value.commercial = false;
+          errors.value.homeType = false;
+        }
+
+
+        if (!valid) {
+          $toast.open({
+            message: 'Please fill all required fields.',
+            type: 'error',
+            position: 'top-right'
+          });
+          return;
+        }
+        handleNext();
+      };
+
+      const handleStepThird = () => {
+        const { location, address, size, totalPrice } = propertyRequestform.value;
+        let valid = true;
+
+        if (!location) {
+          errors.value.location = true;
+          valid = false;
+        } else {
+          errors.value.location = false;
+        }
+
+        if (!address) {
+          errors.value.address = true;
+          valid = false;
+        } else {
+          errors.value.address = false;
+        }
+
+        if (!size) {
+          errors.value.size = true;
+          valid = false;
+        } else {
+          errors.value.size = false;
+        }
+
+        if (!totalPrice) {
+          errors.value.totalPrice = true;
+          valid = false;
+        } else {
+          errors.value.totalPrice = false;
+        }
+
+        if (!valid) {
+          $toast.open({
+            message: 'Please fill all required fields.',
+            type: 'error',
+            position: 'top-right'
+          });
+          return;
+        }
+        handleSubmission();
+      };
+
+      const handleStepFourth = () => {
+        fs_step4.value = false;
+        fs_step1.value = true;
+        fs_step_show.value = false;
+        curStep.value = 1;
+        setProgressBar();
+      };
+
+      const handleNext = () => {
+        if (curStep.value < steps.value) {
+          curStep.value++;
+          setProgressBar();
+        }
+        fs_step1.value = curStep.value === 1;
+        fs_step2.value = curStep.value === 2;
+        fs_step3.value = curStep.value === 3;
+        fs_step4.value = curStep.value === 4;
+        fs_step_show.value = curStep.value !== 1;
+      };
+
+      const handlePrevious = () => {
+        if (curStep.value > 1) {
+          curStep.value--;
+          setProgressBar();
+        }
+        fs_step1.value = curStep.value === 1;
+        fs_step2.value = curStep.value === 2;
+        fs_step3.value = curStep.value === 3;
+        fs_step4.value = curStep.value === 4;
+        fs_step_show.value = curStep.value !== 1;
+      };
+
+      return {
+        propertyRequestform,
+        handleSubmission,
+        handlePurpose,
+        handleStepFirst,
+        handleStepSecond,
+        handleStepThird,
+        handleNext,
+        handlePrevious,
+        handleClick,
+        loading,
+        errors,
+        // composable
+        cityData,
+        error,
+        fetchCityData,
+        cityList,
+        curStep,
+        fs_step1,
+        fs_step2,
+        fs_step3,
+        fs_step4,
+        fs_step_show,
+        handle_purpose_active_rent,
+        handle_purpose_active_sale,
+      };
+    }
+  };
 </script>
 
 
 
 
+
 <style scoped>
+.active_purpose {
+
+  background-color: rgb(244, 93, 8) !important;
+
+}
+
 .fs_step {
   display: block;
   opacity: 1;
@@ -634,10 +692,11 @@ export default {
 }
 
 .label--radio-1 {
-  border: 1px solid var(--second--main-color);
+  border: 1px solid black;
   font-weight: 600;
   font-size: 16px;
-  cursor: pointer
+  cursor: pointer;
+  margin: 0.5em;
 }
 
 /* .label--radio-1 svg {

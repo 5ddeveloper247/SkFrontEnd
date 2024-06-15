@@ -31,6 +31,14 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,153,148,1) 
     --popup--bg--main--color: #FF9494;
     --subbuttons-bg-color: #f2f7ff;
 }
+.elip {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
 
 /* ::-webkit-scrollbar {
     background-color: red;

@@ -1,11 +1,10 @@
-
 <template>
 
     <div class="container pt-5">
         <div class="row justify-content-start px-md-4 pb-md-4 p-2 pt-2 pt-md-5">
             <div class="mb-2 d-flex justify-content-between pt-5">
                 <div>
-                    <h5>signature properties offer beautiful plot sector B park face dha phase 2 islamabad</h5>
+                    <h5>{{ propertyData?.property_listing_pape?.extra_info_title }}</h5>
                     <p><small>DHA Defence Phase 2, DHA Defence, Islamabad, Islamabad Capital</small></p>
                 </div>
                 <!-- <div>
@@ -23,7 +22,7 @@
 
 
             <Loader :isLoading="loading" />
-            <div class="col-md-8" >
+            <div class="col-md-8">
                 <swiper :speed="1000" :spaceBetween="5" :slidesPerView="1" :navigation="true" :modules="modules"
                     class="mySwiper">
                     <swiper-slide v-for="media in propertyData.property_record_files" :key="media.id"
@@ -37,27 +36,6 @@
                         </div>
                     </swiper-slide>
                 </swiper>
-                <!-- <div id="society-detail-carousel" class="carousel slide">
-                    <div class="carousel-inner">
-                        <div class="" v-for="media in propertyData.property_record_files" :key="media.id">
-                            <img :src="getImageUrl(media)" class="d-block w-100" alt="Image 3">
-                            <div class="verified-society rounded-2">
-                                <p class="text-white p-2 d-flex align-items-center"><i
-                                        class="fa-solid fa-check pe-2"></i>Verified</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#society-detail-carousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#society-detail-carousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div> -->
 
                 <div class="d-flex justify-content-start my-4 mx-md-5">
                     <div class="d-flex flex-column justify-content-center align-items-center mx-3">
@@ -264,6 +242,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row mt-md-4 mt-2">
                                 <div class="col-md-3 m-0 p-0 d-flex align-items-center justify-content-center">
                                     <h6><small>Nearby Locations <br> and Other Facilitie</small></h6>
@@ -483,12 +462,12 @@
 // YourVueComponent.vue
 
 // Import helper functions
-import { redirectToPhoneDialer, redirectToWhatsApp,redirectToEmail } from '../helpers/redirectHelpers';
+import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';
 import { ref, onBeforeMount } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useRoute } from 'vue-router';
-import { Swiper, SwiperSlide } from 'swiper/vue'; 
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
@@ -507,121 +486,121 @@ const autoplay = {
 const $toast = useToast();
 // Define reactive references for form data and property data
 const inquiryData = ref({
-  location: '',
-  email: '',
-  phone: '',
-  description: '',
-  agent: [], 
-  informedMe: false 
+    location: '',
+    email: '',
+    phone: '',
+    description: '',
+    agent: [],
+    informedMe: false
 });
 
 const propertyData = ref([]);
-const loading=ref(false);
+const loading = ref(false);
 // Retrieve the property ID from the route parameters
 const route = useRoute();
 const propertyId = ref(route.params.id);
 
 // Helper function to get the image URL
 const getImageUrl = (media) => {
-  return `${import.meta.env.VITE_BASE_URL}/${media?.image_uri}`;
+    return `${import.meta.env.VITE_BASE_URL}/${media?.image_uri}`;
 };
 
 // Function to handle form submission
 // Function to handle form submission
-const handleInquiryFormSubmission = () => {      
-  // Make POST request to backend with form data
-  console.log(inquiryData.value);
-  const base_url = import.meta.env.VITE_BASE_URL;
-  loading.value=true;
-  fetch(`${base_url}/api/frontend/inquiry/store`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    body: JSON.stringify(inquiryData.value)
-  })
-  .then(response => {
-    if (!response.ok) {
-      return response.json().then(errorData => {
-        throw new Error(JSON.stringify(errorData));
-      });
-    }
-    return response.json();
-  })
-  .then(data => {
-    loading.value=false;
-    // Handle successful form submission response
-    console.log('Form submission successful:', data);
-    $toast.open({
-      message: 'Query submitted successfully!',
-      type: 'success',
-      position: 'top-right',
-    });
-    // Optionally, reset the form data after successful submission
-    inquiryData.value = {
-      location: '',
-      email: '',
-      phone: '',
-      description: '',
-      agent: [],
-      informedMe: false
-    };
-  })
-  .catch(error => {
-    loading.value=false; 
-    // Handle form submission error
-    console.error('Error submitting form data:', error);
-    const errorMessage = JSON.parse(error.message);
-    if (errorMessage.errors) {
-      Object.values(errorMessage.errors).forEach(err => {
-        $toast.open({
-          message: err[0],
-          type: 'error',
-          position: 'top-right',
+const handleInquiryFormSubmission = () => {
+    // Make POST request to backend with form data
+    console.log(inquiryData.value);
+    const base_url = import.meta.env.VITE_BASE_URL;
+    loading.value = true;
+    fetch(`${base_url}/api/frontend/inquiry/store`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(inquiryData.value)
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(JSON.stringify(errorData));
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            loading.value = false;
+            // Handle successful form submission response
+            console.log('Form submission successful:', data);
+            $toast.open({
+                message: 'Query submitted successfully!',
+                type: 'success',
+                position: 'top-right',
+            });
+            // Optionally, reset the form data after successful submission
+            inquiryData.value = {
+                location: '',
+                email: '',
+                phone: '',
+                description: '',
+                agent: [],
+                informedMe: false
+            };
+        })
+        .catch(error => {
+            loading.value = false;
+            // Handle form submission error
+            console.error('Error submitting form data:', error);
+            const errorMessage = JSON.parse(error.message);
+            if (errorMessage.errors) {
+                Object.values(errorMessage.errors).forEach(err => {
+                    $toast.open({
+                        message: err[0],
+                        type: 'error',
+                        position: 'top-right',
+                    });
+                });
+            } else {
+                $toast.open({
+                    message: 'Oops, network error occurred!',
+                    type: 'error',
+                    position: 'top-right',
+                });
+            }
         });
-      });
-    } else {
-      $toast.open({
-        message: 'Oops, network error occurred!',
-        type: 'error',
-        position: 'top-right',
-      });
-    }
-  });
 };
 
 // Fetch the media data when the component is mounted
 onBeforeMount(() => {
-  // Fetch the media data
-  loading.value=true;
-  const base_url = import.meta.env.VITE_BASE_URL;
-  fetch(`${base_url}/api/frontend/home/property/getbyid/${propertyId.value}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data.propertyInfo);
-    propertyData.value = data.propertyInfo;
-    // $toast.open({
-    //   message: 'Property data fetched successfully!',
-    //   type: 'success',
-    //   position: 'top-right',
-    // });
-    loading.value=false;
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    loading.value=false;
-    $toast.open({
-      message: 'Failed to fetch property data.',
-      type: 'error',
-      position: 'top-right',
-    });
-  });
+    // Fetch the media data
+    loading.value = true;
+    const base_url = import.meta.env.VITE_BASE_URL;
+    fetch(`${base_url}/api/frontend/home/property/getbyid/${propertyId.value}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data.propertyInfo);
+            propertyData.value = data.propertyInfo;
+            // $toast.open({
+            //   message: 'Property data fetched successfully!',
+            //   type: 'success',
+            //   position: 'top-right',
+            // });
+            loading.value = false;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            loading.value = false;
+            $toast.open({
+                message: 'Failed to fetch property data.',
+                type: 'error',
+                position: 'top-right',
+            });
+        });
 });
 </script>
 

@@ -1,6 +1,6 @@
 <template>
     <Loader :isLoading="loading" />
-    <div class="container pt-5" >
+    <div class="container pt-5">
         <nav class="pt-5"
             style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
             aria-label="breadcrumb">
@@ -167,40 +167,6 @@
                                     </div>
                                 </div>
 
-
-
-
-
-
-
-
-
-
-
-                                <!-- <div class="d-flex flex-column">
-                        <div class="form-check">
-                            <input class="form-check-input filters" type="checkbox" value="" id="flexCheckChecked">
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Checked checkbox
-                            </label>
-                        </div>
-                    </div> -->
-
-
-                                <!-- search filter button -->
-
-                                <!-- <div class="d-flex flex-row">
-                        <div class="row justify-content-center p-2 m-1">
-                            <a @click.prevent="handleSearchBtn" style="width: fit-content;" href=""
-                                class="mx-1 my-4 nav-sub-links-2 nav-link text-nowrap px-2 px-md-3 py-1 d-flex flex-column align-items-center justify-content-center"
-                                role="button">Search</a>
-                        </div>
-                        <div class="row justify-content-center p-2 m-1">
-                            <a @click.prevent="handleClearFilter" style="width: fit-content;" href=""
-                                class="mx-1 my-4 nav-sub-links-2 nav-link text-nowrap px-2 px-md-3 py-1 d-flex flex-column align-items-center justify-content-center"
-                                role="button">Clear Filter</a>
-                        </div>
-                    </div> -->
                             </div>
                         </div>
                     </div>
@@ -213,14 +179,7 @@
                         <div class="col-9">
                             <h2 class="text-start my-4">Properties for Sale/Rent</h2>
                         </div>
-                        <!-- <div class="col-3">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Sort By</option>
-                                <option value="1">Lowest Price</option>
-                                <option value="2">Heighest Price</option>
-                                <option value="3">Newest (By property year)</option>
-                            </select>
-                        </div> -->
+
                     </div>
                     <div class="col-md-4 my-1" v-for="media in mediaData" :key="media?.id">
                         <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
@@ -228,31 +187,32 @@
                                 <img :src="getImageUrl(media)" height="300" alt="Image">
                                 <div class="card-body">
                                     <h5 class="card-title">${{ media?.price }}</h5>
-                                    <p class="card-text">{{ media?.property_listing_pape?.extra_info_title }}</p>
-                                    <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center"><i class="fa-solid fa-bed pe-2"></i>
-                                            <p>{{ media?.property_listing_pape?.propertyDetail_bedrooms }}</p>
-                                        </div>
-                                        <div class="mx-3 d-flex align-items-center"><i
-                                                class="fa-solid fa-toilet pe-2"></i>
-                                            <p>{{ media?.property_listing_pape?.propertyDetail_bathrooms }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-2">
-                                        <a class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button" @click="redirectToEmail"><i
-                                                class="fa-regular fa-envelope pe-2"></i></a>
-                                        <!-- {{media?.pInfo_email }} -->
-                                        <!-- Call useContact directly on button click -->
-                                        <button @click="redirectToPhoneDialer"
-                                            class="btn btn-sm mx-1 mt-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button"><i class="fa-solid fa-phone pe-2"></i></button>
-                                        <!-- {{media?.pInfo_phoneNumber }} -->
-                                    </div>
+                                    <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
+                                    <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                 </div>
                             </div>
                         </RouterLink>
+                        <div class="d-flex align-items-center justify-content-between px-2 ps-3 w-100">
+                            <div class="d-flex align-items-center">
+                                <div><i class="fa-solid fa-bed pe-2"></i>{{
+                                    media?.property_listing_pape?.propertyDetail_bedrooms
+                                }}</div>
+                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
+                                    media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a class="btn btn-sm nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                    :href="'mailto:' + media?.pInfo_email" role="button">
+                                    <i class="fa-regular fa-envelope pe-2"></i>
+                                    <!-- {{ media?.pInfo_email }} -->
+                                </a>
+                                <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                    :href="'tel:' + media?.pInfo_phoneNumber" role="button">
+                                    <i class="fa-solid fa-phone pe-2"></i>
+                                    <!-- {{ media?.pInfo_phoneNumber }} -->
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
 

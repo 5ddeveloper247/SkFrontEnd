@@ -10,7 +10,7 @@
                         <h1 class="text-white p-0 p-md-5 text-center">
                             Find Your Dream Home with
                             <br>
-                            <span>SK Marketing</span>
+                            <!-- <span>SK Marketing</span> -->
                         </h1>
                     </div>
                 </div>
@@ -57,10 +57,8 @@
                 <form action="" class="rounded-2" style="background-color: #111111b8">
                     <div class="d-flex flex-wrap justify-content-between align-items-center p-3 all-property-form">
                         <ul class="d-flex flex-wrap mb-0 p-0">
+
                             <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white active" href="#"
-                                    @click.prevent="setPurpose('All')">All</a>
-                            </li>
-                            <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#"
                                     @click.prevent="setPurpose('Sale')">Sale</a>
                             </li>
                             <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#"
@@ -419,111 +417,7 @@
                 Explore the Latest Properties Listed by SK Marketing <br> in Bahria Town and DHA Islamabad.
             </p>
             <div class="owl-carousel owl-theme mt-4 property-listed d-flex ">
-                <!-- <div class="item mx-3">    
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/listed-propery-1.webp" alt="Image">
-                        <div
-                            class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                            <h5 class="card-title">$ 5,970</h5>
-                            <p class="card-text">Tranquil Haven in the Woods</p>
-                            <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                            <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>4 beds</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>3 bath</div>
-                            </div>
-                            <div class="d-flex align-items-center mt-2">
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item mx-3">
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/listed-propery-2.webp" alt="Image">
-                        <div
-                            class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                            <h5 class="card-title">$ 5,970</h5>
-                            <p class="card-text">Tranquil Haven in the Woods</p>
-                            <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                            <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>4 beds</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>3 bath</div>
-                            </div>
-                            <div class="d-flex align-items-center mt-2">
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item mx-3">
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/listed-propery-3.jpeg" alt="Image">
-                        <div
-                            class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                            <h5 class="card-title">$ 5,970</h5>
-                            <p class="card-text">Tranquil Haven in the Woods</p>
-                            <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                            <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>4 beds</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>3 bath</div>
-                            </div>
-                            <div class="d-flex align-items-center mt-2">
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item mx-3">
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/listed-propery-3.jpeg" alt="Image">
-                        <div
-                            class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                            <h5 class="card-title">$ 5,970</h5>
-                            <p class="card-text">Tranquil Haven in the Woods</p>
-                            <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                            <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>4 beds</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>3 bath</div>
-                            </div>
-                            <div class="d-flex align-items-center mt-2">
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item mx-3">
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/listed-propery-2.webp" alt="Image">
-                        <div
-                            class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                            <h5 class="card-title">$ 5,970</h5>
-                            <p class="card-text">Tranquil Haven in the Woods</p>
-                            <p><small>103 Wright CourtBurien, WA 98168</small></p>
-                            <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>4 beds</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>3 bath</div>
-                            </div>
-                            <div class="d-flex align-items-center mt-2">
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-regular fa-envelope pe-2"></i>Email</a>
-                                <a class="btn btn-sm mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-0 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="fa-solid fa-phone pe-2"></i>Call</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>  -->
+
             </div>
 
             <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :navigation="true" :modules="modules"
@@ -535,39 +429,42 @@
                     1024: { slidesPerView: 3, spaceBetween: 5 }
                 }" class="mySwiper">
                 <swiper-slide v-for="media in mediaData " :key="media.id" :slidesPerView="3">
-                    <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
+                    <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }" style="text-decoration: none;">
                         <div class="item mx-3">
                             <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
                             <div class="card border-0 bg-transparent">
                                 <img class="card-img-top rounded-5" :src="getImageUrl(media)" height="270" alt="Image">
                                 <div
                                     class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                                    <h5 class="card-title">${{ media?.price }}</h5>
-                                    <p class="card-text">{{ media?.property_listing_pape?.extra_info_title }}</p>
-                                    <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p>
-                                    <div class="d-flex align-items-center">
-                                        <div><i class="fa-solid fa-bed pe-2"></i>{{
-                                            media?.property_listing_pape?.propertyDetail_bedrooms
-                                        }}</div>
-                                        <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
-                                            media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
-                                    </div>
-                                    <div class="d-flex align-items-center mt-3">
-                                        <a class="btn btn-sm  nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button">
-                                            <i class="fa-regular fa-envelope pe-2"></i>
-                                            <!-- {{ media?.pInfo_email }} -->
-                                        </a>
-                                        <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                            role="button">
-                                            <i class="fa-solid fa-phone pe-2"></i>
-                                            <!-- {{ media?.pInfo_phoneNumber }} -->
-                                        </a>
-                                    </div>
+                                    <h5 class="card-title">PKR {{ media?.price }}</h5>
+                                    <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
                                 </div>
                             </div>
                         </div>
                     </RouterLink>
+
+                    <div class="d-flex align-items-center justify-content-between px-4 mx-2 mt-2 w-100">
+                        <div class="d-flex align-items-center">
+                            <div><i class="fa-solid fa-bed pe-2"></i>{{
+                                media?.property_listing_pape?.propertyDetail_bedrooms
+                            }}</div>
+                            <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
+                                media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <a class="btn btn-sm nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                :href="'mailto:' + media?.pInfo_email" role="button">
+                                <i class="fa-regular fa-envelope pe-2"></i>
+                                <!-- {{ media?.pInfo_email }} -->
+                            </a>
+                            <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                :href="'tel:' + media?.pInfo_phoneNumber" role="button">
+                                <i class="fa-solid fa-phone pe-2"></i>
+                                <!-- {{ media?.pInfo_phoneNumber }} -->
+                            </a>
+                        </div>
+                    </div>
+
                 </swiper-slide>
             </swiper>
         </div>
@@ -729,66 +626,28 @@
                         </p>
                     </div>
                     <div class="col-md-5">
-                        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner bg-transparent">
-                                <div class="carousel-item bg-transparent active">
+                        <swiper :autoplay="autoplay" :slidesPerView="1" :speed="2000" :spaceBetween="50"
+                            :modules="modules" class="mySwiper">
+                            <swiper-slide v-for="testimonial in testimonials " :key="testimonial.id">
+                                <div class="bg-transparent">
                                     <div class="right-testimonial border p-4 rounded-4 bg-transparent">
                                         <p>
-                                            Explore the insightful and positive feedback from our valued clients regarding their experiences with SK Marketing's services in Bahria Town and DHA Islamabad. Our commitment to excellence ensures that each client finds their ideal property with satisfaction and confidence.
+                                            {{ testimonial.description }}
                                         </p>
                                         <hr>
                                         <div class="d-flex align-items-center justify-content-between ">
                                             <div class="d-flex align-items-center">
                                                 <img class="img-fluid" src="../assets/Images/listing.png" alt="">
-                                                <p class="px-2">BILAL AHSEN</p>
+                                                <p class="px-2">{{ testimonial.name }}</p>
                                             </div>
                                             <img src="../assets/Images/ratings.png" alt="">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item ">
-                                    <div class="right-testimonial border bg-transparent p-4 rounded-4 bg-transparent">
-                                        <p>
-                                            Explore the insightful reviews and heartfelt testimonials from our valued clients who have experienced SK Marketing's exceptional services in Bahria Town and DHA Islamabad. Our commitment to providing personalized real estate solutions ensures that every client finds their perfect property with ease and satisfaction. 
-                                        </p>
-                                        <hr>
-                                        <div class="d-flex align-items-center justify-content-between ">
-                                            <div class="d-flex align-items-center">
-                                                <img class="img-fluid" src="../assets/Images/listing.png" alt="">
-                                                <p class="px-2">HASSAAN AHMED</p>
-                                            </div>
-                                            <img src="../assets/Images/ratings.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
+                            </swiper-slide>
+                        </swiper>
 
-                                <div class="carousel-item ">
-                                    <div class="right-testimonial border bg-transparent p-4 rounded-4 bg-transparent">
-                                        <p>
-                                            Delve into the extensive client feedback and glowing reviews that highlight SK Marketing's excellence in real estate services across Bahria Town and DHA Islamabad. Experience firsthand why our clients trust us for their property needs. 
-                                        </p>
-                                        <hr>
-                                        <div class="d-flex align-items-center justify-content-between ">
-                                            <div class="d-flex align-items-center">
-                                                <img class="img-fluid" src="../assets/Images/listing.png" alt="">
-                                                <p class="px-2">USMAN TAUQEER</p>
-                                            </div>
-                                            <img src="../assets/Images/ratings.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -801,7 +660,8 @@
                     <div class="d-flex flex-column p-3">
                         <h2 class="text-white">Become a Partner.</h2>
                         <p class="text-white">
-                            Join forces with SK Marketing and explore <br> partnership opportunities in Bahria Town and DHA Islamabad. 
+                            Join forces with SK Marketing and explore <br> partnership opportunities in Bahria Town and
+                            DHA Islamabad.
                         </p>
                     </div>
                     <RouterLink to="/contact" type="button" class="enquiry-btn mx-3 rounded-pill nav-link text-nowrap px-2 px-md-4 py-1 
@@ -813,42 +673,6 @@
         </div>
     </div>
     <!-- ======================Modals================== -->
-    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content p-md-3 p-2">
-                <div class="d-flex justify-content-between px-md-3">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Enquire Now</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-md-6 d-flex align-items-center justify-content-center modal-animated-image">
-                        <img class="img-fluid" src="../assets/Images/property-animated.jpeg" alt="">
-                    </div>
-                    <div class="col-md-6">
-                        <form>
-                            <div class="col-12 mb-3">
-                                <label for="recipient-name" class="col-form-label">Name:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="recipient-name" class="col-form-label">Email:</label>
-                                <input type="email" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="recipient-name" class="col-form-label">Phone:</label>
-                                <input type="number" class="form-control" id="recipient-name">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn nav-sub-links-main rounded-pill mx-1"
-                        data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn main-button mx-1">Send message</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </template>
 
 
@@ -873,7 +697,7 @@ import { useCityData } from '@/composables/useCityData';
 const modules = ref([Navigation, Autoplay]);
 // Autoplay configuration
 const autoplay = {
-    delay: 3000, // 3 seconds delay between slides
+    delay: 3500, // 3 seconds delay between slides
     disableOnInteraction: false // Keep autoplay running even after user interaction
 };
 
@@ -884,6 +708,7 @@ const $toast = useToast();
 const router = useRouter();
 
 const mediaData = ref([]);
+const testimonials = ref([]);
 const loading = ref(true);
 
 ////////////////////////
@@ -893,7 +718,7 @@ const mediaSliderType = ref(null);
 const autoplaySpeed = 5000;
 
 const filterCriteria = ref({
-    purpose: 'All',
+    purpose: 'Sale',
     city: 'select city',
     homeType: 'select home type',
     plot: 'select plot type',
@@ -990,7 +815,7 @@ onBeforeUnmount(() => {
 
 
 const setMediaType = (type) => {
-    alert("clicked")
+
     mediaSliderType.value = type;
     getMediabyType();
 };
@@ -1068,9 +893,10 @@ onMounted(() => {
         .then(data => {
             setTimeout(() => {
                 loading.value = false;
-            }, 2000);
-            console.log('Success:', data.propertyInfo);
+            }, 1000);
+            console.log('Success:', data.testimonials);
             mediaData.value = data.propertyInfo;
+            testimonials.value = data.testimonials;
             // $toast.open({
             //     message: 'Property data fetched successfully!',
             //     type: 'success',
@@ -1172,13 +998,7 @@ onMounted(() => {
     width: 100%;
 }
 
-.card-body p {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+
 
 img {
     object-fit: cover;
