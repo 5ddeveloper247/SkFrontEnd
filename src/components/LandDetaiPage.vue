@@ -16,14 +16,6 @@
                 </div> -->
             </div>
 
-
-
-
-
-
-
-
-
             <Loader :isLoading="loading" />
 
             <div class="col-md-8" v-show="!loading">
@@ -429,7 +421,7 @@
                         <a href="">Property for Sale in Peshawar</a>
                     </div>
                 </div> -->
-                <div class="property-detail d-flex flex-column py-4 px-md-2 shadow rounded-4 mt-4">
+                <div class="property-detail d-flex flex-column py-4 px-md-2 d-none shadow rounded-4 mt-4">
                     <div class="d-flex flex-wrap align-items-center justify-content-center">
                         <h5 class="text-center">Signature Properties</h5>
                     </div>
@@ -446,7 +438,7 @@
                     </div>
                 </div>
                 <a href="requestform.html"
-                    class="mx-1 nav-sub-links-main text-nowrap shadow px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center mt-4"
+                    class="mx-1 d-none nav-sub-links-main text-nowrap shadow px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center mt-4"
                     role="button"><i class="fa-regular fa-flag pe-2"></i>Report this property</a>
             </div>
 

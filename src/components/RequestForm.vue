@@ -338,9 +338,6 @@ export default {
       propertyType: ''
     });
 
-    const isValid = ref(true);
-    const loading = ref(false);
-
     const validateForm = () => {
       const requiredFields = [
         'firstName', 'lastName', 'phone', 'email',
@@ -355,12 +352,11 @@ export default {
       return true;
     };
 
-    // const isValid = ref(true);
+
+    const isValid = ref(true);
+    const loading = ref(false);
 
     const handleSubmission = () => {
-      alert("2nb");
-      alert(isValid.value);
-
       // Validation check for input fields
       isValid.value = true;
       $('input[type="text"], input[type="number"], input[type="email"]').each(function () {
@@ -373,7 +369,6 @@ export default {
       });
 
       if (!isValid.value) {
-        alert("failed");
         return; // If validation fails, do not proceed with submission
       }
 
@@ -392,14 +387,12 @@ export default {
           loading.value = false;
           if (data.success) {
             console.log('Success:', data);
-            loading.value = false;
             $toast.open({
               message: 'Submitted Successfully',
               type: 'success',
               position: 'top-right'
             });
           } else {
-            loading.value = false;
             $toast.open({
               message: 'An error occurred!',
               type: 'error',
@@ -408,7 +401,6 @@ export default {
             console.error('Error:', data);
 
             if (data.errors) {
-              loading.value = false;
               Object.keys(data.errors).forEach(field => {
                 data.errors[field].forEach(errorMessage => {
                   $toast.open({
@@ -432,15 +424,8 @@ export default {
         });
     };
 
-
-    const handlePurpose = (purpose) => {
-
-      propertyRequestform.value.purpose = purpose;
-    };
-
     onMounted(() => {
       $(document).ready(function () {
-        alert("1")
         var current_fs, next_fs, previous_fs; // fieldsets
         var opacity;
         var current = 1;
@@ -450,14 +435,12 @@ export default {
 
         $(".next").click(function () {
           // Validation check for input fields
-
+          isValid.value = true;
           $(this).parent().find('input[type="text"], input[type="number"], input[type="email"]').each(function () {
             if ($.trim($(this).val()) == '') {
-              alert("doing false")
               isValid.value = false;
               $(this).addClass('input-error'); // Add class to highlight empty fields
             } else {
-              alert("else")
               $(this).removeClass('input-error'); // Remove class if field is filled
             }
           });
@@ -531,6 +514,12 @@ export default {
         });
       });
     });
+
+
+    const handlePurpose = (purpose) => {
+
+      propertyRequestform.value.purpose = purpose;
+    };
 
     return {
       propertyRequestform,
