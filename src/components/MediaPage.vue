@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loader :isLoading="loading" />
-    <div class="video-sec" v-show="!loading">
+    <div class="video-sec mb-5" v-show="!loading">
       <div class="media mt-3 pt-5">
         <div class="d-flex flex-column align-items-center id_sxy justify-content-center pt-5">
           <iframe class="Uvideo-1" width="100%" :src="currentTopVideo"></iframe>
@@ -41,7 +41,11 @@
 
 
     <!-- Video Section Bottom -->
+<<<<<<< HEAD
+    <div class="img-section pt-5">
+=======
     <div class="img-section ">
+>>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
       <div class="media ">
         <div class="d-flex flex-column align-items-center justify-content-center">
           <img :src="currentBottomVideo" width="100%" height="350" alt="">
@@ -257,6 +261,10 @@ loading.value=false;
 .img-section,
 .video-sec {
   margin: 0 18rem;
+}
+
+.swiper {
+  margin-top: 3rem;
 }
 
 @media (max-width:1200px) {

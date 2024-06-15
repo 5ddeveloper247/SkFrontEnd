@@ -57,13 +57,12 @@ export default {
     <div class="heroandnav">
         <div class="navTop d-md-block" style="display: block;">
             <div class="container">
-                <div
-                    class="d-flex flex-md-nowrap flex-wrap justify-content-between align-items-center py-2">
+                <div class="d-flex justify-content-between">
                     <div class="d-flex align-items-center d-none d-lg-flex">
                         <i class="fa-solid fa-location-dot"></i>
                         <p class="px-3">Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.,</p>
                     </div>
-                    <div class="d-flex flex-md-nowrap flex-wrap align-items-center justify-content-between justify-lg-content-end w-100">
+                    <div class="d-flex">
                         <div class="d-flex align-items-center mx-md-4">
                             <i class="fa-regular fa-envelope"></i>
                             <a href="/info@skrealestate.com.pk" class="px-2">info@skrealestate.com.pk</a>
@@ -85,9 +84,9 @@ export default {
             <div class="container">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
+                        <RouterLink class="navbar-brand" to="/">
                             <img class="logo" src="../assets/Images/SK-logo.png" alt="">
-                        </a>
+                        </RouterLink>
                         <button ref="navbarToggler" class="navbar-toggler collapsed" type="button"
                             data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
                             aria-expanded="false" aria-label="Toggle navigation"><span
@@ -144,5 +143,9 @@ a {
     font-size: 10px;
     color: #fff;
     text-decoration: none;
+}
+
+.navbar-brand {
+    background-color: transparent !important;
 }
 </style>

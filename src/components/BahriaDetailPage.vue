@@ -1,9 +1,12 @@
 <script setup>
+
 </script>
 
 <template>
-    <div class="societies-detail-page">
-        <img class="societies-detail-page-img" src="../assets/Images/civic.webp" alt="">
+    <div class="bahria-detail-page d-flex align-items-center justify-content-center">
+        <h1 class="text-white text-center fs-1 fw-bold b_detail-text">
+            BAHRIA TOWN <br> RAWALPINDI ISLAMABAD
+        </h1>
     </div>
     <div class="container societies-detail-page p-md-5 p-2">
         <div>
@@ -92,4 +95,5 @@
             <img class="img-fluid Bahria Town-map mt-3" src="../assets/Images/bahria-map.webp" alt="">
         </div>
     </div>
+    
 </template>

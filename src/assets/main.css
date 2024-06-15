@@ -1800,10 +1800,25 @@ header h2 {
 }
 
 /* /////////////////////////////societies-detail-page//////////////////////// */
-.societies-detail-page-img {
+.bahria-detail-page {
+    background-image: url('../assets/Images/main-slider-img-3.jpg');
+    background-position: center;
+    background-size: cover;
     width: 100%;
     height: 100vh;
-    object-fit: cover;
+}
+
+.dha-detail-page {
+    background-image: url('../assets/Images/main-slider-img-1.jpg');
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+}
+
+.b_detail-text {
+    background-color: #00000073;
+    padding: 2rem;
 }
 
 .societies-detail-page h3::after {

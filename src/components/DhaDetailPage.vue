@@ -2,9 +2,10 @@
 </script>
 
 <template>
-    <div class="societies-detail-page">
-        <img class="societies-detail-page-img" src="../assets/Images/main-slider-img-1.jpg" alt="">
-        <!-- <div class="banner-overlay"></div> -->
+    <div class="dha-detail-page d-flex align-items-center justify-content-center">
+        <h1 class="text-white text-center fs-1 fw-bold b_detail-text">
+            DHA <br> RAWALPINDI ISLAMABAD
+        </h1>
     </div>
     <div class="container societies-detail-page p-md-5 p-2">
         <div>

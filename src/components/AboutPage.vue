@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
+
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
 // Autoplay configuration
