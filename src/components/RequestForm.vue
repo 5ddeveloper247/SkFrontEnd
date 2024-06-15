@@ -290,6 +290,8 @@ export default {
       propertyType: ''
     });
 
+<<<<<<< HEAD
+=======
     const isValid = ref(true);
     const loading = ref(false);
     const curStep = ref(1);
@@ -317,6 +319,7 @@ export default {
       totalPrice: false
     });
 
+>>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
     const validateForm = () => {
       const requiredFields = [
         'firstName', 'lastName', 'phone', 'email',
@@ -333,8 +336,27 @@ export default {
       return true;
     };
 
+<<<<<<< HEAD
+
+    const isValid = ref(true);
+    const loading = ref(false);
+
+    const handleSubmission = () => {
+      // Validation check for input fields
+      isValid.value = true;
+      $('input[type="text"], input[type="number"], input[type="email"]').each(function () {
+        if ($.trim($(this).val()) === '') {
+          isValid.value = false;
+          $(this).addClass('input-error'); // Add class to highlight empty fields
+        } else {
+          $(this).removeClass('input-error'); // Remove class if field is filled
+        }
+      });
+
+=======
     const handleSubmission = () => {
       isValid.value = validateForm();
+>>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
       if (!isValid.value) {
         return; // If validation fails, do not proceed with submission
       }
@@ -352,6 +374,10 @@ export default {
         .then(data => {
           loading.value = false;
           if (data.success) {
+<<<<<<< HEAD
+            console.log('Success:', data);
+=======
+>>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
             $toast.open({
               message: 'Submitted Successfully',
               type: 'success',
@@ -362,7 +388,28 @@ export default {
             setProgressBar();
             handleNext();
           } else {
+<<<<<<< HEAD
+            $toast.open({
+              message: 'An error occurred!',
+              type: 'error',
+              position: 'top-right'
+            });
+            console.error('Error:', data);
+
+            if (data.errors) {
+              Object.keys(data.errors).forEach(field => {
+                data.errors[field].forEach(errorMessage => {
+                  $toast.open({
+                    message: `${field}: ${errorMessage}`,
+                    type: 'error',
+                    position: 'top-right'
+                  });
+                });
+              });
+            }
+=======
             handleErrors(data);
+>>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
           }
         })
         .catch(error => {
@@ -377,6 +424,103 @@ export default {
         });
     };
 
+<<<<<<< HEAD
+    onMounted(() => {
+      $(document).ready(function () {
+        var current_fs, next_fs, previous_fs; // fieldsets
+        var opacity;
+        var current = 1;
+        var steps = $("fieldset").length;
+
+        setProgressBar(current);
+
+        $(".next").click(function () {
+          // Validation check for input fields
+          isValid.value = true;
+          $(this).parent().find('input[type="text"], input[type="number"], input[type="email"]').each(function () {
+            if ($.trim($(this).val()) == '') {
+              isValid.value = false;
+              $(this).addClass('input-error'); // Add class to highlight empty fields
+            } else {
+              $(this).removeClass('input-error'); // Remove class if field is filled
+            }
+          });
+
+          if (!isValid.value) {
+            // If any input field is empty, do not proceed
+            return;
+          }
+
+          // If all input fields are filled, proceed to the next fieldset
+          current_fs = $(this).parent();
+          next_fs = $(this).parent().next();
+
+          // Add Class Active
+          $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+          // Show the next fieldset
+          next_fs.show();
+          // Hide the current fieldset with style
+          current_fs.animate({ opacity: 0 }, {
+            step: function (now) {
+              // for making fieldset appear animation
+              opacity = 1 - now;
+
+              current_fs.css({
+                'display': 'none',
+                'position': 'relative'
+              });
+              next_fs.css({ 'opacity': opacity });
+            },
+            duration: 500
+          });
+          setProgressBar(++current);
+        });
+
+        $(".previous").click(function () {
+          current_fs = $(this).parent();
+          previous_fs = $(this).parent().prev();
+
+          // Remove class active
+          $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+          // Show the previous fieldset
+          previous_fs.show();
+
+          // Hide the current fieldset with style
+          current_fs.animate({ opacity: 0 }, {
+            step: function (now) {
+              // for making fieldset appear animation
+              opacity = 1 - now;
+
+              current_fs.css({
+                'display': 'none',
+                'position': 'relative'
+              });
+              previous_fs.css({ 'opacity': opacity });
+            },
+            duration: 500
+          });
+          setProgressBar(--current);
+        });
+
+        function setProgressBar(curStep) {
+          var percent = parseFloat(100 / steps) * curStep;
+          percent = percent.toFixed();
+          $(".progress-bar").css("width", percent + "%");
+        }
+
+        $(".submit").click(function () {
+          return false;
+        });
+      });
+    });
+
+
+    const handlePurpose = (purpose) => {
+
+      propertyRequestform.value.purpose = purpose;
+=======
     const handleErrors = (data) => {
       if (data.errors) {
         Object.keys(data.errors).forEach(field => {
@@ -580,6 +724,7 @@ export default {
       fs_step3.value = curStep.value === 3;
       fs_step4.value = curStep.value === 4;
       fs_step_show.value = curStep.value !== 1;
+>>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
     };
 
     return {

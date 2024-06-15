@@ -50,11 +50,11 @@
                 </div>
             </div>
             <div class="col-md-4 my-1">
-                <a href="detailpage.html">
+                <RouterLink to="/bahria">
                     <div class="card border-0 bg-transparent mx-4">
                         <img class="img-fluid rounded-4" src="../assets/Images/bahria-town.jpeg" alt="Image">
                     </div>
-                </a>
+                </RouterLink>
             </div>
         </div>
     </div>

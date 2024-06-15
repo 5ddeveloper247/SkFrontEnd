@@ -280,6 +280,7 @@ import Loader from './Loader.vue';
 import axios from 'axios';
 import { useCityData } from '@/composables/useCityData';
 
+
 // Define objects
 const route = useRoute();
 const $toast = useToast();
