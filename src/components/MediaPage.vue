@@ -22,7 +22,7 @@
         640: { slidesPerView: 1, spaceBetween: 5 },
         768: { slidesPerView: 2, spaceBetween: 3 },
         1024: { slidesPerView: 3, spaceBetween: 40 }
-      }" class="mySwiper">
+      }" class="mySwiper mt-5">
         <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
           <div class="media-cards">
             <div class="card media-card-1" @click="showTopVideo(media.id)">
@@ -41,14 +41,10 @@
 
 
     <!-- Video Section Bottom -->
-    <div class="img-section">
+    <div class="img-section ">
       <div class="media ">
         <div class="d-flex flex-column align-items-center justify-content-center">
           <img :src="currentBottomVideo" width="100%" height="350" alt="">
-          <!-- <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"
-            class="btn subscribe-btn d-flex align-items-center my-2">
-            <i class="fa-brands fa-youtube pe-2"></i>Subscribe
-          </a> -->
         </div>
       </div>
 
@@ -59,7 +55,7 @@
         640: { slidesPerView: 1, spaceBetween: 5 },
         768: { slidesPerView: 2, spaceBetween: 3 },
         1024: { slidesPerView: 3, spaceBetween: 50 }
-      }" class="mySwiper">
+      }" class="mySwiper mt-5">
         <swiper-slide :slidesPerView="3" v-for="(image, index) in mediaOnly" :key="index">
           <div class="media-cards">
             <div>

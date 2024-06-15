@@ -1,4 +1,5 @@
 <template>
+    <Loader :isLoading="loading" />
     <div class="contact-banner pt-md-5">
         <div class="row justify-content-start pt-md-5">
             <div class="col-md-7 p-5">
@@ -6,7 +7,11 @@
                     Contact <br> Sk Marketing
                 </h1>
                 <p class="text-white text-start py-5">
-                    Get in touch with SK Marketing today for expert guidance and personalized assistance in exploring real estate opportunities in Bahria Town and DHA Islamabad. Our dedicated team is ready to assist you in finding your dream home or investment property. Whether you are looking to buy, sell, or rent, we are here to ensure a smooth and successful real estate experience. Reach out to us via phone, email, or visit our office to start your journey with SK Marketing.
+                    Get in touch with SK Marketing today for expert guidance and personalized assistance in exploring
+                    real estate opportunities in Bahria Town and DHA Islamabad. Our dedicated team is ready to assist
+                    you in finding your dream home or investment property. Whether you are looking to buy, sell, or
+                    rent, we are here to ensure a smooth and successful real estate experience. Reach out to us via
+                    phone, email, or visit our office to start your journey with SK Marketing.
                 </p>
             </div>
         </div>
@@ -68,6 +73,7 @@ import { ref } from 'vue';
 import { reactive } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import Loader from './Loader.vue';
 const $toast = useToast();
 const contactFormData = reactive({
     fullName: '',
@@ -76,7 +82,6 @@ const contactFormData = reactive({
     subject: '',
     message: ''
 });
-
 const errors = ref({
     fullName: '',
     email: '',
@@ -84,7 +89,7 @@ const errors = ref({
     subject: '',
     message: ''
 });
-
+const loading = ref(false);
 const validateForm = () => {
     let isValid = true;
 
@@ -129,8 +134,17 @@ const validateForm = () => {
     return isValid;
 };
 
-
-
+const resetForm = () => {
+    contactFormData.fullName = '';
+    contactFormData.email = '';
+    contactFormData.companyName = '';
+    contactFormData.subject = '';
+    contactFormData.message = '';
+    // Optionally clear errors
+    Object.keys(errors.value).forEach(key => {
+        errors.value[key] = '';
+    });
+};
 
 const submitForm = async () => {
     if (!validateForm()) {
@@ -138,6 +152,7 @@ const submitForm = async () => {
     }
 
     try {
+        loading.value = true;
         const base_url = import.meta.env.VITE_BASE_URL;
 
         const response = await fetch(base_url + '/api/frontend/contact/store', {
@@ -149,20 +164,24 @@ const submitForm = async () => {
         });
 
         if (!response.ok) {
+            loading.value = false;
             throw new Error('Network response was not ok');
         }
 
         const data = await response.json();
         console.log('Success:', data);
+        loading.value = false;
         $toast.open({
-            message: 'Message Submitted Successfully!',
+            message: 'Submitted Successfully!',
             type: 'success',
             position: 'top-right'
         });
         // Handle success response
-        // You might want to clear the form or show a success message
+        // Reset the form
+        resetForm();
     } catch (error) {
         // console.error('Error:', error);
+        loading.value = false;
         $toast.open({
             message: 'Oops Network Error Occured!',
             type: 'error',
