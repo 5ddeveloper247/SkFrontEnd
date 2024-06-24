@@ -36,8 +36,10 @@
                                 <div class="range-slider-container">
                                     <input v-model="Landfilters.minPrice" type="range" min="0" max="100" value="25"
                                         class="range-slider" id="minRange">
-                                    <input v-model="Landfilters.maxPrice" type="range" min="0" max="100" value="75"
-                                        class="range-slider" id="maxRange">
+                                    <input v-model="Landfilters.maxPrice" type="range" min="100000"
+                                        :max="priceMaxRangeFilterValue" value="100000" class="range-slider"
+                                        id="maxRange">
+                                    <p>max:{{ priceMaxRangeFilterValue }}</p>
                                     <div class="price-range d-flex flex-nowrap">Price : <span id="minPrice">{{
                                         Landfilters.minPrice
                                             }}</span> -
@@ -179,14 +181,13 @@
                         <div class="col-9">
                             <h2 class="text-start my-4">Properties for Sale/Rent</h2>
                         </div>
-
                     </div>
                     <div class="col-md-4 my-1" v-for="media in mediaData" :key="media?.id">
                         <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
                             <div class="card border-0 bg-transparent">
                                 <img :src="getImageUrl(media)" height="300" alt="Image">
                                 <div class="card-body">
-                                    <h5 class="card-title">${{ media?.price }}</h5>
+                                    <h5 class="card-title">Pkr {{ media?.price }}</h5>
                                     <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
                                     <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                 </div>
@@ -231,19 +232,22 @@
 
 
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue';
+import { ref, onMounted, watch, computed,onBeforeMount,onBeforeUnmount,  onUnmounted } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '../stores/HomeDataFilterStore';
-import { useRoute } from 'vue-router';
+import { useRoute,onBeforeRouteLeave} from 'vue-router';
 import Loader from './Loader.vue';
 import axios from 'axios';
 import { useCityData } from '@/composables/useCityData';
+import { useFooterStore } from '../stores/FooterLoadingState';
+
 
 
 // Define objects
 const route = useRoute();
 const $toast = useToast();
+const footerState = useFooterStore();
 const { cityData, error, cityList, fetchCityData } = useCityData();
 
 // Define reactive variables
@@ -272,6 +276,7 @@ const loading = ref(false);
 const selectedAreas = ref([]);
 const selectedLocation = ref([]);
 const selectedSectors = ref([]);
+const priceMaxRangeFilterValue = ref(0);
 
 // Fetch image URL
 const getImageUrl = (media) => {
@@ -333,6 +338,7 @@ const generateFilterData = (HomefilterData) => {
 // Function to fetch property data based on filters
 const fetchPropertyData = (HomePagefilterCriteria = null) => {
     const base_url = import.meta.env.VITE_BASE_URL;
+
     let url = `${base_url}/api/frontend/home/property/get`;
     let options = {
         method: 'GET',
@@ -480,7 +486,42 @@ const onLocationChange = () => {
 };
 
 
+// get the max price of property for range price 
+onMounted(() => {
+    const base_url = import.meta.env.VITE_BASE_URL;
+    const url = `${base_url}/api/frontend/home/property/max/range/price`;
 
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            priceMaxRangeFilterValue.value = data.maxPrice;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            // Handle error state or display error message as needed
+        });
+});
+
+
+
+//handling footer here
+onBeforeMount(() => {
+    footerState.setFooterState(true);
+})
+
+onUnmounted(() => {
+    footerState.setFooterState(false);
+})
+
+onBeforeRouteLeave((to, from, next) => {
+      footerState.setFooterState(false);
+      next();
+    });
 </script>
 
 

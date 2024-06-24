@@ -673,7 +673,7 @@
         </div>
     </div>
     <!-- ======================Modals================== -->
-    
+
 </template>
 
 
@@ -681,9 +681,9 @@
 
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, onBeforeMount } from 'vue';
 import emitter from '../../emitter';
-import { RouterLink, useRouter } from 'vue-router';
+import { RouterLink, useRouter,onBeforeRouteLeave} from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '.././stores/HomeDataFilterStore'; // Adjust the path as necessary
@@ -694,6 +694,7 @@ import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useCityData } from '@/composables/useCityData';
+import { useFooterStore } from '../stores/FooterLoadingState';
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
 // Autoplay configuration
@@ -707,6 +708,7 @@ const { cityData, error, cityList, fetchCityData } = useCityData();
 //Create the toast instance
 const $toast = useToast();
 const router = useRouter();
+const footerState = useFooterStore();
 
 const mediaData = ref([]);
 const testimonials = ref([]);
@@ -982,6 +984,20 @@ onMounted(() => {
     });
 });
 
+
+
+onBeforeRouteLeave((to, from, next) => {
+      footerState.setFooterState(false);
+      next();
+    });
+
+onBeforeMount(() => {
+    footerState.setFooterState(true);
+})
+
+onBeforeUnmount(() => {
+    footerState.setFooterState(false);
+})
 </script>
 
 
