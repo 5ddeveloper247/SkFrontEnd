@@ -33,19 +33,35 @@
                                 <div class="mt-2">
                                     <h6>Minimum Price - Maximum Price</h6>
                                 </div>
+
                                 <div class="range-slider-container">
-                                    <input v-model="Landfilters.minPrice" type="range" min="0" max="100" value="25"
-                                        class="range-slider" id="minRange">
-                                    <input v-model="Landfilters.maxPrice" type="range" min="100000"
-                                        :max="priceMaxRangeFilterValue" value="100000" class="range-slider"
-                                        id="maxRange">
-                                    <p>max:{{ priceMaxRangeFilterValue }}</p>
-                                    <div class="price-range d-flex flex-nowrap">Price : <span id="minPrice">{{
-                                        Landfilters.minPrice
-                                            }}</span> -
-                                        <span id="maxPrice">{{ Landfilters.maxPrice }}</span>
+                                    <div class="row align-items-center justify-content-center">
+                                        <div class="col-md-6 my-2 ">
+                                            <input v-model.number="filterMinPrice" type="number" min="0"
+                                                :max="priceMaxRangeFilterValue" step="1"
+                                                class="range-input w-100  border-1">
+                                        </div>
+                                        <div class="col-md-6 my-2 ">
+                                            <input v-model.number="filterMaxPrice" type="number" min="0"
+                                                :max="priceMaxRangeFilterValue" step="1"
+                                                class="range-input w-100  border-1">
+                                        </div>
+                                        <div class="col-md-12 my-2 d-flex justify-content-start">
+                                            <button class="search-button py-0 px-3 border-0" type="button"
+                                                @click="handleFilterPrices">Search (<span class="text-white"
+                                                    id="minPrice">{{ filterMinPrice }}</span> :
+                                                <span class="text-white" id="maxPrice">{{ filterMaxPrice
+                                                    }}</span>)</button>
+                                        </div>
                                     </div>
+                                    <!-- <p>Max: {{ priceMaxRangeFilterValue }}</p> -->
+                                    <!-- <div class="price-range d-flex flex-nowrap">
+                                        Price: <span id="minPrice">{{ filterMinPrice }}</span> :
+                                        <span id="maxPrice">{{ filterMaxPrice }}</span>
+                                    </div> -->
                                 </div>
+
+
                                 <div class="mt-2">
                                     <h6>Purpose</h6>
                                 </div>
@@ -71,7 +87,8 @@
                                     </div>
                                     <div class="m-2 mb-4 w-100">
                                         <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.homeType" value="House"> House
+                                            <input type="checkbox" v-model="Landfilters.homeType" value="House">
+                                            House
                                         </label>
                                         <label class="d-block">
                                             <input type="checkbox" v-model="Landfilters.homeType" value="Flat"> Flat
@@ -103,7 +120,8 @@
                                             Office
                                         </label>
                                         <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.commercial" value="Shop"> Shop
+                                            <input type="checkbox" v-model="Landfilters.commercial" value="Shop">
+                                            Shop
                                         </label>
                                         <label class="d-block">
                                             <input type="checkbox" v-model="Landfilters.commercial" value="Building">
@@ -187,7 +205,7 @@
                             <div class="card border-0 bg-transparent">
                                 <img :src="getImageUrl(media)" height="300" alt="Image">
                                 <div class="card-body">
-                                    <h5 class="card-title">Pkr {{ media?.price }}</h5>
+                                    <h5 class="card-title">Pkr {{numFormatter( media?.price )}}</h5>
                                     <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
                                     <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                 </div>
@@ -241,7 +259,7 @@ import Loader from './Loader.vue';
 import axios from 'axios';
 import { useCityData } from '@/composables/useCityData';
 import { useFooterStore } from '../stores/FooterLoadingState';
-
+import { numFormatter} from '../helpers/numberFormater';
 
 
 // Define objects
@@ -256,7 +274,10 @@ const isMobile = ref(false);
 const mediaData = ref([]);
 const cityListingData = ref([]);
 const cityListing = ref([]);
+const filterMinPrice = ref(0);
+const filterMaxPrice = ref(0);
 const initialFetchCompleted = ref(false); // Flag to indicate if the initial fetch is completed
+
 const Landfilters = ref({
     HomePageFilters: '',
     minPrice: '',
@@ -280,10 +301,7 @@ const selectedLocation = ref([]);
 const selectedSectors = ref([]);
 const priceMaxRangeFilterValue = ref(0);
 
-// Fetch image URL
-const getImageUrl = (media) => {
-    return `${import.meta.env.VITE_BASE_URL}/${media?.property_record_files[0]?.image_uri}`;
-};
+
 
 // Function to generate filter data
 const generateFilterData = (HomefilterData) => {
@@ -309,6 +327,7 @@ const generateFilterData = (HomefilterData) => {
         min_year
     } = HomefilterData;
 
+
     // Update Landfilters value
     Landfilters.value.HomePageFilters = HomefilterData;
     Landfilters.value.purpose = purpose || '';
@@ -330,11 +349,22 @@ const generateFilterData = (HomefilterData) => {
     Landfilters.value.min_garages = min_garages || '';
     Landfilters.value.max_garages = max_garages || '';
     Landfilters.value.min_year = min_year || '';
-
-
-
     return true;
 };
+
+const handleFilterPrices = () => {
+    if (filterMinPrice.value < filterMaxPrice.value) {
+        Landfilters.value.minPrice = filterMinPrice.value;
+        Landfilters.value.maxPrice = filterMaxPrice.value;
+    }
+    else {
+        $toast.open({
+            message: 'Min Price must be less than Max Price',
+            type: 'info',
+            position: 'top-right'
+        });
+    }
+}
 
 // Function to fetch property data based on filters
 const fetchPropertyData = (HomePagefilterCriteria = null) => {
@@ -393,18 +423,27 @@ const fetchPropertyData = (HomePagefilterCriteria = null) => {
 
 
 
-// Watch for changes in Landfilters, but skip the initial mount
+//Watch for changes in Landfilters, but skip the initial mount
 watch(
     () => Landfilters.value,
     (newValue, oldValue) => {
         if (initialFetchCompleted.value) {
             fetchPropertyData(newValue);
+            console.log(newValue)
+            console.log("watchersssssssssssssssssssss")
         }
     },
     { deep: true } // Deep watch to detect nested changes
 );
 
-// Initialize on component mount
+
+
+
+
+
+
+
+//Initialize on component mount and set the filter data comming from home page
 onMounted(() => {
     const formDataStore = useFormDataStore();
     const HomePagefilterCriteria = formDataStore.filterData;
@@ -412,9 +451,10 @@ onMounted(() => {
 
     if (Object.keys(Landfilters.value.HomePageFilters).length) {
 
-        CityListings();
+        CityListings(); //retrieving the city and its relevant area locations city is comming from home page filter
         fetchPropertyData(Landfilters.value);
-    } else {
+    }
+    else {
 
         fetchPropertyData();
     }
@@ -424,6 +464,9 @@ onMounted(() => {
         initialFetchCompleted.value = true;
     }, 5000); // Delay to ensure the watcher does not trigger prematurely
 });
+
+
+
 
 // Counting land properties 
 const LandPropertiesCount = computed(() => {
@@ -442,6 +485,13 @@ const checkIsMobile = () => {
     isMobile.value = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
 };
 
+
+
+
+// Fetch image URL
+const getImageUrl = (media) => {
+    return `${import.meta.env.VITE_BASE_URL}/${media?.property_record_files[0]?.image_uri}`;
+};
 
 const CityListings = async () => {
     try {
@@ -463,7 +513,6 @@ const CityListings = async () => {
         error.value = { message: err.message, hasError: true };
     }
 };
-
 
 const onCityChange = () => {
     const selectedCityObject = cityData.value.find((city) => city.NAME === Landfilters.value.city[0]);

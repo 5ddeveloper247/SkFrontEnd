@@ -166,7 +166,7 @@
                                 <div class="col-md-5 col-12">
                                     <div class="d-flex align-items-center justify-content-between m-2">
                                         <p>Price</p>
-                                        <p>{{ propertyData?.price }}</p>
+                                        <p>{{ numFormatter(propertyData?.price) }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-5 col-12">
@@ -396,7 +396,7 @@
             <div class="col-md-4">
                 <div class="property-detail d-flex flex-column py-4 px-2 shadow rounded-4 my-2">
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
-                        <h5>PKR {{ propertyData.price }}</h5>
+                        <h5>PKR {{ numFormatter(propertyData.price) }}</h5>
                         <div class="d-flex align-items-center justify-content-center">
 
                             <i class="fa-brands fa-whatsapp px-2" @click="redirectToWhatsApp"></i>
@@ -528,6 +528,7 @@
 // YourVueComponent.vue
 // Import helper functions
 import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';
+import { numFormatter} from '../helpers/numberFormater';
 import { ref, onBeforeMount, onBeforeUnmount } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
@@ -539,6 +540,7 @@ import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useFooterStore } from '../stores/FooterLoadingState';
+
 
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);

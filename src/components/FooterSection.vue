@@ -11,7 +11,9 @@
                 <div class="col-md-4">
                     <h5>SK Marketing</h5>
                     <p class="mt-4">
-                        SK Marketing excels in eco-friendly construction, offering premium residential and commercial properties. With innovative designs and sustainable materials, our homes and offices promise luxury and environmental harmony.
+                        SK Marketing excels in eco-friendly construction, offering premium residential and commercial
+                        properties. With innovative designs and sustainable materials, our homes and offices promise
+                        luxury and environmental harmony.
                     </p>
                     <div class="d-flex flex-column mt-4">
                         <ul class="list-unstyled d-flex footer-icons">
@@ -44,7 +46,8 @@
                         </p>
                         <p class="pt-3"><i class="fa-solid fa-phone pe-3"></i>+92 333 5702234 / +44 7894 279999
                         </p>
-                        <a  href="info@skrealestate.com.pk"  class="py-3"><i class="fa-solid fa-envelope pe-3"></i>info@skrealestate.com.pk
+                        <a href="info@skrealestate.pk" class="py-3"><i
+                                class="fa-solid fa-envelope pe-3"></i>info@skrealestate.pk
                         </a>
                     </div>
                 </div>
@@ -53,7 +56,7 @@
         <div class="bg-black">
             <div class="container">
                 <div class="d-flex justify-content-between px-5 py-2 flex-md-nowrap flex-wrap">
-                    <p class="text-white">© copyright – All rights reserved</p>
+                    <p class="text-white">© 2024 copyright – All rights reserved</p>
                     <div class="d-flex footer-bottom">
                         <a class="px-3" href="">Terms and Conditions</a>
                         <a class="px-3" href="">Privacy Policy</a>
@@ -68,10 +71,7 @@
 
 
 <style scoped>
-
-
-
-a{
+a {
     text-decoration: none;
     color: #000;
 }
