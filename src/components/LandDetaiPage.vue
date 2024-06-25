@@ -578,7 +578,6 @@ const getImageUrl = (media) => {
 // Function to handle form submission
 const handleInquiryFormSubmission = () => {
     // Make POST request to backend with form data
-    console.log(inquiryData.value);
     const base_url = import.meta.env.VITE_BASE_URL;
     loading.value = true;
     footerState.setFooterState(false);
@@ -602,7 +601,7 @@ const handleInquiryFormSubmission = () => {
             loading.value = false;
             footerState.setFooterState(true);
             // Handle successful form submission response
-            console.log('Form submission successful:', data);
+
             $toast.open({
                 message: 'Query submitted successfully!',
                 type: 'success',
@@ -660,7 +659,6 @@ onBeforeMount(() => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data.propertyInfo);
             propertyData.value = data.propertyInfo;
             // $toast.open({
             //   message: 'Property data fetched successfully!',

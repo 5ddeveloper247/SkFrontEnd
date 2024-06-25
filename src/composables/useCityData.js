@@ -1,5 +1,5 @@
 // src/composables/useCityData.js
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeMount } from 'vue';
 import axios from 'axios';
 
 export function useCityData() {

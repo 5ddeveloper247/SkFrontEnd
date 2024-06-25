@@ -7,7 +7,7 @@ export const useFooterStore = defineStore('footerState', {
     actions: {
         setFooterState(newState) {
             this.footerState = newState;
-            console.log(this.footerState)
+
 
         },
     },

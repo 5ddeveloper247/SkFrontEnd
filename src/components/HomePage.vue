@@ -447,7 +447,7 @@
                         <div class="d-flex align-items-center">
                             <div><i class="fa-solid fa-bed pe-2"></i>{{
                                 media?.property_listing_pape?.propertyDetail_bedrooms
-                            }}</div>
+                                }}</div>
                             <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
                                 media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
                         </div>
@@ -683,7 +683,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, onBeforeMount } from 'vue';
 import emitter from '../../emitter';
-import { RouterLink, useRouter,onBeforeRouteLeave} from 'vue-router';
+import { RouterLink, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '.././stores/HomeDataFilterStore'; // Adjust the path as necessary
@@ -818,7 +818,6 @@ onBeforeUnmount(() => {
 
 
 const setMediaType = (type) => {
-
     mediaSliderType.value = type;
     getMediabyType();
 };
@@ -874,14 +873,7 @@ onMounted(() => {
 });
 
 
-
-
 onMounted(() => {
-    // $toast.open({
-    //   message: 'Fetching media data...',
-    //   type: 'info',
-    //   position:'top-right'
-    // });
 
     // Make API call
     loading.value = true;
@@ -986,10 +978,12 @@ onMounted(() => {
 
 
 
+
+
 onBeforeRouteLeave((to, from, next) => {
-      footerState.setFooterState(false);
-      next();
-    });
+    footerState.setFooterState(false);
+    next();
+});
 
 onBeforeMount(() => {
     footerState.setFooterState(true);

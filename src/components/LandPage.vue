@@ -197,7 +197,7 @@
                             <div class="d-flex align-items-center">
                                 <div><i class="fa-solid fa-bed pe-2"></i>{{
                                     media?.property_listing_pape?.propertyDetail_bedrooms
-                                }}</div>
+                                    }}</div>
                                 <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
                                     media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
                             </div>
@@ -232,11 +232,11 @@
 
 
 <script setup>
-import { ref, onMounted, watch, computed,onBeforeMount,onBeforeUnmount,  onUnmounted } from 'vue';
+import { ref, onMounted, watch, computed, onBeforeMount, onBeforeUnmount, onUnmounted } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '../stores/HomeDataFilterStore';
-import { useRoute,onBeforeRouteLeave} from 'vue-router';
+import { useRoute, onBeforeRouteLeave } from 'vue-router';
 import Loader from './Loader.vue';
 import axios from 'axios';
 import { useCityData } from '@/composables/useCityData';
@@ -254,6 +254,8 @@ const { cityData, error, cityList, fetchCityData } = useCityData();
 const propertiesCounter = ref(0);
 const isMobile = ref(false);
 const mediaData = ref([]);
+const cityListingData = ref([]);
+const cityListing = ref([]);
 const initialFetchCompleted = ref(false); // Flag to indicate if the initial fetch is completed
 const Landfilters = ref({
     HomePageFilters: '',
@@ -329,8 +331,7 @@ const generateFilterData = (HomefilterData) => {
     Landfilters.value.max_garages = max_garages || '';
     Landfilters.value.min_year = min_year || '';
 
-    console.log("Filter data has been updated:");
-    console.log(Landfilters.value);
+
 
     return true;
 };
@@ -363,7 +364,7 @@ const fetchPropertyData = (HomePagefilterCriteria = null) => {
         .then(response => response.json())
         .then(data => {
             loading.value = false;
-            console.log('Success:', data.propertyInfo);
+
 
             // Update mediaData with property information
             mediaData.value = data.propertyInfo;
@@ -410,10 +411,11 @@ onMounted(() => {
     generateFilterData(HomePagefilterCriteria);
 
     if (Object.keys(Landfilters.value.HomePageFilters).length) {
-        console.log('Applying Home filters:', Landfilters.value);
+
+        CityListings();
         fetchPropertyData(Landfilters.value);
     } else {
-        console.log('Fetching default property data');
+
         fetchPropertyData();
     }
 
@@ -433,15 +435,6 @@ watch(LandPropertiesCount, (newCount) => {
     propertiesCounter.value = newCount;
 });
 
-// Handle the onclick on mobile and email
-const useContact = (media) => {
-    if (checkIsMobile()) {
-        window.location.href = 'tel:' + media.pInfo_phoneNumber;
-    } else {
-        // Handle non-mobile devices (e.g., show a contact form)
-        alert('Please contact us through the provided phone number: ' + media.pInfo_phoneNumber);
-    }
-}
 
 // Function to check if the device is mobile
 const checkIsMobile = () => {
@@ -450,6 +443,26 @@ const checkIsMobile = () => {
 };
 
 
+const CityListings = async () => {
+    try {
+        const base_url = import.meta.env.VITE_BASE_URL;
+        const response = await axios.get(`${base_url}/api/frontend/composable/city`);
+        cityListingData.value = response.data.cityData;
+
+        // Assuming cityData is directly accessible and has NAME property
+        cityListing.value = cityListingData.value.map(city => city);
+
+        // Find the selected city and update selectedAreas
+        const selectedCityObject = cityListing.value.find((city) => city.NAME === Landfilters.value.city[0]);
+        if (selectedCityObject) {
+            selectedAreas.value = selectedCityObject.areas;
+        } else {
+            selectedAreas.value = [];
+        }
+    } catch (err) {
+        error.value = { message: err.message, hasError: true };
+    }
+};
 
 
 const onCityChange = () => {
@@ -508,8 +521,10 @@ onMounted(() => {
 });
 
 
-
-//handling footer here
+onMounted(() => {
+    window.scrollTo(0, 0);
+});
+//handling footer here 
 onBeforeMount(() => {
     footerState.setFooterState(true);
 })
@@ -519,9 +534,9 @@ onUnmounted(() => {
 })
 
 onBeforeRouteLeave((to, from, next) => {
-      footerState.setFooterState(false);
-      next();
-    });
+    footerState.setFooterState(false);
+    next();
+});
 </script>
 
 
