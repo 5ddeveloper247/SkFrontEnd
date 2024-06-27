@@ -88,6 +88,15 @@ label {
     color: #fff !important;
 }
 
+
+.search-button {
+    height: 28px;
+    font-size: 12px;
+    border-radius: 20px;
+    background-color: var(--second--main-color) !important;
+    color: #fff !important;
+}
+
 .main-button-2 {
     height: 40px;
     font-size: 14px;

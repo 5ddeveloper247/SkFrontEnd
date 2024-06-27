@@ -273,7 +273,7 @@
             </div>
         </div>
     </div>
-    <!-- ======================Blogs================== -->
+    <!-- ======================BlHeogs================== -->
     <div class="blogs">
         <div class="p-5">
             <h2 class="text-center text-white">Our Projects in Bahria/DHA</h2>
@@ -403,12 +403,16 @@
             <div class="d-flex justify-content-between listing-ul">
                 <h2>Latest Listed Properties</h2>
                 <ul class="d-flex flex-nowrap mb-0 p-0">
-                    <li class="nav-item mx-1"><a class="listed-properties py-2 px-3 text-black active" href="#"
+                    <li class="nav-item mx-1">
+                        <a class="listed-properties py-2 px-3 text-black active" href="#"
                             @click.prevent="setMediaType('All')">All</a>
                     </li>
-                    <li class="nav-item mx-1"><a class="listed-properties py-2 px-3 text-black" href="#"
-                            @click.prevent="setMediaType('Sale')">Sale</a></li>
-                    <li class="nav-item mx-1"><a class="listed-properties py-2 px-3 text-black" href="#"
+                    <li class="nav-item mx-1">
+                        <a class="listed-properties py-2 px-3 text-black" href="#"
+                            @click.prevent="setMediaType('Sale')">Sale</a>
+                    </li>
+                    <li class="nav-item mx-1">
+                        <a class="listed-properties py-2 px-3 text-black" href="#"
                             @click.prevent="setMediaType('Rent')">Rent</a>
                     </li>
                 </ul>
@@ -416,57 +420,57 @@
             <p>
                 Explore the Latest Properties Listed by SK Marketing <br> in Bahria Town and DHA Islamabad.
             </p>
-            <div class="owl-carousel owl-theme mt-4 property-listed d-flex ">
 
-            </div>
-
-            <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :navigation="true" :modules="modules"
-                :breakpoints="{
-                    320: { slidesPerView: 1, spaceBetween: 5 },
-                    480: { slidesPerView: 1, spaceBetween: 5 },
-                    640: { slidesPerView: 1, spaceBetween: 5 },
-                    768: { slidesPerView: 2, spaceBetween: 3 },
-                    1024: { slidesPerView: 3, spaceBetween: 5 }
-                }" class="mySwiper">
-                <swiper-slide v-for="media in mediaData " :key="media.id" :slidesPerView="3">
-                    <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }" style="text-decoration: none;">
-                        <div class="item mx-3">
-                            <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
-                            <div class="card border-0 bg-transparent">
-                                <img class="card-img-top rounded-5" :src="getImageUrl(media)" height="270" alt="Image">
-                                <div
-                                    class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                                    <h5 class="card-title">PKR {{ media?.price }}</h5>
-                                    <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
+            <div v-if="mediaData.length > 0">
+                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :navigation="true" :modules="modules"
+                    :breakpoints="{
+                        320: { slidesPerView: 1, spaceBetween: 5 },
+                        480: { slidesPerView: 1, spaceBetween: 5 },
+                        640: { slidesPerView: 1, spaceBetween: 5 },
+                        768: { slidesPerView: 2, spaceBetween: 3 },
+                        1024: { slidesPerView: 3, spaceBetween: 5 }
+                    }" class="mySwiper">
+                    <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
+                        <RouterLink :to="{ name: 'land-detail', params: { id: media.id } }"
+                            style="text-decoration: none;">
+                            <div class="item mx-3">
+                                <div class="card border-0 bg-transparent">
+                                    <img class="card-img-top rounded-5" :src="getImageUrl(media)" height="270"
+                                        alt="Image">
+                                    <div
+                                        class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
+                                        <h5 class="card-title">PKR {{numFormatter(media.price)}}</h5>
+                                        <p class="card-text elip">{{ media.property_listing_pape.extra_info_title }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </RouterLink>
+                        </RouterLink>
 
-                    <div class="d-flex align-items-center justify-content-between px-4 mx-2 mt-2 w-100">
-                        <div class="d-flex align-items-center">
-                            <div><i class="fa-solid fa-bed pe-2"></i>{{
-                                media?.property_listing_pape?.propertyDetail_bedrooms
-                                }}</div>
-                            <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
-                                media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
+                        <div class="d-flex align-items-center justify-content-between px-4 mx-2 mt-2 w-100">
+                            <div class="d-flex align-items-center">
+                                <div><i class="fa-solid fa-bed pe-2"></i>{{
+                                    media.property_listing_pape.propertyDetail_bedrooms }}</div>
+                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
+                                    media.property_listing_pape.propertyDetail_bathrooms }}</div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a class="btn btn-sm nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                    :href="'mailto:' + media.pInfo_email" role="button">
+                                    <i class="fa-regular fa-envelope pe-2"></i>
+                                </a>
+                                <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                    :href="'tel:' + media.pInfo_phoneNumber" role="button">
+                                    <i class="fa-solid fa-phone pe-2"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="d-flex align-items-center">
-                            <a class="btn btn-sm nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                :href="'mailto:' + media?.pInfo_email" role="button">
-                                <i class="fa-regular fa-envelope pe-2"></i>
-                                <!-- {{ media?.pInfo_email }} -->
-                            </a>
-                            <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                :href="'tel:' + media?.pInfo_phoneNumber" role="button">
-                                <i class="fa-solid fa-phone pe-2"></i>
-                                <!-- {{ media?.pInfo_phoneNumber }} -->
-                            </a>
-                        </div>
-                    </div>
+                    </swiper-slide>
+                </swiper>
+            </div>
 
-                </swiper-slide>
-            </swiper>
+            <div v-else class="no-properties-message">
+                <p>No properties listed at the moment. Please check back later.</p>
+            </div>
         </div>
     </div>
 
@@ -637,10 +641,11 @@
                                         <hr>
                                         <div class="d-flex align-items-center justify-content-between ">
                                             <div class="d-flex align-items-center">
-                                                <img class="img-fluid" src="../assets/Images/listing.png" alt="">
+                                                <img class="img-fluid"
+                                                    :src="getTestimonialImageUrl(testimonial.image_url)" alt="">
                                                 <p class="px-2">{{ testimonial.name }}</p>
                                             </div>
-                                            <img src="../assets/Images/ratings.png" alt="">
+                                            <img src="../assets/Images/ratings.png" alt="" style="height:50px;">
                                         </div>
                                     </div>
                                 </div>
@@ -695,6 +700,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useCityData } from '@/composables/useCityData';
 import { useFooterStore } from '../stores/FooterLoadingState';
+import {numFormatter} from '../helpers/numberFormater';
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
 // Autoplay configuration
@@ -722,13 +728,13 @@ const autoplaySpeed = 5000;
 
 const filterCriteria = ref({
     purpose: 'Sale',
-    city: 'select city',
-    homeType: 'select home type',
-    plot: 'select plot type',
-    commercial: 'select commercial type',
-
-    //inactive still
+    city: 'Select city',
+    homeType: 'Select home type',
+    plot: 'Select plot type',
+    commercial: 'Select commercial type',
     rooms: 'Select rooms',
+    //inactive still
+
     location: '',
     min_price: '',
     max_price: '',
@@ -749,25 +755,30 @@ const handleFilterCriteria = () => {
     const homeTypeVal = filterCriteria.value.homeType;
     const plotVal = filterCriteria.value.plot;
     const commercialVal = filterCriteria.value.commercial;
+    const rooms = filterCriteria.value.rooms;
     //  alert(cityVal+homeTypeVal+plotVal+commercialVal)
-    if (cityVal.includes('select')) {
+    if (cityVal.includes('Select')) {
         filterCriteria.value.city = '';
         //alert(filterCriteria.value.city)
     }
-    if (homeTypeVal.includes('select')) {
+    if (homeTypeVal.includes('Select')) {
         filterCriteria.value.homeType = '';
         //alert(filterCriteria.value.homeType)
     }
-    if (plotVal.includes('select')) {
+    if (plotVal.includes('Select')) {
         filterCriteria.value.plot = '';
         //alert(filterCriteria.value.plot)
     }
-    if (commercialVal.includes('select')) {
+    if (commercialVal.includes('Select')) {
         filterCriteria.value.commercial = '';
         //alert(filterCriteria.value.commercial)
     }
-    console.log(filterCriteria)
-    console.log("kfjsakjfkadsjfkajsdkfjksad")
+    if (rooms.includes('Select')) {
+        filterCriteria.value.rooms = '';
+        //alert(filterCriteria.value.commercial)
+    }
+
+
     formDataStore.setFilterData(filterCriteria.value);
     router.push({ name: 'land' }); // Use named route
 }
@@ -783,6 +794,11 @@ const setPurpose = (purpose) => {
 const getImageUrl = (media) => {
     return `${import.meta.env.VITE_BASE_URL}/${media?.property_record_files[0]?.image_uri}`;
 }
+
+
+const getTestimonialImageUrl = (url) => {
+    return `${import.meta.env.VITE_BASE_URL}/${url}`;
+};
 
 const startAutoplay = () => {
     autoplayInterval.value = setInterval(() => {
@@ -842,8 +858,6 @@ const getMediabyType = () => {
             return response.json();
         })
         .then(data => {
-
-            console.log('Success:', data.propertyInfo);
             mediaData.value = data.propertyInfo;
             setTimeout(() => {
                 loading.value = false;
@@ -889,7 +903,6 @@ onMounted(() => {
             setTimeout(() => {
                 loading.value = false;
             }, 1000);
-            console.log('Success:', data.testimonials);
             mediaData.value = data.propertyInfo;
             testimonials.value = data.testimonials;
             // $toast.open({
@@ -996,6 +1009,17 @@ onBeforeUnmount(() => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 <style scoped>
 .swiper-button-prev {
     color: var(--second--main-color);
@@ -1026,5 +1050,25 @@ h1 {
 
 span {
     font-weight: 700;
+}
+
+.no-properties-message {
+    text-align: center;
+    font-size: 1.5em;
+    color: rgb(244, 93, 8);
+    margin-top: 20px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 </style>

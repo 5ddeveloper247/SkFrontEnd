@@ -65,7 +65,7 @@ export default {
                     <div class="d-flex">
                         <div class="d-flex align-items-center mx-md-4">
                             <i class="fa-regular fa-envelope"></i>
-                            <a href="/info@skrealestate.com.pk" class="px-2">info@skrealestate.com.pk</a>
+                            <a href="/info@skrealestate.com.pk" class="px-2">info@skrealestate.pk</a>
                         </div>
                         <div class="d-flex align-items-center mx-md-4">
                             <i class="fa-solid fa-phone"></i>
