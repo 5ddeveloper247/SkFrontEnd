@@ -335,8 +335,7 @@
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
                                             <p v-if="propertyData?.amenities[20]?.value == 1"
                                                 class="d-flex align-items-center">
-                                                <svg class="pe-1" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><g fill="none"><path fill="#d3d3d3" d="M2 6a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z"/><path fill="#83cbff" d="M14.854 17.146L8 20l-2.56 6.56c.27.272.646.44 1.06.44h8a.5.5 0 0 0 .5-.5v-9a.498.498 0 0 0-.146-.354M17.5 27h8a1.5 1.5 0 0 0 1.5-1.5v-8a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5M27 14.5v-8c0-.414-.168-.79-.44-1.06L19 8l-1.854 6.854A.5.5 0 0 0 17.5 15h9a.5.5 0 0 0 .5-.5"/><path fill="#00a6ed" d="M5 6.5A1.5 1.5 0 0 1 6.5 5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5zm0 11a.5.5 0 0 1 .5-.5h9c.138 0 .263.056.354.146l-9.415 9.415A1.496 1.496 0 0 1 5 25.5zM26.56 5.44A1.496 1.496 0 0 0 25.5 5h-8a.5.5 0 0 0-.5.5v9c0 .138.056.263.146.354z"/></g></svg>
-                                                <small>{{ propertyData?.amenities[20]?.amenities }}</small>
+                                                <svg class="pe-1" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c-3.866 0-7 3.272-7 7v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10c0-3.728-3.134-7-7-7M5 13h14M12 3v18"/></svg>                                                <small>{{ propertyData?.amenities[20]?.amenities }}</small>
                                             </p>
                                             <p v-if="propertyData?.amenities[21]?.value == 1"
                                                 class="d-flex align-items-center">
@@ -517,7 +516,7 @@
                     480: { slidesPerView: 1, spaceBetween: 5 },
                     640: { slidesPerView: 1, spaceBetween: 5 },
                     768: { slidesPerView: 2, spaceBetween: 3 },
-                    1024: { slidesPerView: 2, spaceBetween: 5 }
+                    1024: { slidesPerView: 3, spaceBetween: 5 }
                 }" class="mySwiper">
                 <swiper-slide v-for="media in mediaData " :key="media.id" :slidesPerView="3">
                     <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }" style="text-decoration: none;">

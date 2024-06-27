@@ -93,11 +93,11 @@
                 for business and shopping.
             </p>
             <!-- <img class="img-fluid Bahria Town-map mt-3" src="../assets/Images/bahria-map.webp" alt=""> -->
-            <div class="bahria-map-container">
+            <div class="bahria-map-container d-flex justify-content-center">
                 <img class="img-fluid bahria-map mt-3" src="../assets/Images/bahria-map.webp" alt="">
                 <div class="map-overlay mt-3">
                     <button type="button"
-                        class="btn main-button px-3 mb-4 m-2 btn-round">Download</button>
+                        class="btn main-button px-3 mb-4 m-2 btn-round">Download Map</button>
                 </div>
             </div>
         </div>

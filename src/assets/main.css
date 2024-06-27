@@ -222,7 +222,7 @@ input#floatingInput {
 }
 
 .nav-link:hover {
-    color: #f4ed08 !important;
+    color: #000 !important;
 }
 
 .nav-link:hover svg path {
@@ -1863,12 +1863,11 @@ header h2 {
 
 .dha-map-container {
     position: relative;
-    width: 100%;
     height: 25rem;
 }
 
 .dha-map {
-    width: 100%;
+    width: 70vw;
     height: 100%;
     transition: 0.5s ease;
     cursor: pointer;
@@ -1881,7 +1880,7 @@ header h2 {
 }
 
 .bahria-map {
-    width: 100%;
+    width: 70vw;
     height: 100%;
     transition: 0.5s ease;
     cursor: pointer;
@@ -1897,7 +1896,7 @@ header h2 {
     -ms-transform: translate(-50%, -50%);
     text-align: center;
     pointer-events: none;
-    width: 100%;
+    width: 70vw;
     height: 100%;
     display: flex;
     align-items: center;
