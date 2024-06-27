@@ -207,7 +207,7 @@
                             <div class="card border-0 bg-transparent">
                                 <img :src="getImageUrl(media)" height="300" alt="Image">
                                 <div class="card-body">
-                                    <h5 class="card-title">Pkr {{numFormatter( media?.price )}}</h5>
+                                    <h5 class="card-title">PKR {{numFormatter( media?.price )}}</h5>
                                     <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
                                     <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                 </div>
