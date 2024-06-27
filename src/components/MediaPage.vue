@@ -2,7 +2,8 @@
  
     <Loader :isLoading="loading" />
     <div class="video-sec mb-5" v-show="!loading">
-      <div class="media mt-3 pt-5">
+      <h2 class="mt-5 pt-5">PROPERTIES <span class="fw-bolder">VIDEOS</span></h2>
+      <div class="media">
         <div class="d-flex flex-column align-items-center id_sxy justify-content-center pt-5">
           <iframe class="Uvideo-1" width="100%" :src="currentTopVideo"></iframe>
           <!-- <a :href="currentTopVideo" target="_blank" class="btn subscribe-btn d-flex align-items-center my-2">
@@ -42,6 +43,7 @@
 
     <!-- Video Section Bottom -->
     <div class="img-section ">
+      <h2 class="mt-5 pt-5 mb-5">PROPERTIES <span class="fw-bolder">IMAGES</span></h2>
       <div class="media ">
         <div class="d-flex flex-column align-items-center justify-content-center">
           <img :src="currentBottomVideo" width="100%" height="350" alt="">
@@ -267,9 +269,26 @@ onBeforeMount(() => {
 
 
 <style scoped>
+h2 {
+  position: relative;
+}
+h2::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5%;
+  border-bottom: 3px solid var(--second--main-color);
+  height: 100%;
+  width: 14%
+}
+
+img {
+  object-fit: cover
+}
+
 .img-section,
 .video-sec {
-  margin: 0 18rem;
+  margin: 0 15rem;
 }
 
 .swiper {
