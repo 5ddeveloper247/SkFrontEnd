@@ -91,7 +91,14 @@
                 Walk also commits to becoming a top-notch business district. The society offers the best opportunities
                 for business and shopping.
             </p>
-            <img class="img-fluid dha-map mt-3" src="../assets/Images/zameenlocaterMap.jpg" alt="">
+            <div class="dha-map-container">
+                <img class="img-fluid dha-map mt-3" src="../assets/Images/zameenlocaterMap.jpg" alt="">
+                <div class="map-overlay mt-3">
+                    <button type="button"
+                        class="btn main-button px-3 mb-4 m-2 btn-round">Download</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
