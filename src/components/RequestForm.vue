@@ -10,10 +10,10 @@
           <form id="msform">
             <!-- progressbar -->
             <ul id="progressbar" class="p-0">
-              <li class="active" id="account"><strong>Personal Information</strong></li>
-              <li id="personal"><strong>Property Type</strong></li>
-              <li id="payment"><strong>Address</strong></li>
-              <li id="confirm"><strong>Finish</strong></li>
+              <li :class="{ active: curStep >= 1 }" id="account"><strong>Personal Information</strong></li>
+              <li :class="{ active: curStep >= 2 }" id="personal"><strong>Property Type</strong></li>
+              <li :class="{ active: curStep >= 3 }" id="payment"><strong>Address</strong></li>
+              <li :class="{ active: curStep >= 4 }" id="confirm"><strong>Finish</strong></li>
             </ul>
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
@@ -59,7 +59,9 @@
                   </div>
                   <div>
 
-                    <label class="label--radio-1 d-flex align-items-center px-4 rounded-5">
+
+                    <label
+                      :class="{ 'label--radio-1': true, 'd-flex': true, 'align-items-center': true, 'px-4': true, 'rounded-5': true, 'active_purpose': handle_purpose_active_sale }">
                       <input type="radio"
                         :class="{ 'radio-sale': true, 'form-control': true, 'input-error': errors.purpose }"
                         name="purpose" @click.prevent="handlePurpose('Sale')">
@@ -74,7 +76,8 @@
                   </div>
                   <div>
 
-                    <label class="label--radio-1 d-flex align-items-center px-4 ms-2 rounded-5">
+                    <label
+                      :class="{ 'label--radio-1': true, 'd-flex': true, 'align-items-center': true, 'px-4': true, 'rounded-5': true, 'active_purpose': handle_purpose_active_rent }">
                       <input type="radio"
                         :class="{ 'radio-sale': true, 'form-control': true, 'input-error': errors.purpose }"
                         name="purpose" @click.prevent="handlePurpose('Rent')">
@@ -112,7 +115,7 @@
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('homeType')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.homeType }"
                                     v-model="propertyRequestform.homeType" value="Flat" name="homeType">
                                   Flat
@@ -120,7 +123,7 @@
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('homeType')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.homeType }"
                                     v-model="propertyRequestform.homeType" value="House" name="homeType">
                                   House
@@ -134,7 +137,7 @@
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('plot')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.plot }"
                                     v-model="propertyRequestform.plot" value="Residencial" name="plot">
                                   Residencial
@@ -142,7 +145,7 @@
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('plot')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.plot }"
                                     v-model="propertyRequestform.plot" value="Commercial" name="plot">
                                   Commercial
@@ -156,7 +159,7 @@
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('commercial')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.commercial }"
                                     v-model="propertyRequestform.commercial" value="Office" name="commercial">
                                   Office
@@ -164,7 +167,7 @@
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('commercial')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.commercial }"
                                     v-model="propertyRequestform.commercial" value="Shop" name="commercial">
                                   Shop
@@ -172,7 +175,7 @@
                               </li>
                               <li class="list__item">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @click="handleClick('commercial')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.commercial }"
                                     v-model="propertyRequestform.commercial" value="Building" name="commercial">
                                   Building
@@ -187,7 +190,8 @@
                 </div>
               </div>
               <input type="button" name="next" class="action-button" value="Next" @click="handleStepSecond" />
-              <input type="button" name="previous" class="action-button-previous" value="Previous" />
+              <input type="button" name="previous" class="action-button-previous" @click="handlePrevious"
+                value="Previous" />
             </fieldset>
 
 
@@ -228,7 +232,8 @@
                 </div>
               </div>
               <input type="button" name="next" class="action-button" @click="handleStepThird" value="Submit" />
-              <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+              <input type="button" name="previous" class="previous action-button-previous" @click="handlePrevious"
+                value="Previous" />
             </fieldset>
 
             <fieldset :class="{ 'd-block': fs_step4 }">
@@ -260,11 +265,12 @@
 
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeMount, onBeforeUnmount } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Loader from './Loader.vue';
 import { useCityData } from '@/composables/useCityData';
+import { useFooterStore } from '../stores/FooterLoadingState';
 
 export default {
   components: {
@@ -272,6 +278,7 @@ export default {
   },
   setup() {
     const $toast = useToast();
+    const footerState = useFooterStore();
     const { cityData, error, cityList, fetchCityData } = useCityData();
     const propertyRequestform = ref({
       firstName: '',
@@ -286,16 +293,16 @@ export default {
       address: '',
       size: '',
       totalPrice: '',
-      purpose: '',
+      purpose: 'Sale',
       propertyType: ''
     });
 
-<<<<<<< HEAD
-=======
     const isValid = ref(true);
     const loading = ref(false);
     const curStep = ref(1);
     const steps = ref(4);
+    const handle_purpose_active_sale = ref(true)
+    const handle_purpose_active_rent = ref(false)
 
     const fs_step1 = ref(true);
     const fs_step2 = ref(false);
@@ -319,7 +326,25 @@ export default {
       totalPrice: false
     });
 
->>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
+    const handleClick = (e) => {
+      if (e == 'homeType') {
+        // alert(propertyRequestform.value.homeType)
+        propertyRequestform.value.commercial = " "
+        propertyRequestform.value.plot = " "
+      }
+
+      if (e == 'plot') {
+        // alert(propertyRequestform.value.homeType)
+        propertyRequestform.value.homeType = " "
+        propertyRequestform.value.commercial = " "
+      }
+
+      if (e == 'commercial') {
+        // alert(propertyRequestform.value.homeType)
+        propertyRequestform.value.homeType = " "
+        propertyRequestform.value.plot = " "
+      }
+    }
     const validateForm = () => {
       const requiredFields = [
         'firstName', 'lastName', 'phone', 'email',
@@ -336,27 +361,8 @@ export default {
       return true;
     };
 
-<<<<<<< HEAD
-
-    const isValid = ref(true);
-    const loading = ref(false);
-
-    const handleSubmission = () => {
-      // Validation check for input fields
-      isValid.value = true;
-      $('input[type="text"], input[type="number"], input[type="email"]').each(function () {
-        if ($.trim($(this).val()) === '') {
-          isValid.value = false;
-          $(this).addClass('input-error'); // Add class to highlight empty fields
-        } else {
-          $(this).removeClass('input-error'); // Remove class if field is filled
-        }
-      });
-
-=======
     const handleSubmission = () => {
       isValid.value = validateForm();
->>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
       if (!isValid.value) {
         return; // If validation fails, do not proceed with submission
       }
@@ -374,46 +380,17 @@ export default {
         .then(data => {
           loading.value = false;
           if (data.success) {
-<<<<<<< HEAD
-            console.log('Success:', data);
-=======
->>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
             $toast.open({
               message: 'Submitted Successfully',
               type: 'success',
               position: 'top-right'
             });
             resetForm();
-            curStep.value++;
-            setProgressBar();
-            handleNext();
           } else {
-<<<<<<< HEAD
-            $toast.open({
-              message: 'An error occurred!',
-              type: 'error',
-              position: 'top-right'
-            });
-            console.error('Error:', data);
-
-            if (data.errors) {
-              Object.keys(data.errors).forEach(field => {
-                data.errors[field].forEach(errorMessage => {
-                  $toast.open({
-                    message: `${field}: ${errorMessage}`,
-                    type: 'error',
-                    position: 'top-right'
-                  });
-                });
-              });
-            }
-=======
             handleErrors(data);
->>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
           }
         })
         .catch(error => {
-
           loading.value = false;
           $toast.open({
             message: 'An unexpected error occurred.',
@@ -424,103 +401,6 @@ export default {
         });
     };
 
-<<<<<<< HEAD
-    onMounted(() => {
-      $(document).ready(function () {
-        var current_fs, next_fs, previous_fs; // fieldsets
-        var opacity;
-        var current = 1;
-        var steps = $("fieldset").length;
-
-        setProgressBar(current);
-
-        $(".next").click(function () {
-          // Validation check for input fields
-          isValid.value = true;
-          $(this).parent().find('input[type="text"], input[type="number"], input[type="email"]').each(function () {
-            if ($.trim($(this).val()) == '') {
-              isValid.value = false;
-              $(this).addClass('input-error'); // Add class to highlight empty fields
-            } else {
-              $(this).removeClass('input-error'); // Remove class if field is filled
-            }
-          });
-
-          if (!isValid.value) {
-            // If any input field is empty, do not proceed
-            return;
-          }
-
-          // If all input fields are filled, proceed to the next fieldset
-          current_fs = $(this).parent();
-          next_fs = $(this).parent().next();
-
-          // Add Class Active
-          $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-          // Show the next fieldset
-          next_fs.show();
-          // Hide the current fieldset with style
-          current_fs.animate({ opacity: 0 }, {
-            step: function (now) {
-              // for making fieldset appear animation
-              opacity = 1 - now;
-
-              current_fs.css({
-                'display': 'none',
-                'position': 'relative'
-              });
-              next_fs.css({ 'opacity': opacity });
-            },
-            duration: 500
-          });
-          setProgressBar(++current);
-        });
-
-        $(".previous").click(function () {
-          current_fs = $(this).parent();
-          previous_fs = $(this).parent().prev();
-
-          // Remove class active
-          $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-          // Show the previous fieldset
-          previous_fs.show();
-
-          // Hide the current fieldset with style
-          current_fs.animate({ opacity: 0 }, {
-            step: function (now) {
-              // for making fieldset appear animation
-              opacity = 1 - now;
-
-              current_fs.css({
-                'display': 'none',
-                'position': 'relative'
-              });
-              previous_fs.css({ 'opacity': opacity });
-            },
-            duration: 500
-          });
-          setProgressBar(--current);
-        });
-
-        function setProgressBar(curStep) {
-          var percent = parseFloat(100 / steps) * curStep;
-          percent = percent.toFixed();
-          $(".progress-bar").css("width", percent + "%");
-        }
-
-        $(".submit").click(function () {
-          return false;
-        });
-      });
-    });
-
-
-    const handlePurpose = (purpose) => {
-
-      propertyRequestform.value.purpose = purpose;
-=======
     const handleErrors = (data) => {
       if (data.errors) {
         Object.keys(data.errors).forEach(field => {
@@ -560,15 +440,30 @@ export default {
         propertyType: ''
       };
       curStep.value = 1;
+      fs_step1.value = true;
+      fs_step2.value = false;
+      fs_step3.value = false;
+      fs_step4.value = false;
+      fs_step_show.value = false;
       setProgressBar();
     };
 
     const handlePurpose = (purpose) => {
       propertyRequestform.value.purpose = purpose;
+      if (purpose == "Sale") {
+        handle_purpose_active_sale.value = true;
+        handle_purpose_active_rent.value = false;
+      }
+      else {
+        handle_purpose_active_rent.value = true;
+        handle_purpose_active_sale.value = false;
+      }
+
     };
 
     onMounted(() => {
       setProgressBar();
+
     });
 
     const setProgressBar = () => {
@@ -610,16 +505,26 @@ export default {
       }
 
       if (!valid) {
-        alert('Please fill all required fields');
+        $toast.open({
+          message: 'Please fill all required fields.',
+          type: 'error',
+          position: 'top-right'
+        });
         return;
       }
       handleNext();
     };
 
     const handleStepSecond = () => {
-      const { homeType, plot, commercial, purpose } = propertyRequestform.value;
+      const { homeType, plot, commercial, purpose, city } = propertyRequestform.value;
       let valid = true;
 
+      if (!city) {
+        errors.value.city = true;
+        valid = false;
+      } else {
+        errors.value.city = false;
+      }
       if (!purpose) {
         errors.value.purpose = true;
         valid = false;
@@ -627,29 +532,26 @@ export default {
         errors.value.purpose = false;
       }
 
-      if (!homeType) {
+
+
+      if (!plot && !commercial && !homeType) {
+        errors.value.plot = true;
+        errors.value.commercial = true;
         errors.value.homeType = true;
         valid = false;
       } else {
+        errors.value.plot = false;
+        errors.value.commercial = false;
         errors.value.homeType = false;
       }
 
-      if (!plot) {
-        errors.value.plot = true;
-        valid = false;
-      } else {
-        errors.value.plot = false;
-      }
-
-      if (!commercial) {
-        errors.value.commercial = true;
-        valid = false;
-      } else {
-        errors.value.commercial = false;
-      }
 
       if (!valid) {
-        alert('Please fill all required fields');
+        $toast.open({
+          message: 'Please fill all required fields.',
+          type: 'error',
+          position: 'top-right'
+        });
         return;
       }
       handleNext();
@@ -688,7 +590,11 @@ export default {
       }
 
       if (!valid) {
-        alert('Please fill all required fields');
+        $toast.open({
+          message: 'Please fill all required fields.',
+          type: 'error',
+          position: 'top-right'
+        });
         return;
       }
       handleSubmission();
@@ -724,8 +630,16 @@ export default {
       fs_step3.value = curStep.value === 3;
       fs_step4.value = curStep.value === 4;
       fs_step_show.value = curStep.value !== 1;
->>>>>>> d6d1b13097548bd448a8944026f70cc74e503792
     };
+
+
+    onBeforeMount(() => {
+      footerState.setFooterState(true);
+    })
+
+    onBeforeUnmount(() => {
+      footerState.setFooterState(false);
+    })
 
     return {
       propertyRequestform,
@@ -736,6 +650,7 @@ export default {
       handleStepThird,
       handleNext,
       handlePrevious,
+      handleClick,
       loading,
       errors,
       // composable
@@ -749,15 +664,27 @@ export default {
       fs_step3,
       fs_step4,
       fs_step_show,
+      handle_purpose_active_rent,
+      handle_purpose_active_sale,
     };
   }
 };
+
+
+
 </script>
 
 
 
 
+
 <style scoped>
+.active_purpose {
+
+  background-color: rgb(244, 93, 8) !important;
+
+}
+
 .fs_step {
   display: block;
   opacity: 1;
@@ -779,10 +706,11 @@ export default {
 }
 
 .label--radio-1 {
-  border: 1px solid var(--second--main-color);
+  border: 1px solid black;
   font-weight: 600;
   font-size: 16px;
-  cursor: pointer
+  cursor: pointer;
+  margin: 0.5em;
 }
 
 /* .label--radio-1 svg {

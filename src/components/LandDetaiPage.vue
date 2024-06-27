@@ -1,11 +1,10 @@
-
 <template>
 
     <div class="container pt-5">
         <div class="row justify-content-start px-md-4 pb-md-4 p-2 pt-2 pt-md-5">
             <div class="mb-2 d-flex justify-content-between pt-5">
                 <div>
-                    <h5>signature properties offer beautiful plot sector B park face dha phase 2 islamabad</h5>
+                    <h5>{{ propertyData?.property_listing_pape?.extra_info_title }}</h5>
                     <p><small>DHA Defence Phase 2, DHA Defence, Islamabad, Islamabad Capital</small></p>
                 </div>
                 <!-- <div>
@@ -15,7 +14,7 @@
             </div>
 
             <Loader :isLoading="loading" />
-            <div class="col-md-8" >
+            <div class="col-md-8">
                 <swiper :speed="1000" :spaceBetween="5" :slidesPerView="1" :navigation="true" :modules="modules"
                     class="mySwiper">
                     <swiper-slide v-for="media in propertyData.property_record_files" :key="media.id"
@@ -29,27 +28,6 @@
                         </div>
                     </swiper-slide>
                 </swiper>
-                <!-- <div id="society-detail-carousel" class="carousel slide">
-                    <div class="carousel-inner">
-                        <div class="" v-for="media in propertyData.property_record_files" :key="media.id">
-                            <img :src="getImageUrl(media)" class="d-block w-100" alt="Image 3">
-                            <div class="verified-society rounded-2">
-                                <p class="text-white p-2 d-flex align-items-center"><i
-                                        class="fa-solid fa-check pe-2"></i>Verified</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#society-detail-carousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#society-detail-carousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div> -->
 
                 <div class="d-flex justify-content-start my-4 mx-md-5">
                     <div class="d-flex flex-column justify-content-center align-items-center mx-3">
@@ -188,7 +166,7 @@
                                 <div class="col-md-5 col-12">
                                     <div class="d-flex align-items-center justify-content-between m-2">
                                         <p>Price</p>
-                                        <p>{{ propertyData?.price }}</p>
+                                        <p>{{ numFormatter(propertyData?.price) }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-5 col-12">
@@ -218,79 +196,92 @@
                                 <div class="col-md-9 amenties-border-left">
                                     <div class="d-flex flex-column justify-content-between">
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-bolt pe-1"></i><small>{{
-                                                        propertyData?.amenities[0]?.value == 1 ?
-                                                            propertyData?.amenities[0]?.amenities : "" }}</small></p>
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-check-to-slot pe-1"></i><small>{{
-                                                        propertyData?.amenities[1]?.value == 1 ?
-                                                            propertyData?.amenities[1]?.amenities : "" }}</small>
+                                            <p v-if="propertyData?.amenities[0]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-bolt pe-1"></i>
+                                                <small>{{ propertyData?.amenities[0]?.amenities }}</small>
                                             </p>
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-plate-wheat pe-1"></i><small>{{
-                                                        propertyData?.amenities[2]?.value == 1 ?
-                                                            propertyData?.amenities[2]?.amenities : "" }}</small></p>
+                                            <p v-if="propertyData?.amenities[1]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-check-to-slot pe-1"></i>
+                                                <small>{{ propertyData?.amenities[1]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[2]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-plate-wheat pe-1"></i>
+                                                <small>{{ propertyData?.amenities[2]?.amenities }}</small>
+                                            </p>
                                         </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-bolt pe-1"></i><small>{{
-                                                        propertyData?.amenities[3]?.value == 1 ?
-                                                            propertyData?.amenities[3]?.amenities : "" }}</small></p>
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-water pe-1"></i><small>{{
-                                                        propertyData?.amenities[4]?.value == 1 ?
-                                                            propertyData?.amenities[4]?.amenities : "" }}</small></p>
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-fire-flame-simple pe-1"></i><small>{{
-                                                        propertyData?.amenities[5]?.value == 1 ?
-                                                            propertyData?.amenities[5]?.amenities : "" }}</small></p>
+                                            <p v-if="propertyData?.amenities[3]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-bolt pe-1"></i>
+                                                <small>{{ propertyData?.amenities[3]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[4]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-water pe-1"></i>
+                                                <small>{{ propertyData?.amenities[4]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[5]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-fire-flame-simple pe-1"></i>
+                                                <small>{{ propertyData?.amenities[5]?.amenities }}</small>
+                                            </p>
                                         </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-border-all pe-1"></i><small>{{
-                                                        propertyData?.amenities[6]?.value == 1 ?
-                                                            propertyData?.amenities[6]?.amenities : "" }}</small>
+                                            <p v-if="propertyData?.amenities[6]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-border-all pe-1"></i>
+                                                <small>{{ propertyData?.amenities[6]?.amenities }}</small>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
+
                             <div class="row mt-md-4 mt-2">
                                 <div class="col-md-3 m-0 p-0 d-flex align-items-center justify-content-center">
-                                    <h6><small>Nearby Locations <br> and Other Facilitie</small></h6>
+                                    <h6><small>Nearby Locations <br> and Other Facilities</small></h6>
                                 </div>
                                 <div class="col-md-9 amenties-border-left">
                                     <div class="d-flex flex-column justify-content-between">
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-bolt pe-1"></i><small>{{
-                                                        propertyData?.amenities[6]?.value == 1 ?
-                                                            propertyData?.amenities[6]?.amenities : "" }}</small></p>
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-check-to-slot pe-1"></i><small>{{
-                                                        propertyData?.amenities[7]?.value == 1 ?
-                                                            propertyData?.amenities[7]?.amenities : "" }}</small></p>
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-plate-wheat pe-1"></i><small>{{
-                                                        propertyData?.amenities[7]?.value == 1 ?
-                                                            propertyData?.amenities[7]?.amenities : "" }}</small></p>
+                                            <p v-if="propertyData?.amenities[7]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-bolt pe-1"></i>
+                                                <small>{{ propertyData?.amenities[7]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[8]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-check-to-slot pe-1"></i>
+                                                <small>{{ propertyData?.amenities[8]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[9]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-plate-wheat pe-1"></i>
+                                                <small>{{ propertyData?.amenities[9]?.amenities }}</small>
+                                            </p>
                                         </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-bolt pe-1"></i><small>{{
-                                                        propertyData?.amenities[8]?.value == 1 ?
-                                                            propertyData?.amenities[8]?.amenities : "" }}</small>
+                                            <p v-if="propertyData?.amenities[10]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-bolt pe-1"></i>
+                                                <small>{{ propertyData?.amenities[10]?.amenities }}</small>
                                             </p>
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-water pe-1"></i><small>{{
-                                                        propertyData?.amenities[9]?.value == 1 ?
-                                                            propertyData?.amenities[9]?.amenities : "" }}
-                                                    <br></small></p>
+                                            <p v-if="propertyData?.amenities[11]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-water pe-1"></i>
+                                                <small>{{ propertyData?.amenities[11]?.amenities }}<br></small>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
+
                             <div class="row mt-md-4 mt-2">
                                 <div class="col-md-3 m-0 p-0 d-flex align-items-center justify-content-center">
                                     <h6><small>Other Facilities</small></h6>
@@ -298,14 +289,76 @@
                                 <div class="col-md-9 amenties-border-left">
                                     <div class="d-flex flex-column justify-content-between">
                                         <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
-                                            <p class="d-flex align-items-center"><i
-                                                    class="fa-solid fa-person-rifle pe-1"></i><small>{{
-                                                        propertyData?.amenities[10]?.value == 1 ?
-                                                            propertyData?.amenities[10]?.amenities : "" }}</small></p>
+                                            <p v-if="propertyData?.amenities[12]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[12]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[13]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[13]?.amenities }}</small>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
+                                            <p v-if="propertyData?.amenities[14]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[14]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[15]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[15]?.amenities }}</small>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
+                                            <p v-if="propertyData?.amenities[16]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[16]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[17]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[17]?.amenities }}</small>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
+                                            <p v-if="propertyData?.amenities[18]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[18]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[19]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[19]?.amenities }}</small>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
+                                            <p v-if="propertyData?.amenities[20]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[20]?.amenities }}</small>
+                                            </p>
+                                            <p v-if="propertyData?.amenities[21]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[21]?.amenities }}</small>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
+                                            <p v-if="propertyData?.amenities[22]?.value == 1"
+                                                class="d-flex align-items-center">
+                                                <i class="fa-solid fa-person-rifle pe-1"></i>
+                                                <small>{{ propertyData?.amenities[22]?.amenities }}</small>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -343,7 +396,7 @@
             <div class="col-md-4">
                 <div class="property-detail d-flex flex-column py-4 px-2 shadow rounded-4 my-2">
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
-                        <h5>PKR {{ propertyData.price }}</h5>
+                        <h5>PKR {{ numFormatter(propertyData.price) }}</h5>
                         <div class="d-flex align-items-center justify-content-center">
 
                             <i class="fa-brands fa-whatsapp px-2" @click="redirectToWhatsApp"></i>
@@ -473,23 +526,25 @@
 
 <script setup>
 // YourVueComponent.vue
-
 // Import helper functions
-import { redirectToPhoneDialer, redirectToWhatsApp,redirectToEmail } from '../helpers/redirectHelpers';
-import { ref, onBeforeMount } from 'vue';
+import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';
+import { numFormatter} from '../helpers/numberFormater';
+import { ref, onBeforeMount, onBeforeUnmount } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useRoute } from 'vue-router';
-import { Swiper, SwiperSlide } from 'swiper/vue'; 
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
 import Loader from './Loader.vue';
+import { useFooterStore } from '../stores/FooterLoadingState';
 
 
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
+
 
 const autoplay = {
     delay: 3000, // 3 seconds delay between slides
@@ -497,124 +552,144 @@ const autoplay = {
 };
 // Create the toast instance
 const $toast = useToast();
+const footerState = useFooterStore();
+
+
 // Define reactive references for form data and property data
 const inquiryData = ref({
-  location: '',
-  email: '',
-  phone: '',
-  description: '',
-  agent: [], 
-  informedMe: false 
+    location: '',
+    email: '',
+    phone: '',
+    description: '',
+    agent: [],
+    informedMe: false
 });
 
 const propertyData = ref([]);
-const loading=ref(false);
+const loading = ref(false);
 // Retrieve the property ID from the route parameters
 const route = useRoute();
 const propertyId = ref(route.params.id);
 
 // Helper function to get the image URL
 const getImageUrl = (media) => {
-  return `${import.meta.env.VITE_BASE_URL}/${media?.image_uri}`;
+    return `${import.meta.env.VITE_BASE_URL}/${media?.image_uri}`;
 };
 
 // Function to handle form submission
 // Function to handle form submission
-const handleInquiryFormSubmission = () => {      
-  // Make POST request to backend with form data
-  console.log(inquiryData.value);
-  const base_url = import.meta.env.VITE_BASE_URL;
-  loading.value=true;
-  fetch(`${base_url}/api/frontend/inquiry/store`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    body: JSON.stringify(inquiryData.value)
-  })
-  .then(response => {
-    if (!response.ok) {
-      return response.json().then(errorData => {
-        throw new Error(JSON.stringify(errorData));
-      });
-    }
-    return response.json();
-  })
-  .then(data => {
-    loading.value=false;
-    // Handle successful form submission response
-    console.log('Form submission successful:', data);
-    $toast.open({
-      message: 'Query submitted successfully!',
-      type: 'success',
-      position: 'top-right',
-    });
-    // Optionally, reset the form data after successful submission
-    inquiryData.value = {
-      location: '',
-      email: '',
-      phone: '',
-      description: '',
-      agent: [],
-      informedMe: false
-    };
-  })
-  .catch(error => {
-    loading.value=false; 
-    // Handle form submission error
-    console.error('Error submitting form data:', error);
-    const errorMessage = JSON.parse(error.message);
-    if (errorMessage.errors) {
-      Object.values(errorMessage.errors).forEach(err => {
-        $toast.open({
-          message: err[0],
-          type: 'error',
-          position: 'top-right',
+const handleInquiryFormSubmission = () => {
+    // Make POST request to backend with form data
+    const base_url = import.meta.env.VITE_BASE_URL;
+    loading.value = true;
+    footerState.setFooterState(false);
+    fetch(`${base_url}/api/frontend/inquiry/store`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(inquiryData.value)
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(JSON.stringify(errorData));
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            loading.value = false;
+            footerState.setFooterState(true);
+            // Handle successful form submission response
+
+            $toast.open({
+                message: 'Query submitted successfully!',
+                type: 'success',
+                position: 'top-right',
+            });
+            // Optionally, reset the form data after successful submission
+            inquiryData.value = {
+                location: '',
+                email: '',
+                phone: '',
+                description: '',
+                agent: [],
+                informedMe: false
+            };
+        })
+        .catch(error => {
+            loading.value = false;
+            footerState.setFooterState(true);
+            // Handle form submission error
+            console.error('Error submitting form data:', error);
+            const errorMessage = JSON.parse(error.message);
+            if (errorMessage.errors) {
+                Object.values(errorMessage.errors).forEach(err => {
+                    $toast.open({
+                        message: err[0],
+                        type: 'error',
+                        position: 'top-right',
+                    });
+                });
+            } else {
+                $toast.open({
+                    message: 'Oops, network error occurred!',
+                    type: 'error',
+                    position: 'top-right',
+                });
+            }
         });
-      });
-    } else {
-      $toast.open({
-        message: 'Oops, network error occurred!',
-        type: 'error',
-        position: 'top-right',
-      });
-    }
-  });
 };
+
+
+
+
 
 // Fetch the media data when the component is mounted
 onBeforeMount(() => {
-  // Fetch the media data
-  loading.value=true;
-  const base_url = import.meta.env.VITE_BASE_URL;
-  fetch(`${base_url}/api/frontend/home/property/getbyid/${propertyId.value}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data.propertyInfo);
-    propertyData.value = data.propertyInfo;
-    // $toast.open({
-    //   message: 'Property data fetched successfully!',
-    //   type: 'success',
-    //   position: 'top-right',
-    // });
-    loading.value=false;
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    loading.value=false;
-    $toast.open({
-      message: 'Failed to fetch property data.',
-      type: 'error',
-      position: 'top-right',
-    });
-  });
+    // Fetch the media data
+    loading.value = true;
+    footerState.setFooterState(false);
+    const base_url = import.meta.env.VITE_BASE_URL;
+    fetch(`${base_url}/api/frontend/home/property/getbyid/${propertyId.value}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            propertyData.value = data.propertyInfo;
+            // $toast.open({
+            //   message: 'Property data fetched successfully!',
+            //   type: 'success',
+            //   position: 'top-right',
+            // });
+            loading.value = false;
+            setTimeout(() => {
+                footerState.setFooterState(true);
+            }, 2000)
+
+
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            loading.value = false;
+            footerState.setFooterState(true);
+            $toast.open({
+                message: 'Failed to fetch property data.',
+                type: 'error',
+                position: 'top-right',
+            });
+        });
 });
+
+onBeforeUnmount(() => {
+    footerState.setFooterState(false);
+})
+
 </script>
 
 

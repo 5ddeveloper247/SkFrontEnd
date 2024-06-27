@@ -32,6 +32,15 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,153,148,1) 
     --subbuttons-bg-color: #f2f7ff;
 }
 
+.elip {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+
 /* ::-webkit-scrollbar {
     background-color: red;
     position: fixed;
@@ -78,6 +87,15 @@ label {
     background-color: var(--second--main-color) !important;
     color: #fff !important;
 }
+
+.search-button {
+    height: 28px;
+    font-size: 12px;
+    border-radius: 20px;
+    background-color: var(--second--main-color) !important;
+    color: #fff !important;
+}
+
 .main-button-2 {
     height: 40px;
     font-size: 14px;
@@ -139,7 +157,8 @@ input#floatingInput {
     color: var(--home-text-color-);
 
 }
-.router-link-active{
+
+.router-link-active {
     background-color: var(--second--main-color) !important;
     color: #fff !important;
     border-radius: 20px;
@@ -183,31 +202,37 @@ input#floatingInput {
     color: #fff !important;
 } */
 .nav-links-property {
-   text-decoration: none;
+    text-decoration: none;
 }
+
 .nav-links-property:hover {
     color: red !important;
 }
+
 .nav-links-property.active {
     background-color: var(--second--main-color) !important;
     color: #fff !important;
     border-radius: 20px;
 }
+
 .listed-properties {
     text-decoration: none;
- }
- .listed-properties:hover {
-     color: red !important;
- }
- .listed-properties.active {
-     background-color: var(--second--main-color) !important;
-     color: #fff !important;
-     border-radius: 20px;
- }
+}
+
+.listed-properties:hover {
+    color: red !important;
+}
+
+.listed-properties.active {
+    background-color: var(--second--main-color) !important;
+    color: #fff !important;
+    border-radius: 20px;
+}
 
 .nav-link:hover {
     color: #f4ed08 !important;
 }
+
 .nav-link:hover svg path {
     fill: var(--second--main-color);
 }
@@ -221,12 +246,15 @@ input#floatingInput {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
-.all-property-form ul{
+
+.all-property-form ul {
     list-style: none;
 }
-.listing-ul ul{
+
+.listing-ul ul {
     list-style: none;
 }
+
 .detail-ul .nav-link {
     color: #000;
     font-size: 14px;
@@ -386,33 +414,42 @@ input#floatingInput {
     width: 100%;
     object-fit: cover;
 }
-.slider-text{
+
+.slider-text {
     position: absolute;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     left: 50%;
     width: 72rem;
 }
-.properties-calculation-card{
-   margin-top: -16rem !important;
-   position: inherit;
-   z-index: 1;
+
+.properties-calculation-card {
+    margin-top: -16rem !important;
+    position: inherit;
+    z-index: 1;
 }
-.next-carousal-btn, .prev-carousal-btn{
+
+.next-carousal-btn,
+.prev-carousal-btn {
     background-color: var(--second--main-color) !important;
     border-radius: 4px;
 }
-.carousel-control-next, .carousel-control-prev{
+
+.carousel-control-next,
+.carousel-control-prev {
     opacity: 1 !important;
 }
+
 @media screen and (max-width: 768px) {
     .top-carousal img {
         height: 100vh;
     }
-    .properties-calculation-card{
+
+    .properties-calculation-card {
         margin-top: -22rem !important;
-     }
-     .slider-text{
+    }
+
+    .slider-text {
         top: 40%;
         width: 22rem;
     }
@@ -1887,6 +1924,6 @@ header h2 {
 
 .modal-animated-image {
     background:
-    linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 4%, var(--second--main-color) 50%, rgba(255, 255, 255, 0.5) 96%, rgba(255, 255, 255, 1) 100%),
-    linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 4%, var(--second--main-color) 50%, rgba(255, 255, 255, 0.5) 96%, rgba(255, 255, 255, 1) 100%);
+        linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 4%, var(--second--main-color) 50%, rgba(255, 255, 255, 0.5) 96%, rgba(255, 255, 255, 1) 100%),
+        linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 4%, var(--second--main-color) 50%, rgba(255, 255, 255, 0.5) 96%, rgba(255, 255, 255, 1) 100%);
 }

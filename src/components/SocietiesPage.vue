@@ -1,4 +1,15 @@
 <script setup>
+import { onBeforeMount,onBeforeUnmount } from 'vue';
+import { useFooterStore } from '../stores/FooterLoadingState';
+const footerState = useFooterStore();
+onBeforeMount(() => {
+      footerState.setFooterState(true);
+    })
+
+    onBeforeUnmount(() => {
+      footerState.setFooterState(false);
+    })
+
 </script>
 
 <template>
@@ -9,7 +20,11 @@
                     Societies <br> We Deal
                 </h1>
                 <p class="text-white text-start pt-3">
-                    At SK Marketing, we focus exclusively on providing exceptional real estate services within the prestigious communities of Bahria Town and DHA Islamabad. Our extensive knowledge and dedication ensure that we meet the diverse needs of our clients, offering a range of properties from luxurious homes to affordable options. Whether you're buying, selling, or renting, trust SK Marketing to navigate these renowned societies with expertise and personalized service.
+                    At SK Marketing, we focus exclusively on providing exceptional real estate services within the
+                    prestigious communities of Bahria Town and DHA Islamabad. Our extensive knowledge and dedication
+                    ensure that we meet the diverse needs of our clients, offering a range of properties from luxurious
+                    homes to affordable options. Whether you're buying, selling, or renting, trust SK Marketing to
+                    navigate these renowned societies with expertise and personalized service.
                 </p>
             </div>
         </div>
@@ -28,11 +43,16 @@
                 <div>
                     <h5 class="card-title pb-3">Defence Housing Autority</h5>
                     <p class="card-text">
-                        Discover the prestigious properties and exceptional opportunities offered by Defence Housing Authority (DHA) Islamabad through SK Marketing. As specialists in this renowned locality, we provide unparalleled expertise and personalized service to help you find your ideal home or investment property. Whether you are buying, selling, or renting, trust SK Marketing to navigate the DHA Islamabad real estate market with confidence and success.
+                        Discover the prestigious properties and exceptional opportunities offered by Defence Housing
+                        Authority (DHA) Islamabad through SK Marketing. As specialists in this renowned locality, we
+                        provide unparalleled expertise and personalized service to help you find your ideal home or
+                        investment property. Whether you are buying, selling, or renting, trust SK Marketing to navigate
+                        the DHA Islamabad real estate market with confidence and success.
                     </p>
-                        <RouterLink to="/dha" class="mt-3 about-us-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-column align-items-center justify-content-center mb-5 w-auto">
-                            Explore Now
-                        </RouterLink>
+                    <RouterLink to="/dha"
+                        class="mt-3 about-us-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-column align-items-center justify-content-center mb-5 w-auto">
+                        Explore Now
+                    </RouterLink>
                 </div>
             </div>
         </div>
@@ -42,11 +62,15 @@
                 <div>
                     <h5 class="card-title pb-3">Bahria Town</h5>
                     <p class="card-text">
-                        Explore the vibrant community and diverse real estate offerings of Bahria Town Islamabad with SK Marketing. As experts in this renowned township, we offer comprehensive services tailored to your property needs. Whether you seek a luxurious residence or an investment opportunity, SK Marketing is your trusted partner in navigating the Bahria Town Islamabad real estate landscape.
+                        Explore the vibrant community and diverse real estate offerings of Bahria Town Islamabad with SK
+                        Marketing. As experts in this renowned township, we offer comprehensive services tailored to
+                        your property needs. Whether you seek a luxurious residence or an investment opportunity, SK
+                        Marketing is your trusted partner in navigating the Bahria Town Islamabad real estate landscape.
                     </p>
-                        <RouterLink to="bahria" class="mt-3 about-us-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-column align-items-center justify-content-center mb-5">
-                            Explore Now
-                        </RouterLink>
+                    <RouterLink to="bahria"
+                        class="mt-3 about-us-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-column align-items-center justify-content-center mb-5">
+                        Explore Now
+                    </RouterLink>
                 </div>
             </div>
             <div class="col-md-4 my-1">

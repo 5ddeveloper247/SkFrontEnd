@@ -69,11 +69,15 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref,onBeforeMount,onBeforeUnmount} from 'vue';
 import { reactive } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Loader from './Loader.vue';
+import { useFooterStore } from '../stores/FooterLoadingState';
+
+
+const footerState = useFooterStore();
 const $toast = useToast();
 const contactFormData = reactive({
     fullName: '',
@@ -190,6 +194,16 @@ const submitForm = async () => {
         // Handle error response
     }
 }
+
+
+
+onBeforeMount(() => {
+    footerState.setFooterState(true);
+})
+
+onBeforeUnmount(() => {
+    footerState.setFooterState(false);
+})
 
 </script>
 

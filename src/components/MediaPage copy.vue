@@ -72,12 +72,12 @@
         </swiper-slide>
       </swiper>
     </div>
- 
+  
 </template>
 
 
 <script setup>
-import { onMounted, ref, watch,onBeforeMount,onBeforeUnmount } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -85,9 +85,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
-import { useFooterStore } from '../stores/FooterLoadingState';
-const footerState = useFooterStore();
-
 
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
@@ -252,16 +249,6 @@ setTimeout(()=>{
 loading.value=false;
 },3000)
 });
-
-
-
-onBeforeMount(() => {
-      footerState.setFooterState(true);
-    })
-
-    onBeforeUnmount(() => {
-      footerState.setFooterState(false);
-    })
 </script>
 
 

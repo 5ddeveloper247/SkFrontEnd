@@ -1,18 +1,32 @@
 <script setup>
-import { ref } from 'vue';
+import { ref,onBeforeMount,onBeforeUnmount } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
+import { useFooterStore } from '../stores/FooterLoadingState';
 
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
+const footerState = useFooterStore();
 // Autoplay configuration
 const autoplay = {
     delay: 3000, // 3 seconds delay between slides
     disableOnInteraction: false // Keep autoplay running even after user interaction
 };
+
+
+
+//handling footer by these two
+onBeforeMount(() => {
+    footerState.setFooterState(true);
+})
+
+onBeforeUnmount(() => {
+    footerState.setFooterState(false);
+})
+
 </script>
 
 <template>
