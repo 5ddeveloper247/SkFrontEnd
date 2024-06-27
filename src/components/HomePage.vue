@@ -645,7 +645,7 @@
                                                     :src="getTestimonialImageUrl(testimonial.image_url)" alt="">
                                                 <p class="px-2">{{ testimonial.name }}</p>
                                             </div>
-                                            <img src="../assets/Images/ratings.png" alt="">
+                                            <img src="../assets/Images/ratings.png" alt="" style="height:50px;">
                                         </div>
                                     </div>
                                 </div>
