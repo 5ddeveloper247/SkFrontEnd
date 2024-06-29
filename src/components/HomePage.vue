@@ -1,5 +1,5 @@
 <template>
-    <Loader :isLoading="loading" />
+
 
     <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade" v-show="!loading">
         <div class="carousel-inner">
@@ -439,7 +439,7 @@
                                         alt="Image">
                                     <div
                                         class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                                        <h5 class="card-title">PKR {{numFormatter(media.price)}}</h5>
+                                        <h5 class="card-title">PKR {{ numFormatter(media.price) }}</h5>
                                         <p class="card-text elip">{{ media.property_listing_pape.extra_info_title }}</p>
                                     </div>
                                 </div>
@@ -700,7 +700,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useCityData } from '@/composables/useCityData';
 import { useFooterStore } from '../stores/FooterLoadingState';
-import {numFormatter} from '../helpers/numberFormater';
+import { numFormatter } from '../helpers/numberFormater';
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
 // Autoplay configuration
@@ -839,7 +839,7 @@ const setMediaType = (type) => {
 };
 
 const getMediabyType = () => {
-    loading.value = true;
+    //loading.value = true;
     const base_url = import.meta.env.VITE_BASE_URL;
     fetch(base_url + '/api/frontend/home/property/post', {
         method: 'POST',
@@ -890,7 +890,7 @@ onMounted(() => {
 onMounted(() => {
 
     // Make API call
-    loading.value = true;
+    //loading.value = true; 
     const base_url = import.meta.env.VITE_BASE_URL;
     fetch(base_url + '/api/frontend/home/property/get', {
         method: 'GET',

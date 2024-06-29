@@ -207,7 +207,7 @@
                             <div class="card border-0 bg-transparent">
                                 <img :src="getImageUrl(media)" height="300" alt="Image">
                                 <div class="card-body">
-                                    <h5 class="card-title">PKR {{numFormatter( media?.price )}}</h5>
+                                    <h5 class="card-title">PKR {{ numFormatter(media?.price) }}</h5>
                                     <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
                                     <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                 </div>
@@ -217,7 +217,7 @@
                             <div class="d-flex align-items-center">
                                 <div><i class="fa-solid fa-bed pe-2"></i>{{
                                     media?.property_listing_pape?.propertyDetail_bedrooms
-                                    }}</div>
+                                }}</div>
                                 <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
                                     media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
                             </div>
@@ -261,7 +261,7 @@ import Loader from './Loader.vue';
 import axios from 'axios';
 import { useCityData } from '@/composables/useCityData';
 import { useFooterStore } from '../stores/FooterLoadingState';
-import { numFormatter} from '../helpers/numberFormater';
+import { numFormatter } from '../helpers/numberFormater';
 
 
 // Define objects

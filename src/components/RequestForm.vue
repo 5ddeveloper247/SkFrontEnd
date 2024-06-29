@@ -20,7 +20,7 @@
                 aria-valuemax="100"></div>
             </div> <br>
             <!-- fieldsets -->
-            <fieldset :class="{ 'd_block': fs_step1, 'fs_step_show': fs_step_show }">
+            <fieldset :class="{ 'd_block': fs_step1, 'fs_step_show': fs_step_show }" id="stp1">
 
               <div class="'form-card'">
                 <div class="form-floating mb-3">
@@ -381,7 +381,7 @@ export default {
           loading.value = false;
           if (data.success) {
             $toast.open({
-              message: 'Submitted Successfully',
+              message: 'Request has submitted successfully',
               type: 'success',
               position: 'top-right'
             });
@@ -598,13 +598,13 @@ export default {
         return;
       }
       handleSubmission();
+      handleStepFourth();
     };
 
     const handleStepFourth = () => {
-      fs_step4.value = false;
-      fs_step1.value = true;
-      fs_step_show.value = false;
-      curStep.value = 1;
+      fs_step3.value = false;
+      fs_step4.value = true;
+      curStep.value = 4;
       setProgressBar();
     };
 
