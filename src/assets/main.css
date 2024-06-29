@@ -406,6 +406,19 @@ input#floatingInput {
     color: var(--second--main-color) !important;
 }
 
+.whatsapp-btn {
+    text-decoration: none;
+    border-radius: 20px !important;
+    background-color: transparent !important;
+    color: var(--second--main-color) !important;
+    border: 1px solid var(--second--main-color);
+}
+.call-btn{
+    text-decoration: none;
+    border-radius: 20px !important;
+    background-color: var(--second--main-color) !important;
+    color: #fff !important;
+}
 /* =====================New Hero Section================== */
 .heroandnav {
     background-image: url(../assets/Images/construction1.jpg);
@@ -1441,7 +1454,7 @@ figure img:hover {
 
 .property-detail i {
     cursor: pointer;
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .property-links a {

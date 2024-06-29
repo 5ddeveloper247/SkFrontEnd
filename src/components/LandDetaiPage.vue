@@ -2,7 +2,7 @@
 
     <div class="container pt-5">
         <div class="row justify-content-start px-md-4 pb-md-4 p-2 pt-2 pt-md-5">
-            <div class="mb-2 d-flex justify-content-between pt-5">
+            <div class="mb-2 d-flex justify-content-between pt-4">
                 <div>
                     <h5>{{ propertyData?.property_listing_pape?.extra_info_title }}</h5>
                     <p><small>DHA Defence Phase 2, DHA Defence, Islamabad, Islamabad Capital</small></p>
@@ -374,28 +374,15 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="col-md-4">
-                <div class="property-detail d-flex flex-column py-4 px-2 shadow rounded-4 my-2">
+                <div class="property-detail d-flex flex-column py-4 px-2 shadow rounded-4 mb-4">
+                    <h4><small>PKR</small> {{ numFormatter(propertyData.price) }}</h4>
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
-                        <h5>PKR {{ numFormatter(propertyData.price) }}</h5>
                         <div class="d-flex align-items-center justify-content-center">
-
-                            <i class="fa-brands fa-whatsapp px-2" @click="redirectToWhatsApp"></i>
-                            <i class="fa-solid fa-phone px-2" @click="redirectToPhoneDialer"></i>
+                            <a data-v-c970699f="" href="/requestform" class="mx-1 whatsapp-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center" role="button"><i data-v-c970699f="" class="fa-brands fa-whatsapp pe-2"></i>Request Form</a>
+                            <a data-v-c970699f="" href="/requestform" class="mx-1 call-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center" role="button"><i data-v-c970699f="" class="fa-solid fa-phone pe-2 text-white"></i>Request Form</a>
+                            <!-- <i class="fa-brands fa-whatsapp px-2" @click="redirectToWhatsApp"></i>
+                            <i class="fa-solid fa-phone px-2" @click="redirectToPhoneDialer"></i> -->
                         </div>
                     </div>
 
