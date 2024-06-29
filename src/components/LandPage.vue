@@ -1,12 +1,12 @@
 <template>
     <Loader :isLoading="loading" />
     <div class="container pt-5">
-        <nav class="pt-5"
+        <nav class="pt-5 mt-md-3"
             style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
             aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Library</li>
+                <li class="breadcrumb-item active" aria-current="page">Land/Properties</li>
             </ol>
         </nav>
 
@@ -19,12 +19,12 @@
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <h3>
+                        <!-- <h3>
                             Choose Land Details
-                        </h3>
+                        </h3> -->
                     </div>
                     <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
-                        <div class="shadow my-4 p-3 p-lg-0 h-100 w-100 rounded-4">
+                        <div class="shadow p-3 p-lg-0 h-100 w-100 rounded-4">
                             <div class="filters d-flex flex-column py-4 px-md-2">
                                 <div class="d-flex flex-wrap align-items-center justify-content-between">
                                     <h5>Final Results</h5>
@@ -195,19 +195,19 @@
                 </div>
             </nav>
 
-            <div class="col-12 col-lg-9 col-8 my-5 properties-listed">
+            <div class="col-12 col-lg-9 col-8 my-1 properties-listed">
                 <div class="row listing">
                     <div class="row justify-content-between align-items-center properties-for-sale">
                         <div class="col-9">
-                            <h2 class="text-start my-4">Properties for Sale/Rent</h2>
+                            <!-- <h2 class="text-start my-4">Properties for Sale/Rent</h2> -->
                         </div>
                     </div>
                     <div class="col-md-4 my-1" v-for="media in mediaData" :key="media?.id">
                         <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
                             <div class="card border-0 bg-transparent">
-                                <img :src="getImageUrl(media)" height="300" alt="Image">
+                                <img :src="getImageUrl(media)" class="rounded-5" height="300" alt="Image">
                                 <div class="card-body">
-                                    <h5 class="card-title">PKR {{ numFormatter(media?.price) }}</h5>
+                                    <h5 class="card-title">PKR {{numFormatter( media?.price )}}</h5>
                                     <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
                                     <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                 </div>

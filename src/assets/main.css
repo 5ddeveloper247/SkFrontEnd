@@ -35,7 +35,8 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,153,148,1) 
 .elip {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
+    height: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 600;
@@ -414,6 +415,19 @@ input::-webkit-inner-spin-button {
     color: var(--second--main-color) !important;
 }
 
+.whatsapp-btn {
+    text-decoration: none;
+    border-radius: 20px !important;
+    background-color: transparent !important;
+    color: var(--second--main-color) !important;
+    border: 1px solid var(--second--main-color);
+}
+.call-btn{
+    text-decoration: none;
+    border-radius: 20px !important;
+    background-color: var(--second--main-color) !important;
+    color: #fff !important;
+}
 /* =====================New Hero Section================== */
 .heroandnav {
     background-image: url(../assets/Images/construction1.jpg);
@@ -1449,7 +1463,7 @@ figure img:hover {
 
 .property-detail i {
     cursor: pointer;
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .property-links a {
@@ -1495,8 +1509,13 @@ figure img:hover {
 }
 
 .societiess img {
-    height: 19rem;
-    width: 19rem;
+    height: 22rem;
+    width: 100%;
+}
+
+.estate-services .card-body .card-text {
+    height: 80px;
+    overflow-y: auto;
 }
 
 .listing a {
@@ -1993,4 +2012,15 @@ header h2 {
     background-color: #f8f6f6;
     border-radius: 10px;
     padding: 10px;
+}
+.swiper-button-prev, .swiper-button-next{
+    color: var(--second--main-color) !important;
+}
+.swiper-pagination-bullet{
+    margin-top: 50px !important;
+    top: 50rem !important;
+    background-color: var(--second--main-color) !important;
+}
+.swiper-wrapper{
+    margin-bottom: 30px;
 }

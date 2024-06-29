@@ -2,7 +2,7 @@
 
     <div class="container pt-5">
         <div class="row justify-content-start px-md-4 pb-md-4 p-2 pt-2 pt-md-5">
-            <div class="mb-2 d-flex justify-content-between pt-5">
+            <div class="mb-2 d-flex justify-content-between pt-4">
                 <div>
                     <h5>{{ propertyData?.property_listing_pape?.extra_info_title }}</h5>
                     <p><small>DHA Defence Phase 2, DHA Defence, Islamabad, Islamabad Capital</small></p>
@@ -526,28 +526,15 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="col-md-4">
-                <div class="property-detail d-flex flex-column py-4 px-2 shadow rounded-4 my-2">
+                <div class="property-detail d-flex flex-column py-4 px-2 shadow rounded-4 mb-4">
+                    <h4><small>PKR</small> {{ numFormatter(propertyData.price) }}</h4>
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
-                        <h5>PKR {{ numFormatter(propertyData.price) }}</h5>
                         <div class="d-flex align-items-center justify-content-center">
-
-                            <i class="fa-brands fa-whatsapp px-2" @click="redirectToWhatsApp"></i>
-                            <i class="fa-solid fa-phone px-2" @click="redirectToPhoneDialer"></i>
+                            <a data-v-c970699f="" href="/requestform" class="mx-1 whatsapp-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center" role="button"><i data-v-c970699f="" class="fa-brands fa-whatsapp pe-2"></i>Request Form</a>
+                            <a data-v-c970699f="" href="/requestform" class="mx-1 call-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center" role="button"><i data-v-c970699f="" class="fa-solid fa-phone pe-2 text-white"></i>Request Form</a>
+                            <!-- <i class="fa-brands fa-whatsapp px-2" @click="redirectToWhatsApp"></i>
+                            <i class="fa-solid fa-phone px-2" @click="redirectToPhoneDialer"></i> -->
                         </div>
                     </div>
 
@@ -662,31 +649,28 @@
                         </RouterLink>
                     </swiper-slide>
                 </swiper> -->
-                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :navigation="true" :modules="modules"
-                    :breakpoints="{
-                        320: { slidesPerView: 1, spaceBetween: 5 },
-                        480: { slidesPerView: 1, spaceBetween: 5 },
-                        640: { slidesPerView: 1, spaceBetween: 5 },
-                        768: { slidesPerView: 2, spaceBetween: 3 },
-                        1024: { slidesPerView: 3, spaceBetween: 5 }
-                    }" class="mySwiper">
-                    <swiper-slide v-for="media in mediaData " :key="media.id" :slidesPerView="3">
-                        <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }"
-                            style="text-decoration: none;">
-                            <div class="item mx-3">
-                                <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
-                                <div class="card border-0 bg-transparent">
-                                    <img class="card-img-top rounded-5" :src="getImageUrlSwipper(media)" height="270"
-                                        alt="Image">
-                                    <div
-                                        class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                                        <h5 class="card-title">PKR {{ media?.price }}</h5>
-                                        <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}
-                                        </p>
-                                    </div>
+                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :pagination="{ clickable: true }" :modules="modules"
+                :breakpoints="{
+                    320: { slidesPerView: 1, spaceBetween: 5 },
+                    480: { slidesPerView: 1, spaceBetween: 5 },
+                    640: { slidesPerView: 1, spaceBetween: 5 },
+                    768: { slidesPerView: 2, spaceBetween: 3 },
+                    1024: { slidesPerView: 3, spaceBetween: 5 }
+                }" class="mySwiper">
+                <swiper-slide v-for="media in mediaData " :key="media.id" :slidesPerView="3">
+                    <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }" style="text-decoration: none;">
+                        <div class="item mx-3">
+                            <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
+                            <div class="card border-0 bg-transparent">
+                                <img class="card-img-top rounded-5" :src="getImageUrlSwipper(media)" height="270" alt="Image">
+                                <div
+                                    class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
+                                    <h5 class="card-title">PKR {{ media?.price }}</h5>
+                                    <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
                                 </div>
                             </div>
-                        </RouterLink>
+                        </div>
+                    </RouterLink>
 
                         <div class="d-flex align-items-center justify-content-between px-4 mx-2 mt-2 w-100">
                             <div class="d-flex align-items-center">
@@ -734,14 +718,15 @@ import { useRoute } from 'vue-router';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useFooterStore } from '../stores/FooterLoadingState';
 
 
 // Modules for Swiper
-const modules = ref([Navigation, Autoplay]);
+const modules = ref([Navigation, Autoplay, Pagination]);
 
 const mediaData = ref([]);
 const mediaSliderType = ref("All");
