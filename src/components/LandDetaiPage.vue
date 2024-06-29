@@ -510,7 +510,7 @@
                         </RouterLink>
                     </swiper-slide>
                 </swiper> -->
-                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :navigation="true" :modules="modules"
+                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :pagination="{ clickable: true }" :modules="modules"
                 :breakpoints="{
                     320: { slidesPerView: 1, spaceBetween: 5 },
                     480: { slidesPerView: 1, spaceBetween: 5 },
@@ -579,14 +579,15 @@ import { useRoute } from 'vue-router';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useFooterStore } from '../stores/FooterLoadingState';
 
 
 // Modules for Swiper
-const modules = ref([Navigation, Autoplay]);
+const modules = ref([Navigation, Autoplay, Pagination]);
 
 const mediaData = ref([]);
 const mediaSliderType = ref("All");

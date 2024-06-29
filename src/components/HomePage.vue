@@ -399,10 +399,12 @@
 
         <!-- ======================Listing================== -->
         <div class="row my-5 px-md-5">
-            <span>CHECKOUT OUR NEW</span>
-            <div class="d-flex justify-content-between listing-ul">
-                <h2>Latest Listed Properties</h2>
-                <ul class="d-flex flex-nowrap mb-0 p-0">
+            <span>Latest Properties</span>
+            <div class="d-flex justify-content-between listing-ul mb-3">
+                <p>
+                    Explore the Latest Properties Listed by SK Marketing <br> in Bahria Town and DHA Islamabad.
+                </p>
+                <ul class="d-flex justify-content-end flex-nowrap mb-0 p-0">
                     <li class="nav-item mx-1">
                         <a class="listed-properties py-2 px-3 text-black active" href="#"
                             @click.prevent="setMediaType('All')">All</a>
@@ -417,12 +419,10 @@
                     </li>
                 </ul>
             </div>
-            <p>
-                Explore the Latest Properties Listed by SK Marketing <br> in Bahria Town and DHA Islamabad.
-            </p>
+
 
             <div v-if="mediaData.length > 0">
-                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :navigation="true" :modules="modules"
+                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :pagination="{ clickable: true }" :modules="modules"
                     :breakpoints="{
                         320: { slidesPerView: 1, spaceBetween: 5 },
                         480: { slidesPerView: 1, spaceBetween: 5 },
@@ -438,15 +438,15 @@
                                     <img class="card-img-top rounded-5" :src="getImageUrl(media)" height="270"
                                         alt="Image">
                                     <div
-                                        class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                                        <h5 class="card-title">PKR {{numFormatter(media.price)}}</h5>
+                                        class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center pb-1">
+                                        <h5 class="card-title">PKR {{ numFormatter(media.price) }}</h5>
                                         <p class="card-text elip">{{ media.property_listing_pape.extra_info_title }}</p>
                                     </div>
                                 </div>
                             </div>
                         </RouterLink>
 
-                        <div class="d-flex align-items-center justify-content-between px-4 mx-2 mt-2 w-100">
+                        <div class="d-flex align-items-center justify-content-between px-4 mx-2 w-100">
                             <div class="d-flex align-items-center">
                                 <div><i class="fa-solid fa-bed pe-2"></i>{{
                                     media.property_listing_pape.propertyDetail_bedrooms }}</div>
@@ -482,7 +482,7 @@
                 <h2 class="text-center pb-4">Real Estate Services in Bahria Town, DHA Islamabad</h2>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card rounded-4 py-5 my-1">
+                        <div class="card estate-services rounded-4 py-5 my-1">
                             <div class="d-flex align-items-center justify-content-center our-services-card-img">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
@@ -495,7 +495,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card rounded-4 py-5 my-1">
+                        <div class="card estate-services rounded-4 py-5 my-1">
                             <div class="d-flex align-items-center justify-content-center our-services-card-img">
                                 <i class="fa-solid fa-house"></i>
                             </div>
@@ -509,7 +509,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card rounded-4 py-5 my-1">
+                        <div class="card estate-services rounded-4 py-5 my-1">
                             <div class="d-flex align-items-center justify-content-center our-services-card-img">
                                 <i class="fa-solid fa-house-laptop"></i>
                             </div>
@@ -645,7 +645,7 @@
                                                     :src="getTestimonialImageUrl(testimonial.image_url)" alt="">
                                                 <p class="px-2">{{ testimonial.name }}</p>
                                             </div>
-                                            <img src="../assets/Images/ratings.png" alt="" style="height:50px;">
+                                            <!-- <img src="../assets/Images/ratings.png" alt="" style="height:50px;"> -->
                                         </div>
                                     </div>
                                 </div>
@@ -695,14 +695,15 @@ import { useFormDataStore } from '.././stores/HomeDataFilterStore'; // Adjust th
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useCityData } from '@/composables/useCityData';
 import { useFooterStore } from '../stores/FooterLoadingState';
-import {numFormatter} from '../helpers/numberFormater';
+import { numFormatter } from '../helpers/numberFormater';
 // Modules for Swiper
-const modules = ref([Navigation, Autoplay]);
+const modules = ref([Navigation, Autoplay, Pagination]);
 // Autoplay configuration
 const autoplay = {
     delay: 3500, // 3 seconds delay between slides

@@ -17,7 +17,7 @@
 
     </div> -->
 
-      <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="40" :navigation="true" :modules="modules" :breakpoints="{
+      <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="40" :pagination="{ clickable: true }" :modules="modules" :breakpoints="{
         320: { slidesPerView: 1, spaceBetween: 5 },
         480: { slidesPerView: 1, spaceBetween: 5 },
         640: { slidesPerView: 1, spaceBetween: 5 },
@@ -51,7 +51,7 @@
       </div>
 
       <!-- Media Cards Bottom -->
-      <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="50" :navigation="true" :modules="modules" :breakpoints="{
+      <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="50" :pagination="{ clickable: true }" :modules="modules" :breakpoints="{
         320: { slidesPerView: 1, spaceBetween: 5 },
         480: { slidesPerView: 1, spaceBetween: 5 },
         640: { slidesPerView: 1, spaceBetween: 5 },
@@ -85,14 +85,15 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import { useFooterStore } from '../stores/FooterLoadingState';
 const footerState = useFooterStore();
 
 
 // Modules for Swiper
-const modules = ref([Navigation, Autoplay]);
+const modules = ref([Navigation, Autoplay, Pagination]);
 // Autoplay configuration
 const autoplay = {
   delay: 3000, // 3 seconds delay between slides
