@@ -1,9 +1,9 @@
 <template>
   <!-- ======================Multi Step Form================== -->
   <Loader :isLoading="loading" />
-  <div class="container-fluid call-to-action pt-5">
+  <div class="container-fluid call-to-action">
 
-    <div class="row justify-content-center pt-md-5 pt-3">
+    <div class="row justify-content-center pt-3">
       <div class="col-md-8 col-12 text-center p-0">
         <div class="card px-md-0 px-2 pt-4 pb-0 mt-3 mb-3">
           <h2 id="heading">Request Form</h2>

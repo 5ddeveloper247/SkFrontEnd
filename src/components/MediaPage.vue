@@ -2,7 +2,7 @@
 
   <Loader :isLoading="loading" />
   <div class="video-sec mb-5" v-show="!loading">
-    <h2 class="mt-5 pt-5">PROPERTIES <span class="fw-bolder">VIDEOS</span></h2>
+    <h2 class="mt-5">PROPERTIES <span class="fw-bolder">VIDEOS</span></h2>
     <div class="media">
       <div class="d-flex flex-column align-items-center id_sxy justify-content-center pt-5">
         <iframe class="Uvideo-1" width="100%" :src="currentTopVideo"></iframe>
