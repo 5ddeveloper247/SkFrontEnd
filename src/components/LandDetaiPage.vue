@@ -514,7 +514,12 @@
                         tabindex="0">
                         <hr>
                         <h2>Map</h2>
-                        <div class="map mt-5">
+                        <div class="map-inner-content"
+                                v-if="propertyData?.property_listing_pape?.address_map_location">
+                                <span v-html="propertyData?.property_listing_pape?.address_map_location"></span>
+                            </div>
+
+                        <div class="map mt-5" v-if="!propertyData?.property_listing_pape?.address_map_location">
                             <div class="map-inner-content">
                                 <div class="d-flex justify-content-center">
                                     <i class="fa-solid fa-location-dot"></i>
@@ -955,6 +960,10 @@ watch(
 onBeforeUnmount(() => {
     footerState.setFooterState(false);
 })
+
+
+
+
 
 </script>
 

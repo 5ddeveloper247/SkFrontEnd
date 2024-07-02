@@ -113,11 +113,9 @@
                             <div class="col-6 col-md mb-4">
                                 <select class="form-select" v-model="filterCriteria.rooms"
                                     aria-label="Default select example">
-                                    
+
                                     <option :value="filterCriteria.rooms" disabled>{{ filterCriteria.rooms }}</option>
-                                    <option
-                                        v-for="num in parseInt(maxRooms)"
-                                        :value="num" :key="num">
+                                    <option v-for="num in parseInt(maxRooms)" :value="num" :key="num">
                                         {{ num }} Room
                                     </option>
                                 </select>
@@ -1006,7 +1004,8 @@ onBeforeRouteLeave((to, from, next) => {
     next();
 });
 
-onBeforeMount(() => {
+onMounted(() => {
+    footerState.setFooterState(false);
     footerState.setFooterState(true);
 })
 
