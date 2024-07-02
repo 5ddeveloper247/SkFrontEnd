@@ -72,7 +72,7 @@
                             <div class="col-6 col-md mb-4">
                                 <select class="form-select" v-model="filterCriteria.city"
                                     aria-label="Default select example">
-                                    <option :value="filterCriteria.city" disabled>{{ filterCriteria.city }}</option>
+                                    <option value="Select city">Select city</option>
                                     <option v-for="city in cityList" :key="city" :value="city">{{ city }}</option>
                                     <!-- <option value="Islamabad">Islamabad</option>
                                     <option value="Lahore">Lahore</option>
@@ -80,20 +80,33 @@
                                 </select>
                             </div>
 
-                            <div class="col-6 col-md mb-4">
+                            <div class="col-6 col-md mb-4"
+                                v-if="filterCriteria.plot !== 'Residential Plot' && filterCriteria.plot !== 'Commercial Plot'">
                                 <select class="form-select" v-model="filterCriteria.homeType"
                                     aria-label="Default select example">
-                                    <option :value="filterCriteria.homeType" disabled>{{ filterCriteria.homeType }}
-                                    </option>
+                                    <option value="Select home">Select home</option>
                                     <option value="House">House</option>
                                     <option value="Flat">Flat</option>
                                 </select>
                             </div>
 
-                            <div class="col-6 col-md mb-4">
+                            <div class="col-6 col-md mb-4"
+                                v-if="filterCriteria.homeType == 'House' || filterCriteria.homeType == 'Flat'">
+                                <select class="form-select" v-model="filterCriteria.rooms"
+                                    aria-label="Default select example">
+
+                                    <option value="Select rooms">Select rooms</option>
+                                    <option v-for="num in parseInt(maxRooms)" :value="num" :key="num">
+                                        {{ num }} Room
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-6 col-md mb-4"
+                                v-if="filterCriteria.homeType !== 'House' && filterCriteria.homeType !== 'Flat'">
                                 <select class="form-select" v-model="filterCriteria.plot"
                                     aria-label="Default select example">
-                                    <option :value="filterCriteria.plot" disabled>{{ filterCriteria.plot }}</option>
+                                    <option value="Select plot type">Select plot type</option>
                                     <option value="Residential Plot">Residential Plot</option>
                                     <option value="Commercial Plot">Commercial Plot</option>
                                 </select>
@@ -102,24 +115,15 @@
                             <div class="col-6 col-md mb-4" v-if="filterCriteria.plot === 'Commercial Plot'">
                                 <select class="form-select" v-model="filterCriteria.commercial"
                                     aria-label="Default select example">
-                                    <option :value="filterCriteria.commercial" disabled>{{ filterCriteria.commercial }}
-                                    </option>
+                                    <option value="Select commercial type">Select commercial type</option>
                                     <option value="Office">Office</option>
                                     <option value="Shop">Shop</option>
                                     <option value="Building">Building</option>
                                 </select>
                             </div>
 
-                            <div class="col-6 col-md mb-4">
-                                <select class="form-select" v-model="filterCriteria.rooms"
-                                    aria-label="Default select example">
 
-                                    <option :value="filterCriteria.rooms" disabled>{{ filterCriteria.rooms }}</option>
-                                    <option v-for="num in parseInt(maxRooms)" :value="num" :key="num">
-                                        {{ num }} Room
-                                    </option>
-                                </select>
-                            </div>
+
 
                             <button type="button" class="btn col-12 col-md main-button px-3 mb-4 m-2 btn-round"
                                 @click="handleFilterCriteria">Search</button>
@@ -732,7 +736,7 @@ const autoplaySpeed = 5000;
 const filterCriteria = ref({
     purpose: 'Sale',
     city: 'Select city',
-    homeType: 'Select home type',
+    homeType: 'Select home',
     plot: 'Select plot type',
     commercial: 'Select commercial type',
     rooms: 'Select rooms',
