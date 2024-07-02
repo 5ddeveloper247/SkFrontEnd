@@ -113,10 +113,13 @@
                             <div class="col-6 col-md mb-4">
                                 <select class="form-select" v-model="filterCriteria.rooms"
                                     aria-label="Default select example">
+                                    
                                     <option :value="filterCriteria.rooms" disabled>{{ filterCriteria.rooms }}</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                                    <option
+                                        v-for="num in parseInt(maxRooms)"
+                                        :value="num" :key="num">
+                                        {{ num }} Room
+                                    </option>
                                 </select>
                             </div>
 
@@ -422,8 +425,8 @@
 
 
             <div v-if="mediaData.length > 0">
-                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :pagination="{ clickable: true }" :modules="modules"
-                    :breakpoints="{
+                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :pagination="{ clickable: true }"
+                    :modules="modules" :breakpoints="{
                         320: { slidesPerView: 1, spaceBetween: 5 },
                         480: { slidesPerView: 1, spaceBetween: 5 },
                         640: { slidesPerView: 1, spaceBetween: 5 },
@@ -719,6 +722,7 @@ const footerState = useFooterStore();
 
 const mediaData = ref([]);
 const testimonials = ref([]);
+const maxRooms = ref(1);
 const loading = ref(true);
 
 ////////////////////////
@@ -774,10 +778,11 @@ const handleFilterCriteria = () => {
         filterCriteria.value.commercial = '';
         //alert(filterCriteria.value.commercial)
     }
-    if (rooms.includes('Select')) {
-        filterCriteria.value.rooms = '';
-        //alert(filterCriteria.value.commercial)
-    }
+    // alert(rooms)
+    // if (rooms.includes('Select')) {
+    //     filterCriteria.value.rooms = '';
+    //     //alert(filterCriteria.value.commercial)
+    // }
 
 
     formDataStore.setFilterData(filterCriteria.value);
@@ -906,6 +911,8 @@ onMounted(() => {
             }, 1000);
             mediaData.value = data.propertyInfo;
             testimonials.value = data.testimonials;
+            maxRooms.value = data.maxRooms;
+
             // $toast.open({
             //     message: 'Property data fetched successfully!',
             //     type: 'success',

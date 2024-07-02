@@ -54,7 +54,7 @@
                 </div>
                 <div class="d-flex flex-column">
                     <label for="message" class="py-3 fw-bold">Message *</label>
-                    <textarea class="w-100 p-4" :class="{ 'border-danger': errors.message }" name="Message"
+                    <textarea class="w-100 p-4 form-control" :class="{ 'border-danger': errors.message }" name="Message"
                         placeholder="Hello there,I would like to talk about how to..." id="message" cols="30" rows="3"
                         v-model="contactFormData.message">
           </textarea>

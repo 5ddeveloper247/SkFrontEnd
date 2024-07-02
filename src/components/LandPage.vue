@@ -37,16 +37,16 @@
                                 <div class="range-slider-container">
                                     <div class="row align-items-center justify-content-center">
                                         <div class="col-md-6 my-2 ">
-                                            <h6 class="fw-normal">Minimum Price</h6>
+                                            <h6 class="fw-normal">Min Price</h6>
                                             <input v-model.number="filterMinPrice" type="number" min="0"
                                                 :max="priceMaxRangeFilterValue" step="1"
                                                 class="range-input w-100  border-1">
                                         </div>
                                         <div class="col-md-6 my-2 ">
-                                            <h6 class="fw-normal"> Maximum Price</h6>
+                                            <h6 class="fw-normal"> Max Price</h6>
                                             <input v-model.number="filterMaxPrice" type="number" min="0"
                                                 :max="priceMaxRangeFilterValue" step="1"
-                                                class="range-input w-100  border-1">
+                                                class="range-input w-100  border-1" >
                                         </div>
                                         <div class="col-md-12 my-2 d-flex justify-content-start">
                                             <button class="search-button py-0 px-3 border-0" type="button"
