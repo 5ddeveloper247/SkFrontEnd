@@ -60,7 +60,7 @@ export default {
                 <div class="d-flex justify-content-between">
                     <div class="d-flex align-items-center d-none d-lg-flex">
                         <i class="fa-solid fa-location-dot"></i>
-                        <p class="px-3">Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.,</p>
+                        <p class="px-3">Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.</p>
                     </div>
                     <div class="d-flex">
                         <div class="d-flex align-items-center mx-md-4">
@@ -140,7 +140,7 @@ p {
 }
 
 a {
-    font-size: 10px;
+    font-size: 12px;
     color: #fff;
     text-decoration: none;
 }
