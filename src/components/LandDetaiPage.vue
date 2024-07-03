@@ -675,8 +675,10 @@
                             <div class="item mx-3">
                                 <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
                                 <div class="card border-0 bg-transparent">
-                                    <img class="card-img-top rounded-5" :src="getImageUrlSwipper(media)" height="270"
-                                        alt="Image">
+                
+                                        <img v-if="media?.property_record_files[0]?.image_uri" class="card-img-top rounded-5" :src="getImageUrlSwipper(media)" height="270"
+                                         alt="Image">
+                                        <img v-if="!media?.property_record_files[0]?.image_uri" src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300" alt="Image">
                                     <div
                                         class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
                                         <h5 class="card-title">PKR {{ media?.price }}</h5>

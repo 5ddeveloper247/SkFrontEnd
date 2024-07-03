@@ -205,7 +205,8 @@
                     <div class="col-md-4 my-1" v-for="media in mediaData" :key="media?.id">
                         <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
                             <div class="card border-0 bg-transparent">
-                                <img :src="getImageUrl(media)" class="rounded-5" height="300" alt="Image">
+                                <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrl(media)" class="rounded-5" height="300" alt="Image">
+                                <img v-if="!media?.property_record_files[0]?.image_uri" src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300" alt="Image">
                                 <div class="card-body">
                                     <h5 class="card-title">PKR {{numFormatter( media?.price )}}</h5>
                                     <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
