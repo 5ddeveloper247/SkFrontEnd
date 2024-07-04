@@ -41,7 +41,8 @@
                     <div class="d-flex flex-column">
                         <h5>Address</h5>
 
-                        <p class="pt-3"><i class="fa-solid fa-location-dot pe-3"></i>
+                        <p class="pt-3 d-flex "><i class="fa-solid fa-location-dot pe-3"></i>
+                            
                             Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.
                         </p>
                         <p class="pt-3"><i class="fa-solid fa-phone pe-3"></i>+92 333 5702234 / +44 7894 279999

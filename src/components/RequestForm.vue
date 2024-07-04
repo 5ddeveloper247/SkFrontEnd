@@ -24,25 +24,28 @@
 
               <div class="'form-card'">
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.firstName }"
-                    class="form-control" id="floatingFirstName" v-model="propertyRequestform.firstName"
-                    placeholder="First Name" />
+                  <input @input="enforceMaxLength($event, 15, 'firstName')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.firstName }" class="form-control"
+                    id="floatingFirstName" v-model="propertyRequestform.firstName" placeholder="First Name" />
 
                   <label for="floatingFirstName">First Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.firstName }"
-                    id="floatingLastName" v-model="propertyRequestform.lastName" placeholder="Last Name" />
+                  <input @input="enforceMaxLength($event, 15, 'lastName')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.firstName }" id="floatingLastName"
+                    v-model="propertyRequestform.lastName" placeholder="Last Name" />
                   <label for="floatingLastName">Last Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="email" :class="{ 'form-control': true, 'input-error': errors.firstName }"
-                    id="floatingEmail" v-model="propertyRequestform.email" placeholder="sk@gmail.com" />
+                  <input @input="enforceMaxLength($event, 50, 'email')" type="email"
+                    :class="{ 'form-control': true, 'input-error': errors.firstName }" id="floatingEmail"
+                    v-model="propertyRequestform.email" placeholder="sk@gmail.com" />
                   <label for="floatingEmail">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" :class="{ 'form-control': true, 'input-error': errors.firstName }"
-                    id="floatingPhone" v-model="propertyRequestform.phone" placeholder="Phone" />
+                  <input @input="enforceMaxLength($event, 13, 'phone')" type="number"
+                    :class="{ 'form-control': true, 'input-error': errors.firstName }" id="floatingPhone"
+                    v-model="propertyRequestform.phone" placeholder="Phone" />
                   <label for="floatingPhone">Phone</label>
                 </div>
                 <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
@@ -206,28 +209,33 @@
                   </div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.city }" id="floatingInput"
+                  <input @input="enforceMaxLength($event, 50, 'city')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.city }" id="floatingInput"
                     v-model="propertyRequestform.city" placeholder="City">
                   <label for="floatingInput">City</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.location }"
-                    id="floatingInput" v-model="propertyRequestform.location" placeholder="Location">
+                  <input @input="enforceMaxLength($event, 50, 'location')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.location }" id="floatingInput"
+                    v-model="propertyRequestform.location" placeholder="Location">
                   <label for="floatingInput">Location</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.address }" id="floatingInput"
+                  <input @input="enforceMaxLength($event, 100, 'address')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.address }" id="floatingInput"
                     v-model="propertyRequestform.address" placeholder="Address">
                   <label for="floatingInput">Address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" :class="{ 'form-control': true, 'input-error': errors.size }" id="floatingInput"
+                  <input @input="enforceMaxLength($event, 15, 'size')" type="number"
+                    :class="{ 'form-control': true, 'input-error': errors.size }" id="floatingInput"
                     v-model="propertyRequestform.size" placeholder="Size">
                   <label for="floatingInput">Size</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" :class="{ 'form-control': true, 'input-error': errors.totalPrice }"
-                    id="floatingInput" v-model="propertyRequestform.totalPrice" placeholder="Total Price">
+                  <input @input="enforceMaxLength($event, 15, 'totalPrice')" type="number"
+                    :class="{ 'form-control': true, 'input-error': errors.totalPrice }" id="floatingInput"
+                    v-model="propertyRequestform.totalPrice" placeholder="Total Price in PKR">
                   <label for="floatingInput">Total Price</label>
                 </div>
               </div>
@@ -246,7 +254,7 @@
                     <h2 class="steps">Step 4 - 4</h2>
                   </div>
                 </div> <br>
-                <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
+                <h2 class="purple-text text-center"><strong>Submitting....</strong></h2> <br>
                 <div class="row justify-content-center">
 
                 </div>
@@ -265,7 +273,8 @@
 
 
 <script>
-import { ref, onMounted, onBeforeMount, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeMount, onUnmounted, onBeforeUnmount, watch } from 'vue';
+import { useRoute, onBeforeRouteLeave } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Loader from './Loader.vue';
@@ -472,6 +481,16 @@ export default {
       document.querySelector(".progress-bar").style.width = percent + "%";
     };
 
+
+
+    const enforceMaxLength = (event, maxLength, fieldName) => {
+      if (event.target.value.length > maxLength) {
+        event.target.value = event.target.value.slice(0, maxLength);
+        propertyRequestform.value[fieldName] = event.target.value;
+      }
+    };
+
+
     const handleStepFirst = () => {
       const { firstName, lastName, phone, email } = propertyRequestform.value;
       let valid = true;
@@ -479,7 +498,8 @@ export default {
       if (!firstName) {
         errors.value.firstName = true;
         valid = false;
-      } else {
+      }
+      else {
         errors.value.firstName = false;
       }
 
@@ -633,12 +653,17 @@ export default {
     };
 
 
-    onBeforeMount(() => {
+    onMounted(() => {
       footerState.setFooterState(true);
     })
 
-    onBeforeUnmount(() => {
+    onUnmounted(() => {
       footerState.setFooterState(false);
+    })
+
+    onBeforeRouteLeave((to, from, next) => {
+      footerState.setFooterState(false);
+      next();
     })
 
     return {
@@ -666,6 +691,7 @@ export default {
       fs_step_show,
       handle_purpose_active_rent,
       handle_purpose_active_sale,
+      enforceMaxLength,
     };
   }
 };

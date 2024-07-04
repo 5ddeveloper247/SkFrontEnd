@@ -17,28 +17,29 @@
 
     </div> -->
 
-      <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="40" :pagination="{ clickable: true }" :modules="modules" :breakpoints="{
+    <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="40" :pagination="{ clickable: true }" :modules="modules"
+      :breakpoints="{
         320: { slidesPerView: 1, spaceBetween: 5 },
         480: { slidesPerView: 1, spaceBetween: 5 },
         640: { slidesPerView: 1, spaceBetween: 5 },
         768: { slidesPerView: 2, spaceBetween: 3 },
         1024: { slidesPerView: 3, spaceBetween: 40 }
       }" class="mySwiper mt-5">
-        <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
-          <div class="media-cards">
-            <div class="card media-card-1" @click="showTopVideo(media.id)">
-              <iframe :src="convertToEmbedUrl(media.url)" height="180" frameborder="0" allowfullscreen></iframe>
-              <div class="card-body">
-                <p class="card-text text-center px-2">
-                  {{ media.description }}
-                </p>
-              </div>
-              <i class="fa-brands fa-youtube"></i>
+      <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
+        <div class="media-cards">
+          <div class="card media-card-1" @click="showTopVideo(media.id)">
+            <iframe :src="convertToEmbedUrl(media.url)" height="180" frameborder="0" allowfullscreen></iframe>
+            <div class="card-body">
+              <p class="card-text text-center px-2">
+                {{ media.description }}
+              </p>
             </div>
+            <i class="fa-brands fa-youtube"></i>
           </div>
-        </swiper-slide>
-      </swiper>
-    </div>
+        </div>
+      </swiper-slide>
+    </swiper>
+  </div>
 
 
   <!-- Video Section Bottom -->
@@ -50,36 +51,39 @@
       </div>
     </div>
 
-      <!-- Media Cards Bottom -->
-      <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="50" :pagination="{ clickable: true }" :modules="modules" :breakpoints="{
+    <!-- Media Cards Bottom -->
+    <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="50" :pagination="{ clickable: true }" :modules="modules"
+      :breakpoints="{
         320: { slidesPerView: 1, spaceBetween: 5 },
         480: { slidesPerView: 1, spaceBetween: 5 },
         640: { slidesPerView: 1, spaceBetween: 5 },
         768: { slidesPerView: 2, spaceBetween: 3 },
         1024: { slidesPerView: 3, spaceBetween: 50 }
       }" class="mySwiper mt-5">
-        <swiper-slide :slidesPerView="3" v-for="(image, index) in mediaOnly" :key="index">
-          <div class="media-cards">
-            <div>
-              <div class="card media-card-1">
-                <img :src="convertToMediaOnlyUrl(image.url)" height="170" width="100%" alt="..." @click="bottomTopMeida(image.id)" />
-                <div class="card-body">
-                  <p class="card-text text-center px-2">
-                    {{ image.description }}
-                  </p>
-                </div>
+      <swiper-slide :slidesPerView="3" v-for="(image, index) in mediaOnly" :key="index">
+        <div class="media-cards">
+          <div>
+            <div class="card media-card-1">
+              <img :src="convertToMediaOnlyUrl(image.url)" height="170" width="100%" alt="..."
+                @click="bottomTopMeida(image.id)" />
+              <div class="card-body">
+                <p class="card-text text-center px-2">
+                  {{ image.description }}
+                </p>
               </div>
             </div>
           </div>
-        </swiper-slide>
-      </swiper>
-    </div>
- 
+        </div>
+      </swiper-slide>
+    </swiper>
+  </div>
+
 </template>
 
 
 <script setup>
-import { onMounted, ref, watch, onBeforeMount, onBeforeUnmount } from 'vue';
+import { ref, onMounted, watch, computed, onBeforeMount, onBeforeUnmount, onUnmounted } from 'vue';
+import { useRoute, onBeforeRouteLeave } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -258,13 +262,24 @@ onMounted(() => {
 
 
 
+//handling footer here 
 onBeforeMount(() => {
   footerState.setFooterState(true);
 })
 
-onBeforeUnmount(() => {
+onMounted(()=>{
   footerState.setFooterState(false);
+  footerState.setFooterState(true);
 })
+onUnmounted(() => {
+  footerState.setFooterState(false);
+
+})
+
+onBeforeRouteLeave((to, from, next) => {
+  footerState.setFooterState(false);
+  next();
+});
 </script>
 
 

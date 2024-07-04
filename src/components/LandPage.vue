@@ -46,7 +46,7 @@
                                             <h6 class="fw-normal"> Max Price</h6>
                                             <input v-model.number="filterMaxPrice" type="number" min="0"
                                                 :max="priceMaxRangeFilterValue" step="1"
-                                                class="range-input w-100  border-1" >
+                                                class="range-input w-100  border-1">
                                         </div>
                                         <div class="col-md-12 my-2 d-flex justify-content-start">
                                             <button class="search-button py-0 px-3 border-0" type="button"
@@ -194,8 +194,22 @@
                     </div>
                 </div>
             </nav>
+            <div v-if="notFound"
+                class="col-12  d-flex justify-content-center align-items-center col-lg-9 col-8 my-1 properties-listed">
+                <div class="row listing d-flex justify-content-center align-items-center">
+                    <h1 class="d-flex justify-content-center mb-0"
+                        style="margin-top: 100px;color: #1e02021c;font-size: 1rem;font-weight: bold;">
+                        try searching
+                    </h1>
+                    <h1 class="d-flex justify-content-center"
+                        style="color: #1e02021c;font-size: 5rem;font-weight: bold; margin-top: -30px;">
+                        Opps!
+                    </h1>
 
-            <div class="col-12 col-lg-9 col-8 my-1 properties-listed">
+                </div>
+            </div>
+
+            <div v-if="mediaData" class="col-12 col-lg-9 col-8 my-1 properties-listed">
                 <div class="row listing">
                     <div class="row justify-content-between align-items-center properties-for-sale">
                         <div class="col-9">
@@ -205,10 +219,13 @@
                     <div class="col-md-4 my-1" v-for="media in mediaData" :key="media?.id">
                         <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
                             <div class="card border-0 bg-transparent">
-                                <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrl(media)" class="rounded-5" height="300" alt="Image">
-                                <img v-if="!media?.property_record_files[0]?.image_uri" src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300" alt="Image">
+                                <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrl(media)"
+                                    class="rounded-5" height="300" alt="Image">
+                                <img v-if="!media?.property_record_files[0]?.image_uri"
+                                    src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300"
+                                    alt="Image">
                                 <div class="card-body">
-                                    <h5 class="card-title">PKR {{numFormatter( media?.price )}}</h5>
+                                    <h5 class="card-title">PKR {{ numFormatter(media?.price) }}</h5>
                                     <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
                                     <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                 </div>
@@ -280,6 +297,7 @@ const cityListing = ref([]);
 const filterMinPrice = ref(0);
 const filterMaxPrice = ref(0);
 const initialFetchCompleted = ref(false); // Flag to indicate if the initial fetch is completed
+const notFound = ref(false);
 
 const Landfilters = ref({
     HomePageFilters: '',
@@ -354,6 +372,24 @@ const generateFilterData = (HomefilterData) => {
     Landfilters.value.min_year = min_year || '';
     return true;
 };
+
+
+watch(
+    () => mediaData.value,
+    (newValue, oldValue) => {
+        if (newValue.length == 0) {
+            setTimeout(() => {
+                // Your logic here after 2 seconds
+            }, 2000);
+            notFound.value = true;
+        }
+        else {
+            notFound.value = false;
+        }
+    },
+    { deep: true } // Deep watch to detect nested changes
+);
+
 
 const handleFilterPrices = () => {
     if (filterMinPrice.value < filterMaxPrice.value) {
@@ -432,8 +468,8 @@ watch(
     (newValue, oldValue) => {
         if (initialFetchCompleted.value) {
             fetchPropertyData(newValue);
-            console.log(newValue)
-            console.log("watchersssssssssssssssssssss")
+
+
         }
     },
     { deep: true } // Deep watch to detect nested changes
@@ -572,12 +608,8 @@ onMounted(() => {
         });
 });
 
-
-onMounted(() => {
-    window.scrollTo(0, 0);
-});
 //handling footer here 
-onBeforeMount(() => {
+onMounted(() => {
     footerState.setFooterState(true);
 })
 

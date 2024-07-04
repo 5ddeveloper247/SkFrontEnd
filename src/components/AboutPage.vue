@@ -1,11 +1,14 @@
 <script setup>
-import { ref,onBeforeMount,onBeforeUnmount } from 'vue';
+import { ref,onBeforeMount,onBeforeUnmount,onMounted } from 'vue';
+import { RouterLink, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { useFooterStore } from '../stores/FooterLoadingState';
+
+
 
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay]);
@@ -20,12 +23,22 @@ const autoplay = {
 
 //handling footer by these two
 onBeforeMount(() => {
-    footerState.setFooterState(true);
+
+footerState.setFooterState(false);
+footerState.setFooterState(true);
+})
+onMounted(() => {
+footerState.setFooterState(false);
+footerState.setFooterState(true);
 })
 
 onBeforeUnmount(() => {
-    footerState.setFooterState(false);
+footerState.setFooterState(false);
 })
+onBeforeRouteLeave((to, from, next) => {
+footerState.setFooterState(false);
+next();
+});
 
 </script>
 

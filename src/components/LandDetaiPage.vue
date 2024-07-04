@@ -514,10 +514,9 @@
                         tabindex="0">
                         <hr>
                         <h2>Map</h2>
-                        <div class="map-inner-content"
-                                v-if="propertyData?.property_listing_pape?.address_map_location">
-                                <span v-html="propertyData?.property_listing_pape?.address_map_location"></span>
-                            </div>
+                        <div class="map-inner-content" v-if="propertyData?.property_listing_pape?.address_map_location">
+                            <span v-html="propertyData?.property_listing_pape?.address_map_location"></span>
+                        </div>
 
                         <div class="map mt-5" v-if="!propertyData?.property_listing_pape?.address_map_location">
                             <div class="map-inner-content">
@@ -554,22 +553,23 @@
                     <!-- inqueryform -->
                     <form class="detail-page-form">
                         <div class="form-floating my-4">
-                            <input type="text" v-model="inquiryData.name" class="form-control" id="nameInput"
-                                placeholder="New York, San Francisco, etc">
+                            <input @input="enforceMaxLength($event, 15, 'name')" type="text" v-model="inquiryData.name"
+                                class="form-control" id="nameInput" placeholder="New York, San Francisco, etc">
                             <label for="locationInput">Name</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="email" v-model="inquiryData.email" class="form-control" id="emailInput"
-                                placeholder="Email">
+                            <input @input="enforceMaxLength($event, 50, 'email')" type="email"
+                                v-model="inquiryData.email" class="form-control" id="emailInput" placeholder="Email">
                             <label for="emailInput">Email</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="number" v-model="inquiryData.phone" class="form-control" id="phoneInput"
-                                placeholder="Phone">
+                            <input @input="enforceMaxLength($event, 13, 'phone')" type="number"
+                                v-model="inquiryData.phone" class="form-control" id="phoneInput" placeholder="Phone">
                             <label for="phoneInput">Phone</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <textarea v-model="inquiryData.description" class="form-control textarea-size"
+                            <textarea @input="enforceMaxLength($event, 150, 'description')"
+                                v-model="inquiryData.description" class="form-control textarea-size"
                                 placeholder="Leave a comment here" id="commentInput"></textarea>
                             <label for="commentInput">Comments</label>
                         </div>
@@ -607,16 +607,6 @@
                     </form>
 
                 </div>
-                <!-- <div class="property-detail d-flex flex-column py-4 px-md-2 shadow rounded-4 mt-4">
-                    <div class="d-flex flex-wrap align-items-center justify-content-center">
-                        <h5 class="text-center">Useful Links</h5>
-                    </div>
-                    <div class="d-flex flex-column property-links px-md-4 px-2">
-                        <a href="">Property for Sale in Islamabad</a>
-                        <a href="">Property for Sale in Lahore</a>
-                        <a href="">Property for Sale in Peshawar</a>
-                    </div>
-                </div> -->
                 <div class="property-detail d-flex flex-column py-4 px-md-2 d-none shadow rounded-4 mt-4">
                     <div class="d-flex flex-wrap align-items-center justify-content-center">
                         <h5 class="text-center">Signature Properties</h5>
@@ -640,27 +630,7 @@
 
             <div class="row px-md-5">
                 <h2 class="pb-3">Relevent Properties</h2>
-                <!-- <swiper :speed="1000" :autoplay="autoplay" :slidesPerView="3" :navigation="true" :modules="modules"
-                    :breakpoints="{
-                        320: { slidesPerView: 1, spaceBetween: 5 },
-                        480: { slidesPerView: 1, spaceBetween: 5 },
-                        640: { slidesPerView: 2, spaceBetween: 10 },
-                        768: { slidesPerView: 2, spaceBetween: 15 },
-                        1024: { slidesPerView: 3, spaceBetween: 25 }
-                    }" class="mySwiper">
-                    <swiper-slide v-for="media in propertyData.property_record_files" :key="media.id"
-                        :slidesPerView="3">
-                        <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
-                            <div>
-                                <img :src="getImageUrl(media)" class="d-block" height="270" width="100%" alt="Image 3">
-                                <div class="verified-society rounded-2">
-                                    <p class="text-white p-2 d-flex align-items-center"><i
-                                            class="fa-solid fa-check pe-2"></i>Verified</p>
-                                </div>
-                            </div>
-                        </RouterLink>
-                    </swiper-slide>
-                </swiper> -->
+
                 <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :pagination="{ clickable: true }"
                     :modules="modules" :breakpoints="{
                         320: { slidesPerView: 1, spaceBetween: 5 },
@@ -675,10 +645,13 @@
                             <div class="item mx-3">
                                 <!-- {{ console.log(media?.property_record_files[0]?.image_uri) }} -->
                                 <div class="card border-0 bg-transparent">
-                
-                                        <img v-if="media?.property_record_files[0]?.image_uri" class="card-img-top rounded-5" :src="getImageUrlSwipper(media)" height="270"
-                                         alt="Image">
-                                        <img v-if="!media?.property_record_files[0]?.image_uri" src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300" alt="Image">
+
+                                    <img v-if="media?.property_record_files[0]?.image_uri"
+                                        class="card-img-top rounded-5" :src="getImageUrlSwipper(media)" height="270"
+                                        alt="Image">
+                                    <img v-if="!media?.property_record_files[0]?.image_uri"
+                                        src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300"
+                                        alt="Image">
                                     <div
                                         class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
                                         <h5 class="card-title">PKR {{ media?.price }}</h5>
@@ -728,10 +701,10 @@
 // Import helper functions
 import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';
 import { numFormatter } from '../helpers/numberFormater';
-import { ref, onBeforeMount, onBeforeUnmount, onMounted, watch } from 'vue';
+import { ref, onBeforeMount, onBeforeUnmount, onUnmounted, onMounted, watch } from 'vue';
+import { useRoute, onBeforeRouteLeave } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
-import { useRoute } from 'vue-router';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -946,6 +919,7 @@ const propertyDetailbyId = () => {
             });
         });
 }
+
 onBeforeMount(() => {
     // Fetch the media data
     propertyDetailbyId();
@@ -959,9 +933,28 @@ watch(
         propertyDetailbyId(); // Fetch new data based on the new route parameter
     }
 );
-onBeforeUnmount(() => {
+
+
+const enforceMaxLength = (event, maxLength, fieldName) => {
+    if (event.target.value.length > maxLength) {
+        event.target.value = event.target.value.slice(0, maxLength);
+        inquiryData.value[fieldName] = event.target.value;
+    }
+};
+
+//handling footer here 
+onMounted(() => {
+    footerState.setFooterState(true);
+})
+
+onUnmounted(() => {
     footerState.setFooterState(false);
 })
+
+onBeforeRouteLeave((to, from, next) => {
+    footerState.setFooterState(false);
+    next();
+});
 
 
 

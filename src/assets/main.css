@@ -173,9 +173,9 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}s
+}
 
-.mainNavBar {
+s .mainNavBar {
     /* background: rgba(255, 255, 255, .3); */
     background-color: #0000005e;
     box-shadow: 0px 5px 20px -5px #00000033;
@@ -345,6 +345,7 @@ input::-webkit-inner-spin-button {
     }
 }
 
+
 .map {
     background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 69%)), url(../assets/Images/map.webp);
     height: 21rem;
@@ -422,12 +423,14 @@ input::-webkit-inner-spin-button {
     color: var(--second--main-color) !important;
     border: 1px solid var(--second--main-color);
 }
-.call-btn{
+
+.call-btn {
     text-decoration: none;
     border-radius: 20px !important;
     background-color: var(--second--main-color) !important;
     color: #fff !important;
 }
+
 /* =====================New Hero Section================== */
 .heroandnav {
     background-image: url(../assets/Images/construction1.jpg);
@@ -2013,14 +2016,18 @@ header h2 {
     border-radius: 10px;
     padding: 10px;
 }
-.swiper-button-prev, .swiper-button-next{
+
+.swiper-button-prev,
+.swiper-button-next {
     color: var(--second--main-color) !important;
 }
-.swiper-pagination-bullet{
+
+.swiper-pagination-bullet {
     margin-top: 50px !important;
     top: 50rem !important;
     background-color: var(--second--main-color) !important;
 }
-.swiper-wrapper{
+
+.swiper-wrapper {
     margin-bottom: 30px;
 }

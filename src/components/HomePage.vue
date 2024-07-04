@@ -1,7 +1,7 @@
 <template>
 
 
-    <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade" v-show="!loading">
+    <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade">
         <div class="carousel-inner">
             <div class="carousel-item top-carousal active">
                 <img src="../assets/Images/main-slider-img-2.jpg" class="d-block w-100" alt="...">
@@ -440,9 +440,12 @@
                             style="text-decoration: none;">
                             <div class="item mx-3">
                                 <div class="card border-0 bg-transparent">
-                                    <img v-if="media?.property_record_files[0]?.image_uri" class="card-img-top rounded-5" :src="getImageUrl(media)" height="270"
+                                    <img v-if="media?.property_record_files[0]?.image_uri"
+                                        class="card-img-top rounded-5" :src="getImageUrl(media)" height="270"
                                         alt="Image">
-                                        <img v-if="!media?.property_record_files[0]?.image_uri" src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300" alt="Image">
+                                    <img v-if="!media?.property_record_files[0]?.image_uri"
+                                        src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300"
+                                        alt="Image">
 
                                     <div
                                         class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center pb-1">
@@ -695,7 +698,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, onBeforeMount } from 'vue';
 import emitter from '../../emitter';
-import { RouterLink, useRouter, onBeforeRouteLeave } from 'vue-router';
+import { RouterLink, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '.././stores/HomeDataFilterStore'; // Adjust the path as necessary
@@ -758,6 +761,8 @@ const filterCriteria = ref({
     min_year: '',
 
 });
+
+
 
 const handleFilterCriteria = () => {
     const cityVal = filterCriteria.value.city;
@@ -891,12 +896,6 @@ const getMediabyType = () => {
 
 
 
-
-onMounted(() => {
-    window.scrollTo(0, 0);
-});
-
-
 onMounted(() => {
 
     // Make API call
@@ -935,7 +934,6 @@ onMounted(() => {
             });
         });
 });
-
 
 
 onMounted(() => {
