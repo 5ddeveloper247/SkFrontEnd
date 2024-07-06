@@ -4,7 +4,7 @@
     <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade">
         <div class="carousel-inner">
             <div class="carousel-item top-carousal active">
-                <img src="../assets/Images/main-slider-img-2.jpg" class="d-block w-100" alt="...">
+                <img src="../assets/Images/8609d298-8f84-4192-9cc7-a376e1e32ef1.png" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
                         <h1 class="text-white p-0 p-md-5 text-center">
@@ -17,7 +17,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/main-slider-img-1.jpg" class="d-block w-100" alt="...">
+                <img src="../assets/Images/as.png" class="d-block w-100" alt="...">
                 <div class="slider-text text-end">
                     <div class="anim-2">
                         <h1 class="text-white p-0 p-md-5 text-center text-capitalize">
@@ -28,7 +28,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/main-slider-img-3.jpg" class="d-block w-100" alt="...">
+                <img src="../assets/Images/bcd0d308-36ca-4e5d-aa12-3d97b693662e.png" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
                         <h1 class="text-white p-0 p-md-5 text-center text-uppercase">
@@ -411,15 +411,15 @@
                 </p>
                 <ul class="d-flex justify-content-end flex-nowrap mb-0 p-0">
                     <li class="nav-item mx-1">
-                        <a class="listed-properties py-2 px-3 text-black active" href="#"
+                        <a class="listed-properties py-1 px-3 text-black active" href="#"
                             @click.prevent="setMediaType('All')">All</a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="listed-properties py-2 px-3 text-black" href="#"
+                        <a class="listed-properties py-1 px-3 text-black" href="#"
                             @click.prevent="setMediaType('Sale')">Sale</a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="listed-properties py-2 px-3 text-black" href="#"
+                        <a class="listed-properties py-1 px-3 text-black" href="#"
                             @click.prevent="setMediaType('Rent')">Rent</a>
                     </li>
                 </ul>
@@ -433,45 +433,69 @@
                         480: { slidesPerView: 1, spaceBetween: 5 },
                         640: { slidesPerView: 1, spaceBetween: 5 },
                         768: { slidesPerView: 2, spaceBetween: 3 },
-                        1024: { slidesPerView: 3, spaceBetween: 5 }
+                        1024: { slidesPerView: 3, spaceBetween: 10 }
                     }" class="mySwiper">
                     <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
-                        <RouterLink :to="{ name: 'land-detail', params: { id: media.id } }"
-                            style="text-decoration: none;">
-                            <div class="item mx-3">
+                        <div class="property-card px-2 mx-2 py-2 mb-3">
+                            <RouterLink class="r-cards" :to="{ name: 'land-detail', params: { id: media?.id } }">
                                 <div class="card border-0 bg-transparent">
-                                    <img v-if="media?.property_record_files[0]?.image_uri"
-                                        class="card-img-top rounded-5" :src="getImageUrl(media)" height="270"
-                                        alt="Image">
+                                    <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrl(media)"
+                                        class="" height="200" width="100%" alt="Image">
                                     <img v-if="!media?.property_record_files[0]?.image_uri"
-                                        src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300"
+                                        src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="200"
                                         alt="Image">
-
-                                    <div
-                                        class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center pb-1">
-                                        <h5 class="card-title">PKR {{ numFormatter(media.price) }}</h5>
-                                        <p class="card-text elip">{{ media.property_listing_pape.extra_info_title }}</p>
-                                    </div>
                                 </div>
-                            </div>
-                        </RouterLink>
-
-                        <div class="d-flex align-items-center justify-content-between px-4 mx-2 w-100">
-                            <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>{{
-                                    media.property_listing_pape.propertyDetail_bedrooms }}</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
-                                    media.property_listing_pape.propertyDetail_bathrooms }}</div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <a class="btn btn-sm nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                    :href="'mailto:' + media.pInfo_email" role="button">
-                                    <i class="fa-regular fa-envelope pe-2"></i>
-                                </a>
-                                <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                    :href="'tel:' + media.pInfo_phoneNumber" role="button">
-                                    <i class="fa-solid fa-phone pe-2"></i>
-                                </a>
+                            </RouterLink>
+                            <div class="card-content d-flex flex-column pb-2">
+                                <div class="card-body pt-3">
+                                    <h5 class="card-title fw-bold"> PKR {{ numFormatter(media?.price) }}</h5>
+                                    <p class="card-text elip">
+                                        {{ media?.property_listing_pape?.extra_info_title }}
+                                    </p>
+                                    <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
+                                </div>
+                                <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home=='House' || media?.property_listing_pape?.pupose_home=='Flat'">
+                                        <div>
+                                            <i class="fa-solid fa-bed pe-1"></i>
+                                            <small class="fw-bold">
+                                                {{ media?.property_listing_pape?.propertyDetail_bedrooms }}
+                                            </small>
+                                        </div>
+                                        <div class="mx-3">
+                                            <i class="fa-solid fa-toilet pe-1"></i>
+                                            <small class="fw-bold">
+                                                {{ media?.property_listing_pape?.propertyDetail_bathrooms }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home !=='House' && media?.property_listing_pape?.pupose_home !=='Flat'">
+                                        <div>
+                                            <i class="fa-solid fa-landmark pe-1"></i>
+                                            <small class="fw-bold">
+                                                {{ media?.property_listing_pape?.propertyDetail_area }}
+                                            </small>
+                                        </div>
+                                        <div class="mx-3">
+                                            <i class="fa-solid fa-expand pe-1"></i>
+                                            <small class="fw-bold">
+                                                {{ media?.property_listing_pape?.propertyDetail_area_unit }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <a class="btn w-100 d-flex gap-2 align-items-center btn-sm nav-sub-links-main text-nowrap  py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                        :href="'mailto:' + media?.pInfo_email" role="button">
+                                        <h6 class="mb-0 icon-text">Email</h6>
+                                        <i class="fa-regular fa-envelope"></i>
+                                        <!-- {{ media?.pInfo_email }} -->
+                                    </a>
+                                    <a class="btn w-100 d-flex gap-2 align-items-center btn-sm mx-2 nav-sub-links-main text-nowrap d-flex flex-nowrap align-items-center justify-content-center"
+                                        :href="'tel:' + media?.pInfo_phoneNumber" role="button">
+                                        <h6 class="mb-0 icon-text">Call</h6>
+                                        <i class="fa-solid fa-phone"></i>
+                                        <!-- {{ media?.pInfo_phoneNumber }} -->
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </swiper-slide>
@@ -1081,5 +1105,13 @@ span {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.property-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.347) 0px 3px 8px;
+    transition: transform 0.4s;
+    margin-top: 1rem;
 }
 </style>

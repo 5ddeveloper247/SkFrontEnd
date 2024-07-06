@@ -10,11 +10,11 @@
             </ol>
         </nav>
 
-        <div class="row land-con align-items-start">
-            <nav class="navbar  col-12 col-lg-3 side-bar-checkboxes navbar-expand-lg">
-                <div class="w-100">
+        <div class="row gx-5 land-con align-items-start">
+            <nav class="navbar col-12 col-lg-3 pt-0 side-bar-checkboxes navbar-expand-lg">
+                <div class="">
                     <div class="d-flex gap-3">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        <button class="navbar-toggler mx-3 my-2" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -24,36 +24,41 @@
                         </h3> -->
                     </div>
                     <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
-                        <div class="shadow p-3 p-lg-0 h-100 w-100 rounded-4">
-                            <div class="filters d-flex flex-column py-4 px-md-2">
-                                <div class="d-flex flex-wrap align-items-center justify-content-between">
-                                    <h5>Final Results</h5>
-                                    <p><small>{{ propertiesCounter }} Land/Properties</small></p>
+                        <div class="h-100 w-100 rounded-4">
+                            <div class="filters d-flex flex-column pb-4">
+                                <div
+                                    class="nav-top-c d-flex flex-wrap align-items-center justify-content-between px-3 py-2">
+                                    <h5 class="mb-0">FINAL RESULTS</h5>
                                 </div>
                                 <!-- <div class="mt-2">
                                     <h6 class="fw-normal">Minimum Price - Maximum Price</h6>
                                 </div> -->
 
-                                <div class="range-slider-container">
-                                    <div class="row align-items-center justify-content-center">
-                                        <div class="col-md-6 my-2 ">
-                                            <h6 class="fw-normal">Min Price</h6>
-                                            <input v-model.number="filterMinPrice" type="number" min="0"
-                                                :max="priceMaxRangeFilterValue" step="1"
-                                                class="range-input w-100  border-1">
+                                <div class="range-slider-container p-3 ">
+                                    <div class="row g-0">
+                                        <div class="col-md-4 my-2 ">
+                                            <!-- <span class="fw-normal">Min Price</span> -->
+                                            <input placeholder="min" v-model.number="filterMinPrice" type="number"
+                                                min="0" :max="priceMaxRangeFilterValue" step="1"
+                                                class="range-input w-100 rounded-1">
                                         </div>
-                                        <div class="col-md-6 my-2 ">
-                                            <h6 class="fw-normal"> Max Price</h6>
-                                            <input v-model.number="filterMaxPrice" type="number" min="0"
-                                                :max="priceMaxRangeFilterValue" step="1"
-                                                class="range-input w-100  border-1">
+                                        <div class="col-md-4 my-2 ">
+                                            <!-- <span class="fw-normal"> Max Price</span> -->
+                                            <input placeholder="max" v-model.number="filterMaxPrice" type="number"
+                                                min="0" :max="priceMaxRangeFilterValue" step="1"
+                                                class="range-input w-100 rounded-1">
                                         </div>
-                                        <div class="col-md-12 my-2 d-flex justify-content-start">
-                                            <button class="search-button py-0 px-3 border-0" type="button"
-                                                @click="handleFilterPrices">Search (<span class="text-white"
-                                                    id="minPrice">{{ filterMinPrice }}</span> :
-                                                <span class="text-white" id="maxPrice">{{ filterMaxPrice
-                                                    }}</span>)</button>
+                                        <div class="col-md-4 my-2 d-flex align-items-end">
+                                            <button class="search-button rounded-1 px-3 border-0" type="button"
+                                                @click="handleFilterPrices">
+                                                <span class="text-white fw-bold">Search</span>
+                                                <!-- ( <span class="text-white fw-bold" id="minPrice">
+                                                    {{ filterMinPrice }}
+                                                </span> :
+                                                <span class="text-white fw-bold" id="maxPrice">
+                                                    {{ filterMaxPrice }}
+                                                </span> ) -->
+                                            </button>
                                         </div>
                                     </div>
                                     <!-- <p>Max: {{ priceMaxRangeFilterValue }}</p> -->
@@ -64,129 +69,178 @@
                                 </div>
 
 
-                                <div class="mt-2">
-                                    <h6>Purpose</h6>
-                                </div>
-
-
                                 <!-- checkx -->
 
                                 <div class="d-flex flex-column">
-                                    <div class="m-2 mb-4 w-100">
-                                        <div>
-                                            <h6>Purpose</h6>
-                                            <label class="d-block">
-                                                <input type="radio" v-model="Landfilters.purpose" value="Sale"> Sale
-                                            </label>
-                                            <label class="d-block">
-                                                <input type="radio" v-model="Landfilters.purpose" value="Rent"> Rent
-                                            </label>
+                                    <div class="w-100">
+                                        <div class="mt-2">
+                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+                                                @click="toggleInputs">
+                                                PURPOSE
+                                                <i :class="{ 'fa-chevron-right': showInputs, 'fa-chevron-down': !showInputs }"
+                                                    class="fa-solid"></i>
+                                            </h6>
                                         </div>
+                                        <transition name="fade">
+                                            <div v-if="!showInputs" class="px-4">
+                                                <label class="d-flex align-items-center gap-1">
+                                                    <input type="radio" v-model="Landfilters.purpose" value="Sale"> Sale
+                                                </label>
+                                                <label class="d-flex align-items-center gap-1 mt-1">
+                                                    <input type="radio" v-model="Landfilters.purpose" value="Rent"> Rent
+                                                </label>
+                                            </div>
+                                        </transition>
                                     </div>
 
-                                    <div class="mt-2">
-                                        <h6>Home Type</h6>
+                                    <div class="w-100">
+                                        <!-- HOME TYPE -->
+                                        <div class="mt-2">
+                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+                                                @click="toggleHomeType">
+                                                HOME TYPE
+                                                <i :class="{ 'fa-chevron-right': showHomeType, 'fa-chevron-down': !showHomeType }"
+                                                    class="fa-solid"></i>
+                                            </h6>
+                                        </div>
+                                        <transition name="fade">
+                                            <div v-if="!showHomeType" class="px-4">
+                                                <label class="d-flex align-items-center gap-1">
+                                                    <input type="checkbox" v-model="Landfilters.homeType" value="House">
+                                                    House
+                                                </label>
+                                                <label class="d-flex align-items-center gap-1 mt-1">
+                                                    <input type="checkbox" v-model="Landfilters.homeType" value="Flat">
+                                                    Flat
+                                                </label>
+                                            </div>
+                                        </transition>
+
+                                        <!-- PLOT -->
+                                        <div class="mt-2">
+                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+                                                @click="togglePlot">
+                                                PLOT
+                                                <i :class="{ 'fa-chevron-right': showPlot, 'fa-chevron-down': !showPlot }"
+                                                    class="fa-solid"></i>
+                                            </h6>
+                                        </div>
+                                        <transition name="fade">
+                                            <div v-if="!showPlot" class="px-4">
+                                                <label class="d-flex align-items-center gap-1">
+                                                    <input type="checkbox" v-model="Landfilters.plot"
+                                                        value="Residential Plot"> Residential Plot
+                                                </label>
+                                                <label class="d-flex align-items-center gap-1 mt-1">
+                                                    <input type="checkbox" v-model="Landfilters.plot"
+                                                        value="Commercial Plot"> Commercial Plot
+                                                </label>
+                                            </div>
+                                        </transition>
+
+                                        <!-- COMMERCIAL -->
+                                        <div class="mt-2">
+                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+                                                @click="toggleCommercial">
+                                                COMMERCIAL
+                                                <i :class="{ 'fa-chevron-right': showCommercial, 'fa-chevron-down': !showCommercial }"
+                                                    class="fa-solid"></i>
+                                            </h6>
+                                        </div>
+                                        <transition name="fade">
+                                            <div v-if="!showCommercial" class="px-4">
+                                                <label class="d-flex align-items-center gap-1">
+                                                    <input type="checkbox" v-model="Landfilters.commercial"
+                                                        value="Office"> Office
+                                                </label>
+                                                <label class="d-flex align-items-center gap-1 my-1">
+                                                    <input type="checkbox" v-model="Landfilters.commercial"
+                                                        value="Shop"> Shop
+                                                </label>
+                                                <label class="d-flex align-items-center gap-1">
+                                                    <input type="checkbox" v-model="Landfilters.commercial"
+                                                        value="Building"> Building
+                                                </label>
+                                            </div>
+                                        </transition>
+
+                                        <!-- CITY -->
+                                        <div class="mt-2">
+                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+                                                @click="toggleCity">
+                                                CITY
+                                                <i :class="{ 'fa-chevron-right': showCity, 'fa-chevron-down': !showCity }"
+                                                    class="fa-solid"></i>
+                                            </h6>
+                                        </div>
+                                        <transition name="fade">
+                                            <div v-if="!showCity" class="px-4">
+                                                <label class="d-flex align-items-center gap-1 my-1"
+                                                    v-for="city in cityList" :key="city">
+                                                    <input type="checkbox" @change="onCityChange"
+                                                        v-model="Landfilters.city" :value="city"> {{ city }}
+                                                </label>
+                                            </div>
+                                        </transition>
+
+                                        <!-- AREA -->
+                                        <div class="mt-2" v-if="selectedAreas.length > 0">
+                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+                                                @click="toggleArea">
+                                                AREA
+                                                <i :class="{ 'fa-chevron-right': showArea, 'fa-chevron-down': !showArea }"
+                                                    class="fa-solid"></i>
+                                            </h6>
+                                        </div>
+                                        <transition name="fade">
+                                            <div v-if="!showArea" class="px-4">
+                                                <label class="d-block" v-for="area in selectedAreas" :key="area.NAME">
+                                                    <input type="checkbox" @change="onAreaChange"
+                                                        v-model="Landfilters.area" :value="area.NAME"> {{ area.NAME }}
+                                                </label>
+                                            </div>
+                                        </transition>
+
+                                        <!-- LOCATION -->
+                                        <div class="mt-2" v-if="selectedLocation.length > 0">
+                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+                                                @click="toggleLocation">
+                                                LOCATION
+                                                <i :class="{ 'fa-chevron-right': showLocation, 'fa-chevron-down': !showLocation }"
+                                                    class="fa-solid"></i>
+                                            </h6>
+                                        </div>
+                                        <transition name="fade">
+                                            <div v-if="!showLocation" class="px-4">
+                                                <label class="d-block" v-for="location in selectedLocation"
+                                                    :key="location.NAME">
+                                                    <input type="checkbox" @change="onLocationChange"
+                                                        v-model="Landfilters.location" :value="location.NAME"> {{
+                                                            location.NAME }}
+                                                </label>
+                                            </div>
+                                        </transition>
+
+                                        <!-- SECTOR -->
+                                        <div class="mt-2" v-if="selectedSectors.length > 0">
+                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+                                                @click="toggleSector">
+                                                SECTOR
+                                                <i :class="{ 'fa-chevron-right': showSector, 'fa-chevron-down': !showSector }"
+                                                    class="fa-solid"></i>
+                                            </h6>
+                                        </div>
+                                        <transition name="fade">
+                                            <div v-if="!showSector" class="px-4">
+                                                <label class="d-block" v-for="sector in selectedSectors"
+                                                    :key="sector.NAME">
+                                                    <input type="checkbox" v-model="Landfilters.sector"
+                                                        :value="sector.NAME"> {{ sector.NAME }}
+                                                </label>
+                                            </div>
+                                        </transition>
                                     </div>
-                                    <div class="m-2 mb-4 w-100">
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.homeType" value="House">
-                                            House
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.homeType" value="Flat"> Flat
-                                        </label>
-                                    </div>
 
-                                    <div class="mt-2">
-                                        <h6>Plot</h6>
-                                    </div>
-                                    <div class="m-2 mb-4 w-100">
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.plot" value="Residential Plot">
-                                            Residential
-                                            Plot
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.plot" value="Commercial Plot">
-                                            Commercial
-                                            Plot
-                                        </label>
-                                    </div>
-
-                                    <div class="mt-2">
-                                        <h6>Commercial</h6>
-                                    </div>
-                                    <div class="m-2 mb-4 w-100">
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.commercial" value="Office">
-                                            Office
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.commercial" value="Shop">
-                                            Shop
-                                        </label>
-                                        <label class="d-block">
-                                            <input type="checkbox" v-model="Landfilters.commercial" value="Building">
-                                            Building
-                                        </label>
-                                    </div>
-
-                                    <div class="mt-2">
-                                        <h6>City</h6>
-                                    </div>
-                                    <div class="m-2 mb-4 w-100">
-                                        <label class="d-block" v-for="city in cityList" :key="city">
-                                            <input type="checkbox" @change="onCityChange" v-model="Landfilters.city"
-                                                :value="city">
-                                            {{ city }}
-                                        </label>
-                                    </div>
-
-
-
-
-                                    <!-- Area -->
-                                    <div class="mt-2" v-if="selectedAreas.length > 0">
-                                        <h6>Area</h6>
-                                    </div>
-                                    <div class="m-2 mb-4 w-100">
-
-                                        <label class="d-block" v-for="area in selectedAreas">
-                                            <input type="checkbox" @change="onAreaChange" v-model="Landfilters.area"
-                                                :value="area.NAME">
-                                            {{ area.NAME }}
-                                        </label>
-
-                                    </div>
-
-
-                                    <div class="mt-2" v-if="selectedLocation.length > 0">
-                                        <h6>Location</h6>
-                                    </div>
-                                    <div class="m-2 mb-4 w-100">
-
-                                        <label class="d-block" v-for="location in selectedLocation">
-                                            <input type="checkbox" @change="onLocationChange"
-                                                v-model="Landfilters.location" :value="location.NAME">
-                                            {{ location.NAME }}
-                                        </label>
-
-                                    </div>
-
-                                    <!-- Location -->
-
-
-                                    <!-- Sectors -->
-                                    <div class="mt-2" v-if="selectedSectors.length > 0">
-                                        <h6>Sector</h6>
-                                    </div>
-                                    <div class="m-2 mb-4 w-100">
-                                        <label class="d-block" v-for="sector in selectedSectors">
-                                            <input type="checkbox" v-model="Landfilters.sector" :value="sector.NAME">
-                                            {{ sector.NAME }}
-                                        </label>
-
-                                    </div>
                                 </div>
 
                             </div>
@@ -195,11 +249,11 @@
                 </div>
             </nav>
             <div v-if="notFound"
-                class="col-12  d-flex justify-content-center align-items-center col-lg-9 col-8 my-1 properties-listed">
+                class="col-12  d-flex justify-content-center align-items-center col-lg-9 my-1 properties-listed">
                 <div class="row listing d-flex justify-content-center align-items-center">
                     <h1 class="d-flex justify-content-center mb-0"
                         style="margin-top: 100px;color: #1e02021c;font-size: 1rem;font-weight: bold;">
-                        try searching
+                        try filtering
                     </h1>
                     <h1 class="d-flex justify-content-center"
                         style="color: #1e02021c;font-size: 5rem;font-weight: bold; margin-top: -30px;">
@@ -210,46 +264,90 @@
             </div>
 
             <div v-if="mediaData" class="col-12 col-lg-9 col-8 my-1 properties-listed">
-                <div class="row listing">
-                    <div class="row justify-content-between align-items-center properties-for-sale">
+                <div class="listing">
+                    <!-- <div class="row justify-content-between align-items-center properties-for-sale">
                         <div class="col-9">
-                            <!-- <h2 class="text-start my-4">Properties for Sale/Rent</h2> -->
+                            <h2 class="text-start my-4">Properties for Sale/Rent</h2>
                         </div>
-                    </div>
-                    <div class="col-md-4 my-1" v-for="media in mediaData" :key="media?.id">
-                        <RouterLink :to="{ name: 'land-detail', params: { id: media?.id } }">
-                            <div class="card border-0 bg-transparent">
-                                <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrl(media)"
-                                    class="rounded-5" height="300" alt="Image">
-                                <img v-if="!media?.property_record_files[0]?.image_uri"
-                                    src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="300"
-                                    alt="Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">PKR {{ numFormatter(media?.price) }}</h5>
-                                    <p class="card-text elip">{{ media?.property_listing_pape?.extra_info_title }}</p>
-                                    <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
+                    </div> -->
+                    <div>
+                        <div v-if="propertiesCounter > 0"
+                            class=" d-flex align-items-center justify-content-between prop-top mt-1 py-0">
+                            <h5 class="mb-0">
+                                <small>
+                                    {{ propertiesCounter }}
+                                    Land/Properties
+                                </small>
+                            </h5>
+                            <button class="rounded-2 d-none d-sm-block" @click="toggleLayout" v-if="!isGridView">
+                                <h4 class="mb-0"><i class="fa-solid fa-grip"></i></h4>
+                            </button>
+                            <button class="rounded-2 d-none d-sm-block" @click="toggleLayout" v-if="isGridView">
+                                <h4 class=mb-0><i class="fa-solid fa-list"></i></h4>
+                            </button>
+                        </div>
+                        <div :class="{ 'grid-container': isGridView, 'list-container': !isGridView }">
+                            <div class="property-card px-2 py-2" v-for="media in mediaData" :key="media?.id">
+                                <RouterLink class="r-cards" :to="{ name: 'land-detail', params: { id: media?.id } }">
+                                    <div class="card border-0 bg-transparent">
+                                        <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrl(media)"
+                                            class="" height="200" width="100%" alt="Image">
+                                        <img v-if="!media?.property_record_files[0]?.image_uri"
+                                            src="/src/assets/Images/placeholder-image.jpg" class="rounded-5"
+                                            height="200" alt="Image">
+                                    </div>
+                                </RouterLink>
+                                <div class="card-content d-flex flex-column pb-2">
+                                    <div class="card-body pt-2">
+                                        <h5 class="card-title fw-bold"> PKR {{ numFormatter(media?.price) }}</h5>
+                                        <p class="card-text elip">
+                                            {{ media?.property_listing_pape?.extra_info_title }}
+                                        </p>
+                                        <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
+                                    </div>
+                                    <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home=='House' || media?.property_listing_pape?.pupose_home=='Flat'">
+                                        <div>
+                                            <i class="fa-solid fa-bed pe-1"></i>
+                                            <small class="fw-bold">
+                                                {{ media?.property_listing_pape?.propertyDetail_bedrooms }}
+                                            </small>
+                                        </div>
+                                        <div class="mx-3">
+                                            <i class="fa-solid fa-toilet pe-1"></i>
+                                            <small class="fw-bold">
+                                                {{ media?.property_listing_pape?.propertyDetail_bathrooms }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home !=='House' && media?.property_listing_pape?.pupose_home !=='Flat'">
+                                        <div>
+                                            <i class="fa-solid fa-landmark pe-1"></i>
+                                            <small class="fw-bold">
+                                                {{ media?.property_listing_pape?.propertyDetail_area }}
+                                            </small>
+                                        </div>
+                                        <div class="mx-3">
+                                            <i class="fa-solid fa-expand pe-1"></i>
+                                            <small class="fw-bold">
+                                                {{ media?.property_listing_pape?.propertyDetail_area_unit }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <a class="btn w-100 d-flex gap-2 align-items-center btn-sm nav-sub-links-main text-nowrap  py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                            :href="'mailto:' + media?.pInfo_email" role="button">
+                                            <h6 class="mb-0 icon-text">Email</h6>
+                                            <i class="fa-regular fa-envelope"></i>
+                                            <!-- {{ media?.pInfo_email }} -->
+                                        </a>
+                                        <a class="btn w-100 d-flex gap-2 align-items-center btn-sm mx-2 nav-sub-links-main text-nowrap d-flex flex-nowrap align-items-center justify-content-center"
+                                            :href="'tel:' + media?.pInfo_phoneNumber" role="button">
+                                            <h6 class="mb-0 icon-text">Call</h6>
+                                            <i class="fa-solid fa-phone"></i>
+                                            <!-- {{ media?.pInfo_phoneNumber }} -->
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        </RouterLink>
-                        <div class="d-flex align-items-center justify-content-between px-2 ps-3 w-100">
-                            <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>{{
-                                    media?.property_listing_pape?.propertyDetail_bedrooms
-                                }}</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
-                                    media?.property_listing_pape?.propertyDetail_bathrooms }}</div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <a class="btn btn-sm nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                    :href="'mailto:' + media?.pInfo_email" role="button">
-                                    <i class="fa-regular fa-envelope pe-2"></i>
-                                    <!-- {{ media?.pInfo_email }} -->
-                                </a>
-                                <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                    :href="'tel:' + media?.pInfo_phoneNumber" role="button">
-                                    <i class="fa-solid fa-phone pe-2"></i>
-                                    <!-- {{ media?.pInfo_phoneNumber }} -->
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -294,8 +392,8 @@ const isMobile = ref(false);
 const mediaData = ref([]);
 const cityListingData = ref([]);
 const cityListing = ref([]);
-const filterMinPrice = ref(0);
-const filterMaxPrice = ref(0);
+const filterMinPrice = ref();
+const filterMaxPrice = ref();
 const initialFetchCompleted = ref(false); // Flag to indicate if the initial fetch is completed
 const notFound = ref(false);
 
@@ -479,6 +577,59 @@ watch(
 
 
 
+const isGridView = ref(true);
+
+const toggleLayout = () => {
+    isGridView.value = !isGridView.value;
+};
+
+
+const showInputs = ref(false);
+const showHomeType = ref(false);
+const showPlot = ref(false);
+const showCommercial = ref(false);
+const showLocation = ref(false);
+const showSector = ref(false);
+const showCity = ref(false);
+const showArea = ref(false);
+
+
+const toggleInputs = () => {
+    showInputs.value = !showInputs.value;
+};
+
+const toggleHomeType = () => {
+    showHomeType.value = !showHomeType.value;
+};
+
+const toggleCity = () => {
+    showCity.value = !showCity.value;
+};
+
+const toggleArea = () => {
+    showArea.value = !showArea.value;
+};
+
+const toggleLocation = () => {
+    showLocation.value = !showLocation.value;
+};
+
+const toggleCommercial = () => {
+    showCommercial.value = !showCommercial.value;
+};
+
+const toggleSector = () => {
+    showSector.value = !showSector.value;
+};
+
+const togglePlot = () => {
+    showPlot.value = !showPlot.value;
+};
+
+
+
+
+
 
 
 
@@ -626,9 +777,43 @@ onBeforeRouteLeave((to, from, next) => {
 
 
 <style scoped>
-.d-block {
-    display: block;
-    margin-bottom: 8px;
+.nav-top-c {
+    background: linear-gradient(to right, #F45D08, #141415ba);
+
+    color: #fff;
+}
+
+.prop-top {
+    background-color: #dadada65;
+    border: 1px solid #dadada;
+    box-shadow: rgba(131, 131, 131, 0.221) 0px 3px 8px;
+    /* border-radius: 4px; */
+    padding: .4rem .5rem;
+}
+
+.input-heading {
+    background-color: #dadada46;
+    border: 1px solid #dadada;
+    box-shadow: rgba(131, 131, 131, 0.221) 0px 3px 8px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    max-height: 0;
+    padding: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+    opacity: 1;
+    max-height: 600px;
+    /* Adjust based on content */
 }
 
 .nav-sub-links-main {
@@ -651,6 +836,12 @@ onBeforeRouteLeave((to, from, next) => {
     .land-con {
         position: relative
     }
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        left: 0;
+    }
 }
 
 .range-slider-container input {
@@ -658,4 +849,80 @@ onBeforeRouteLeave((to, from, next) => {
     padding: 0 .5rem;
     border: 1px solid #0000002a;
 }
+
+
+/* .listing {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+} */
+
+.navbar {
+    margin-top: .5rem;
+    box-shadow: rgba(54, 9, 255, 0.283) 0px 3px 8px;
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid #00000000;
+    padding: .3rem 1rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.list-container {
+    display: block;
+    margin: 20px 0;
+
+    .property-card {
+        margin: 30px 0;
+        display: flex;
+    }
+
+    .r-cards img {
+        width: 260px;
+    }
+}
+
+.property-card .cards .card {
+    display: flex !important;
+}
+
+.property-card {
+    background: white;
+    /* border-radius: 5px; */
+    box-shadow: rgba(0, 0, 0, 0.347) 0px 3px 8px;
+    transition: transform 0.4s;
+}
+
+.list-container .property-card .card-content {
+    padding: 0 1rem;
+}
+
+.property-card:hover {
+    transform: scale(1.02);
+}
+
+.card img {
+    object-fit: cover;
+}
+
+/* h6 {
+    position: relative;
+    width: fit-content;
+}
+
+h6::after {
+    content: '';
+    position: absolute;
+    border-bottom: 2px solid #ff5f02;
+    bottom: -25%;
+    left: 0;
+    width: 100%;
+} */
 </style>

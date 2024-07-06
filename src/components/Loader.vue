@@ -45,9 +45,9 @@ export default {
 
 .door {
   position: absolute;
-  width: 65px;
-  height: 170px;
-  background: #F45D08;
+  width: 50px;
+  height: 130px;
+  background: #f4082b;
   border: 2px solid #654321;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   transition: transform 2s;
@@ -67,10 +67,10 @@ export default {
 
 .house {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100px;
-  height: 100px;
+  top: 30%;
+  left: 40%;
+  width: 70px;
+  height: 80px;
   transform: translate(-50%, -50%);
 }
 
@@ -79,14 +79,14 @@ export default {
   height: 0;
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
-  border-bottom: 50px solid #1811e461;
+  border-bottom: 50px solid #110f6d;
 }
 
 .walls {
   width: 100px;
   height: 50px;
-  background: #f63809;
-  border: 2px solid #ff0b30;
+  background: #f4082b;
+  border: 2px solid #f4082b;
 }
 
 @keyframes open-left-door {

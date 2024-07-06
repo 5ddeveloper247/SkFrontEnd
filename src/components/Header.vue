@@ -100,7 +100,7 @@ export default {
                                     <RouterLink class="nav-link px-2" to="/about">About</RouterLink>
                                 </li>
                                 <li class="nav-item mx-md-2 mx-0">
-                                    <RouterLink class="nav-link px-2" to="/land">Land/Properties</RouterLink>
+                                    <RouterLink class="nav-link px-2" to="/land">Land Properties</RouterLink>
                                 </li>
                                 <li class="nav-item mx-md-2 mx-0">
                                     <RouterLink class="nav-link px-2" to="/societies">Societies</RouterLink>
@@ -147,5 +147,13 @@ a {
 
 .navbar-brand {
     background-color: transparent !important;
+}
+
+.heroandnav {
+    position: sticky !important;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    box-shadow: rgba(0, 0, 0, 0.171) 0px 3px 8px;
 }
 </style>

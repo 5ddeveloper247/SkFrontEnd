@@ -163,7 +163,7 @@ input#floatingInput {
 .router-link-active {
     background-color: var(--second--main-color) !important;
     color: #fff !important;
-    border-radius: 20px;
+    padding: .3rem .6rem !important;
 }
 
 
@@ -223,7 +223,7 @@ s .mainNavBar {
 .nav-links-property.active {
     background-color: var(--second--main-color) !important;
     color: #fff !important;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .listed-properties {
@@ -237,7 +237,7 @@ s .mainNavBar {
 .listed-properties.active {
     background-color: var(--second--main-color) !important;
     color: #fff !important;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .nav-link:hover {
@@ -401,7 +401,7 @@ s .mainNavBar {
 .nav-sub-links-main {
     border: 1px solid #D7D7D7;
     text-decoration: none;
-    border-radius: 20px !important;
+    border-radius: 4px !important;
     background-color: #fff !important;
     color: var(--home-text-color-) !important;
     width: fit-content;
@@ -409,9 +409,9 @@ s .mainNavBar {
 }
 
 .nav-sub-links-main:hover {
-    border: 1px solid #D7D7D7;
+    border: 1px solid #878787;
     text-decoration: none;
-    border-radius: 20px !important;
+    border-radius: 4px !important;
     background-color: transparent !important;
     color: var(--second--main-color) !important;
 }
@@ -2015,6 +2015,10 @@ header h2 {
     background-color: #f8f6f6;
     border-radius: 10px;
     padding: 10px;
+}
+
+.swiper {
+    overflow: visible;
 }
 
 .swiper-button-prev,

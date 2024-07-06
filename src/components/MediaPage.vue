@@ -5,7 +5,7 @@
     <h2 class="mt-5">PROPERTIES <span class="fw-bolder">VIDEOS</span></h2>
     <div class="media">
       <div class="d-flex flex-column align-items-center id_sxy justify-content-center pt-5">
-        <iframe class="Uvideo-1" width="100%" :src="currentTopVideo"></iframe>
+        <iframe v-if="currentTopVideo" class="Uvideo-1" width="100%" :src="currentTopVideo"></iframe>
         <!-- <a :href="currentTopVideo" target="_blank" class="btn subscribe-btn d-flex align-items-center my-2">
             <i class="fa-brands fa-youtube pe-2"></i>Subscribe
           </a> -->
@@ -31,7 +31,7 @@
             <iframe :src="convertToEmbedUrl(media.url)" height="180" frameborder="0" allowfullscreen></iframe>
             <div class="card-body">
               <p class="card-text text-center px-2">
-                {{ media.description }}
+                {{ media.title }}
               </p>
             </div>
             <i class="fa-brands fa-youtube"></i>
@@ -47,13 +47,13 @@
     <h2 class="mt-5 pt-5 mb-5">PROPERTIES <span class="fw-bolder">IMAGES</span></h2>
     <div class="media ">
       <div class="d-flex flex-column align-items-center justify-content-center">
-        <img :src="currentBottomVideo" width="100%" height="350" alt="">
+        <img v-if="currentBottomVideo" :src="currentBottomVideo" width="100%" height="350" alt="">
       </div>
     </div>
 
     <!-- Media Cards Bottom -->
-    <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="50" :pagination="{ clickable: true }" :modules="modules"
-      :breakpoints="{
+    <swiper v-if="mediaOnly" :autoplay="autoplay" :speed="1000" :spaceBetween="50" :pagination="{ clickable: true }"
+      :modules="modules" :breakpoints="{
         320: { slidesPerView: 1, spaceBetween: 5 },
         480: { slidesPerView: 1, spaceBetween: 5 },
         640: { slidesPerView: 1, spaceBetween: 5 },
@@ -68,7 +68,7 @@
                 @click="bottomTopMeida(image.id)" />
               <div class="card-body">
                 <p class="card-text text-center px-2">
-                  {{ image.description }}
+                  {{ image.title }}
                 </p>
               </div>
             </div>
@@ -267,7 +267,7 @@ onBeforeMount(() => {
   footerState.setFooterState(true);
 })
 
-onMounted(()=>{
+onMounted(() => {
   footerState.setFooterState(false);
   footerState.setFooterState(true);
 })

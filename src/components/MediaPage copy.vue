@@ -1,78 +1,79 @@
 <template>
- 
-    <Loader :isLoading="loading" />
-    <div class="video-sec mb-5" v-show="!loading">
-      <div class="media mt-3 pt-5">
-        <div class="d-flex flex-column align-items-center id_sxy justify-content-center pt-5">
-          <iframe class="Uvideo-1" width="100%" :src="currentTopVideo"></iframe>
-          <!-- <a :href="currentTopVideo" target="_blank" class="btn subscribe-btn d-flex align-items-center my-2">
+
+  <Loader :isLoading="loading" />
+  <div class="video-sec mb-5" v-show="!loading">
+    <div class="media mt-3 pt-5">
+      <div class="d-flex flex-column align-items-center id_sxy justify-content-center pt-5">
+        <iframe class="Uvideo-1" width="100%" :src="currentTopVideo"></iframe>
+        <!-- <a :href="currentTopVideo" target="_blank" class="btn subscribe-btn d-flex align-items-center my-2">
             <i class="fa-brands fa-youtube pe-2"></i>Subscribe
           </a> -->
-        </div>
       </div>
+    </div>
 
-      <!-- Media Cards Top -->
-      <!-- <div class="row justify-content-center mx-md-5 mx-2 px-md-5 mt-3 media-cards">
+    <!-- Media Cards Top -->
+    <!-- <div class="row justify-content-center mx-md-5 mx-2 px-md-5 mt-3 media-cards">
 
     </div> -->
 
-      <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="40" :navigation="true" :modules="modules" :breakpoints="{
-        320: { slidesPerView: 1, spaceBetween: 5 },
-        480: { slidesPerView: 1, spaceBetween: 5 },
-        640: { slidesPerView: 1, spaceBetween: 5 },
-        768: { slidesPerView: 2, spaceBetween: 3 },
-        1024: { slidesPerView: 3, spaceBetween: 40 }
-      }" class="mySwiper mt-5">
-        <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
-          <div class="media-cards">
-            <div class="card media-card-1" @click="showTopVideo(media.id)">
-              <iframe :src="convertToEmbedUrl(media.url)" height="180" frameborder="0" allowfullscreen></iframe>
+    <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="40" :navigation="true" :modules="modules" :breakpoints="{
+      320: { slidesPerView: 1, spaceBetween: 5 },
+      480: { slidesPerView: 1, spaceBetween: 5 },
+      640: { slidesPerView: 1, spaceBetween: 5 },
+      768: { slidesPerView: 2, spaceBetween: 3 },
+      1024: { slidesPerView: 3, spaceBetween: 40 }
+    }" class="mySwiper mt-5">
+      <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
+        <div class="media-cards">
+          <div class="card media-card-1" @click="showTopVideo(media.id)">
+            <iframe :src="convertToEmbedUrl(media.url)" height="180" frameborder="0" allowfullscreen></iframe>
+            <div class="card-body">
+              <p class="card-text text-center px-2">
+                {{ media.description }}
+              </p>
+            </div>
+            <i class="fa-brands fa-youtube"></i>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper>
+  </div>
+
+
+  <!-- Video Section Bottom -->
+  <div class="img-section ">
+    <div class="media ">
+      <div class="d-flex flex-column align-items-center justify-content-center">
+        <img :src="currentBottomVideo" width="100%" height="350" alt="">
+      </div>
+    </div>
+
+    <!-- Media Cards Bottom -->
+    <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="50" :navigation="true" :modules="modules" :breakpoints="{
+      320: { slidesPerView: 1, spaceBetween: 5 },
+      480: { slidesPerView: 1, spaceBetween: 5 },
+      640: { slidesPerView: 1, spaceBetween: 5 },
+      768: { slidesPerView: 2, spaceBetween: 3 },
+      1024: { slidesPerView: 3, spaceBetween: 50 }
+    }" class="mySwiper mt-5">
+      <swiper-slide :slidesPerView="3" v-for="(image, index) in mediaOnly" :key="index">
+        <div class="media-cards">
+          <div>
+            <div class="card media-card-1">
+              <img :src="convertToMediaOnlyUrl(image.url)" height="170" width="100%" alt="..."
+                @click="bottomTopMeida(image.id)" />
               <div class="card-body">
                 <p class="card-text text-center px-2">
-                  {{ media.description }}
+                  {{ image.title }}
                 </p>
               </div>
-              <i class="fa-brands fa-youtube"></i>
             </div>
           </div>
-        </swiper-slide>
-      </swiper>
-    </div>
-
-
-    <!-- Video Section Bottom -->
-    <div class="img-section ">
-      <div class="media ">
-        <div class="d-flex flex-column align-items-center justify-content-center">
-          <img :src="currentBottomVideo" width="100%" height="350" alt="">
         </div>
-      </div>
+      </swiper-slide>
+    </swiper>
+  </div>
 
-      <!-- Media Cards Bottom -->
-      <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="50" :navigation="true" :modules="modules" :breakpoints="{
-        320: { slidesPerView: 1, spaceBetween: 5 },
-        480: { slidesPerView: 1, spaceBetween: 5 },
-        640: { slidesPerView: 1, spaceBetween: 5 },
-        768: { slidesPerView: 2, spaceBetween: 3 },
-        1024: { slidesPerView: 3, spaceBetween: 50 }
-      }" class="mySwiper mt-5">
-        <swiper-slide :slidesPerView="3" v-for="(image, index) in mediaOnly" :key="index">
-          <div class="media-cards">
-            <div>
-              <div class="card media-card-1">
-                <img :src="convertToMediaOnlyUrl(image.url)" height="170" width="100%" alt="..." @click="bottomTopMeida(image.id)" />
-                <div class="card-body">
-                  <p class="card-text text-center px-2">
-                    {{ image.description }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper>
-    </div>
-  
 </template>
 
 
@@ -130,8 +131,8 @@ function convertToEmbedUrl(url) {
 }
 
 
-function convertToMediaOnlyUrl(url){
-  const parsed_media_only_url=import.meta.env.VITE_BASE_URL+'/'+url ;
+function convertToMediaOnlyUrl(url) {
+  const parsed_media_only_url = import.meta.env.VITE_BASE_URL + '/' + url;
   return parsed_media_only_url;
 }
 
@@ -167,13 +168,13 @@ function getMediaUrlFromMediaData(id) {
 
 
 
-function bottomTopMeida(id){
+function bottomTopMeida(id) {
 
   const parsed_uri = getMediaFromMediaOnly(id);
   currentBottomVideo.value = parsed_uri;
 }
-function convertToMediaUrl(url){
-  const parsed_media_only_url=import.meta.env.VITE_BASE_URL+'/'+url ;
+function convertToMediaUrl(url) {
+  const parsed_media_only_url = import.meta.env.VITE_BASE_URL + '/' + url;
   return parsed_media_only_url;
 }
 
@@ -243,11 +244,11 @@ onMounted(() => {
 
 
 
-onMounted(()=>{
-loading.value=true;
-setTimeout(()=>{
-loading.value=false;
-},3000)
+onMounted(() => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 3000)
 });
 </script>
 
