@@ -1,5 +1,5 @@
 <script setup>
-import { ref,onBeforeMount,onBeforeUnmount,onMounted } from 'vue';
+import { ref, onBeforeMount, onBeforeUnmount, onMounted } from 'vue';
 import { RouterLink, useRouter, onBeforeRouteLeave } from 'vue-router';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
@@ -24,20 +24,20 @@ const autoplay = {
 //handling footer by these two
 onBeforeMount(() => {
 
-footerState.setFooterState(false);
-footerState.setFooterState(true);
+    footerState.setFooterState(false);
+    footerState.setFooterState(true);
 })
 onMounted(() => {
-footerState.setFooterState(false);
-footerState.setFooterState(true);
+    footerState.setFooterState(false);
+    footerState.setFooterState(true);
 })
 
 onBeforeUnmount(() => {
-footerState.setFooterState(false);
+    footerState.setFooterState(false);
 })
 onBeforeRouteLeave((to, from, next) => {
-footerState.setFooterState(false);
-next();
+    footerState.setFooterState(false);
+    next();
 });
 
 </script>
@@ -50,7 +50,9 @@ next();
                     About <br> Sk Marketing
                 </h1>
                 <p class="text-white text-start py-5">
-                    SK Marketing specializes in eco-friendly construction and property sales. We deliver premium residential and commercial spaces, blending innovative design with sustainable materials for a perfect balance of luxury and environmental responsibility.
+                    SK Marketing specializes in eco-friendly construction and property sales. We deliver premium
+                    residential and commercial spaces, blending innovative design with sustainable materials for a
+                    perfect balance of luxury and environmental responsibility.
                 </p>
             </div>
         </div>
@@ -199,7 +201,7 @@ next();
                     1024: { slidesPerView: 3, spaceBetween: 5 }
                 }" class="mySwiper">
                 <swiper-slide :slidesPerView="3">
-                    <div class="item mx-3">
+                    <div class="item property-card">
                         <div class="card border-0 bg-transparent">
                             <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
                             <div class="card-body">
@@ -216,41 +218,24 @@ next();
                 </swiper-slide>
 
                 <swiper-slide :slidesPerView="3">
-                    <div class="item mx-3">
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/team-2.webp" alt="Image">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Hamza Ashfaq</h5>
-                            <p class="card-text text-center">Real Estate Developer</p>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
-                                <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
-                                <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                    <div class="item property-card">
+                        <div class="card border-0 bg-transparent">
+                            <img class="img-fluid card-img-top" src="../assets/Images/team-2.webp" alt="Image">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Hamza Ashfaq</h5>
+                                <p class="card-text text-center">Real Estate Developer</p>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </swiper-slide>
 
                 <swiper-slide :slidesPerView="3">
-                    <div class="item mx-3">
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Umar Aziz</h5>
-                            <p class="card-text text-center">Real Estate Developer</p>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
-                                <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
-                                <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </swiper-slide>
-
-                <swiper-slide :slidesPerView="3">
-                    <div class="item mx-3">
+                    <div class="item property-card">
                         <div class="card border-0 bg-transparent">
                             <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
                             <div class="card-body">
@@ -267,37 +252,54 @@ next();
                 </swiper-slide>
 
                 <swiper-slide :slidesPerView="3">
-                    <div class="item mx-3">
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/team-2.webp" alt="Image">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Hamza Ashfaq</h5>
-                            <p class="card-text text-center">Real Estate Developer</p>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
-                                <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
-                                <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                    <div class="item propperty-card">
+                        <div class="card border-0 bg-transparent">
+                            <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Umar Aziz</h5>
+                                <p class="card-text text-center">Real Estate Developer</p>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </swiper-slide>
 
                 <swiper-slide :slidesPerView="3">
-                    <div class="item mx-3">
-                    <div class="card border-0 bg-transparent">
-                        <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Umar Aziz</h5>
-                            <p class="card-text text-center">Real Estate Developer</p>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
-                                <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
-                                <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                    <div class="item property-card">
+                        <div class="card border-0 bg-transparent">
+                            <img class="img-fluid card-img-top" src="../assets/Images/team-2.webp" alt="Image">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Hamza Ashfaq</h5>
+                                <p class="card-text text-center">Real Estate Developer</p>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </swiper-slide>
+
+                <swiper-slide :slidesPerView="3">
+                    <div class="item property-card">
+                        <div class="card border-0 bg-transparent">
+                            <img class="img-fluid card-img-top" src="../assets/Images/team-1.webp" alt="Image">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Umar Aziz</h5>
+                                <p class="card-text text-center">Real Estate Developer</p>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <i class="fa-brands fa-instagram mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-facebook-f mx-md-2 mx-1"></i>
+                                    <i class="fa-brands fa-x-twitter mx-md-2 mx-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </swiper-slide>
             </swiper>
         </div>
@@ -326,3 +328,18 @@ next();
 
     </div>
 </template>
+
+
+<style scoped>
+.swiper-slide {
+    background: white;
+    /* border-radius: 5px; */
+    box-shadow: rgba(0, 0, 0, 0.347) 0px 3px 8px;
+    transition: transform 0.4s;
+    margin: 0 10px; 
+}
+
+.card-img-top {
+    width: 100% !important;
+}
+</style>

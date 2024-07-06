@@ -1,6 +1,6 @@
 <template>
-    <div class="container pt-5">
-        <div class="row justify-content-start px-md-4 pb-md-4 p-2 pt-2 pt-md-5">
+    <div class="container">
+        <div class="row justify-content-start px-md-4 pb-md-4 p-2 pt-2">
             <div class="mb-2 d-flex justify-content-between pt-4">
                 <div>
                     <h5>{{ propertyData?.property_listing_pape?.extra_info_title }}</h5>
@@ -15,34 +15,41 @@
             <Loader :isLoading="loading" />
             <div class="col-md-8">
                 <swiper :speed="1000" :spaceBetween="5" :slidesPerView="1" :navigation="true" :modules="modules"
-                    class="mySwiper">
+                    class="mySwiper detail-img">
                     <swiper-slide v-for="media in propertyData.property_record_files" :key="media.id"
                         :slidesPerView="3">
                         <div>
-                            <img :src="getImageUrl(media)" class="d-block" height="450" width="100%" alt="Image 3">
+                            <img :src="getImageUrl(media)" class="d-block rounded-4" height="380" width="100%"
+                                alt="Image 3">
                             <div class="verified-society rounded-2">
-                                <p class="text-white p-2 d-flex align-items-center"><i
-                                        class="fa-solid fa-check pe-2"></i>Verified</p>
+                                <p class="text-white p-2 d-flex align-items-center" style="background-color: red;">
+                                    <small class="text-white">
+                                        VERIFIED
+                                        <i class="fa-solid fa-check pe-2"></i>
+                                    </small>
+                                </p>
                             </div>
                         </div>
                     </swiper-slide>
                 </swiper>
 
-                <div class="d-flex justify-content-start my-4 mx-md-5">
-                    <div class="d-flex flex-column justify-content-center align-items-center mx-3">
-                        <i class="fa-solid fa-bed px-4"></i>
-                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_bathrooms }}
+                <div class="d-flex justify-content-start">
+                    <div class="d-flex gap-2 align-items-center mx-3">
+                        <i class="fa-solid fa-bed "></i>
+                        <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_bathrooms
+                            }}
                         </p>
                     </div>
-                    <div class="d-flex flex-column justify-content-center align-items-center mx-3">
-                        <i class="fa-solid fa-bath px-4"></i>
-                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_bedrooms }}
+                    <div class="d-flex gap-2 align-items-center mx-3">
+                        <i class="fa-solid fa-bath"></i>
+                        <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_bedrooms }}
                         </p>
                     </div>
-                    <div class="d-flex flex-column justify-content-center align-items-center mx-3">
-                        <i class="fa-solid fa-arrows-up-down px-4"></i>
-                        <p class="mt-3 text-center">{{ propertyData.property_listing_pape?.propertyDetail_area }} / {{
-                            propertyData.property_listing_pape?.propertyDetail_area_unit }}</p>
+                    <div class="d-flex gap-2 align-items-center mx-3">
+                        <i class="fa-solid fa-arrows-up-down"></i>
+                        <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_area }} /
+                            {{
+                                propertyData.property_listing_pape?.propertyDetail_area_unit }}</p>
                     </div>
                 </div>
                 <hr>
@@ -58,12 +65,11 @@
                             Nearby</button>
                     </li>
                 </ul>
-                <div class="tab-content" id="pills-tabContent">
+                <div class="tab-content mb-5" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab"
                         tabindex="0">
                         <hr>
-                        <h2>Overview</h2>
-                        <div class="my-5 details p-2">
+                        <div class="my-4 details px-3 py-4">
                             <h5>Details</h5>
                             <ul class="d-none">
                                 <li>
@@ -183,7 +189,7 @@
 
                             </div>
                         </div>
-                        <div class="description p-2">
+                        <div class="my-4 description px-3 py-4">
                             <h5>Description</h5>
                             <p>
                                 <small>
@@ -191,7 +197,7 @@
                                 </small>
                             </p>
                         </div>
-                        <div class="my-5 pe-5 amenities p-2">
+                        <div class="my-4 amenities px-3 py-4">
                             <h5>Amenities</h5>
                             <div class="lighter-bg">
                                 <div class="row">
@@ -248,7 +254,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-md-4 mt-2">
+                                <div class="row mt-2 mb-5">
                                     <div class="col-md-3 m-0 p-0 d-flex align-items-center justify-content-center">
                                         <h6><small>Nearby Locations <br> and Other Facilities</small></h6>
                                     </div>
@@ -531,7 +537,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="property-detail d-flex flex-column py-4 px-2 shadow rounded-4 mb-4">
+                <div class="property-detail d-flex flex-column py-4 px-3 shadow rounded-4 mb-4">
                     <h4><small>PKR</small> {{ numFormatter(propertyData.price) }}</h4>
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
                         <div class="d-flex align-items-center justify-content-center">
@@ -642,8 +648,8 @@
                         <div class="property-card px-2 mx-2 py-2 mb-3">
                             <RouterLink class="r-cards" :to="{ name: 'land-detail', params: { id: media?.id } }">
                                 <div class="card border-0 bg-transparent">
-                                    <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrlSwipper(media)"
-                                        class="" height="200" width="100%" alt="Image">
+                                    <img v-if="media?.property_record_files[0]?.image_uri"
+                                        :src="getImageUrlSwipper(media)" class="" height="200" width="100%" alt="Image">
                                     <img v-if="!media?.property_record_files[0]?.image_uri"
                                         src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="200"
                                         alt="Image">
@@ -657,34 +663,36 @@
                                     </p>
                                     <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                 </div>
-                                <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home=='House' || media?.property_listing_pape?.pupose_home=='Flat'">
-                                        <div>
-                                            <i class="fa-solid fa-bed pe-1"></i>
-                                            <small class="fw-bold">
-                                                {{ media?.property_listing_pape?.propertyDetail_bedrooms }}
-                                            </small>
-                                        </div>
-                                        <div class="mx-3">
-                                            <i class="fa-solid fa-toilet pe-1"></i>
-                                            <small class="fw-bold">
-                                                {{ media?.property_listing_pape?.propertyDetail_bathrooms }}
-                                            </small>
-                                        </div>
+                                <div class="d-flex align-items-center pb-3"
+                                    v-if="media?.property_listing_pape?.pupose_home == 'House' || media?.property_listing_pape?.pupose_home == 'Flat'">
+                                    <div>
+                                        <i class="fa-solid fa-bed pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_bedrooms }}
+                                        </small>
                                     </div>
-                                    <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home !=='House' && media?.property_listing_pape?.pupose_home !=='Flat'">
-                                        <div>
-                                            <i class="fa-solid fa-landmark pe-1"></i>
-                                            <small class="fw-bold">
-                                                {{ media?.property_listing_pape?.propertyDetail_area }}
-                                            </small>
-                                        </div>
-                                        <div class="mx-3">
-                                            <i class="fa-solid fa-expand pe-1"></i>
-                                            <small class="fw-bold">
-                                                {{ media?.property_listing_pape?.propertyDetail_area_unit }}
-                                            </small>
-                                        </div>
+                                    <div class="mx-3">
+                                        <i class="fa-solid fa-toilet pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_bathrooms }}
+                                        </small>
                                     </div>
+                                </div>
+                                <div class="d-flex align-items-center pb-3"
+                                    v-if="media?.property_listing_pape?.pupose_home !== 'House' && media?.property_listing_pape?.pupose_home !== 'Flat'">
+                                    <div>
+                                        <i class="fa-solid fa-landmark pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_area }}
+                                        </small>
+                                    </div>
+                                    <div class="mx-3">
+                                        <i class="fa-solid fa-expand pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_area_unit }}
+                                        </small>
+                                    </div>
+                                </div>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <a class="btn w-100 d-flex gap-2 align-items-center btn-sm nav-sub-links-main text-nowrap  py-1 d-flex flex-nowrap align-items-center justify-content-center"
                                         :href="'mailto:' + media?.pInfo_email" role="button">
@@ -803,10 +811,10 @@ const getImageUrlSwipper = (media) => {
     return `${import.meta.env.VITE_BASE_URL}/${media?.property_record_files[0]?.image_uri}`;
 }
 
-// const autoplay = {
-//     delay: 3000, // 3 seconds delay between slides
-//     disableOnInteraction: false // Keep autoplay running even after user interaction
-// };
+const autoplay = {
+    delay: 3000, // 3 seconds delay between slides
+    disableOnInteraction: false // Keep autoplay running even after user interaction
+};
 
 
 
@@ -998,5 +1006,26 @@ img {
     box-shadow: rgba(0, 0, 0, 0.347) 0px 3px 8px;
     transition: transform 0.4s;
     margin-top: 1rem;
+}
+
+.details,
+.description,
+.amenities {
+    box-shadow: rgba(0, 0, 0, 0.148) 0px 3px 8px;
+    border-radius: 7px;
+}
+
+.amenities .lighter-bg {
+    border: 1px solid #f45f08d6;
+    background-color: #f45f0818;
+}
+
+.detail-img {
+    filter: drop-shadow(-0.4rem 0.4rem 0.1rem rgb(199, 199, 199));
+}
+
+.swiper-navigation {
+    height: 10px !important;
+    background-color: red !important;
 }
 </style>

@@ -710,7 +710,8 @@ s .mainNavBar {
 
 /* =====================Blogs================== */
 .blogs {
-    background-color: var(--second--main-color);
+    background  : linear-gradient( rgba(244, 93, 8, 1) 0%, rgba(255, 143, 51, 1) 50%, rgba(244, 93, 8, 1) 100%);
+    color: rgba(244, 93, 8, 1);
 }
 
 .blogs img {
@@ -2023,7 +2024,17 @@ header h2 {
 
 .swiper-button-prev,
 .swiper-button-next {
-    color: var(--second--main-color) !important;
+    color: #fff !important;
+    background-color: #000;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 25px !important;
+    font-weight: 900;
 }
 
 .swiper-pagination-bullet {

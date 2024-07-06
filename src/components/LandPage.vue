@@ -1,18 +1,33 @@
 <template>
     <Loader :isLoading="loading" />
     <div class="container pt-5">
-        <nav class=""
+        <nav class="row gap-3 align-items-center"
             style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
             aria-label="breadcrumb">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb col-2">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Land/Properties</li>
             </ol>
+            <div v-if="propertiesCounter > 0"
+                class="col d-flex align-items-center justify-content-between prop-top mt-1 py-0 me-2">
+                <h5 class="mb-0">
+                    <small>
+                        {{ propertiesCounter }}
+                        Land/Properties
+                    </small>
+                </h5>
+                <button class="rounded-2 d-none d-sm-block" @click="toggleLayout" v-if="!isGridView">
+                    <h4 class="mb-0"><i class="fa-solid fa-grip"></i></h4>
+                </button>
+                <button class="rounded-2 d-none d-sm-block" @click="toggleLayout" v-if="isGridView">
+                    <h4 class=mb-0><i class="fa-solid fa-list"></i></h4>
+                </button>
+            </div>
         </nav>
 
         <div class="row gx-5 land-con align-items-start">
-            <nav class="navbar col-12 col-lg-3 pt-0 side-bar-checkboxes navbar-expand-lg">
-                <div class="">
+            <nav class="navbar col-12 col-lg pt-0 side-bar-checkboxes navbar-expand-lg">
+                <div class="w-100 h-100">
                     <div class="d-flex gap-3">
                         <button class="navbar-toggler mx-3 my-2" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -51,7 +66,9 @@
                                         <div class="col-md-4 my-2 d-flex align-items-end">
                                             <button class="search-button rounded-1 px-3 border-0" type="button"
                                                 @click="handleFilterPrices">
-                                                <span class="text-white fw-bold">Search</span>
+                                                <span class="text-white fw-bold">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                </span>
                                                 <!-- ( <span class="text-white fw-bold" id="minPrice">
                                                     {{ filterMinPrice }}
                                                 </span> :
@@ -249,7 +266,7 @@
                 </div>
             </nav>
             <div v-if="notFound"
-                class="col-12  d-flex justify-content-center align-items-center col-lg-9 my-1 properties-listed">
+                class="col-12  d-flex justify-content-center align-items-center col-lg-10 my-1 properties-listed">
                 <div class="row listing d-flex justify-content-center align-items-center">
                     <h1 class="d-flex justify-content-center mb-0"
                         style="margin-top: 100px;color: #1e02021c;font-size: 1rem;font-weight: bold;">
@@ -263,7 +280,7 @@
                 </div>
             </div>
 
-            <div v-if="mediaData" class="col-12 col-lg-9 col-8 my-1 properties-listed">
+            <div v-if="mediaData" class="col-12 col-lg-10 my-1 properties-listed">
                 <div class="listing">
                     <!-- <div class="row justify-content-between align-items-center properties-for-sale">
                         <div class="col-9">
@@ -271,21 +288,7 @@
                         </div>
                     </div> -->
                     <div>
-                        <div v-if="propertiesCounter > 0"
-                            class=" d-flex align-items-center justify-content-between prop-top mt-1 py-0">
-                            <h5 class="mb-0">
-                                <small>
-                                    {{ propertiesCounter }}
-                                    Land/Properties
-                                </small>
-                            </h5>
-                            <button class="rounded-2 d-none d-sm-block" @click="toggleLayout" v-if="!isGridView">
-                                <h4 class="mb-0"><i class="fa-solid fa-grip"></i></h4>
-                            </button>
-                            <button class="rounded-2 d-none d-sm-block" @click="toggleLayout" v-if="isGridView">
-                                <h4 class=mb-0><i class="fa-solid fa-list"></i></h4>
-                            </button>
-                        </div>
+
                         <div :class="{ 'grid-container': isGridView, 'list-container': !isGridView }">
                             <div class="property-card px-2 py-2" v-for="media in mediaData" :key="media?.id">
                                 <RouterLink class="r-cards" :to="{ name: 'land-detail', params: { id: media?.id } }">
@@ -295,6 +298,12 @@
                                         <img v-if="!media?.property_record_files[0]?.image_uri"
                                             src="/src/assets/Images/placeholder-image.jpg" class="rounded-5"
                                             height="200" alt="Image">
+                                        <div class="over-text">
+                                            <small>
+                                                VERIFIED
+                                                <i class="fa-solid fa-check pe-2"></i>
+                                            </small>
+                                        </div>
                                     </div>
                                 </RouterLink>
                                 <div class="card-content d-flex flex-column pb-2">
@@ -305,7 +314,8 @@
                                         </p>
                                         <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                     </div>
-                                    <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home=='House' || media?.property_listing_pape?.pupose_home=='Flat'">
+                                    <div class="d-flex align-items-center pb-3"
+                                        v-if="media?.property_listing_pape?.pupose_home == 'House' || media?.property_listing_pape?.pupose_home == 'Flat'">
                                         <div>
                                             <i class="fa-solid fa-bed pe-1"></i>
                                             <small class="fw-bold">
@@ -319,7 +329,8 @@
                                             </small>
                                         </div>
                                     </div>
-                                    <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home !=='House' && media?.property_listing_pape?.pupose_home !=='Flat'">
+                                    <div class="d-flex align-items-center pb-3"
+                                        v-if="media?.property_listing_pape?.pupose_home !== 'House' && media?.property_listing_pape?.pupose_home !== 'Flat'">
                                         <div>
                                             <i class="fa-solid fa-landmark pe-1"></i>
                                             <small class="fw-bold">
@@ -777,9 +788,30 @@ onBeforeRouteLeave((to, from, next) => {
 
 
 <style scoped>
+.navbar {
+    position: sticky !important;
+    top: 20%;
+    left: 0;
+    overflow-y: auto;
+    height: 80vh;
+    margin-bottom: 1.5rem
+}
+
+.navbar::-webkit-scrollbar {
+    width: 4px;
+    /* background-color: rgba(220, 20, 60, 0.658); */
+    background-color: #fff;
+    border-radius: 50px;
+}
+
+.navbar::-webkit-scrollbar-thumb {
+    background-color: #0f045571;
+    border-radius: 50px;
+}
+
+
 .nav-top-c {
     background: linear-gradient(to right, #F45D08, #141415ba);
-
     color: #fff;
 }
 
@@ -838,8 +870,8 @@ onBeforeRouteLeave((to, from, next) => {
     }
 
     .navbar {
-        position: sticky;
-        top: 0;
+        position: sticky !important;
+        top: 11%;
         left: 0;
     }
 }
@@ -850,6 +882,14 @@ onBeforeRouteLeave((to, from, next) => {
     border: 1px solid #0000002a;
 }
 
+.search-button {
+    background-color: transparent !important;
+    border: 1px solid #F45D08 !important;
+    padding: 0rem .6rem !important;
+    height: 24.5px;
+    font-size: 13px;
+    width: 100%;
+}
 
 /* .listing {
     display: grid;
@@ -870,8 +910,8 @@ button {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
     margin: 20px 0;
 }
 
@@ -925,4 +965,26 @@ h6::after {
     left: 0;
     width: 100%;
 } */
+
+.card {
+    position: relative
+}
+
+.over-text {
+    background-color: red;
+    width: fit-content;
+    padding: 0rem .8rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    small {
+        color: #fff;
+        font-weight: 700;
+    }
+}
+
+.fa-check {
+    color: #fff;
+}
 </style>
