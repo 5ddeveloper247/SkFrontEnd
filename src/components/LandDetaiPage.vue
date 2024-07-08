@@ -646,7 +646,8 @@
                     }" class="mySwiper">
                     <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
                         <div class="property-card px-2 mx-2 py-2 mb-3">
-                            <RouterLink class="r-cards" :to="{ name: 'land-detail', params: { id: media?.id } }">
+                            <RouterLink class="r-cards"
+                                :to="{ name: 'land-detail', params: { id: idEncryptor(media?.id) } }">
                                 <div class="card border-0 bg-transparent">
                                     <img v-if="media?.property_record_files[0]?.image_uri"
                                         :src="getImageUrlSwipper(media)" class="" height="200" width="100%" alt="Image">
@@ -725,7 +726,7 @@
 // YourVueComponent.vue
 // Import helper functions
 import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';
-import { numFormatter } from '../helpers/numberFormater';
+import { numFormatter, idEncryptor, idDecryptor } from '../helpers/numberFormater';
 import { ref, onBeforeMount, onBeforeUnmount, onUnmounted, onMounted, watch } from 'vue';
 import { useRoute, onBeforeRouteLeave } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
@@ -738,6 +739,8 @@ import 'swiper/css/autoplay';
 import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useFooterStore } from '../stores/FooterLoadingState';
+
+
 
 
 // Modules for Swiper
@@ -765,7 +768,7 @@ const getMediabyType = () => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 'mediaSliderType': mediaSliderType.value, 'typeId': propertyId.value }) // Use 'body' instead of 'data'
+        body: JSON.stringify({ 'mediaSliderType': mediaSliderType.value, 'typeId': idDecryptor(propertyId.value) }) // Use 'body' instead of 'data'
     })
         .then(response => {
             setTimeout(() => {
@@ -912,7 +915,7 @@ const propertyDetailbyId = () => {
     loading.value = true;
     footerState.setFooterState(false);
     const base_url = import.meta.env.VITE_BASE_URL;
-    fetch(`${base_url}/api/frontend/home/property/getbyid/${propertyId.value}`, {
+    fetch(`${base_url}/api/frontend/home/property/getbyid/${idDecryptor(propertyId.value)}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -946,7 +949,7 @@ const propertyDetailbyId = () => {
 }
 
 onBeforeMount(() => {
-    // Fetch the media data
+
     propertyDetailbyId();
 });
 
@@ -1027,5 +1030,9 @@ img {
 .swiper-navigation {
     height: 10px !important;
     background-color: red !important;
+}
+
+.whatsapp-btn, .call-btn {
+    font-size: 12px !important;
 }
 </style>

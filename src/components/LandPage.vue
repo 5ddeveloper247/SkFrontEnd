@@ -291,7 +291,8 @@
 
                         <div :class="{ 'grid-container': isGridView, 'list-container': !isGridView }">
                             <div class="property-card px-2 py-2" v-for="media in mediaData" :key="media?.id">
-                                <RouterLink class="r-cards" :to="{ name: 'land-detail', params: { id: media?.id } }">
+                                <RouterLink class="r-cards"
+                                    :to="{ name: 'land-detail', params: { id: idEncryptor(media?.id) } }">
                                     <div class="card border-0 bg-transparent">
                                         <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrl(media)"
                                             class="" height="200" width="100%" alt="Image">
@@ -388,7 +389,7 @@ import Loader from './Loader.vue';
 import axios from 'axios';
 import { useCityData } from '@/composables/useCityData';
 import { useFooterStore } from '../stores/FooterLoadingState';
-import { numFormatter } from '../helpers/numberFormater';
+import { numFormatter, idEncryptor, idDecryptor } from '../helpers/numberFormater';
 
 
 // Define objects

@@ -26,9 +26,19 @@ export const numFormatter = (unformattedNum) => {
     return formattedNum + suffix.symbol;
 };
 
-// Example usage
-console.log(numFormatter(500));       // Output: "500"
-console.log(numFormatter(2500));      // Output: "2.5 Thousand"
-console.log(numFormatter(100000));    // Output: "1 Lakh"
-console.log(numFormatter(1500000));   // Output: "15 Lakh"
-console.log(numFormatter(35000000));  // Output: "3.5 Crore"
+
+export const idEncryptor = (id) => {
+    if (typeof id !== 'string' && typeof id !== 'number') {
+        throw new Error('ID must be a string or number');
+    }
+
+    const base64Encoded = btoa(String(id));
+    return base64Encoded;
+};
+
+export const idDecryptor = (encodedId) => {
+    const decoded = atob(encodedId);
+    // You may want to parse the decoded value based on your data type expectation
+    return decoded;
+};
+

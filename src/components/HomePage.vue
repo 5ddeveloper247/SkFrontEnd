@@ -437,7 +437,8 @@
                     }" class="mySwiper">
                     <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
                         <div class="property-card px-2 mx-2 py-2 mb-3">
-                            <RouterLink class="r-cards" :to="{ name: 'land-detail', params: { id: media?.id } }">
+                            <RouterLink class="r-cards"
+                                :to="{ name: 'land-detail', params: { id: idEncryptor(media?.id) } }">
                                 <div class="card border-0 bg-transparent">
                                     <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrl(media)"
                                         class="" height="200" width="100%" alt="Image">
@@ -454,34 +455,36 @@
                                     </p>
                                     <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
                                 </div>
-                                <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home=='House' || media?.property_listing_pape?.pupose_home=='Flat'">
-                                        <div>
-                                            <i class="fa-solid fa-bed pe-1"></i>
-                                            <small class="fw-bold">
-                                                {{ media?.property_listing_pape?.propertyDetail_bedrooms }}
-                                            </small>
-                                        </div>
-                                        <div class="mx-3">
-                                            <i class="fa-solid fa-toilet pe-1"></i>
-                                            <small class="fw-bold">
-                                                {{ media?.property_listing_pape?.propertyDetail_bathrooms }}
-                                            </small>
-                                        </div>
+                                <div class="d-flex align-items-center pb-3"
+                                    v-if="media?.property_listing_pape?.pupose_home == 'House' || media?.property_listing_pape?.pupose_home == 'Flat'">
+                                    <div>
+                                        <i class="fa-solid fa-bed pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_bedrooms }}
+                                        </small>
                                     </div>
-                                    <div class="d-flex align-items-center pb-3" v-if="media?.property_listing_pape?.pupose_home !=='House' && media?.property_listing_pape?.pupose_home !=='Flat'">
-                                        <div>
-                                            <i class="fa-solid fa-landmark pe-1"></i>
-                                            <small class="fw-bold">
-                                                {{ media?.property_listing_pape?.propertyDetail_area }}
-                                            </small>
-                                        </div>
-                                        <div class="mx-3">
-                                            <i class="fa-solid fa-expand pe-1"></i>
-                                            <small class="fw-bold">
-                                                {{ media?.property_listing_pape?.propertyDetail_area_unit }}
-                                            </small>
-                                        </div>
+                                    <div class="mx-3">
+                                        <i class="fa-solid fa-toilet pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_bathrooms }}
+                                        </small>
                                     </div>
+                                </div>
+                                <div class="d-flex align-items-center pb-3"
+                                    v-if="media?.property_listing_pape?.pupose_home !== 'House' && media?.property_listing_pape?.pupose_home !== 'Flat'">
+                                    <div>
+                                        <i class="fa-solid fa-landmark pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_area }}
+                                        </small>
+                                    </div>
+                                    <div class="mx-3">
+                                        <i class="fa-solid fa-expand pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_area_unit }}
+                                        </small>
+                                    </div>
+                                </div>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <a class="btn w-100 d-flex gap-2 align-items-center btn-sm nav-sub-links-main text-nowrap  py-1 d-flex flex-nowrap align-items-center justify-content-center"
                                         :href="'mailto:' + media?.pInfo_email" role="button">
@@ -735,7 +738,7 @@ import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useCityData } from '@/composables/useCityData';
 import { useFooterStore } from '../stores/FooterLoadingState';
-import { numFormatter } from '../helpers/numberFormater';
+import { numFormatter, idEncryptor, idDecryptor } from '../helpers/numberFormater';
 // Modules for Swiper
 const modules = ref([Navigation, Autoplay, Pagination]);
 // Autoplay configuration
@@ -921,7 +924,6 @@ const getMediabyType = () => {
 
 
 onMounted(() => {
-
     // Make API call
     //loading.value = true; 
     const base_url = import.meta.env.VITE_BASE_URL;
