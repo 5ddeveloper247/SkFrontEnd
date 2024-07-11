@@ -130,7 +130,7 @@ export default {
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';
+import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../helpers/redirectHelpers';   
 </script>
 
 
