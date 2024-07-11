@@ -1,10 +1,10 @@
 <template>
-    <Loader :isLoading="loading" />
 
-    <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade" v-show="!loading">
+
+    <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade">
         <div class="carousel-inner">
             <div class="carousel-item top-carousal active">
-                <img src="../assets/Images/main-slider-img-2.jpg" class="d-block w-100" alt="...">
+                <img src="../assets/Images/8609d298-8f84-4192-9cc7-a376e1e32ef1.png" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
                         <h1 class="text-white p-0 p-md-5 text-center">
@@ -17,7 +17,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/main-slider-img-1.jpg" class="d-block w-100" alt="...">
+                <img src="../assets/Images/as.png" class="d-block w-100" alt="...">
                 <div class="slider-text text-end">
                     <div class="anim-2">
                         <h1 class="text-white p-0 p-md-5 text-center text-capitalize">
@@ -28,7 +28,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/main-slider-img-3.jpg" class="d-block w-100" alt="...">
+                <img src="../assets/Images/bcd0d308-36ca-4e5d-aa12-3d97b693662e.png" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
                         <h1 class="text-white p-0 p-md-5 text-center text-uppercase">
@@ -72,7 +72,7 @@
                             <div class="col-6 col-md mb-4">
                                 <select class="form-select" v-model="filterCriteria.city"
                                     aria-label="Default select example">
-                                    <option :value="filterCriteria.city" disabled>{{ filterCriteria.city }}</option>
+                                    <option value="Select city">Select city</option>
                                     <option v-for="city in cityList" :key="city" :value="city">{{ city }}</option>
                                     <!-- <option value="Islamabad">Islamabad</option>
                                     <option value="Lahore">Lahore</option>
@@ -80,20 +80,33 @@
                                 </select>
                             </div>
 
-                            <div class="col-6 col-md mb-4">
+                            <div class="col-6 col-md mb-4"
+                                v-if="filterCriteria.plot !== 'Residential Plot' && filterCriteria.plot !== 'Commercial Plot'">
                                 <select class="form-select" v-model="filterCriteria.homeType"
                                     aria-label="Default select example">
-                                    <option :value="filterCriteria.homeType" disabled>{{ filterCriteria.homeType }}
-                                    </option>
+                                    <option value="Select home">Select home</option>
                                     <option value="House">House</option>
                                     <option value="Flat">Flat</option>
                                 </select>
                             </div>
 
-                            <div class="col-6 col-md mb-4">
+                            <div class="col-6 col-md mb-4"
+                                v-if="filterCriteria.homeType == 'House' || filterCriteria.homeType == 'Flat'">
+                                <select class="form-select" v-model="filterCriteria.rooms"
+                                    aria-label="Default select example">
+
+                                    <option value="Select rooms">Select rooms</option>
+                                    <option v-for="num in parseInt(maxRooms)" :value="num" :key="num">
+                                        {{ num }} Room
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-6 col-md mb-4"
+                                v-if="filterCriteria.homeType !== 'House' && filterCriteria.homeType !== 'Flat'">
                                 <select class="form-select" v-model="filterCriteria.plot"
                                     aria-label="Default select example">
-                                    <option :value="filterCriteria.plot" disabled>{{ filterCriteria.plot }}</option>
+                                    <option value="Select plot type">Select plot type</option>
                                     <option value="Residential Plot">Residential Plot</option>
                                     <option value="Commercial Plot">Commercial Plot</option>
                                 </select>
@@ -102,23 +115,15 @@
                             <div class="col-6 col-md mb-4" v-if="filterCriteria.plot === 'Commercial Plot'">
                                 <select class="form-select" v-model="filterCriteria.commercial"
                                     aria-label="Default select example">
-                                    <option :value="filterCriteria.commercial" disabled>{{ filterCriteria.commercial }}
-                                    </option>
+                                    <option value="Select commercial type">Select commercial type</option>
                                     <option value="Office">Office</option>
                                     <option value="Shop">Shop</option>
                                     <option value="Building">Building</option>
                                 </select>
                             </div>
 
-                            <div class="col-6 col-md mb-4">
-                                <select class="form-select" v-model="filterCriteria.rooms"
-                                    aria-label="Default select example">
-                                    <option :value="filterCriteria.rooms" disabled>{{ filterCriteria.rooms }}</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                            </div>
+
+
 
                             <button type="button" class="btn col-12 col-md main-button px-3 mb-4 m-2 btn-round"
                                 @click="handleFilterCriteria">Search</button>
@@ -399,69 +404,101 @@
 
         <!-- ======================Listing================== -->
         <div class="row my-5 px-md-5">
-            <span>CHECKOUT OUR NEW</span>
-            <div class="d-flex justify-content-between listing-ul">
-                <h2>Latest Listed Properties</h2>
-                <ul class="d-flex flex-nowrap mb-0 p-0">
+            <span>Latest Properties</span>
+            <div class="d-flex justify-content-between listing-ul mb-3">
+                <p>
+                    Explore the Latest Properties Listed by SK Marketing <br> in Bahria Town and DHA Islamabad.
+                </p>
+                <ul class="d-flex justify-content-end flex-nowrap mb-0 p-0">
                     <li class="nav-item mx-1">
-                        <a class="listed-properties py-2 px-3 text-black active" href="#"
+                        <a class="listed-properties py-1 px-3 text-black active" href="#"
                             @click.prevent="setMediaType('All')">All</a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="listed-properties py-2 px-3 text-black" href="#"
+                        <a class="listed-properties py-1 px-3 text-black" href="#"
                             @click.prevent="setMediaType('Sale')">Sale</a>
                     </li>
                     <li class="nav-item mx-1">
-                        <a class="listed-properties py-2 px-3 text-black" href="#"
+                        <a class="listed-properties py-1 px-3 text-black" href="#"
                             @click.prevent="setMediaType('Rent')">Rent</a>
                     </li>
                 </ul>
             </div>
-            <p>
-                Explore the Latest Properties Listed by SK Marketing <br> in Bahria Town and DHA Islamabad.
-            </p>
+
 
             <div v-if="mediaData.length > 0">
-                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :navigation="true" :modules="modules"
-                    :breakpoints="{
+                <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :pagination="{ clickable: true }"
+                    :modules="modules" :breakpoints="{
                         320: { slidesPerView: 1, spaceBetween: 5 },
                         480: { slidesPerView: 1, spaceBetween: 5 },
                         640: { slidesPerView: 1, spaceBetween: 5 },
                         768: { slidesPerView: 2, spaceBetween: 3 },
-                        1024: { slidesPerView: 3, spaceBetween: 5 }
+                        1024: { slidesPerView: 3, spaceBetween: 10 }
                     }" class="mySwiper">
                     <swiper-slide v-for="media in mediaData" :key="media.id" :slidesPerView="3">
-                        <RouterLink :to="{ name: 'land-detail', params: { id: media.id } }"
-                            style="text-decoration: none;">
-                            <div class="item mx-3">
+                        <div class="property-card px-2 mx-2 py-2 mb-3">
+                            <RouterLink class="r-cards"
+                                :to="{ name: 'land-detail', params: { id: idEncryptor(media?.id) } }">
                                 <div class="card border-0 bg-transparent">
-                                    <img class="card-img-top rounded-5" :src="getImageUrl(media)" height="270"
+                                    <img v-if="media?.property_record_files[0]?.image_uri" :src="getImageUrl(media)"
+                                        class="" height="200" width="100%" alt="Image">
+                                    <img v-if="!media?.property_record_files[0]?.image_uri"
+                                        src="/src/assets/Images/placeholder-image.jpg" class="rounded-5" height="200"
                                         alt="Image">
-                                    <div
-                                        class="card-body d-flex flex-column justify-content-center justify-content-md-start align-items-md-start align-items-center">
-                                        <h5 class="card-title">PKR {{numFormatter(media.price)}}</h5>
-                                        <p class="card-text elip">{{ media.property_listing_pape.extra_info_title }}</p>
+                                </div>
+                            </RouterLink>
+                            <div class="card-content d-flex flex-column pb-2">
+                                <div class="card-body pt-3">
+                                    <h5 class="card-title fw-bold"> PKR {{ numFormatter(media?.price) }}</h5>
+                                    <p class="card-text elip">
+                                        {{ media?.property_listing_pape?.extra_info_title }}
+                                    </p>
+                                    <!-- <p><small>{{ media?.property_listing_pape?.extra_info_description }}</small></p> -->
+                                </div>
+                                <div class="d-flex align-items-center pb-3"
+                                    v-if="media?.property_listing_pape?.pupose_home == 'House' || media?.property_listing_pape?.pupose_home == 'Flat'">
+                                    <div>
+                                        <i class="fa-solid fa-bed pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_bedrooms }}
+                                        </small>
+                                    </div>
+                                    <div class="mx-3">
+                                        <i class="fa-solid fa-toilet pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_bathrooms }}
+                                        </small>
                                     </div>
                                 </div>
-                            </div>
-                        </RouterLink>
-
-                        <div class="d-flex align-items-center justify-content-between px-4 mx-2 mt-2 w-100">
-                            <div class="d-flex align-items-center">
-                                <div><i class="fa-solid fa-bed pe-2"></i>{{
-                                    media.property_listing_pape.propertyDetail_bedrooms }}</div>
-                                <div class="mx-3"><i class="fa-solid fa-toilet pe-2"></i>{{
-                                    media.property_listing_pape.propertyDetail_bathrooms }}</div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <a class="btn btn-sm nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                    :href="'mailto:' + media.pInfo_email" role="button">
-                                    <i class="fa-regular fa-envelope pe-2"></i>
-                                </a>
-                                <a class="btn btn-sm mx-2 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                    :href="'tel:' + media.pInfo_phoneNumber" role="button">
-                                    <i class="fa-solid fa-phone pe-2"></i>
-                                </a>
+                                <div class="d-flex align-items-center pb-3"
+                                    v-if="media?.property_listing_pape?.pupose_home !== 'House' && media?.property_listing_pape?.pupose_home !== 'Flat'">
+                                    <div>
+                                        <i class="fa-solid fa-landmark pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_area }}
+                                        </small>
+                                    </div>
+                                    <div class="mx-3">
+                                        <i class="fa-solid fa-expand pe-1"></i>
+                                        <small class="fw-bold">
+                                            {{ media?.property_listing_pape?.propertyDetail_area_unit }}
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <a class="btn w-100 d-flex gap-2 align-items-center btn-sm nav-sub-links-main text-nowrap  py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                        :href="'mailto:' + media?.pInfo_email" role="button">
+                                        <h6 class="mb-0 icon-text">Email</h6>
+                                        <i class="fa-regular fa-envelope"></i>
+                                        <!-- {{ media?.pInfo_email }} -->
+                                    </a>
+                                    <a class="btn w-100 d-flex gap-2 align-items-center btn-sm mx-2 nav-sub-links-main text-nowrap d-flex flex-nowrap align-items-center justify-content-center"
+                                        :href="'tel:' + media?.pInfo_phoneNumber" role="button">
+                                        <h6 class="mb-0 icon-text">Call</h6>
+                                        <i class="fa-solid fa-phone"></i>
+                                        <!-- {{ media?.pInfo_phoneNumber }} -->
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </swiper-slide>
@@ -482,7 +519,7 @@
                 <h2 class="text-center pb-4">Real Estate Services in Bahria Town, DHA Islamabad</h2>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card rounded-4 py-5 my-1">
+                        <div class="card estate-services rounded-4 py-5 my-1">
                             <div class="d-flex align-items-center justify-content-center our-services-card-img">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
@@ -495,7 +532,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card rounded-4 py-5 my-1">
+                        <div class="card estate-services rounded-4 py-5 my-1">
                             <div class="d-flex align-items-center justify-content-center our-services-card-img">
                                 <i class="fa-solid fa-house"></i>
                             </div>
@@ -509,7 +546,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card rounded-4 py-5 my-1">
+                        <div class="card estate-services rounded-4 py-5 my-1">
                             <div class="d-flex align-items-center justify-content-center our-services-card-img">
                                 <i class="fa-solid fa-house-laptop"></i>
                             </div>
@@ -645,7 +682,7 @@
                                                     :src="getTestimonialImageUrl(testimonial.image_url)" alt="">
                                                 <p class="px-2">{{ testimonial.name }}</p>
                                             </div>
-                                            <img src="../assets/Images/ratings.png" alt="" style="height:50px;">
+                                            <!-- <img src="../assets/Images/ratings.png" alt="" style="height:50px;"> -->
                                         </div>
                                     </div>
                                 </div>
@@ -688,21 +725,22 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, onBeforeMount } from 'vue';
 import emitter from '../../emitter';
-import { RouterLink, useRouter, onBeforeRouteLeave } from 'vue-router';
+import { RouterLink, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { useFormDataStore } from '.././stores/HomeDataFilterStore'; // Adjust the path as necessary
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import { Navigation, Autoplay } from 'swiper/modules';
+import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import Loader from './Loader.vue';
 import { useCityData } from '@/composables/useCityData';
 import { useFooterStore } from '../stores/FooterLoadingState';
-import {numFormatter} from '../helpers/numberFormater';
+import { numFormatter, idEncryptor, idDecryptor } from '../helpers/numberFormater';
 // Modules for Swiper
-const modules = ref([Navigation, Autoplay]);
+const modules = ref([Navigation, Autoplay, Pagination]);
 // Autoplay configuration
 const autoplay = {
     delay: 3500, // 3 seconds delay between slides
@@ -718,6 +756,7 @@ const footerState = useFooterStore();
 
 const mediaData = ref([]);
 const testimonials = ref([]);
+const maxRooms = ref(1);
 const loading = ref(true);
 
 ////////////////////////
@@ -729,7 +768,7 @@ const autoplaySpeed = 5000;
 const filterCriteria = ref({
     purpose: 'Sale',
     city: 'Select city',
-    homeType: 'Select home type',
+    homeType: 'Select home',
     plot: 'Select plot type',
     commercial: 'Select commercial type',
     rooms: 'Select rooms',
@@ -749,6 +788,8 @@ const filterCriteria = ref({
     min_year: '',
 
 });
+
+
 
 const handleFilterCriteria = () => {
     const cityVal = filterCriteria.value.city;
@@ -773,10 +814,11 @@ const handleFilterCriteria = () => {
         filterCriteria.value.commercial = '';
         //alert(filterCriteria.value.commercial)
     }
-    if (rooms.includes('Select')) {
-        filterCriteria.value.rooms = '';
-        //alert(filterCriteria.value.commercial)
-    }
+    // alert(rooms)
+    // if (rooms.includes('Select')) {
+    //     filterCriteria.value.rooms = '';
+    //     //alert(filterCriteria.value.commercial)
+    // }
 
 
     formDataStore.setFilterData(filterCriteria.value);
@@ -839,7 +881,7 @@ const setMediaType = (type) => {
 };
 
 const getMediabyType = () => {
-    loading.value = true;
+    //loading.value = true;
     const base_url = import.meta.env.VITE_BASE_URL;
     fetch(base_url + '/api/frontend/home/property/post', {
         method: 'POST',
@@ -881,16 +923,9 @@ const getMediabyType = () => {
 
 
 
-
 onMounted(() => {
-    window.scrollTo(0, 0);
-});
-
-
-onMounted(() => {
-
     // Make API call
-    loading.value = true;
+    //loading.value = true; 
     const base_url = import.meta.env.VITE_BASE_URL;
     fetch(base_url + '/api/frontend/home/property/get', {
         method: 'GET',
@@ -905,6 +940,8 @@ onMounted(() => {
             }, 1000);
             mediaData.value = data.propertyInfo;
             testimonials.value = data.testimonials;
+            maxRooms.value = data.maxRooms;
+
             // $toast.open({
             //     message: 'Property data fetched successfully!',
             //     type: 'success',
@@ -923,7 +960,6 @@ onMounted(() => {
             });
         });
 });
-
 
 
 onMounted(() => {
@@ -998,7 +1034,8 @@ onBeforeRouteLeave((to, from, next) => {
     next();
 });
 
-onBeforeMount(() => {
+onMounted(() => {
+    footerState.setFooterState(false);
     footerState.setFooterState(true);
 })
 
@@ -1070,5 +1107,13 @@ span {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.property-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.347) 0px 3px 8px;
+    transition: transform 0.4s;
+    margin-top: 1rem;
 }
 </style>

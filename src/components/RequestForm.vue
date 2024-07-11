@@ -1,9 +1,9 @@
 <template>
   <!-- ======================Multi Step Form================== -->
   <Loader :isLoading="loading" />
-  <div class="container-fluid call-to-action pt-5">
+  <div class="container-fluid call-to-action">
 
-    <div class="row justify-content-center pt-md-5 pt-3">
+    <div class="row justify-content-center pt-3">
       <div class="col-md-8 col-12 text-center p-0">
         <div class="card px-md-0 px-2 pt-4 pb-0 mt-3 mb-3">
           <h2 id="heading">Request Form</h2>
@@ -20,29 +20,32 @@
                 aria-valuemax="100"></div>
             </div> <br>
             <!-- fieldsets -->
-            <fieldset :class="{ 'd_block': fs_step1, 'fs_step_show': fs_step_show }">
+            <fieldset :class="{ 'd_block': fs_step1, 'fs_step_show': fs_step_show }" id="stp1">
 
               <div class="'form-card'">
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.firstName }"
-                    class="form-control" id="floatingFirstName" v-model="propertyRequestform.firstName"
-                    placeholder="First Name" />
+                  <input @input="enforceMaxLength($event, 15, 'firstName')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.firstName }" class="form-control"
+                    id="floatingFirstName" v-model="propertyRequestform.firstName" placeholder="First Name" />
 
                   <label for="floatingFirstName">First Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.firstName }"
-                    id="floatingLastName" v-model="propertyRequestform.lastName" placeholder="Last Name" />
+                  <input @input="enforceMaxLength($event, 15, 'lastName')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.firstName }" id="floatingLastName"
+                    v-model="propertyRequestform.lastName" placeholder="Last Name" />
                   <label for="floatingLastName">Last Name</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="email" :class="{ 'form-control': true, 'input-error': errors.firstName }"
-                    id="floatingEmail" v-model="propertyRequestform.email" placeholder="sk@gmail.com" />
+                  <input @input="enforceMaxLength($event, 50, 'email')" type="email"
+                    :class="{ 'form-control': true, 'input-error': errors.firstName }" id="floatingEmail"
+                    v-model="propertyRequestform.email" placeholder="sk@gmail.com" />
                   <label for="floatingEmail">Email address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" :class="{ 'form-control': true, 'input-error': errors.firstName }"
-                    id="floatingPhone" v-model="propertyRequestform.phone" placeholder="Phone" />
+                  <input @input="enforceMaxLength($event, 13, 'phone')" type="number"
+                    :class="{ 'form-control': true, 'input-error': errors.firstName }" id="floatingPhone"
+                    v-model="propertyRequestform.phone" placeholder="Phone" />
                   <label for="floatingPhone">Phone</label>
                 </div>
                 <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
@@ -206,28 +209,47 @@
                   </div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.city }" id="floatingInput"
+                  <input @input="enforceMaxLength($event, 50, 'city')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.city }" id="floatingInput"
                     v-model="propertyRequestform.city" placeholder="City">
                   <label for="floatingInput">City</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.location }"
-                    id="floatingInput" v-model="propertyRequestform.location" placeholder="Location">
+                  <input @input="enforceMaxLength($event, 50, 'location')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.location }" id="floatingInput"
+                    v-model="propertyRequestform.location" placeholder="Location">
                   <label for="floatingInput">Location</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" :class="{ 'form-control': true, 'input-error': errors.address }" id="floatingInput"
+                  <input @input="enforceMaxLength($event, 100, 'address')" type="text"
+                    :class="{ 'form-control': true, 'input-error': errors.address }"
                     v-model="propertyRequestform.address" placeholder="Address">
                   <label for="floatingInput">Address</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" :class="{ 'form-control': true, 'input-error': errors.size }" id="floatingInput"
-                    v-model="propertyRequestform.size" placeholder="Size">
+                  <select @change="enforceMaxLength($event, 20, 'areaUnit')"
+                    :class="{ 'form-control': true, 'input-error': errors.areaUnit }"
+                    v-model="propertyRequestform.areaUnit">
+
+                    <option value="Marla">Marla</option>
+                    <option value="Sq.Ft">Sq.Ft</option>
+                    <option value="Sq.M">Sq.M</option>
+                    <option value="Sq.Yd">Sq.Yd</option>
+                    <option value="Kanal">Kanal</option>
+                  </select>
+                  <label for="floatingInput">Area Unit</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input @input="enforceMaxLength($event, 15, 'size')" type="number"
+                    :class="{ 'form-control': true, 'input-error': errors.size }" v-model="propertyRequestform.size"
+                    placeholder="Size">
                   <label for="floatingInput">Size</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="number" :class="{ 'form-control': true, 'input-error': errors.totalPrice }"
-                    id="floatingInput" v-model="propertyRequestform.totalPrice" placeholder="Total Price">
+                  <input @input="enforceMaxLength($event, 15, 'totalPrice')" type="number"
+                    :class="{ 'form-control': true, 'input-error': errors.totalPrice }"
+                    v-model="propertyRequestform.totalPrice" placeholder="Total Price in PKR">
                   <label for="floatingInput">Total Price</label>
                 </div>
               </div>
@@ -246,7 +268,7 @@
                     <h2 class="steps">Step 4 - 4</h2>
                   </div>
                 </div> <br>
-                <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
+                <h2 class="purple-text text-center"><strong>Submitting....</strong></h2> <br>
                 <div class="row justify-content-center">
 
                 </div>
@@ -265,7 +287,8 @@
 
 
 <script>
-import { ref, onMounted, onBeforeMount, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeMount, onUnmounted, onBeforeUnmount, watch } from 'vue';
+import { useRoute, onBeforeRouteLeave } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Loader from './Loader.vue';
@@ -291,6 +314,7 @@ export default {
       plot: '',
       location: '',
       address: '',
+      areaUnit: '',
       size: '',
       totalPrice: '',
       purpose: 'Sale',
@@ -381,12 +405,14 @@ export default {
           loading.value = false;
           if (data.success) {
             $toast.open({
-              message: 'Submitted Successfully',
+              message: 'Request has submitted successfully',
               type: 'success',
               position: 'top-right'
             });
             resetForm();
-          } else {
+            window.location.href = '/';
+          }
+          else {
             handleErrors(data);
           }
         })
@@ -436,7 +462,7 @@ export default {
         address: '',
         size: '',
         totalPrice: '',
-        purpose: '',
+        purpose: 'Rent',
         propertyType: ''
       };
       curStep.value = 1;
@@ -472,6 +498,16 @@ export default {
       document.querySelector(".progress-bar").style.width = percent + "%";
     };
 
+
+
+    const enforceMaxLength = (event, maxLength, fieldName) => {
+      if (event.target.value.length > maxLength) {
+        event.target.value = event.target.value.slice(0, maxLength);
+        propertyRequestform.value[fieldName] = event.target.value;
+      }
+    };
+
+
     const handleStepFirst = () => {
       const { firstName, lastName, phone, email } = propertyRequestform.value;
       let valid = true;
@@ -479,7 +515,8 @@ export default {
       if (!firstName) {
         errors.value.firstName = true;
         valid = false;
-      } else {
+      }
+      else {
         errors.value.firstName = false;
       }
 
@@ -558,7 +595,7 @@ export default {
     };
 
     const handleStepThird = () => {
-      const { location, address, size, totalPrice } = propertyRequestform.value;
+      const { location, address, areaUnit, size, totalPrice } = propertyRequestform.value;
       let valid = true;
 
       if (!location) {
@@ -573,6 +610,12 @@ export default {
         valid = false;
       } else {
         errors.value.address = false;
+      }
+      if (!areaUnit) {
+        errors.value.areaUnit = true;
+        valid = false;
+      } else {
+        errors.value.areaUnit = false;
       }
 
       if (!size) {
@@ -598,16 +641,16 @@ export default {
         return;
       }
       handleSubmission();
+      handleStepFourth();
     };
 
     const handleStepFourth = () => {
-      fs_step4.value = false;
-      fs_step1.value = true;
-      fs_step_show.value = false;
-      curStep.value = 1;
+      fs_step3.value = false;
+      fs_step4.value = true;
+      curStep.value = 4;
       setProgressBar();
-    };
 
+    };
     const handleNext = () => {
       if (curStep.value < steps.value) {
         curStep.value++;
@@ -633,12 +676,17 @@ export default {
     };
 
 
-    onBeforeMount(() => {
+    onMounted(() => {
       footerState.setFooterState(true);
     })
 
-    onBeforeUnmount(() => {
+    onUnmounted(() => {
       footerState.setFooterState(false);
+    })
+
+    onBeforeRouteLeave((to, from, next) => {
+      footerState.setFooterState(false);
+      next();
     })
 
     return {
@@ -666,6 +714,7 @@ export default {
       fs_step_show,
       handle_purpose_active_rent,
       handle_purpose_active_sale,
+      enforceMaxLength,
     };
   }
 };

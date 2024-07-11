@@ -23,30 +23,32 @@
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <label for="name" class="py-3 fw-bold">Full Name *</label>
-                        <input type="text" class="form-control py-3 px-4" :class="{ 'border-danger': errors.fullName }"
-                            placeholder="John David" aria-label="full name" id="name"
-                            v-model="contactFormData.fullName">
+                        <input @input="enforceMaxLength($event, 15, 'fullName')" type="text"
+                            class="form-control py-3 px-4" :class="{ 'border-danger': errors.fullName }" placeholder=""
+                            aria-label="full name" id="name" v-model="contactFormData.fullName">
                         <div v-if="errors.fullName" class="text-danger">{{ errors.fullName }}</div>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="email" class="py-3 fw-bold">Your Email *</label>
-                        <input type="text" class="form-control py-3 px-4" :class="{ 'border-danger': errors.email }"
-                            placeholder="example@yourmail.com" aria-label="Your Email" id="email"
-                            v-model="contactFormData.email">
+                        <input @input="enforceMaxLength($event, 50, 'email')" type="text" class="form-control py-3 px-4"
+                            :class="{ 'border-danger': errors.email }" placeholder="example@yourmail.com"
+                            aria-label="Your Email" id="email" v-model="contactFormData.email">
                         <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <label for="Company-name" class="py-3 fw-bold">Company *</label>
-                        <input type="text" class="form-control py-3 px-4"
-                            :class="{ 'border-danger': errors.companyName }" placeholder="Your company name here"
-                            aria-label="Company" id="Company-name" v-model="contactFormData.companyName">
+                        <input @input="enforceMaxLength($event, 50, 'companyName')" type="text"
+                            class="form-control py-3 px-4" :class="{ 'border-danger': errors.companyName }"
+                            placeholder="Your company name here" aria-label="Company" id="Company-name"
+                            v-model="contactFormData.companyName">
                         <div v-if="errors.companyName" class="text-danger">{{ errors.companyName }}</div>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="your-subject" class="py-3 fw-bold">Subject *</label>
-                        <input type="text" class="form-control py-3 px-4" :class="{ 'border-danger': errors.subject }"
+                        <input @input="enforceMaxLength($event, 50, 'subject')" type="text"
+                            class="form-control py-3 px-4" :class="{ 'border-danger': errors.subject }"
                             placeholder="How can we Help" aria-label="subject" id="your-subject"
                             v-model="contactFormData.subject">
                         <div v-if="errors.subject" class="text-danger">{{ errors.subject }}</div>
@@ -54,7 +56,8 @@
                 </div>
                 <div class="d-flex flex-column">
                     <label for="message" class="py-3 fw-bold">Message *</label>
-                    <textarea class="w-100 p-4" :class="{ 'border-danger': errors.message }" name="Message"
+                    <textarea @input="enforceMaxLength($event, 300, 'subject')" class="w-100 p-4 form-control"
+                        :class="{ 'border-danger': errors.message }" name="Message"
                         placeholder="Hello there,I would like to talk about how to..." id="message" cols="30" rows="3"
                         v-model="contactFormData.message">
           </textarea>
@@ -69,7 +72,8 @@
 
 
 <script setup>
-import { ref,onBeforeMount,onBeforeUnmount} from 'vue';
+import { ref, onBeforeMount, onBeforeUnmount, onMounted } from 'vue';
+import { RouterLink, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
 import { reactive } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
@@ -196,14 +200,29 @@ const submitForm = async () => {
 }
 
 
+const enforceMaxLength = (event, maxLength, fieldName) => {
+    if (event.target.value.length > maxLength) {
+        event.target.value = event.target.value.slice(0, maxLength);
+        contactFormData.value[fieldName] = event.target.value;
+    }
+};
 
-onBeforeMount(() => {
+
+
+onBeforeRouteLeave((to, from, next) => {
+    footerState.setFooterState(false);
+    next();
+});
+
+onMounted(() => {
+    footerState.setFooterState(false);
     footerState.setFooterState(true);
 })
 
 onBeforeUnmount(() => {
     footerState.setFooterState(false);
 })
+
 
 </script>
 

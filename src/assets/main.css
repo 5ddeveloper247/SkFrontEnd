@@ -35,7 +35,8 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,153,148,1) 
 .elip {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
+    height: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 600;
@@ -162,10 +163,19 @@ input#floatingInput {
 .router-link-active {
     background-color: var(--second--main-color) !important;
     color: #fff !important;
-    border-radius: 20px;
+    padding: .3rem .6rem !important;
 }
 
-.mainNavBar {
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+s .mainNavBar {
     /* background: rgba(255, 255, 255, .3); */
     background-color: #0000005e;
     box-shadow: 0px 5px 20px -5px #00000033;
@@ -213,7 +223,7 @@ input#floatingInput {
 .nav-links-property.active {
     background-color: var(--second--main-color) !important;
     color: #fff !important;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .listed-properties {
@@ -227,7 +237,7 @@ input#floatingInput {
 .listed-properties.active {
     background-color: var(--second--main-color) !important;
     color: #fff !important;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 .nav-link:hover {
@@ -335,6 +345,7 @@ input#floatingInput {
     }
 }
 
+
 .map {
     background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 69%)), url(../assets/Images/map.webp);
     height: 21rem;
@@ -390,7 +401,7 @@ input#floatingInput {
 .nav-sub-links-main {
     border: 1px solid #D7D7D7;
     text-decoration: none;
-    border-radius: 20px !important;
+    border-radius: 4px !important;
     background-color: #fff !important;
     color: var(--home-text-color-) !important;
     width: fit-content;
@@ -398,11 +409,26 @@ input#floatingInput {
 }
 
 .nav-sub-links-main:hover {
-    border: 1px solid #D7D7D7;
+    border: 1px solid #878787;
+    text-decoration: none;
+    border-radius: 4px !important;
+    background-color: transparent !important;
+    color: var(--second--main-color) !important;
+}
+
+.whatsapp-btn {
     text-decoration: none;
     border-radius: 20px !important;
     background-color: transparent !important;
     color: var(--second--main-color) !important;
+    border: 1px solid var(--second--main-color);
+}
+
+.call-btn {
+    text-decoration: none;
+    border-radius: 20px !important;
+    background-color: var(--second--main-color) !important;
+    color: #fff !important;
 }
 
 /* =====================New Hero Section================== */
@@ -415,7 +441,7 @@ input#floatingInput {
 }
 
 .top-carousal img {
-    height: 100vh;
+    height: 89vh;
     width: 100%;
     object-fit: cover;
 }
@@ -684,7 +710,8 @@ input#floatingInput {
 
 /* =====================Blogs================== */
 .blogs {
-    background-color: var(--second--main-color);
+    background  : linear-gradient( rgba(244, 93, 8, 1) 0%, rgba(255, 143, 51, 1) 50%, rgba(244, 93, 8, 1) 100%);
+    color: rgba(244, 93, 8, 1);
 }
 
 .blogs img {
@@ -1440,7 +1467,7 @@ figure img:hover {
 
 .property-detail i {
     cursor: pointer;
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .property-links a {
@@ -1486,8 +1513,13 @@ figure img:hover {
 }
 
 .societiess img {
-    height: 19rem;
-    width: 19rem;
+    height: 22rem;
+    width: 100%;
+}
+
+.estate-services .card-body .card-text {
+    height: 80px;
+    overflow-y: auto;
 }
 
 .listing a {
@@ -1894,10 +1926,11 @@ header h2 {
     transition: 0.5s ease;
     cursor: pointer;
 }
+
 .map-overlay {
     transition: .5s ease;
     opacity: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1915,6 +1948,7 @@ header h2 {
 .dha-map-container:hover .map-overlay {
     opacity: 1;
 }
+
 .bahria-map-container:hover .map-overlay {
     opacity: 1;
 }
@@ -1982,4 +2016,33 @@ header h2 {
     background-color: #f8f6f6;
     border-radius: 10px;
     padding: 10px;
+}
+
+.swiper {
+    overflow: visible;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: #fff !important;
+    background-color: #000;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 25px !important;
+    font-weight: 900;
+}
+
+.swiper-pagination-bullet {
+    margin-top: 50px !important;
+    top: 50rem !important;
+    background-color: var(--second--main-color) !important;
+}
+
+.swiper-wrapper {
+    margin-bottom: 30px;
 }

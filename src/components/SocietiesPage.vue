@@ -1,14 +1,27 @@
 <script setup>
-import { onBeforeMount,onBeforeUnmount } from 'vue';
+import { onBeforeMount, onBeforeUnmount, onMounted } from 'vue';
 import { useFooterStore } from '../stores/FooterLoadingState';
+import { RouterLink, useRouter, onBeforeRouteLeave } from 'vue-router';
 const footerState = useFooterStore();
 onBeforeMount(() => {
-      footerState.setFooterState(true);
-    })
 
-    onBeforeUnmount(() => {
-      footerState.setFooterState(false);
-    })
+    footerState.setFooterState(false);
+    footerState.setFooterState(true);
+})
+onMounted(() => {
+    footerState.setFooterState(false);
+    footerState.setFooterState(true);
+})
+
+onBeforeUnmount(() => {
+    footerState.setFooterState(false);
+})
+onBeforeRouteLeave((to, from, next) => {
+    footerState.setFooterState(false);
+    next();
+});
+
+
 
 </script>
 

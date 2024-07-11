@@ -60,7 +60,7 @@ export default {
                 <div class="d-flex justify-content-between">
                     <div class="d-flex align-items-center d-none d-lg-flex">
                         <i class="fa-solid fa-location-dot"></i>
-                        <p class="px-3">Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.,</p>
+                        <p class="px-3">Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.</p>
                     </div>
                     <div class="d-flex">
                         <div class="d-flex align-items-center mx-md-4">
@@ -100,7 +100,7 @@ export default {
                                     <RouterLink class="nav-link px-2" to="/about">About</RouterLink>
                                 </li>
                                 <li class="nav-item mx-md-2 mx-0">
-                                    <RouterLink class="nav-link px-2" to="/land">Land/Properties</RouterLink>
+                                    <RouterLink class="nav-link px-2" to="/land">Land Properties</RouterLink>
                                 </li>
                                 <li class="nav-item mx-md-2 mx-0">
                                     <RouterLink class="nav-link px-2" to="/societies">Societies</RouterLink>
@@ -140,12 +140,20 @@ p {
 }
 
 a {
-    font-size: 10px;
+    font-size: 12px;
     color: #fff;
     text-decoration: none;
 }
 
 .navbar-brand {
     background-color: transparent !important;
+}
+
+.heroandnav {
+    position: sticky !important;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    box-shadow: rgba(0, 0, 0, 0.171) 0px 3px 8px;
 }
 </style>
