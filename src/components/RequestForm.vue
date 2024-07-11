@@ -222,19 +222,33 @@
                 </div>
                 <div class="form-floating mb-3">
                   <input @input="enforceMaxLength($event, 100, 'address')" type="text"
-                    :class="{ 'form-control': true, 'input-error': errors.address }" id="floatingInput"
+                    :class="{ 'form-control': true, 'input-error': errors.address }"
                     v-model="propertyRequestform.address" placeholder="Address">
                   <label for="floatingInput">Address</label>
                 </div>
                 <div class="form-floating mb-3">
+                  <select @change="enforceMaxLength($event, 20, 'areaUnit')"
+                    :class="{ 'form-control': true, 'input-error': errors.areaUnit }"
+                    v-model="propertyRequestform.areaUnit">
+
+                    <option value="Marla">Marla</option>
+                    <option value="Sq.Ft">Sq.Ft</option>
+                    <option value="Sq.M">Sq.M</option>
+                    <option value="Sq.Yd">Sq.Yd</option>
+                    <option value="Kanal">Kanal</option>
+                  </select>
+                  <label for="floatingInput">Area Unit</label>
+                </div>
+
+                <div class="form-floating mb-3">
                   <input @input="enforceMaxLength($event, 15, 'size')" type="number"
-                    :class="{ 'form-control': true, 'input-error': errors.size }" id="floatingInput"
-                    v-model="propertyRequestform.size" placeholder="Size">
+                    :class="{ 'form-control': true, 'input-error': errors.size }" v-model="propertyRequestform.size"
+                    placeholder="Size">
                   <label for="floatingInput">Size</label>
                 </div>
                 <div class="form-floating mb-3">
                   <input @input="enforceMaxLength($event, 15, 'totalPrice')" type="number"
-                    :class="{ 'form-control': true, 'input-error': errors.totalPrice }" id="floatingInput"
+                    :class="{ 'form-control': true, 'input-error': errors.totalPrice }"
                     v-model="propertyRequestform.totalPrice" placeholder="Total Price in PKR">
                   <label for="floatingInput">Total Price</label>
                 </div>
@@ -300,6 +314,7 @@ export default {
       plot: '',
       location: '',
       address: '',
+      areaUnit: '',
       size: '',
       totalPrice: '',
       purpose: 'Sale',
@@ -395,7 +410,9 @@ export default {
               position: 'top-right'
             });
             resetForm();
-          } else {
+            window.location.href = '/';
+          }
+          else {
             handleErrors(data);
           }
         })
@@ -445,7 +462,7 @@ export default {
         address: '',
         size: '',
         totalPrice: '',
-        purpose: '',
+        purpose: 'Rent',
         propertyType: ''
       };
       curStep.value = 1;
@@ -578,7 +595,7 @@ export default {
     };
 
     const handleStepThird = () => {
-      const { location, address, size, totalPrice } = propertyRequestform.value;
+      const { location, address, areaUnit, size, totalPrice } = propertyRequestform.value;
       let valid = true;
 
       if (!location) {
@@ -593,6 +610,12 @@ export default {
         valid = false;
       } else {
         errors.value.address = false;
+      }
+      if (!areaUnit) {
+        errors.value.areaUnit = true;
+        valid = false;
+      } else {
+        errors.value.areaUnit = false;
       }
 
       if (!size) {
@@ -626,8 +649,8 @@ export default {
       fs_step4.value = true;
       curStep.value = 4;
       setProgressBar();
-    };
 
+    };
     const handleNext = () => {
       if (curStep.value < steps.value) {
         curStep.value++;

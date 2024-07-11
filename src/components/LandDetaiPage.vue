@@ -702,7 +702,7 @@
                                         <!-- {{ media?.pInfo_email }} -->
                                     </a>
                                     <a class="btn w-100 d-flex gap-2 align-items-center btn-sm mx-2 nav-sub-links-main text-nowrap d-flex flex-nowrap align-items-center justify-content-center"
-                                        :href="'tel:' + media?.pInfo_phoneNumber" role="button">
+                                        :href="'tel:' +media?.property_listing_pape?.extra_info_mobile" role="button">
                                         <h6 class="mb-0 icon-text">Call</h6>
                                         <i class="fa-solid fa-phone"></i>
                                         <!-- {{ media?.pInfo_phoneNumber }} -->
@@ -737,8 +737,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import { Navigation, Autoplay, Pagination } from 'swiper/modules';
-import Loader from './Loader.vue';
 import { useFooterStore } from '../stores/FooterLoadingState';
+import Loader from './Loader.vue';
 
 
 
@@ -806,6 +806,10 @@ const getMediabyType = () => {
 
 //bottom swiper
 onMounted(() => {
+    loading.value = true;
+    setTimeout(() => {
+        loading.value = false;
+            }, 2000);
     getMediabyType();
 })
 

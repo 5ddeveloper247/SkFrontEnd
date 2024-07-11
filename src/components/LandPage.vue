@@ -353,7 +353,8 @@
                                             <!-- {{ media?.pInfo_email }} -->
                                         </a>
                                         <a class="btn w-100 d-flex gap-2 align-items-center btn-sm mx-2 nav-sub-links-main text-nowrap d-flex flex-nowrap align-items-center justify-content-center"
-                                            :href="'tel:' + media?.pInfo_phoneNumber" role="button">
+                                            :href="'tel:' + media?.property_listing_pape?.extra_info_mobile"
+                                            role="button">
                                             <h6 class="mb-0 icon-text">Call</h6>
                                             <i class="fa-solid fa-phone"></i>
                                             <!-- {{ media?.pInfo_phoneNumber }} -->
