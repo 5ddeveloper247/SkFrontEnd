@@ -140,7 +140,7 @@ input#floatingInput {
 }
 
 .navTop {
-    background-color: #111111b8;
+    background-color: #000000;
 }
 
 .navTop i {
@@ -165,9 +165,6 @@ input#floatingInput {
     color: #fff !important;
     padding: .3rem .6rem !important;
 }
-
-
-
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -432,13 +429,13 @@ s .mainNavBar {
 }
 
 /* =====================New Hero Section================== */
-.heroandnav {
+/* .heroandnav {
     background-image: url(../assets/Images/construction1.jpg);
     transition: background-image 0.5s ease-in-out;
     overflow-x: hidden !important;
     background-size: cover;
     background-repeat: no-repeat;
-}
+} */
 
 .top-carousal img {
     height: 89vh;

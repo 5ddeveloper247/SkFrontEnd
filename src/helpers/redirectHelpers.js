@@ -18,7 +18,8 @@ export const redirectToPhoneDialer = () => {
 
 // Function to redirect to WhatsApp
 export const redirectToWhatsApp = () => {
-  if (isMobileDevice()) {
+  // if (isMobileDevice()) {
+    if (true) {
     const phoneNumber = import.meta.env.VITE_ADMIN_WHATSAPP;
     const whatsappURL = `https://wa.me/${phoneNumber}`;
     window.location.href = whatsappURL;

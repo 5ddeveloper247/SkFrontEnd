@@ -4,7 +4,7 @@
     <div id="carouselExampleFade" ref="carousel" class="carousel slide carousel-fade">
         <div class="carousel-inner">
             <div class="carousel-item top-carousal active">
-                <img src="../assets/Images/8609d298-8f84-4192-9cc7-a376e1e32ef1.png" class="d-block w-100" alt="...">
+                <img src="../assets/Images/main-slider-img-1.jpg" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
                         <h1 class="text-white p-0 p-md-5 text-center">
@@ -17,7 +17,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/as.png" class="d-block w-100" alt="...">
+                <img src="../assets/Images/main-slider-img-2.jpg" class="d-block w-100" alt="...">
                 <div class="slider-text text-end">
                     <div class="anim-2">
                         <h1 class="text-white p-0 p-md-5 text-center text-capitalize">
@@ -28,7 +28,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="carousel-item top-carousal">
-                <img src="../assets/Images/bcd0d308-36ca-4e5d-aa12-3d97b693662e.png" class="d-block w-100" alt="...">
+                <img src="../assets/Images/main-slider-img-3.jpg" class="d-block w-100" alt="...">
                 <div class="slider-text">
                     <div class="anim">
                         <h1 class="text-white p-0 p-md-5 text-center text-uppercase">
@@ -59,7 +59,7 @@
                         <ul class="d-flex flex-wrap mb-0 p-0">
 
                             <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white active" href="#"
-                                    @click.prevent="setPurpose('Sale')">Sale</a>
+                                    @click.prevent="setPurpose('Sale')">Buy</a>
                             </li>
                             <li class="nav-item mx-3"><a class="nav-links-property p-2 text-white" href="#"
                                     @click.prevent="setPurpose('Rent')">Rent</a>

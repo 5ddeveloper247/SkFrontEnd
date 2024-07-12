@@ -4,12 +4,12 @@
         <nav class="row gap-3 align-items-center"
             style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
             aria-label="breadcrumb">
-            <ol class="breadcrumb col-2">
+            <ol class="breadcrumb col-12 col-md-2">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Land/Properties</li>
             </ol>
             <div v-if="propertiesCounter > 0"
-                class="col d-flex align-items-center justify-content-between prop-top mt-1 py-0 me-2">
+                class="col-12 col-md d-flex align-items-center justify-content-between prop-top mt-0 mt-md-1 py-2 py-md-0 me-2">
                 <h5 class="mb-0">
                     <small>
                         {{ propertiesCounter }}
@@ -32,7 +32,9 @@
                         <button class="navbar-toggler mx-3 my-2" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
+                            <span class="navbar-toggler-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.6em" viewBox="0 0 512 512"><path fill="white" d="M472 168H40a24 24 0 0 1 0-48h432a24 24 0 0 1 0 48m-80 112H120a24 24 0 0 1 0-48h272a24 24 0 0 1 0 48m-96 112h-80a24 24 0 0 1 0-48h80a24 24 0 0 1 0 48"/></svg>
+                            </span>
                         </button>
                         <!-- <h3>
                             Choose Land Details
@@ -267,7 +269,7 @@
             </nav>
             <div v-if="notFound"
                 class="col-12  d-flex justify-content-center align-items-center col-lg-10 my-1 properties-listed">
-                <div class="row listing d-flex justify-content-center align-items-center">
+                <div class="row listing not-found d-flex justify-content-center align-items-center">
                     <h1 class="d-flex justify-content-center mb-0"
                         style="margin-top: 100px;color: #1e02021c;font-size: 1rem;font-weight: bold;">
                         try filtering
@@ -811,6 +813,16 @@ onBeforeRouteLeave((to, from, next) => {
     border-radius: 50px;
 }
 
+.navbar-toggler-icon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    background-image: none !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
 
 .nav-top-c {
     background: linear-gradient(to right, #F45D08, #141415ba);
@@ -858,6 +870,24 @@ onBeforeRouteLeave((to, from, next) => {
     text-overflow: ellipsis;
 }
 
+.navbar-toggler {
+    border: none !important;
+    background-color: #F45D08   
+}
+
+.not-found {
+    animation: wobble 1.5s infinite alternate-reverse;
+}
+
+@keyframes wobble {
+    to {
+        scale: .8
+    }
+    from {
+        scale: 1
+    }
+}
+
 @media (max-width:992px) {
     .side-bar-checkboxes {
         position: absolute;
@@ -873,8 +903,15 @@ onBeforeRouteLeave((to, from, next) => {
 
     .navbar {
         position: sticky !important;
-        top: 11%;
+        top: 13.5%;
         left: 0;
+        height: fit-content;
+        overflow-y: auto;
+    }
+
+    .navbar-collapse {
+        height: 80vh;
+        overflow-y: auto;
     }
 }
 

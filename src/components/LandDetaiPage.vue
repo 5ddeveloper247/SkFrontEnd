@@ -71,90 +71,7 @@
                         <hr>
                         <div class="my-4 details px-3 py-4">
                             <h5>Details</h5>
-                            <ul class="d-none">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Type</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">{{
-                                                propertyData?.property_listing_pape?.pupose_home }}</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Area</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">1 Kanal</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Price</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">PKR 4.35 Crore</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Purpose</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">For Sale</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Location</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">Bahria Town</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Bedroom(s)</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">4 Bedrooms</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Bath(s)</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">8 Baths</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Added</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">20 hours ago</p>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            </ul>
+                            
                             <div class="row mt-3 justify-content-between pe-5">
                                 <div class="col-md-5 col-12">
                                     <div
@@ -254,9 +171,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-2 mb-5">
+                                <div class="row mt-4">
                                     <div class="col-md-3 m-0 p-0 d-flex align-items-center justify-content-center">
-                                        <h6><small>Nearby Locations <br> and Other Facilities</small></h6>
+                                        <h6><small>Nearby Locations</small></h6>
                                     </div>
                                     <div class="col-md-9 amenties-border-left">
                                         <div class="d-flex flex-column justify-content-between">
@@ -541,16 +458,39 @@
                     <h4><small>PKR</small> {{ numFormatter(propertyData.price) }}</h4>
                     <div class="d-flex flex-wrap align-items-center justify-content-between">
                         <div class="d-flex align-items-center justify-content-center">
-                            <a data-v-c970699f="" href="/requestform"
+                            <a data-v-c970699f="" @click.prevent="redirectToWhatsApp"
                                 class="mx-1 whatsapp-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center"
-                                role="button"><i data-v-c970699f="" class="fa-brands fa-whatsapp pe-2"></i>Request
-                                Form</a>
-                            <a data-v-c970699f="" href="/requestform"
+                                role="button"><i data-v-c970699f="" class="fa-brands fa-whatsapp pe-2"></i> Whatsapp Request
+                               </a>
+                            <a data-v-c970699f="" href="" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 class="mx-1 call-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center"
                                 role="button"><i data-v-c970699f=""
-                                    class="fa-solid fa-phone pe-2 text-white"></i>Request Form</a>
+                                    class="fa-solid fa-phone pe-2 text-white"></i>Dial Request </a>
                             <!-- <i class="fa-brands fa-whatsapp px-2" @click="redirectToWhatsApp"></i>
                             <i class="fa-solid fa-phone px-2" @click="redirectToPhoneDialer"></i> -->
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog d-flex align-items-center justify-content-center h-100">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h6>
+                                        POSTING AS 
+                                        <sup>{{propertyData?.property_listing_pape?.extra_info_postingas}}</sup>
+
+
+                                    </h6>
+                                    <h5>{{ propertyData?.property_listing_pape?.extra_info_mobile }}</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button"  class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <a :href="'tel:' + propertyData?.property_listing_pape?.extra_info_mobile" type="button" class="d-btn py-2 px-3 text-decoration-none">Go To Dailer</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -702,7 +642,7 @@
                                         <!-- {{ media?.pInfo_email }} -->
                                     </a>
                                     <a class="btn w-100 d-flex gap-2 align-items-center btn-sm mx-2 nav-sub-links-main text-nowrap d-flex flex-nowrap align-items-center justify-content-center"
-                                        :href="'tel:' +media?.property_listing_pape?.extra_info_mobile" role="button">
+                                        :href="'tel:' + media?.property_listing_pape?.extra_info_mobile" role="button">
                                         <h6 class="mb-0 icon-text">Call</h6>
                                         <i class="fa-solid fa-phone"></i>
                                         <!-- {{ media?.pInfo_phoneNumber }} -->
@@ -809,7 +749,7 @@ onMounted(() => {
     loading.value = true;
     setTimeout(() => {
         loading.value = false;
-            }, 2000);
+    }, 2000);
     getMediabyType();
 })
 
@@ -997,6 +937,14 @@ onBeforeRouteLeave((to, from, next) => {
 
 
 <style scoped>
+
+.d-btn {
+    background-color: #f45f08;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+}
 img {
     object-fit: cover;
 }
@@ -1036,7 +984,8 @@ img {
     background-color: red !important;
 }
 
-.whatsapp-btn, .call-btn {
+.whatsapp-btn,
+.call-btn {
     font-size: 12px !important;
 }
 </style>

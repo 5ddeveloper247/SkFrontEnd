@@ -43,16 +43,16 @@ onBeforeRouteLeave((to, from, next) => {
         </div>
         <div class="banner-overlay"></div>
     </div>
-    <div class="p-5 societiess mx-md-5">
-        <div class="row">
-            <div class="col-md-4 my-1">
+    <div class="container societiess py-5">
+        <div class="row gy-3">
+            <div class="col-md-5 my-1">
                 <RouterLink to="/dha">
-                    <div class="card border-0 bg-transparent mx-4">
-                        <img class="img-fluid rounded-4" src="../assets/Images/dha.jpg" alt="Image">
+                    <div class="card border-0 bg-transparent">
+                        <img class="rounded-4 img-fluid" src="../assets/Images/dha.jpg" width="100%" alt="Image">
                     </div>
                 </RouterLink>
             </div>
-            <div class="col-md-8 d-flex flex-column align-items-center justify-content-center">
+            <div class="col-md-7 d-flex flex-column align-items-center justify-content-center">
                 <div>
                     <h5 class="card-title pb-3">Defence Housing Autority</h5>
                     <p class="card-text">
@@ -71,7 +71,7 @@ onBeforeRouteLeave((to, from, next) => {
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-8 d-flex flex-column align-items-center justify-content-center">
+            <div class="col-md-7 d-flex flex-column align-items-center justify-content-center">
                 <div>
                     <h5 class="card-title pb-3">Bahria Town</h5>
                     <p class="card-text">
@@ -86,10 +86,10 @@ onBeforeRouteLeave((to, from, next) => {
                     </RouterLink>
                 </div>
             </div>
-            <div class="col-md-4 my-1">
+            <div class="col-md-5">
                 <RouterLink to="/bahria">
-                    <div class="card border-0 bg-transparent mx-4">
-                        <img class="img-fluid rounded-4" src="../assets/Images/bahria-town.jpeg" alt="Image">
+                    <div class="card border-0 bg-transparent">
+                        <img class="img-fluid rounded-4" src="../assets/Images/bahria-town.jpeg" width=100% alt="Image">
                     </div>
                 </RouterLink>
             </div>

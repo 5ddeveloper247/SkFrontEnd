@@ -21,7 +21,7 @@
                 provides a secure and affordable luxury living style. Investors prefer this residential project for its
                 luxurious amenities and breathtaking vistas.
             </p>
-
+            <img src="https://bahriatown.com/wp-content/uploads/2020/06/2-3.jpg" width="100%" height="400" alt="">
         </div>
         <div class="pt-3">
             <h3>Bahria Town Owners & Developers</h3>
@@ -64,6 +64,7 @@
                 here will never face any problems with the project’s legal standing. <br>
                 If you want to know more about the NOC status you can check the official website of CDA.</p>
         </div>
+        <img src="https://bahriatown.com/wp-content/uploads/2020/06/pindi-garden-city-2-s.jpg" width="100%" height="400" alt="">
         <div class="pt-3">
             <h3>Bahria Town Location</h3>
             <p class="pt-3">Bahria Town is located on Malot Road in Zone IV, close to Bhara Kahu and Bahria Enclave. This

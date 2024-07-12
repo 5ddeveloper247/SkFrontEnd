@@ -62,7 +62,7 @@ export default {
                         <i class="fa-solid fa-location-dot"></i>
                         <p class="px-3">Office # 1-2, AJ Tower II River View Commercial Bahria Phase 7 Islamabad.</p>
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex align-items-center justify-content-between justify-content-lg-end w-100">
                         <div class="d-flex align-items-center mx-md-4">
                             <i class="fa-regular fa-envelope"></i>
                             <a href="/info@skrealestate.com.pk" class="px-2">info@skrealestate.pk</a>
@@ -87,10 +87,17 @@ export default {
                         <RouterLink class="navbar-brand" to="/">
                             <img class="logo" src="../assets/Images/SK-logo.png" alt="">
                         </RouterLink>
-                        <button ref="navbarToggler" class="navbar-toggler collapsed" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
-                            aria-expanded="false" aria-label="Toggle navigation"><span
-                                class="navbar-toggler-icon"></span></button>
+                        <div class="d-flex align-items-center gap-2">
+                            <RouterLink to="/requestform"
+                                class="mx-1 d-block d-lg-none nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                role="button"><i class="far fa-paper-plane pe-2"></i>Request Form
+                            </RouterLink>
+                            <button ref="navbarToggler" class="navbar-toggler collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                                aria-expanded="false" aria-label="Toggle navigation"><span
+                                    class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
                         <div ref="navbaCollapse" class="navbar-collapse collapse" id="navbarNav">
                             <ul class="navbar-nav mx-auto">
                                 <li class="nav-item mx-md-2 mx-0">
@@ -113,11 +120,12 @@ export default {
                                 </li>
                             </ul>
                             <div class="d-none d-lg-flex align-items-center">
-                                <i class="fa-brands fa-square-whatsapp px-2" style="font-size: 35px; cursor: pointer;"
-                                    @click="redirectToWhatsApp"></i>
+                                <i class="fa-brands fa-square-whatsapp px-2"
+                                    style="font-size: 35px; cursor: pointer;" @click="redirectToWhatsApp"></i>
                                 <RouterLink to="/requestform"
-                                    class="mx-1 nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
-                                    role="button"><i class="far fa-paper-plane pe-2"></i>Request Form</RouterLink>
+                                    class="mx-1 req-btn nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
+                                    role="button"><i class="far fa-paper-plane pe-2"></i>Request Form
+                                </RouterLink>
                             </div>
                         </div>
                     </div>
@@ -135,6 +143,10 @@ import { redirectToPhoneDialer, redirectToWhatsApp, redirectToEmail } from '../h
 
 
 <style scoped>
+.navbar-toggler {
+    border: none !important;
+}
+
 p {
     font-size: 10px;
 }
@@ -155,5 +167,8 @@ a {
     left: 0;
     z-index: 9999;
     box-shadow: rgba(0, 0, 0, 0.171) 0px 3px 8px;
+    .nav-link {
+        color: #000 !important
+    }
 }
 </style>

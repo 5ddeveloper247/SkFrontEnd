@@ -9,18 +9,28 @@
     </div>
     <div class="container societies-detail-page p-md-5 p-2">
         <div>
-            <h3>Defence Housing Authority</h3>
-            <p class="pt-3">DHA Islamabad is a stunning CDA-approved housing venture developed by Vision
-                Group. It is
-                located in Zone IV which is the middle of Islamabad. Furthermore, this lovely housing society is nestled
-                between the town’s stunning lush green views and hills.
-                <br>
-                In addition, Park View has a 400-foot-wide main Boulevard that gives direct access from the highway into
-                the society and entry via Kurri Road. Similarly, this project has been approved by authorities and
-                provides a secure and affordable luxury living style. Investors prefer this residential project for its
-                luxurious amenities and breathtaking vistas.
-            </p>
-
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6">
+                    <h3>Defence Housing Authority</h3>
+                    <p class="py-3">DHA Islamabad is a stunning CDA-approved housing venture developed by Vision
+                        Group. It is
+                        located in Zone IV which is the middle of Islamabad. Furthermore, this lovely housing society is
+                        nestled
+                        between the town’s stunning lush green views and hills.
+                        <br>
+                        In addition, Park View has a 400-foot-wide main Boulevard that gives direct access from the
+                        highway into
+                        the society and entry via Kurri Road. Similarly, this project has been approved by authorities
+                        and
+                        provides a secure and affordable luxury living style. Investors prefer this residential project
+                        for its
+                        luxurious amenities and breathtaking vistas.
+                    </p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <img src="https://content-cdn.zameen.com/mosque_0682f222c9.jpg" width="500" alt="">
+                </div>
+            </div>
         </div>
         <div class="pt-3">
             <h3>Defence Housing Authority Owners & Developers</h3>
@@ -31,13 +41,24 @@
 
         </div>
         <div class="pt-3">
-            <h3>Vision Group</h3>
-            <p class="pt-3">The Vision Group was created in 2012, and since then it has completed exemplary projects in
-                real estate. Vision Group has dominated the Pakistani real estate market in less than ten years. It has
-                established itself as one of the region’s most trusted and reliable development organizations. Park View
-                City by Vision Group is an effort that aims for excellence by being one of the most extravagant home
-                projects in the area.</p>
-
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6">
+                    <img src="https://content-cdn.zameen.com/large_new_ad02f91a17.jpg" width=100% alt="">
+                </div>
+                <div class="col-12 col-md-6">
+                    <h3>Vision Group</h3>
+                    <p class="pt-3">The Vision Group was created in 2012, and since then it has completed exemplary
+                        projects in
+                        real estate. Vision Group has dominated the Pakistani real estate market in less than ten years.
+                        It has
+                        established itself as one of the region’s most trusted and reliable development organizations.
+                        Park View
+                        City by Vision Group is an effort that aims for excellence by being one of the most extravagant
+                        home
+                        projects in the area.
+                    </p>
+                </div>
+            </div>
         </div>
         <div class="pt-3">
             <h3>Previous Projects of Vision Group</h3>
@@ -63,9 +84,9 @@
                 here will never face any problems with the project’s legal standing. <br>
                 If you want to know more about the NOC status you can check the official website of CDA.</p>
         </div>
-        <div class="pt-3">
-            <h3>Defence Housing Authority Location</h3>
-            <p class="pt-3">DHA is located on Malot Road in Zone IV, close to Bhara Kahu and Bahria Enclave. This
+        <div class="pt-3 text-center">
+            <h3 class="text-start">Defence Housing Authority Location</h3>
+            <p class="pt-3 text-start">DHA is located on Malot Road in Zone IV, close to Bhara Kahu and Bahria Enclave. This
                 society can also be reached from Chak Shahzad via Park Road and Kuri Road, which are connected to the
                 region by the Islamabad Highway, Lethrar Road, and the Kashmir Highway. <br>
                 Finally, the housing plan is set up in an aesthetically pleasing area of the capital city, across from
@@ -76,6 +97,7 @@
                 projects. It also makes it easy to get to some of the city’s most important side roads, such as Malot
                 Road, Kurri Road, as well as Park Road. An interesting thing about PVC is its location, which has made
                 it the focus of many investors nationally and globally.</p>
+            <img class="pt-4" src="https://content-cdn.zameen.com/5d15ac02ee058180321378_cd6129f20b.jpg" width=500 alt="">
         </div>
         <div class="pt-3">
             <h3>Master Plan and Map of Defence Housing Authority</h3>
@@ -94,8 +116,7 @@
             <div class="dha-map-container d-flex justify-content-center">
                 <img class="img-fluid dha-map mt-3" src="../assets/Images/zameenlocaterMap.jpg" alt="">
                 <div class="map-overlay mt-3">
-                    <button type="button"
-                        class="btn main-button px-3 mb-4 m-2 btn-round">Download Map</button>
+                    <button type="button" class="btn main-button px-3 mb-4 m-2 btn-round">Download Map</button>
                 </div>
             </div>
 

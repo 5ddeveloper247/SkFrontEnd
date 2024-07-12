@@ -105,3 +105,10 @@ export default {
             </div>
         </div>
 </template>
+
+
+<style scoped >
+.navTop {
+    background-color: #000 !important
+}
+</style>
