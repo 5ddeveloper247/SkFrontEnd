@@ -81,7 +81,7 @@
                             </div>
 
                             <div class="col-6 col-md mb-4"
-                                v-if="filterCriteria.plot !== 'Residential Plot' && filterCriteria.plot !== 'Commercial Plot'">
+                                v-if="filterCriteria.plot !== 'Residential' && filterCriteria.plot !== 'Commercial'">
                                 <select class="form-select" v-model="filterCriteria.homeType"
                                     aria-label="Default select example">
                                     <option value="Select home">Select home</option>
@@ -107,12 +107,12 @@
                                 <select class="form-select" v-model="filterCriteria.plot"
                                     aria-label="Default select example">
                                     <option value="Select plot type">Select plot type</option>
-                                    <option value="Residential Plot">Residential Plot</option>
-                                    <option value="Commercial Plot">Commercial Plot</option>
+                                    <option value="Residential">Residential</option>
+                                    <option value="Commercial">Commercial</option>
                                 </select>
                             </div>
 
-                            <div class="col-6 col-md mb-4" v-if="filterCriteria.plot === 'Commercial Plot'">
+                            <div class="col-6 col-md mb-4" v-if="filterCriteria.plot === 'Commercial'">
                                 <select class="form-select" v-model="filterCriteria.commercial"
                                     aria-label="Default select example">
                                     <option value="Select commercial type">Select commercial type</option>

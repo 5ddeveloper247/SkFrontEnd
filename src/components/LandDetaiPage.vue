@@ -35,16 +35,17 @@
 
                 <div class="d-flex justify-content-start">
                     <div class="d-flex gap-2 align-items-center mx-3">
-                        <i class="fa-solid fa-bed "></i>
+                        <i class="fa-solid fa-bed"></i>
+                        <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_bedrooms }}
+                        </p>
+                    </div>
+                    <div class="d-flex gap-2 align-items-center mx-3">
+                        <i class="fa-solid fa-bath "></i>
                         <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_bathrooms
                             }}
                         </p>
                     </div>
-                    <div class="d-flex gap-2 align-items-center mx-3">
-                        <i class="fa-solid fa-bath"></i>
-                        <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_bedrooms }}
-                        </p>
-                    </div>
+
                     <div class="d-flex gap-2 align-items-center mx-3">
                         <i class="fa-solid fa-arrows-up-down"></i>
                         <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_area }} /
@@ -71,14 +72,19 @@
                         <hr>
                         <div class="my-4 details px-3 py-4">
                             <h5>Details</h5>
-                            
                             <div class="row mt-3 justify-content-between pe-5">
                                 <div class="col-md-5 col-12">
                                     <div
                                         class="d-flex align-items-center justify-content-between m-1 lighter-bg p-md-2">
                                         <p>Type</p>
-                                        <p>{{ propertyData?.property_listing_pape?.pupose_home }}</p>
+                                        <p v-if="propertyData?.property_listing_pape?.pupose_home">{{
+                                            propertyData.property_listing_pape.pupose_home }}</p>
+                                        <p v-else-if="propertyData?.property_listing_pape?.purpose_plot">{{
+                                            propertyData.property_listing_pape.purpose_plot }}</p>
+                                        <p v-else-if="propertyData?.property_listing_pape?.purpose_commercial">{{
+                                            propertyData.property_listing_pape.purpose_commercial }}</p>
                                     </div>
+
                                 </div>
                                 <div class="col-md-5 col-12">
                                     <div
@@ -613,7 +619,7 @@
                                         </small>
                                     </div>
                                     <div class="mx-3">
-                                        <i class="fa-solid fa-toilet pe-1"></i>
+                                        <i class="fa-solid fa-toilet pe"></i>
                                         <small class="fw-bold">
                                             {{ media?.property_listing_pape?.propertyDetail_bathrooms }}
                                         </small>
