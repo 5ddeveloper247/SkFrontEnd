@@ -237,14 +237,14 @@
                     <option value="Sq.Yd">Sq.Yd</option>
                     <option value="Kanal">Kanal</option>
                   </select>
-                  <label for="floatingInput">Area Unit</label>
+                  <label for="floatingInput">Area</label>
                 </div>
 
                 <div class="form-floating mb-3">
                   <input @input="enforceMaxLength($event, 15, 'size')" type="number"
                     :class="{ 'form-control': true, 'input-error': errors.size }" v-model="propertyRequestform.size"
-                    placeholder="Size">
-                  <label for="floatingInput">Size</label>
+                    placeholder="e.g 10">
+                  <label for="floatingInput">Area unit</label>
                 </div>
                 <div class="form-floating mb-3">
                   <input @input="enforceMaxLength($event, 15, 'totalPrice')" type="number"

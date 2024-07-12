@@ -35,16 +35,17 @@
 
                 <div class="d-flex justify-content-start">
                     <div class="d-flex gap-2 align-items-center mx-3">
-                        <i class="fa-solid fa-bed "></i>
+                        <i class="fa-solid fa-bed"></i>
+                        <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_bedrooms }}
+                        </p>
+                    </div>
+                    <div class="d-flex gap-2 align-items-center mx-3">
+                        <i class="fa-solid fa-bath "></i>
                         <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_bathrooms
                             }}
                         </p>
                     </div>
-                    <div class="d-flex gap-2 align-items-center mx-3">
-                        <i class="fa-solid fa-bath"></i>
-                        <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_bedrooms }}
-                        </p>
-                    </div>
+
                     <div class="d-flex gap-2 align-items-center mx-3">
                         <i class="fa-solid fa-arrows-up-down"></i>
                         <p class="fw-bold text-center">{{ propertyData.property_listing_pape?.propertyDetail_area }} /
@@ -71,97 +72,20 @@
                         <hr>
                         <div class="my-4 details px-3 py-4">
                             <h5>Details</h5>
-                            <ul class="d-none">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Type</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">{{
-                                                propertyData?.property_listing_pape?.pupose_home }}</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Area</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">1 Kanal</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Price</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">PKR 4.35 Crore</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Purpose</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">For Sale</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Location</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">Bahria Town</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Bedroom(s)</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">4 Bedrooms</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Bath(s)</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">8 Baths</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-start p-0">
-                                            <p class="text-start text-nowrap">Added</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-start px-5">
-                                            <p class="text-start text-nowrap">20 hours ago</p>
-                                        </div>
-                                    </div>
-                                </li>
 
-                            </ul>
                             <div class="row mt-3 justify-content-between pe-5">
                                 <div class="col-md-5 col-12">
                                     <div
                                         class="d-flex align-items-center justify-content-between m-1 lighter-bg p-md-2">
                                         <p>Type</p>
-                                        <p>{{ propertyData?.property_listing_pape?.pupose_home }}</p>
+                                        <p v-if="propertyData?.property_listing_pape?.pupose_home">{{
+                                            propertyData.property_listing_pape.pupose_home }}</p>
+                                        <p v-else-if="propertyData?.property_listing_pape?.purpose_plot">{{
+                                            propertyData.property_listing_pape.purpose_plot }}</p>
+                                        <p v-else-if="propertyData?.property_listing_pape?.purpose_commercial">{{
+                                            propertyData.property_listing_pape.purpose_commercial }}</p>
                                     </div>
+
                                 </div>
                                 <div class="col-md-5 col-12">
                                     <div
@@ -673,7 +597,7 @@
                                         </small>
                                     </div>
                                     <div class="mx-3">
-                                        <i class="fa-solid fa-toilet pe-1"></i>
+                                        <i class="fa-solid fa-toilet pe"></i>
                                         <small class="fw-bold">
                                             {{ media?.property_listing_pape?.propertyDetail_bathrooms }}
                                         </small>
@@ -702,7 +626,7 @@
                                         <!-- {{ media?.pInfo_email }} -->
                                     </a>
                                     <a class="btn w-100 d-flex gap-2 align-items-center btn-sm mx-2 nav-sub-links-main text-nowrap d-flex flex-nowrap align-items-center justify-content-center"
-                                        :href="'tel:' +media?.property_listing_pape?.extra_info_mobile" role="button">
+                                        :href="'tel:' + media?.property_listing_pape?.extra_info_mobile" role="button">
                                         <h6 class="mb-0 icon-text">Call</h6>
                                         <i class="fa-solid fa-phone"></i>
                                         <!-- {{ media?.pInfo_phoneNumber }} -->
@@ -809,7 +733,7 @@ onMounted(() => {
     loading.value = true;
     setTimeout(() => {
         loading.value = false;
-            }, 2000);
+    }, 2000);
     getMediabyType();
 })
 
@@ -1036,7 +960,8 @@ img {
     background-color: red !important;
 }
 
-.whatsapp-btn, .call-btn {
+.whatsapp-btn,
+.call-btn {
     font-size: 12px !important;
 }
 </style>
