@@ -466,12 +466,13 @@
                         <div class="d-flex align-items-center justify-content-center">
                             <a data-v-c970699f="" @click.prevent="redirectToWhatsApp"
                                 class="mx-1 whatsapp-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center"
-                                role="button"><i data-v-c970699f="" class="fa-brands fa-whatsapp pe-2"></i> Whatsapp Request
-                               </a>
+                                role="button"><i data-v-c970699f="" class="fa-brands fa-whatsapp pe-2"></i> Whatsapp
+                                Request
+                            </a>
                             <a data-v-c970699f="" href="" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 class="mx-1 call-btn text-nowrap px-2 px-md-3 py-2 d-flex flex-nowrap align-items-center justify-content-center"
-                                role="button"><i data-v-c970699f=""
-                                    class="fa-solid fa-phone pe-2 text-white"></i>Dial Request </a>
+                                role="button"><i data-v-c970699f="" class="fa-solid fa-phone pe-2 text-white"></i>Dial
+                                Request </a>
                             <!-- <i class="fa-brands fa-whatsapp px-2" @click="redirectToWhatsApp"></i>
                             <i class="fa-solid fa-phone px-2" @click="redirectToPhoneDialer"></i> -->
                         </div>
@@ -484,17 +485,18 @@
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <h6>
-                                        POSTING AS 
-                                        <sup>{{propertyData?.property_listing_pape?.extra_info_postingas}}</sup>
+                                        POSTING AS
+                                        <sup>{{ propertyData?.property_listing_pape?.extra_info_postingas }}</sup>
 
 
                                     </h6>
                                     <h5>{{ propertyData?.property_listing_pape?.extra_info_mobile }}</h5>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button"  class="btn btn-secondary"
+                                    <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <a :href="'tel:' + propertyData?.property_listing_pape?.extra_info_mobile" type="button" class="d-btn py-2 px-3 text-decoration-none">Go To Dailer</a>
+                                    <a :href="'tel:' + propertyData?.property_listing_pape?.extra_info_mobile"
+                                        type="button" class="d-btn py-2 px-3 text-decoration-none">Go To Dailer</a>
                                 </div>
                             </div>
                         </div>
@@ -505,24 +507,30 @@
                     <form class="detail-page-form">
                         <div class="form-floating my-4">
                             <input @input="enforceMaxLength($event, 15, 'name')" type="text" v-model="inquiryData.name"
-                                class="form-control" id="nameInput" placeholder="New York, San Francisco, etc">
-                            <label for="locationInput">Name</label>
+                                :class="{ 'form-control': true, 'input-error': errors.name }" id="nameInput"
+                                placeholder="New York, San Francisco, etc">
+                            <label for="nameInput">Name*</label>
                         </div>
                         <div class="form-floating mb-4">
                             <input @input="enforceMaxLength($event, 50, 'email')" type="email"
-                                v-model="inquiryData.email" class="form-control" id="emailInput" placeholder="Email">
-                            <label for="emailInput">Email</label>
+                                v-model="inquiryData.email"
+                                :class="{ 'form-control': true, 'input-error': errors.email }" id="emailInput"
+                                placeholder="Email">
+                            <label for="emailInput">Email*</label>
                         </div>
                         <div class="form-floating mb-4">
                             <input @input="enforceMaxLength($event, 13, 'phone')" type="number"
-                                v-model="inquiryData.phone" class="form-control" id="phoneInput" placeholder="Phone">
-                            <label for="phoneInput">Phone</label>
+                                v-model="inquiryData.phone"
+                                :class="{ 'form-control': true, 'input-error': errors.phone }" id="phoneInput"
+                                placeholder="Phone">
+                            <label for="phoneInput">Phone*</label>
                         </div>
                         <div class="form-floating mb-4">
                             <textarea @input="enforceMaxLength($event, 150, 'description')"
-                                v-model="inquiryData.description" class="form-control textarea-size"
+                                v-model="inquiryData.description"
+                                :class="{ 'form-control textarea-size': true, 'input-error': errors.description }"
                                 placeholder="Leave a comment here" id="commentInput"></textarea>
-                            <label for="commentInput">Comments</label>
+                            <label for="commentInput">Comments*</label>
                         </div>
                         <div class="d-flex align-items-center mb-4">
                             <p><small>I am a:</small></p>
@@ -552,10 +560,11 @@
 
                         <button type="button"
                             class="btn main-button w-100 d-flex align-items-center justify-content-center"
-                            @click="handleInquiryFormSubmission">
+                            @click="handleSubmit">
                             <i class="fa-regular fa-envelope px-2"></i>Send Email
                         </button>
                     </form>
+
 
                 </div>
                 <div class="property-detail d-flex flex-column py-4 px-md-2 d-none shadow rounded-4 mt-4">
@@ -699,9 +708,17 @@ const loading = ref(false);
 // Retrieve the property ID from the route parameters
 const route = useRoute();
 const propertyId = ref(route.params.id);
+var errors = ref(
+    {
+        name: false,
+        email: false,
+        phone: false,
+        description: false
+    }
+)
 
 // Create the toast instance
-const $toast = useToast();
+var $toast = useToast();
 const footerState = useFooterStore();
 
 
@@ -791,11 +808,100 @@ const getImageUrl = (media) => {
 
 // Function to handle form submission
 // Function to handle form submission
+
+
+const validateForm = () => {
+    let isValid = true;
+
+    // Reset all error states initially
+    errors.value = {
+        name: false,
+        email: false,
+        phone: false,
+        description: false
+    };
+
+    // Validate Name
+    if (!inquiryData.value.name) {
+        errors.value.name = true;
+        isValid = false;
+        // $toast.open({
+        //     message: 'Name is required.',
+        //     type: 'error',
+        //     position: 'top-right'
+        // });
+    } else if (!/^[A-Za-z\s]+$/.test(inquiryData.value.name)) {
+        errors.value.name = true;
+        isValid = false;
+        $toast.open({
+            message: 'Name should only contain alphabets and spaces.',
+            type: 'error',
+            position: 'top-right'
+        });
+    } else if (inquiryData.value.name.length > 15) {
+        errors.value.name = true;
+        isValid = false;
+    }
+
+    // Validate Email
+    if (!inquiryData.value.email) {
+        errors.value.email = true;
+        isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(inquiryData.value.email)) {
+        errors.value.email = true;
+        isValid = false;
+        $toast.open({
+            message: 'Email is invalid.',
+            type: 'error',
+            position: 'top-right'
+        });
+    }
+
+    // Validate Phone
+    if (!inquiryData.value.phone) {
+        errors.value.phone = true;
+        isValid = false;
+    } else if (!/^\d+$/.test(inquiryData.value.phone) || parseInt(inquiryData.value.phone) <= 0) {
+        errors.value.phone = true;
+        isValid = false;
+        $toast.open({
+            message: 'Phone number should only contain positive numeric digits.',
+            type: 'error',
+            position: 'top-right'
+        });
+    } else if (inquiryData.value.phone.length < 11 || inquiryData.value.phone.length > 13) {
+        errors.value.phone = true;
+        isValid = false;
+        $toast.open({
+            message: 'Phone number should be between 11 and 13 digits.',
+            type: 'error',
+            position: 'top-right'
+        });
+    }
+
+    // Validate Description
+    if (!inquiryData.value.description) {
+        errors.value.description = true;
+        isValid = false;
+    } else if (inquiryData.value.description.length > 150) {
+        errors.value.description = true;
+        isValid = false;
+        $toast.open({
+            message: 'Comments should not exceed 150 characters.',
+            type: 'error',
+            position: 'top-right'
+        });
+    }
+
+    return isValid;
+};
+
+
 const handleInquiryFormSubmission = () => {
-    // Make POST request to backend with form data
     const base_url = import.meta.env.VITE_BASE_URL;
     loading.value = true;
     footerState.setFooterState(false);
+
     fetch(`${base_url}/api/frontend/inquiry/store`, {
         method: 'POST',
         headers: {
@@ -816,7 +922,6 @@ const handleInquiryFormSubmission = () => {
             loading.value = false;
             footerState.setFooterState(true);
             // Handle successful form submission response
-
             $toast.open({
                 message: 'Query submitted successfully!',
                 type: 'success',
@@ -824,12 +929,10 @@ const handleInquiryFormSubmission = () => {
             });
             // Optionally, reset the form data after successful submission
             inquiryData.value = {
-                location: '',
+                name: '',
                 email: '',
                 phone: '',
-                description: '',
-                agent: [],
-                informedMe: false
+                description: ''
             };
         })
         .catch(error => {
@@ -855,6 +958,13 @@ const handleInquiryFormSubmission = () => {
             }
         });
 };
+
+const handleSubmit = () => {
+    if (validateForm()) {
+        handleInquiryFormSubmission();
+    }
+};
+
 
 
 
@@ -943,6 +1053,9 @@ onBeforeRouteLeave((to, from, next) => {
 
 
 <style scoped>
+.input-error {
+    border: 1px solid red;
+}
 
 .d-btn {
     background-color: #f45f08;
@@ -951,6 +1064,7 @@ onBeforeRouteLeave((to, from, next) => {
     border: none;
     font-size: 14px;
 }
+
 img {
     object-fit: cover;
 }

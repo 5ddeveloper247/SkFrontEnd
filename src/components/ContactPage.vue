@@ -23,16 +23,17 @@
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <label for="name" class="py-3 fw-bold">Full Name *</label>
-                        <input @input="enforceMaxLength($event, 15, 'fullName')" type="text"
-                            class="form-control py-3 px-4" :class="{ 'border-danger': errors.fullName }" placeholder=""
+                        <input @input="enforceMaxLength($event, 15, 'fullName')" type="text" placeholder="example name"
+                            class="form-control py-3 px-4" :class="{ 'border-danger': errors.fullName }" 
                             aria-label="full name" id="name" v-model="contactFormData.fullName">
                         <div v-if="errors.fullName" class="text-danger">{{ errors.fullName }}</div>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="email" class="py-3 fw-bold">Your Email *</label>
-                        <input @input="enforceMaxLength($event, 50, 'email')" type="text" class="form-control py-3 px-4"
-                            :class="{ 'border-danger': errors.email }" placeholder="example@yourmail.com"
-                            aria-label="Your Email" id="email" v-model="contactFormData.email">
+                        <input @input="enforceMaxLength($event, 50, 'email')" type="email"
+                            class="form-control py-3 px-4" :class="{ 'border-danger': errors.email }"
+                            placeholder="example@yourmail.com" aria-label="Your Email" id="email"
+                            v-model="contactFormData.email">
                         <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
                     </div>
                 </div>
@@ -82,7 +83,7 @@ import { useFooterStore } from '../stores/FooterLoadingState';
 
 
 const footerState = useFooterStore();
-const $toast = useToast();
+var $toast = useToast();
 const contactFormData = reactive({
     fullName: '',
     email: '',
@@ -109,6 +110,12 @@ const validateForm = () => {
     // Validate fullName
     if (!contactFormData.fullName) {
         errors.value.fullName = 'Full Name is required';
+        isValid = false;
+    } else if (!/^[A-Za-z\s]+$/.test(contactFormData.fullName)) {
+        errors.value.fullName = 'Full Name should only contain alphabets and spaces';
+        isValid = false;
+    } else if (contactFormData.fullName.length > 15) {
+        errors.value.fullName = 'Full Name should not exceed 15 characters';
         isValid = false;
     }
 
@@ -141,6 +148,7 @@ const validateForm = () => {
 
     return isValid;
 };
+
 
 const resetForm = () => {
     contactFormData.fullName = '';
@@ -177,7 +185,6 @@ const submitForm = async () => {
         }
 
         const data = await response.json();
-        console.log('Success:', data);
         loading.value = false;
         $toast.open({
             message: 'Submitted Successfully!',

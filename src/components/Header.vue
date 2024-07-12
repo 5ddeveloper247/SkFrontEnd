@@ -120,8 +120,8 @@ export default {
                                 </li>
                             </ul>
                             <div class="d-none d-lg-flex align-items-center">
-                                <i class="fa-brands fa-square-whatsapp px-2"
-                                    style="font-size: 35px; cursor: pointer;" @click="redirectToWhatsApp"></i>
+                                <i class="fa-brands fa-square-whatsapp px-2" style="font-size: 35px; cursor: pointer;"
+                                    @click="redirectToWhatsApp"></i>
                                 <RouterLink to="/requestform"
                                     class="mx-1 req-btn nav-sub-links-main text-nowrap px-2 px-md-3 py-1 d-flex flex-nowrap align-items-center justify-content-center"
                                     role="button"><i class="far fa-paper-plane pe-2"></i>Request Form
@@ -167,8 +167,11 @@ a {
     left: 0;
     z-index: 9999;
     box-shadow: rgba(0, 0, 0, 0.171) 0px 3px 8px;
+
     .nav-link {
         color: #000 !important
     }
+
+    background-color: white;
 }
 </style>
