@@ -115,10 +115,10 @@ i {
     height: 40px;
 }
 
-input#floatingInput {
+/* input#floatingInput {
     min-height: 40px;
     height: 40px;
-}
+} */
 
 .form-select:focus {
     border-color: var(--second--main-color);
@@ -975,15 +975,13 @@ footer .footer-icons i {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid var(--second--main-color);
-    ;
+    border: 1px solid green;
     outline-width: 0
 }
 
 #msform .action-button {
     width: 100px;
     background: var(--second--main-color);
-    ;
     color: white;
     border: 0 none;
     font-size: 14px;

@@ -26,24 +26,28 @@
                   <input @input="validateFirstName($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.firstName }" id="floatingFirstName"
                     v-model="propertyRequestform.firstName" placeholder="First Name" />
+                  <div v-if="errors.firstName" class="text-danger">{{ errors.firstName }}</div>
                   <label for="floatingFirstName">First Name*</label>
                 </div>
                 <div class="form-floating mb-3">
                   <input @input="validateLastName($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.lastName }" id="floatingLastName"
                     v-model="propertyRequestform.lastName" placeholder="Last Name" />
+                  <div v-if="errors.lastName" class="text-danger">{{ errors.lastName }}</div>
                   <label for="floatingLastName">Last Name*</label>
                 </div>
                 <div class="form-floating mb-3">
                   <input @input="validateEmail($event)" type="email"
                     :class="{ 'form-control': true, 'input-error': errors.email }" id="floatingEmail"
                     v-model="propertyRequestform.email" placeholder="Email" />
+                  <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
                   <label for="floatingEmail">Email address*</label>
                 </div>
                 <div class="form-floating mb-3">
                   <input @input="validatePhone($event)" type="number"
                     :class="{ 'form-control': true, 'input-error': errors.phone }" id="floatingPhone"
                     v-model="propertyRequestform.phone" placeholder="Phone" />
+                  <div v-if="errors.phone" class="text-danger">{{ errors.phone }}</div>
                   <label for="floatingPhone">Phone*</label>
                 </div>
                 <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
@@ -60,8 +64,6 @@
                     <h5>Purpose:</h5>
                   </div>
                   <div>
-
-
                     <label
                       :class="{ 'label--radio-1': true, 'd-flex': true, 'align-items-center': true, 'px-4': true, 'rounded-5': true, 'active_purpose': handle_purpose_active_sale }">
                       <input type="radio"
@@ -102,12 +104,13 @@
                             <ul class="list">
                               <li class="list__item" v-for="(city, index) in cityList" :key="index">
                                 <label class="label--radio">
-                                  <input type="radio"
+                                  <input type="radio" @change="validateCity($event)"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.city }"
                                     v-model="propertyRequestform.city" :value="city" name="city">
                                   {{ city }}
                                 </label>
                               </li>
+
 
                             </ul>
                           </div>
@@ -185,6 +188,8 @@
                               </li>
                             </ul>
                           </div>
+                          <div v-if="errors.city" class="text-danger">{{ errors.city }}</div>
+                          <div v-if="errors.plot" class="text-danger">{{ errors.plot }}</div>
                         </div>
                       </form>
                     </div>
@@ -196,7 +201,7 @@
                 value="Previous" />
             </fieldset>
 
-
+            
             <fieldset :class="{ 'd-block': fs_step3 }">
               <div class="form-card">
                 <div class="row">
@@ -208,25 +213,29 @@
                   </div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input @input="enforceMaxLength($event, 50, 'city')" type="text"
+                  <input @input="validateCity2($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.city }" id="floatingInput"
                     v-model="propertyRequestform.city" placeholder="City">
+
                   <label for="floatingInput">City*</label>
+                  <div v-if="errors.city" class="text-danger">{{ errors.city }}</div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input @input="enforceMaxLength($event, 50, 'location')" type="text"
+                  <input @input="validateLocation($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.location }" id="floatingInput"
                     v-model="propertyRequestform.location" placeholder="Location">
                   <label for="floatingInput">Location</label>
+                  <div v-if="errors.location" class="text-danger">{{ errors.location }}</div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input @input="enforceMaxLength($event, 100, 'address')" type="text"
+                  <input @input="validateAddress($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.address }"
                     v-model="propertyRequestform.address" placeholder="Address">
                   <label for="floatingInput">Address*</label>
+                  <div v-if="errors.address" class="text-danger">{{ errors.address }}</div>
                 </div>
                 <div class="form-floating mb-3">
-                  <select @change="enforceMaxLength($event, 20, 'areaUnit')"
+                  <select @change="validateAreaUnit($event)"
                     :class="{ 'form-control': true, 'input-error': errors.areaUnit }"
                     v-model="propertyRequestform.areaUnit">
 
@@ -237,6 +246,8 @@
                     <option value="Kanal">Kanal</option>
                   </select>
                   <label for="floatingInput">Area*</label>
+                  <div v-if="errors.areaUnit" class="text-danger">{{ errors.areaUnit }}</div>
+
                 </div>
 
                 <div class="form-floating mb-3">
@@ -244,12 +255,18 @@
                     :class="{ 'form-control': true, 'input-error': errors.size }" v-model="propertyRequestform.size"
                     placeholder="e.g 10">
                   <label for="floatingInput">Area unit*</label>
+                  <div v-if="errors.size" class="text-danger">{{ errors.size }}</div>
+
+
                 </div>
                 <div class="form-floating mb-3">
                   <input @input="validateTotalPrice($event)" type="number"
                     :class="{ 'form-control': true, 'input-error': errors.totalPrice }"
                     v-model="propertyRequestform.totalPrice" placeholder="Total Price in PKR">
                   <label for="floatingInput">Total Price*</label>
+                  <div v-if="errors.totalPrice" class="text-danger">{{ errors.totalPrice }}</div>
+
+
                 </div>
               </div>
               <input type="button" name="next" class="action-button" @click="handleStepThird" value="Submit" />
@@ -287,7 +304,7 @@
 
 <script>
 import { ref, onMounted, onBeforeMount, onUnmounted, onBeforeUnmount, watch } from 'vue';
-import { useRoute, onBeforeRouteLeave } from 'vue-router';
+import { useRoute, onBeforeRouteLeave, useRouter } from 'vue-router';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Loader from './Loader.vue';
@@ -300,6 +317,7 @@ export default {
   },
   setup() {
     var $toast = useToast();
+    var router = useRouter();
     const footerState = useFooterStore();
     const { cityData, error, cityList, fetchCityData } = useCityData();
     const propertyRequestform = ref({
@@ -354,18 +372,27 @@ export default {
         // alert(propertyRequestform.value.homeType)
         propertyRequestform.value.commercial = " "
         propertyRequestform.value.plot = " "
+        errors.value.plot = false
+        errors.value.homeType = false
+        errors.value.commercial = false
       }
 
       if (e == 'plot') {
         // alert(propertyRequestform.value.homeType)
         propertyRequestform.value.homeType = " "
         propertyRequestform.value.commercial = " "
+        errors.value.plot = false
+        errors.value.homeType = false
+        errors.value.commercial = false
       }
 
       if (e == 'commercial') {
         // alert(propertyRequestform.value.homeType)
         propertyRequestform.value.homeType = " "
         propertyRequestform.value.plot = " "
+        errors.value.plot = false
+        errors.value.homeType = false
+        errors.value.commercial = false
       }
     }
     const validateForm = () => {
@@ -402,6 +429,11 @@ export default {
         .then(response => response.json())
         .then(data => {
           loading.value = false;
+          $toast.open({
+            message: 'Request has submitted successfully',
+            type: 'success',
+            position: 'top-right'
+          });
           if (data.success) {
             $toast.open({
               message: 'Request has submitted successfully',
@@ -409,7 +441,7 @@ export default {
               position: 'top-right'
             });
             resetForm();
-            window.location.href = '/';
+            router.push('/');
           }
           else {
             handleErrors(data);
@@ -528,94 +560,53 @@ export default {
 
       // Validate First Name
       if (!firstName) {
-        errors.value.firstName = true;
+        errors.value.firstName = "First name is required";
         valid = false;
       } else if (!/^[A-Za-z]+$/.test(firstName)) {
-        errors.value.firstName = true;
+        errors.value.firstName = "First name should only contain alphabets";
         valid = false;
-        $toast.open({
-          message: 'First name should only contain alphabets.',
-          type: 'error',
-          position: 'top-right'
-        });
       } else if (firstName.length > 15) {
-        errors.value.firstName = true;
+        errors.value.firstName = "First name should not exceed 15 characters.";
         valid = false;
-        $toast.open({
-          message: 'First name should not exceed 15 characters.',
-          type: 'error',
-          position: 'top-right'
-        });
       }
 
       // Validate Last Name
       if (!lastName) {
-        errors.value.lastName = true;
+        errors.value.lastName = "Last name is required";
         valid = false;
       } else if (!/^[A-Za-z]+$/.test(lastName)) {
-        errors.value.lastName = true;
+        errors.value.lastName = "Last name should only contain alphabets";
         valid = false;
-        $toast.open({
-          message: 'Last name should only contain alphabets.',
-          type: 'error',
-          position: 'top-right'
-        });
       } else if (lastName.length > 15) {
-        errors.value.lastName = true;
+        errors.value.lastName = "Last name should not exceed 15 characters";
         valid = false;
-        $toast.open({
-          message: 'Last name should not exceed 15 characters.',
-          type: 'error',
-          position: 'top-right'
-        });
       }
 
       // Validate Phone Number
       if (!phone) {
-        errors.value.phone = true;
+        errors.value.phone = "Phone number is required";
         valid = false;
       } else if (!/^\d+$/.test(phone)) {
-        errors.value.phone = true;
+        errors.value.phone = "Phone number should only contain numeric digits";
         valid = false;
-        $toast.open({
-          message: 'Phone number should only contain numeric digits.',
-          type: 'error',
-          position: 'top-right'
-        });
       } else if (phone.length < 11 || phone.length > 15) {
-        errors.value.phone = true;
+        errors.value.phone = "Phone number should be between 11 and 15 digits";
         valid = false;
-        $toast.open({
-          message: 'Phone number should be between 11 and 15 digits.',
-          type: 'error',
-          position: 'top-right'
-        });
       }
 
       // Validate Email
       if (!email) {
-        errors.value.email = true;
+        errors.value.email = "Email is required";
         valid = false;
       }
       else if (email.length > 50) {
-        errors.value.email = true;
+        errors.value.email = "Email should not exceed 50 characters";
         valid = false;
-        $toast.open({
-          message: 'Email should not exceed 50 characters.',
-          type: 'error',
-          position: 'top-right'
-        });
       }
       else if (!/\S+@\S+\.\S+/.test(email)) {
-        errors.value.email = true;
+        errors.value.email = "Please enter a valid email address";
         valid = false;
-        $toast.open({
-          message: 'Please enter a valid email address must.',
-          type: 'error',
-          position: 'top-right'
-        });
       }
-
       // Proceed to the next step if all fields are valid
       if (valid) {
         handleNext();
@@ -639,13 +630,8 @@ export default {
 
       // Check each field and set errors if necessary
       if (!city) {
-        errors.value.city = true;
+        errors.value.city = "City is required";
         valid = false;
-        $toast.open({
-          message: 'City is required.',
-          type: 'error',
-          position: 'top-right'
-        });
       }
       if (!purpose) {
         errors.value.purpose = true;
@@ -657,15 +643,11 @@ export default {
         });
       }
       if (!plot && !commercial && !homeType) {
-        errors.value.plot = true;
-        errors.value.commercial = true;
-        errors.value.homeType = true;
+        errors.value.plot = "At least one of plot, commercial, or home type must be selected.";
+        errors.value.commercial = "At least one of plot, commercial, or home type must be selected.";
+        errors.value.homeType = "At least one of plot, commercial, or home type must be selected.";
         valid = false;
-        $toast.open({
-          message: 'At least one of plot, commercial, or home type must be selected.',
-          type: 'error',
-          position: 'top-right'
-        });
+
       }
 
       // Proceed to the next step if all fields are valid
@@ -676,11 +658,12 @@ export default {
 
 
     const handleStepThird = () => {
-      const { location, address, areaUnit, size, totalPrice } = propertyRequestform.value;
+      const { location, address, areaUnit, size, totalPrice, city } = propertyRequestform.value;
       let valid = true;
 
       // Reset all error states initially
       errors.value = {
+        city: false,
         location: false,
         address: false,
         areaUnit: false,
@@ -689,74 +672,45 @@ export default {
       };
 
       // Validate Location
-      if (!location) {
-        errors.value.location = true;
+      if (!city) {
+        errors.value.city = "City is required";
         valid = false;
-        $toast.open({
-          message: 'Location is required.',
-          type: 'error',
-          position: 'top-right'
-        });
+      }
+      if (!location) {
+        errors.value.location = "Location is required";
+        valid = false;
       }
 
       // Validate Address
       if (!address) {
-        errors.value.address = true;
+        errors.value.address = "Address is required";
         valid = false;
-        $toast.open({
-          message: 'Address is required.',
-          type: 'error',
-          position: 'top-right'
-        });
       }
 
       // Validate Area Unit
       if (!areaUnit) {
-        errors.value.areaUnit = true;
+        errors.value.areaUnit = "Area Unit is required";
         valid = false;
-        $toast.open({
-          message: 'Area unit is required.',
-          type: 'error',
-          position: 'top-right'
-        });
+
       }
 
       // Validate Size
       if (!size) {
-        errors.value.size = true;
+        errors.value.size = "Size is required";
         valid = false;
-        $toast.open({
-          message: 'Size is required.',
-          type: 'error',
-          position: 'top-right'
-        });
       } else if (size <= 0) {
-        errors.value.size = true;
+        errors.value.size = "Size must be greater than 0";
         valid = false;
-        $toast.open({
-          message: 'Size must be greater than 0.',
-          type: 'error',
-          position: 'top-right'
-        });
       }
 
       // Validate Total Price
       if (!totalPrice) {
-        errors.value.totalPrice = true;
+        errors.value.totalPrice = "Total price is required";
         valid = false;
-        $toast.open({
-          message: 'Total price is required.',
-          type: 'error',
-          position: 'top-right'
-        });
+
       } else if (totalPrice <= 0) {
-        errors.value.totalPrice = true;
+        errors.value.totalPrice = "Total price must be greater than 0";
         valid = false;
-        $toast.open({
-          message: 'Total price must be greater than 0.',
-          type: 'error',
-          position: 'top-right'
-        });
       }
 
       // Proceed to the next step if all fields are valid
@@ -857,7 +811,7 @@ export default {
       }
 
       if (!emailRegex.test(value)) {
-        errors.value.email = true;
+        errors.value.email = "Email should be valid email address";
       } else {
         errors.value.email = false;
       }
@@ -869,30 +823,44 @@ export default {
       let value = event.target.value;
       const phoneRegex = /^\d+$/;
 
-      if (!phoneRegex.test(value)) {
-        errors.value.phone = true;
-        value = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
-      } else {
-        errors.value.phone = false;
+      // Remove non-numeric characters and prevent negative value
+      value = value.replace(/[^0-9]/g, '');
+      if (parseInt(value) < 0) {
+        value = '';
       }
 
-      // Prevent negative value
-      if (parseInt(value) < 0) {
-        errors.value.phone = true;
-        value = '';
+      // Stop at 15 digits
+      if (value.length > 15) {
+        value = value.slice(0, 15);
+      }
+
+      // Set error if the value does not match the criteria
+      if (!phoneRegex.test(value) || value.length < 11 || value.length > 15) {
+        errors.value.phone = "Phone number must be between 11 to 15 digits";
+      } else {
+        errors.value.phone = false;
       }
 
       event.target.value = value;
       propertyRequestform.value.phone = value;
     };
 
+
     const validateTotalPrice = (event) => {
       let value = event.target.value;
       const priceRegex = /^\d+(\.\d{1,2})?$/;
 
+      // Remove non-numeric and non-decimal characters
+      value = value.replace(/[^0-9.]/g, '');
+
+      // Limit to 15 characters
+      if (value.length > 15) {
+        value = value.slice(0, 15);
+      }
+
+      // Check if the value matches the price format
       if (!priceRegex.test(value)) {
-        errors.value.totalPrice = true;
-        value = value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters and limit to 2 decimal places
+        errors.value.totalPrice = "Price must be a valid number with up to 2 decimal places";
       } else {
         errors.value.totalPrice = false;
       }
@@ -903,16 +871,24 @@ export default {
         value = '';
       }
 
+      // Update the value in the input field
       event.target.value = value;
+
+      // Update the value in the form object
       propertyRequestform.value.totalPrice = value;
+
+      // Optionally, return the sanitized value if needed
+      return value;
     };
+
 
     const validateSize = (event) => {
       let value = event.target.value;
       const sizeRegex = /^\d+$/;
 
+      // Check if the value is a number
       if (!sizeRegex.test(value)) {
-        errors.value.size = true;
+        errors.value.size = "Size must be a numeric value";
         value = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
       } else {
         errors.value.size = false;
@@ -924,15 +900,136 @@ export default {
         value = '';
       }
 
+      // Limit to 15 characters
+      if (value.length > 15) {
+        errors.value.size = "Size must not exceed 15 digits";
+        value = value.slice(0, 15); // Limit to 15 characters
+      }
+
+      // Update the value in the input field
       event.target.value = value;
+
+      // Update the value in the form object
       propertyRequestform.value.size = value;
+
+      // Optionally, you can return the sanitized value if needed
+      return value;
+    };
+
+
+
+    const validateCity = (event) => {
+      let value = event.target.value;
+      const cityRegex = /^[A-Za-z\s]*$/;
+
+      if (!cityRegex.test(value)) {
+        errors.value.city = "City must include alphabets";
+        value = value.replace(/[^A-Za-z\s]/g, ''); // Remove non-alphabetic characters
+      } else {
+        errors.value.city = false;
+      }
+
+      if (value.length > 15) {
+        value = value.slice(0, 15); // Limit to 15 characters
+      }
+
+      propertyRequestform.value.city = value;
+    };
+
+
+    const validateCity2 = (event) => {
+      let value = event.target.value;
+      const cityRegex = /^[A-Za-z\s]*$/;
+
+      if (!cityRegex.test(value)) {
+        errors.value.value = "City must include alphabets";
+        value = value.replace(/[^A-Za-z\s]/g, ''); // Remove non-alphabetic characters
+      } else {
+        errors.value.city = false;
+      }
+
+      if (value.length > 15) {
+        value = value.slice(0, 15); // Limit to 15 characters
+      }
+
+      propertyRequestform.value.city = value;
+    };
+
+    const validateArea = (event) => {
+      let value = event.target.value;
+
+      // Check if the value is an integer
+      if (!Number.isInteger(Number(value))) {
+        errors.value.size = "Unit must be an integer";
+      } else if (Number(value) > 15) {
+        // If the value is greater than 15, truncate it to 15 characters
+        errors.value.size = "Unit must not be greater than 15";
+        value = value.slice(0, 15);
+      } else {
+        errors.value.size = false;
+      }
+
+      // Update the value in the input field
+      event.target.value = value;
+
+      // Update the value in the form object
+      propertyRequestform.value.areaUnit = value;
+
+      // Optionally, you can return the sanitized value if needed
+      return value;
+    };
+
+
+
+    const validateAreaUnit = (event) => {
+
+      let value = event.target.value;
+      const nameRegex = /^[A-Za-z\s,.]*$/; // Allow alphabets, spaces, commas, and periods
+
+      if (!nameRegex.test(value)) {
+        errors.value.areaUnit = true;
+        value = value.replace(/[^A-Za-z\s,.]/g, ''); // Remove non-alphabetic characters except commas and periods
+      } else {
+        errors.value.areaUnit = false;
+      }
+
+      if (value.length > 15) {
+        value = value.slice(0, 15); // Limit to 15 characters
+      }
+
+      event.target.value = value; // Update input field with sanitized value
+      propertyRequestform.value.areaUnit = value; // Update form state
+
+      return value; // Optionally, you can return the sanitized value if needed
     };
 
 
 
 
 
+    const validateLocation = (event) => {
+      let value = event.target.value;
 
+      if (!value) {
+        errors.value.location = 'Location is required';
+      } else {
+        errors.value.location = false;
+      }
+
+      propertyRequestform.value.location = value;
+    };
+
+    const validateAddress = (event) => {
+      let value = event.target.value;
+
+      if (!value) {
+        errors.value.address = 'Address is required';
+      } else {
+        errors.value.address = false;
+      }
+
+      propertyRequestform.value.address = value;
+    };
     return {
       propertyRequestform,
       handleSubmission,
@@ -965,6 +1062,12 @@ export default {
       validatePhone,
       validateTotalPrice,
       validateSize,
+      validateCity,
+      validateCity2,
+      validateAreaUnit,
+      validateArea,
+      validateLocation,
+      validateAddress,
     };
   }
 };

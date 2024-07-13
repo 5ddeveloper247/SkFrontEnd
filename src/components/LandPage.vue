@@ -33,7 +33,11 @@
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.6em" viewBox="0 0 512 512"><path fill="white" d="M472 168H40a24 24 0 0 1 0-48h432a24 24 0 0 1 0 48m-80 112H120a24 24 0 0 1 0-48h272a24 24 0 0 1 0 48m-96 112h-80a24 24 0 0 1 0-48h80a24 24 0 0 1 0 48"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.6em"
+                                    viewBox="0 0 512 512">
+                                    <path fill="white"
+                                        d="M472 168H40a24 24 0 0 1 0-48h432a24 24 0 0 1 0 48m-80 112H120a24 24 0 0 1 0-48h272a24 24 0 0 1 0 48m-96 112h-80a24 24 0 0 1 0-48h80a24 24 0 0 1 0 48" />
+                                </svg>
                             </span>
                         </button>
                         <!-- <h3>
@@ -872,7 +876,7 @@ onBeforeRouteLeave((to, from, next) => {
 
 .navbar-toggler {
     border: none !important;
-    background-color: #F45D08   
+    background-color: #F45D08
 }
 
 .not-found {
@@ -883,6 +887,7 @@ onBeforeRouteLeave((to, from, next) => {
     to {
         scale: .8
     }
+
     from {
         scale: 1
     }
@@ -952,6 +957,12 @@ button {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 40px;
     margin: 20px 0;
+    place-items: center;
+
+    .property-card {
+        max-width: 250px;
+        width: 100%;
+    }
 }
 
 .list-container {

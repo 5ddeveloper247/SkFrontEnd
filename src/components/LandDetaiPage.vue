@@ -506,28 +506,28 @@
                     <!-- inqueryform -->
                     <form class="detail-page-form">
                         <div class="form-floating my-4">
-                            <input @input="enforceMaxLength($event, 15, 'name')" type="text" v-model="inquiryData.name"
+                            <input @input="validateName($event)" type="text" v-model="inquiryData.name"
                                 :class="{ 'form-control': true, 'input-error': errors.name }" id="nameInput"
                                 placeholder="New York, San Francisco, etc">
+                            <div v-if="errors.name" class="text-danger">{{ errors.name }}</div>
                             <label for="nameInput">Name*</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input @input="enforceMaxLength($event, 50, 'email')" type="email"
-                                v-model="inquiryData.email"
+                            <input @input="validateEmail($event)" type="email" v-model="inquiryData.email"
                                 :class="{ 'form-control': true, 'input-error': errors.email }" id="emailInput"
                                 placeholder="Email">
+                            <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
                             <label for="emailInput">Email*</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input @input="enforceMaxLength($event, 13, 'phone')" type="number"
-                                v-model="inquiryData.phone"
+                            <input @input="validatePhone($event)" type="number" v-model="inquiryData.phone"
                                 :class="{ 'form-control': true, 'input-error': errors.phone }" id="phoneInput"
                                 placeholder="Phone">
+                            <div v-if="errors.phone" class="text-danger">{{ errors.phone }}</div>
                             <label for="phoneInput">Phone*</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <textarea @input="enforceMaxLength($event, 150, 'description')"
-                                v-model="inquiryData.description"
+                            <textarea @input="validateDescription($event)" v-model="inquiryData.description"
                                 :class="{ 'form-control textarea-size': true, 'input-error': errors.description }"
                                 placeholder="Leave a comment here" id="commentInput"></textarea>
                             <label for="commentInput">Comments*</label>
@@ -809,91 +809,101 @@ const getImageUrl = (media) => {
 // Function to handle form submission
 // Function to handle form submission
 
+const validateName = (event) => {
+    let value = event.target.value.trim();
+    const nameRegex = /^[A-Za-z\s]*$/;
+
+    if (!value) {
+        errors.value.name = 'Name is required';
+        return false;
+    } else if (!nameRegex.test(value)) {
+        errors.value.name = 'Name should only contain alphabets';
+        value = value.replace(/[^A-Za-z\s]/g, ''); // Remove non-alphabetic characters
+        event.target.value = value; // Update input value
+        return false;
+    } else if (value.length > 15) {
+        errors.value.name = 'Name should not exceed 15 characters';
+        event.target.value = value.slice(0, 15); // Limit to 15 characters
+        return false;
+    }
+
+    errors.value.name = '';
+    return true;
+};
+
+const validateEmail = (event) => {
+    let value = event.target.value.trim();
+
+    if (!value) {
+        errors.value.email = 'Email is required';
+        return false;
+    } else if (!/\S+@\S+\.\S+/.test(value)) {
+        errors.value.email = 'Email is invalid';
+        event.target.value = value; // Clear the input field
+        return false;
+    } else if (value.length > 50) {
+        // Truncate the value to 50 characters
+        value = value.slice(0, 50);
+        event.target.value = value; // Update the input field with truncated value
+        errors.value.email = 'Email should not exceed 50 characters';
+        return false;
+    }
+
+    errors.value.email = '';
+    return true;
+};
+
+const validatePhone = (event) => {
+    let value = event.target.value.trim();
+
+    if (!value) {
+        errors.value.phone = 'Phone number is required';
+        return false;
+    } else if (!/^\d+$/.test(value)) {
+        // If non-numeric characters are found, remove them
+        value = value.replace(/\D/g, '');
+        errors.value.phone = 'Phone number should only contain numeric digits';
+    } else if (parseInt(value) <= 0) {
+        errors.value.phone = 'Phone number should be positive';
+        return false;
+    } else if (value.length > 13) {
+        // Truncate the value to 13 characters
+        value = value.slice(0, 13);
+        // Update the error message accordingly
+        errors.value.phone = 'Phone number should not exceed 13 digits';
+    } else {
+        errors.value.phone = '';
+    }
+
+    // Update the value in the form object
+    inquiryData.value.phone = value;
+
+    return true;
+};
+
+const validateDescription = (event) => {
+    const value = event.target.value.trim();
+
+    if (!value) {
+        errors.value.description = 'Comments are required';
+        return false;
+    } else if (value.length > 150) {
+        errors.value.description = 'Comments should not exceed 150 characters';
+        return false;
+    }
+
+    errors.value.description = '';
+    return true;
+};
 
 const validateForm = () => {
-    let isValid = true;
+    const isNameValid = validateName({ target: { value: inquiryData.value.name } });
+    const isEmailValid = validateEmail({ target: { value: inquiryData.value.email } });
+    const isPhoneValid = validatePhone({ target: { value: inquiryData.value.phone } });
+    const isDescriptionValid = validateDescription({ target: { value: inquiryData.value.description } });
 
-    // Reset all error states initially
-    errors.value = {
-        name: false,
-        email: false,
-        phone: false,
-        description: false
-    };
-
-    // Validate Name
-    if (!inquiryData.value.name) {
-        errors.value.name = true;
-        isValid = false;
-        // $toast.open({
-        //     message: 'Name is required.',
-        //     type: 'error',
-        //     position: 'top-right'
-        // });
-    } else if (!/^[A-Za-z\s]+$/.test(inquiryData.value.name)) {
-        errors.value.name = true;
-        isValid = false;
-        $toast.open({
-            message: 'Name should only contain alphabets and spaces.',
-            type: 'error',
-            position: 'top-right'
-        });
-    } else if (inquiryData.value.name.length > 15) {
-        errors.value.name = true;
-        isValid = false;
-    }
-
-    // Validate Email
-    if (!inquiryData.value.email) {
-        errors.value.email = true;
-        isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(inquiryData.value.email)) {
-        errors.value.email = true;
-        isValid = false;
-        $toast.open({
-            message: 'Email is invalid.',
-            type: 'error',
-            position: 'top-right'
-        });
-    }
-
-    // Validate Phone
-    if (!inquiryData.value.phone) {
-        errors.value.phone = true;
-        isValid = false;
-    } else if (!/^\d+$/.test(inquiryData.value.phone) || parseInt(inquiryData.value.phone) <= 0) {
-        errors.value.phone = true;
-        isValid = false;
-        $toast.open({
-            message: 'Phone number should only contain positive numeric digits.',
-            type: 'error',
-            position: 'top-right'
-        });
-    } else if (inquiryData.value.phone.length < 11 || inquiryData.value.phone.length > 13) {
-        errors.value.phone = true;
-        isValid = false;
-        $toast.open({
-            message: 'Phone number should be between 11 and 13 digits.',
-            type: 'error',
-            position: 'top-right'
-        });
-    }
-
-    // Validate Description
-    if (!inquiryData.value.description) {
-        errors.value.description = true;
-        isValid = false;
-    } else if (inquiryData.value.description.length > 150) {
-        errors.value.description = true;
-        isValid = false;
-        $toast.open({
-            message: 'Comments should not exceed 150 characters.',
-            type: 'error',
-            position: 'top-right'
-        });
-    }
-
-    return isValid;
+    return Object.values(errors.value).every(error => !error) &&
+        isNameValid && isEmailValid && isPhoneValid && isDescriptionValid;
 };
 
 
@@ -921,25 +931,25 @@ const handleInquiryFormSubmission = () => {
         .then(data => {
             loading.value = false;
             footerState.setFooterState(true);
-            // Handle successful form submission response
             $toast.open({
                 message: 'Query submitted successfully!',
                 type: 'success',
                 position: 'top-right',
             });
-            // Optionally, reset the form data after successful submission
-            inquiryData.value = {
-                name: '',
-                email: '',
-                phone: '',
-                description: ''
-            };
+            // Reset the form data after successful submission
+            inquiryData.value.name = '';
+            inquiryData.value.email = '';
+            inquiryData.value.phone = '';
+            inquiryData.value.description = '';
+            $toast.open({
+                message: 'Query submitted successfully!',
+                type: 'success',
+                position: 'top-right',
+            });
         })
         .catch(error => {
             loading.value = false;
             footerState.setFooterState(true);
-            // Handle form submission error
-            console.error('Error submitting form data:', error);
             const errorMessage = JSON.parse(error.message);
             if (errorMessage.errors) {
                 Object.values(errorMessage.errors).forEach(err => {
