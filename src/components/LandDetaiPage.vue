@@ -520,7 +520,7 @@
                             <label for="emailInput">Email*</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input @input="validatePhone($event)" type="number" v-model="inquiryData.phone"
+                            <input @input="validatePhone($event)" type="text" v-model="inquiryData.phone"
                                 :class="{ 'form-control': true, 'input-error': errors.phone }" id="phoneInput"
                                 placeholder="Phone">
                             <div v-if="errors.phone" class="text-danger">{{ errors.phone }}</div>
@@ -530,26 +530,28 @@
                             <textarea @input="validateDescription($event)" v-model="inquiryData.description"
                                 :class="{ 'form-control textarea-size': true, 'input-error': errors.description }"
                                 placeholder="Leave a comment here" id="commentInput"></textarea>
+                            <div v-if="errors.description" class="text-danger">{{ errors.description }}</div>
                             <label for="commentInput">Comments*</label>
                         </div>
                         <div class="d-flex align-items-center mb-4">
                             <p><small>I am a:</small></p>
                             <div class="d-flex align-items-center">
-                                <input class="form-check-input mx-2" type="checkbox" v-model="inquiryData.agent"
-                                    value="Buyer" id="buyerCheckbox">
-                                <label for="buyerCheckbox"><small>Buyer/Tenant</small></label>
+                                <input class="form-check-input mx-2" type="radio" v-model="inquiryData.agent"
+                                    value="Buyer" id="buyerRadio">
+                                <label for="buyerRadio"><small>Buyer/Tenant</small></label>
                             </div>
                             <div class="d-flex align-items-center">
-                                <input class="form-check-input mx-2" type="checkbox" v-model="inquiryData.agent"
-                                    value="Agent" id="agentCheckbox">
-                                <label for="agentCheckbox"><small>Agent</small></label>
+                                <input class="form-check-input mx-2" type="radio" v-model="inquiryData.agent"
+                                    value="Agent" id="agentRadio">
+                                <label for="agentRadio"><small>Agent</small></label>
                             </div>
                             <div class="d-flex align-items-center">
-                                <input class="form-check-input mx-2" type="checkbox" v-model="inquiryData.agent"
-                                    value="Others" id="othersCheckbox">
-                                <label for="othersCheckbox"><small>Others</small></label>
+                                <input class="form-check-input mx-2" type="radio" v-model="inquiryData.agent"
+                                    value="Others" id="othersRadio">
+                                <label for="othersRadio"><small>Others</small></label>
                             </div>
                         </div>
+
                         <div class="form-check mb-4">
                             <input v-model="inquiryData.informedMe" class="form-check-input" type="checkbox"
                                 value="true" id="informedMeCheckbox">
@@ -796,7 +798,7 @@ const inquiryData = ref({
     email: '',
     phone: '',
     description: '',
-    agent: [],
+    agent: '',
     informedMe: false
 });
 
@@ -832,26 +834,33 @@ const validateName = (event) => {
 };
 
 const validateEmail = (event) => {
-    let value = event.target.value.trim();
+    let value = event.target.value;
 
-    if (!value) {
-        errors.value.email = 'Email is required';
-        return false;
-    } else if (!/\S+@\S+\.\S+/.test(value)) {
-        errors.value.email = 'Email is invalid';
-        event.target.value = value; // Clear the input field
-        return false;
-    } else if (value.length > 50) {
-        // Truncate the value to 50 characters
+    // Filter out any special characters except for . and @
+    value = value.replace(/[^a-zA-Z0-9.@]/g, '');
+
+    // Limit the email length to 20 characters
+    if (value.length > 50) {
         value = value.slice(0, 50);
-        event.target.value = value; // Update the input field with truncated value
-        errors.value.email = 'Email should not exceed 50 characters';
-        return false;
     }
 
-    errors.value.email = '';
+    // Regular expression to validate the email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Validate the email format
+    if (!emailRegex.test(value)) {
+        errors.value.email = "Email should be a valid email address";
+    } else {
+        errors.value.email = false;
+    }
+
+    // Update the form value and the input field
+    inquiryData.value.email = value;
+    event.target.value = value;
     return true;
 };
+
+
 
 const validatePhone = (event) => {
     let value = event.target.value.trim();
@@ -863,10 +872,20 @@ const validatePhone = (event) => {
         // If non-numeric characters are found, remove them
         value = value.replace(/\D/g, '');
         errors.value.phone = 'Phone number should only contain numeric digits';
-    } else if (parseInt(value) <= 0) {
-        errors.value.phone = 'Phone number should be positive';
+    }
+
+    // Ensure the phone number starts with a zero
+    if (value[0] !== '0') {
+        value = '0' + value;
+    }
+
+    // Ensure the phone number is at least 11 digits long
+    if (value.length < 11) {
+        errors.value.phone = 'Phone number should be at least 11 digits';
         return false;
-    } else if (value.length > 13) {
+    }
+
+    if (value.length > 13) {
         // Truncate the value to 13 characters
         value = value.slice(0, 13);
         // Update the error message accordingly
@@ -877,31 +896,39 @@ const validatePhone = (event) => {
 
     // Update the value in the form object
     inquiryData.value.phone = value;
+    event.target.value = value; // Update input field with sanitized value
 
     return true;
 };
 
+
+
+
+
 const validateDescription = (event) => {
-    const value = event.target.value.trim();
+    let value = event.target.value;
 
     if (!value) {
         errors.value.description = 'Comments are required';
         return false;
     } else if (value.length > 150) {
         errors.value.description = 'Comments should not exceed 150 characters';
+        value = value.slice(0, 150); // Limit to 150 characters
+        event.target.value = value; // Update input field with truncated value
         return false;
     }
 
     errors.value.description = '';
+    event.target.value = value; // Update form state
     return true;
 };
+
 
 const validateForm = () => {
     const isNameValid = validateName({ target: { value: inquiryData.value.name } });
     const isEmailValid = validateEmail({ target: { value: inquiryData.value.email } });
     const isPhoneValid = validatePhone({ target: { value: inquiryData.value.phone } });
     const isDescriptionValid = validateDescription({ target: { value: inquiryData.value.description } });
-
     return Object.values(errors.value).every(error => !error) &&
         isNameValid && isEmailValid && isPhoneValid && isDescriptionValid;
 };
@@ -941,6 +968,7 @@ const handleInquiryFormSubmission = () => {
             inquiryData.value.email = '';
             inquiryData.value.phone = '';
             inquiryData.value.description = '';
+            inquiryData.value.agent = '';
             $toast.open({
                 message: 'Query submitted successfully!',
                 type: 'success',
@@ -1054,11 +1082,6 @@ onBeforeRouteLeave((to, from, next) => {
     footerState.setFooterState(false);
     next();
 });
-
-
-
-
-
 </script>
 
 
@@ -1117,5 +1140,14 @@ img {
 .whatsapp-btn,
 .call-btn {
     font-size: 12px !important;
+}
+
+.detail-page-form input:focus,
+.detail-page-form textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid green;
+    outline-width: 0
 }
 </style>

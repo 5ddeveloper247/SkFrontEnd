@@ -44,7 +44,7 @@
                   <label for="floatingEmail">Email address*</label>
                 </div>
                 <div class="form-floating mb-3">
-                  <input @input="validatePhone($event)" type="number"
+                  <input @input="validatePhone($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.phone }" id="floatingPhone"
                     v-model="propertyRequestform.phone" placeholder="Phone" />
                   <div v-if="errors.phone" class="text-danger">{{ errors.phone }}</div>
@@ -159,8 +159,8 @@
                             </ul>
                           </div>
 
-                          <div class="col-6 col-lg">
-                            <h6 class="heading mt-4 text-uppercase">Commercial type**</h6>
+                          <div class="col-6 col-lg pe-0 ">
+                            <h6 class="heading pe-0 mt-4 text-uppercase">Commercial type**</h6>
                             <ul class="list">
                               <li class="list__item">
                                 <label class="label--radio">
@@ -201,7 +201,7 @@
                 value="Previous" />
             </fieldset>
 
-            
+
             <fieldset :class="{ 'd-block': fs_step3 }">
               <div class="form-card">
                 <div class="row">
@@ -221,10 +221,10 @@
                   <div v-if="errors.city" class="text-danger">{{ errors.city }}</div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input @input="validateLocation($event)" type="text"
+                  <input readonly @input="validateLocation($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.location }" id="floatingInput"
                     v-model="propertyRequestform.location" placeholder="Location">
-                  <label for="floatingInput">Location</label>
+                  <label for="floatingInput">Location*</label>
                   <div v-if="errors.location" class="text-danger">{{ errors.location }}</div>
                 </div>
                 <div class="form-floating mb-3">
@@ -238,7 +238,7 @@
                   <select @change="validateAreaUnit($event)"
                     :class="{ 'form-control': true, 'input-error': errors.areaUnit }"
                     v-model="propertyRequestform.areaUnit">
-
+                    <option class="selectUnit" value="" disabled>Select a unit</option>
                     <option value="Marla">Marla</option>
                     <option value="Sq.Ft">Sq.Ft</option>
                     <option value="Sq.M">Sq.M</option>
@@ -247,11 +247,11 @@
                   </select>
                   <label for="floatingInput">Area*</label>
                   <div v-if="errors.areaUnit" class="text-danger">{{ errors.areaUnit }}</div>
-
                 </div>
 
+
                 <div class="form-floating mb-3">
-                  <input @input="validateSize($event)" type="number"
+                  <input @input="validateSize($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.size }" v-model="propertyRequestform.size"
                     placeholder="e.g 10">
                   <label for="floatingInput">Area unit*</label>
@@ -260,7 +260,7 @@
 
                 </div>
                 <div class="form-floating mb-3">
-                  <input @input="validateTotalPrice($event)" type="number"
+                  <input @input="validateTotalPrice($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.totalPrice }"
                     v-model="propertyRequestform.totalPrice" placeholder="Total Price in PKR">
                   <label for="floatingInput">Total Price*</label>
@@ -582,7 +582,7 @@ export default {
         valid = false;
       }
 
-      // Validate Phone Number
+      // Validate Phone Number 
       if (!phone) {
         errors.value.phone = "Phone number is required";
         valid = false;
@@ -643,9 +643,9 @@ export default {
         });
       }
       if (!plot && !commercial && !homeType) {
-        errors.value.plot = "At least one of plot, commercial, or home type must be selected.";
-        errors.value.commercial = "At least one of plot, commercial, or home type must be selected.";
-        errors.value.homeType = "At least one of plot, commercial, or home type must be selected.";
+        errors.value.plot = "Choose at least one type.";
+        errors.value.commercial = "Choose at least one type.";
+        errors.value.homeType = "Choose at least one type.";
         valid = false;
 
       }
@@ -772,7 +772,7 @@ export default {
       const nameRegex = /^[A-Za-z\s]*$/;
 
       if (!nameRegex.test(value)) {
-        errors.value.firstName = true;
+
         value = value.replace(/[^A-Za-z\s]/g, ''); // Remove non-alphabetic characters
       } else {
         errors.value.firstName = false;
@@ -784,18 +784,20 @@ export default {
 
       propertyRequestform.value.firstName = value;
     };
+
     const validateLastName = (event) => {
       let value = event.target.value;
       const nameRegex = /^[A-Za-z\s]*$/;
 
       if (!nameRegex.test(value)) {
-        errors.value.lastName = true;
+        errors.value.lastName = "Last name should only contain alphabets and spaces";
         value = value.replace(/[^A-Za-z\s]/g, ''); // Remove non-alphabetic characters
       } else {
-        errors.value.lastName = false;
+        errors.value.lastName = '';
       }
 
       if (value.length > 15) {
+        errors.value.lastName = "Last name should not exceed 15 characters";
         value = value.slice(0, 15); // Limit to 15 characters
       }
 
@@ -804,20 +806,30 @@ export default {
 
     const validateEmail = (event) => {
       let value = event.target.value;
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      if (value.length > 20) {
-        value = value.slice(0, 20); // Limit to 20 characters
+      // Filter out any special characters except for . and @
+      value = value.replace(/[^a-zA-Z0-9.@]/g, '');
+
+      // Limit the email length to 20 characters
+      if (value.length > 50) {
+        value = value.slice(0, 50);
       }
 
+      // Regular expression to validate the email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // Validate the email format
       if (!emailRegex.test(value)) {
-        errors.value.email = "Email should be valid email address";
+        errors.value.email = "Email should be a valid email address";
       } else {
         errors.value.email = false;
       }
 
+      // Update the form value and the input field
       propertyRequestform.value.email = value;
+      event.target.value = value;
     };
+
 
     const validatePhone = (event) => {
       let value = event.target.value;
@@ -867,7 +879,7 @@ export default {
 
       // Prevent negative value
       if (parseFloat(value) < 0) {
-        errors.value.totalPrice = true;
+        errors.value.totalPrice = "Value must be a positive number";
         value = '';
       }
 
@@ -896,7 +908,7 @@ export default {
 
       // Prevent negative value
       if (parseInt(value) < 0) {
-        errors.value.size = true;
+        errors.value.size = "Value must be a positive numer";
         value = '';
       }
 
@@ -982,18 +994,18 @@ export default {
 
 
     const validateAreaUnit = (event) => {
-
       let value = event.target.value;
       const nameRegex = /^[A-Za-z\s,.]*$/; // Allow alphabets, spaces, commas, and periods
 
       if (!nameRegex.test(value)) {
-        errors.value.areaUnit = true;
+        errors.value.areaUnit = "Area unit should only contain alphabets, spaces, commas, and periods";
         value = value.replace(/[^A-Za-z\s,.]/g, ''); // Remove non-alphabetic characters except commas and periods
       } else {
-        errors.value.areaUnit = false;
+        errors.value.areaUnit = '';
       }
 
       if (value.length > 15) {
+        errors.value.areaUnit = "Area unit should not exceed 15 characters";
         value = value.slice(0, 15); // Limit to 15 characters
       }
 
@@ -1087,6 +1099,11 @@ export default {
 
 }
 
+.text-danger {
+  font-size: 12px;
+  font-style: italic;
+}
+
 .fs_step {
   display: block;
   opacity: 1;
@@ -1105,6 +1122,10 @@ export default {
 
 .label--radio-1 input[type="radio"] {
   display: none;
+}
+
+.selectUnit {
+  font-size: 12px !important;
 }
 
 .label--radio-1 {

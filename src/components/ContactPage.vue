@@ -122,15 +122,31 @@ const validateFullName = (event) => {
 
 
 const validateEmail = (event) => {
-    const value = event.target.value;
-    if (!value) {
-        errors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(value)) {
-        errors.email = 'Email is invalid';
-    } else {
-        errors.email = '';
+    let value = event.target.value;
+
+    // Filter out any special characters except for . and @
+    value = value.replace(/[^a-zA-Z0-9.@]/g, '');
+
+    // Limit the email length to 20 characters
+    if (value.length > 50) {
+        value = value.slice(0, 50);
     }
+
+    // Regular expression to validate the email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Validate the email format
+    if (!emailRegex.test(value)) {
+        errors.email = "Email should be a valid email address";
+    } else {
+        errors.email = false;
+    }
+
+    // Update the form value and the input field
+
+    event.target.value = value;
 };
+
 
 const validateCompanyName = (event) => {
     const value = event.target.value;
@@ -248,5 +264,14 @@ onBeforeUnmount(() => {
 <style scoped>
 .border-danger {
     border-color: red !important;
+}
+
+input:focus,
+textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid green;
+    outline-width: 0
 }
 </style>
