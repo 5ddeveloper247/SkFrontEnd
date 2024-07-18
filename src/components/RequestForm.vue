@@ -215,13 +215,13 @@
                 <div class="form-floating mb-3">
                   <input @input="validateCity2($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.city }" id="floatingInput"
-                    v-model="propertyRequestform.city" placeholder="City">
+                    v-model="propertyRequestform.city" placeholder="City" readonly>
 
                   <label for="floatingInput">City*</label>
                   <div v-if="errors.city" class="text-danger">{{ errors.city }}</div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input readonly @input="validateLocation($event)" type="text"
+                  <input  @input="validateLocation($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.location }" id="floatingInput"
                     v-model="propertyRequestform.location" placeholder="Location">
                   <label for="floatingInput">Location*</label>

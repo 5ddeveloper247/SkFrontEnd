@@ -152,11 +152,11 @@
                                             <div v-if="!showPlot" class="px-4">
                                                 <label class="d-flex align-items-center gap-1">
                                                     <input type="checkbox" v-model="Landfilters.plot"
-                                                        value="Residential Plot"> Residential Plot
+                                                        value="Residential"> Residential Plot
                                                 </label>
                                                 <label class="d-flex align-items-center gap-1 mt-1">
                                                     <input type="checkbox" v-model="Landfilters.plot"
-                                                        value="Commercial Plot"> Commercial Plot
+                                                        value="Commercial"> Commercial Plot
                                                 </label>
                                             </div>
                                         </transition>
@@ -200,11 +200,12 @@
                                             <div v-if="!showCity" class="px-4">
                                                 <label class="d-flex align-items-center gap-1 my-1"
                                                     v-for="city in cityList" :key="city">
-                                                    <input type="checkbox" @change="onCityChange"
+                                                    <input type="radio" @change="onCityChange"
                                                         v-model="Landfilters.city" :value="city"> {{ city }}
                                                 </label>
                                             </div>
                                         </transition>
+
 
                                         <!-- AREA -->
                                         <div class="mt-2" v-if="selectedAreas.length > 0">
@@ -724,10 +725,12 @@ const CityListings = async () => {
 };
 
 const onCityChange = () => {
-    const selectedCityObject = cityData.value.find((city) => city.NAME === Landfilters.value.city[0]);
+    const selectedCityObject = cityData.value.find((city) => city.NAME === Landfilters.value.city);
     if (selectedCityObject) {
+        selectedAreas.value = [];
         selectedAreas.value = selectedCityObject.areas;
-    } else {
+    }
+    else {
         selectedAreas.value = [];
     }
     // Reset dependent values
@@ -738,6 +741,7 @@ const onCityChange = () => {
 const onAreaChange = () => {
     const selectedAreaObject = selectedAreas.value.find((area) => area.NAME === Landfilters.value.area[0]);
     if (selectedAreaObject) {
+
         selectedLocation.value = selectedAreaObject.locations;
     } else {
         selectedLocation.value = [];
@@ -960,7 +964,7 @@ button {
     place-items: center;
 
     .property-card {
-        max-width: 250px;
+
         width: 100%;
     }
 }
