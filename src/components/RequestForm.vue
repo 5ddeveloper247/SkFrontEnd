@@ -221,7 +221,7 @@
                   <div v-if="errors.city" class="text-danger">{{ errors.city }}</div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input  @input="validateLocation($event)" type="text"
+                  <input @input="validateLocation($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.location }" id="floatingInput"
                     v-model="propertyRequestform.location" placeholder="Location">
                   <label for="floatingInput">Location*</label>
@@ -769,17 +769,21 @@ export default {
 
     const validateFirstName = (event) => {
       let value = event.target.value;
-      const nameRegex = /^[A-Za-z\s]*$/;
+      const nameRegex = /^[A-Za-z\s]*$/; // Allows only alphabets and spaces
 
+      // Check if the value contains invalid characters
       if (!nameRegex.test(value)) {
-
-        value = value.replace(/[^A-Za-z\s]/g, ''); // Remove non-alphabetic characters
+        // Remove non-alphabetic characters except spaces
+        value = value.replace(/[^A-Za-z\s]/g, '');
+        errors.value.firstName = "First name should only contain alphabets";
       } else {
-        errors.value.firstName = false;
+        errors.value.firstName = '';
       }
 
+      // Limit the length to 15 characters
       if (value.length > 15) {
-        value = value.slice(0, 15); // Limit to 15 characters
+        value = value.slice(0, 15);
+        errors.value.firstName = "First name should not exceed 15 characters";
       }
 
       propertyRequestform.value.firstName = value;
@@ -787,22 +791,27 @@ export default {
 
     const validateLastName = (event) => {
       let value = event.target.value;
-      const nameRegex = /^[A-Za-z\s]*$/;
+      const nameRegex = /^[A-Za-z\s]*$/; // Allows only alphabets and spaces
 
+      // Check if the value contains invalid characters
       if (!nameRegex.test(value)) {
-        errors.value.lastName = "Last name should only contain alphabets and spaces";
-        value = value.replace(/[^A-Za-z\s]/g, ''); // Remove non-alphabetic characters
+        // Remove non-alphabetic characters except spaces
+        value = value.replace(/[^A-Za-z\s]/g, '');
+        errors.value.lastName = "Last name should only contain alphabets";
       } else {
         errors.value.lastName = '';
       }
 
+      // Limit the length to 15 characters
       if (value.length > 15) {
+        value = value.slice(0, 15);
         errors.value.lastName = "Last name should not exceed 15 characters";
-        value = value.slice(0, 15); // Limit to 15 characters
       }
 
       propertyRequestform.value.lastName = value;
     };
+
+
 
     const validateEmail = (event) => {
       let value = event.target.value;

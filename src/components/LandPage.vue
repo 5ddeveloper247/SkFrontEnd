@@ -470,7 +470,7 @@ const generateFilterData = (HomefilterData) => {
     // Update Landfilters value
     Landfilters.value.HomePageFilters = HomefilterData;
     Landfilters.value.purpose = purpose || '';
-    Landfilters.value.city = city ? [city] : [];
+    Landfilters.value.city = city ? city : '';
     Landfilters.value.homeType = homeType ? [homeType] : [];
     Landfilters.value.rooms = rooms || '';
     Landfilters.value.plot = plot ? [plot] : [];
@@ -537,6 +537,7 @@ const fetchPropertyData = (HomePagefilterCriteria = null) => {
 
     // If there are filter criteria, fetch filtered results
     if (HomePagefilterCriteria) {
+        console.log("landfilters final data", Landfilters.value)
         url = `${base_url}/api/frontend/home/property/getByFilters`;
         options = {
             ...options,
@@ -727,7 +728,9 @@ const CityListings = async () => {
 const onCityChange = () => {
     const selectedCityObject = cityData.value.find((city) => city.NAME === Landfilters.value.city);
     if (selectedCityObject) {
-        selectedAreas.value = [];
+        Landfilters.value.area = []
+        Landfilters.value.location = []
+        Landfilters.value.sector = []
         selectedAreas.value = selectedCityObject.areas;
     }
     else {
