@@ -234,7 +234,7 @@ onMounted(() => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+     
       mediaData.value = data.media;
       mediaOnly.value = data.mediaOnly;
       loading.value = false;

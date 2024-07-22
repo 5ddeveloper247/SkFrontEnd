@@ -195,7 +195,7 @@ export default {
         return;
       }
 
-      console.log('Form data:', propertyRequestform.value);
+
       const base_url = import.meta.env.VITE_BASE_URL;
       fetch(base_url + '/api/frontend/home/register/property', {
         method: 'POST',
@@ -212,7 +212,7 @@ export default {
               type: 'success',
               position: 'top-right'
             });
-            console.log('Success:', data);
+
           }
           else {
             $toast.open({

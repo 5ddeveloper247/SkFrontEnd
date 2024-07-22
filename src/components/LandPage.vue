@@ -26,7 +26,7 @@
         </nav>
 
         <div class="row gx-5 land-con align-items-start">
-            <nav class="navbar col-12 col-lg pt-0 side-bar-checkboxes navbar-expand-lg">
+            <nav class="navbar col-12 col-lg-2 pt-0 side-bar-checkboxes navbar-expand-lg">
                 <div class="w-100 h-100">
                     <div class="d-flex gap-3">
                         <button class="navbar-toggler mx-3 my-2" type="button" data-bs-toggle="collapse"
@@ -57,19 +57,19 @@
 
                                 <div class="range-slider-container p-3 ">
                                     <div class="row g-0">
-                                        <div class="col-md-4 my-2 ">
+                                        <div class="col-md-12 my-2 ">
                                             <!-- <span class="fw-normal">Min Price</span> -->
                                             <input placeholder="min" v-model.number="filterMinPrice" type="number"
                                                 min="0" :max="priceMaxRangeFilterValue" step="1"
                                                 class="range-input w-100 rounded-1">
                                         </div>
-                                        <div class="col-md-4 my-2 ">
+                                        <div class="col-md-12 my-2 ">
                                             <!-- <span class="fw-normal"> Max Price</span> -->
                                             <input placeholder="max" v-model.number="filterMaxPrice" type="number"
                                                 min="0" :max="priceMaxRangeFilterValue" step="1"
                                                 class="range-input w-100 rounded-1">
                                         </div>
-                                        <div class="col-md-4 my-2 d-flex align-items-end">
+                                        <div class="col-md-12 my-2 d-flex justify-content-center align-items-end">
                                             <button class="search-button rounded-1 px-3 border-0" type="button"
                                                 @click="handleFilterPrices">
                                                 <span class="text-white fw-bold">
@@ -537,7 +537,7 @@ const fetchPropertyData = (HomePagefilterCriteria = null) => {
 
     // If there are filter criteria, fetch filtered results
     if (HomePagefilterCriteria) {
-        console.log("landfilters final data", Landfilters.value)
+       
         url = `${base_url}/api/frontend/home/property/getByFilters`;
         options = {
             ...options,
@@ -728,23 +728,23 @@ const CityListings = async () => {
 const onCityChange = () => {
     const selectedCityObject = cityData.value.find((city) => city.NAME === Landfilters.value.city);
     if (selectedCityObject) {
-        Landfilters.value.area = []
-        Landfilters.value.location = []
-        Landfilters.value.sector = []
+        Landfilters.value.area = [];
+        Landfilters.value.location = [];
+        Landfilters.value.sector = [];
         selectedAreas.value = selectedCityObject.areas;
-    }
-    else {
+    } else {
         selectedAreas.value = [];
     }
     // Reset dependent values
-    selectedSectors.value = [];
     selectedLocation.value = [];
+    selectedSectors.value = [];
 };
 
 const onAreaChange = () => {
     const selectedAreaObject = selectedAreas.value.find((area) => area.NAME === Landfilters.value.area[0]);
     if (selectedAreaObject) {
-
+        Landfilters.value.location = [];
+        Landfilters.value.sector = [];
         selectedLocation.value = selectedAreaObject.locations;
     } else {
         selectedLocation.value = [];
@@ -756,12 +756,14 @@ const onAreaChange = () => {
 const onLocationChange = () => {
     const selectedLocationObject = selectedLocation.value.find((location) => location.NAME === Landfilters.value.location[0]);
     if (selectedLocationObject) {
+        Landfilters.value.sector = [];
         selectedSectors.value = selectedLocationObject.sectors;
     } else {
         selectedSectors.value = [];
     }
     // No dependent values to reset in this function
 };
+
 
 
 // get the max price of property for range price 

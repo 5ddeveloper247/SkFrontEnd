@@ -144,7 +144,7 @@
                                 <label class="label--radio">
                                   <input type="radio" @click="handleClick('plot')"
                                     :class="{ 'radio': true, 'form-control': true, 'input-error': errors.plot }"
-                                    v-model="propertyRequestform.plot" value="Residencial" name="plot">
+                                    v-model="propertyRequestform.plot" value="Residential" name="plot">
                                   Residencial
                                 </label>
                               </li>
@@ -220,13 +220,13 @@
                   <label for="floatingInput">City*</label>
                   <div v-if="errors.city" class="text-danger">{{ errors.city }}</div>
                 </div>
-                <div class="form-floating mb-3">
+                <!-- <div class="form-floating mb-3">
                   <input @input="validateLocation($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.location }" id="floatingInput"
                     v-model="propertyRequestform.location" placeholder="Location">
                   <label for="floatingInput">Location*</label>
                   <div v-if="errors.location" class="text-danger">{{ errors.location }}</div>
-                </div>
+                </div> -->
                 <div class="form-floating mb-3">
                   <input @input="validateAddress($event)" type="text"
                     :class="{ 'form-control': true, 'input-error': errors.address }"
@@ -329,7 +329,7 @@ export default {
       homeType: '',
       commercial: '',
       plot: '',
-      location: '',
+      // location: '',
       address: '',
       areaUnit: '',
       size: '',
@@ -361,7 +361,7 @@ export default {
       homeType: false,
       commercial: false,
       plot: false,
-      location: false,
+      // location: false,
       address: false,
       size: false,
       totalPrice: false
@@ -398,7 +398,7 @@ export default {
     const validateForm = () => {
       const requiredFields = [
         'firstName', 'lastName', 'phone', 'email',
-        'city', 'location', 'address', 'size',
+        'city', 'address', 'size',
         'totalPrice', 'purpose'
       ];
       for (const field of requiredFields) {
@@ -489,7 +489,7 @@ export default {
         homeType: '',
         commercial: '',
         plot: '',
-        location: '',
+       // location: '',
         address: '',
         size: '',
         totalPrice: '',
@@ -658,13 +658,13 @@ export default {
 
 
     const handleStepThird = () => {
-      const { location, address, areaUnit, size, totalPrice, city } = propertyRequestform.value;
+      const { address, areaUnit, size, totalPrice, city } = propertyRequestform.value;
       let valid = true;
 
       // Reset all error states initially
       errors.value = {
         city: false,
-        location: false,
+        // location: false,
         address: false,
         areaUnit: false,
         size: false,
@@ -676,10 +676,10 @@ export default {
         errors.value.city = "City is required";
         valid = false;
       }
-      if (!location) {
-        errors.value.location = "Location is required";
-        valid = false;
-      }
+      // if (!location) {
+      //   errors.value.location = "Location is required";
+      //   valid = false;
+      // }
 
       // Validate Address
       if (!address) {
@@ -1028,17 +1028,17 @@ export default {
 
 
 
-    const validateLocation = (event) => {
-      let value = event.target.value;
+    // const validateLocation = (event) => {
+    //   let value = event.target.value;
 
-      if (!value) {
-        errors.value.location = 'Location is required';
-      } else {
-        errors.value.location = false;
-      }
+    //   if (!value) {
+    //     errors.value.location = 'Location is required';
+    //   } else {
+    //     errors.value.location = false;
+    //   }
 
-      propertyRequestform.value.location = value;
-    };
+    //   propertyRequestform.value.location = value;
+    // };
 
     const validateAddress = (event) => {
       let value = event.target.value;
@@ -1087,7 +1087,7 @@ export default {
       validateCity2,
       validateAreaUnit,
       validateArea,
-      validateLocation,
+      // validateLocation,
       validateAddress,
     };
   }

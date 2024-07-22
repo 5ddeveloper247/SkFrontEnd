@@ -142,36 +142,47 @@
                                                 <p v-if="propertyData?.amenities[1]?.value == 1"
                                                     class="d-flex align-items-center">
                                                     <i class="fa-solid fa-check-to-slot pe-1"></i>
-                                                    <small>{{ propertyData?.amenities[1]?.amenities }}</small>
+                                                    <small>{{ addSpacesToCamelCase(propertyData?.amenities[1]?.amenities
+                                                    ) }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[2]?.value == 1"
                                                     class="d-flex align-items-center">
                                                     <i class="fa-solid fa-plate-wheat pe-1"></i>
-                                                    <small>{{ propertyData?.amenities[2]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[2]?.amenities)
+                                                    }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
                                                 <p v-if="propertyData?.amenities[3]?.value == 1"
                                                     class="d-flex align-items-center">
                                                     <i class="fa-solid fa-bolt pe-1"></i>
-                                                    <small>{{ propertyData?.amenities[3]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[3]?.amenities)
+                                                    }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[4]?.value == 1"
                                                     class="d-flex align-items-center">
                                                     <i class="fa-solid fa-water pe-1"></i>
-                                                    <small>{{ propertyData?.amenities[4]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[4]?.amenities)
+                                                    }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[5]?.value == 1"
                                                     class="d-flex align-items-center">
                                                     <i class="fa-solid fa-fire-flame-simple pe-1"></i>
-                                                    <small>{{ propertyData?.amenities[5]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[5]?.amenities)
+                                                        }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
                                                 <p v-if="propertyData?.amenities[6]?.value == 1"
                                                     class="d-flex align-items-center">
                                                     <i class="fa-solid fa-border-all pe-1"></i>
-                                                    <small>{{ propertyData?.amenities[6]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[6]?.amenities)
+                                                    }}</small>
                                                 </p>
                                             </div>
                                         </div>
@@ -195,7 +206,9 @@
                                                                 d="m23.99 15.96l.01-1.82c0-.3-.12-.58-.33-.79l-2.36-2.36h5.93c.46 0 .87.28 1.04.71l1.716 4.3H30v14h-6.99v.01H19V30h.01v-5.3c0-.39-.31-.7-.7-.7h-4.65c-.39 0-.7.31-.7.7V30H13v.01H9.01v-.091L9 30H2V16h.004l1.716-4.3c.17-.43.58-.71 1.04-.71h5.93l-2.36 2.36c-.21.21-.33.5-.33.79v1.82h.01c0 .01-.002.017-.005.025A.074.074 0 0 0 8 16.01v.49a.5.5 0 0 0 1 0v-.49a.074.074 0 0 0-.005-.025c-.002-.008-.005-.015-.005-.025H9v-1.21c0-.05.004-.099.01-.147a.985.985 0 0 1 .29-.643l6.15-6.06a.79.79 0 0 1 1.12 0l6.15 6.06c.18.18.28.42.29.67v1.97a.5.5 0 0 0 .99-.1v-.498c0-.017-.001-.033-.01-.042M16 18a3.001 3.001 0 1 0 0-6.002A3.001 3.001 0 0 0 16 18m-6.99-1.92v-.07h-.009zM3.28 21h1.44c.16 0 .28-.12.28-.28v-2.44c0-.15-.13-.28-.28-.28H3.28c-.15 0-.28.13-.28.28v2.44c0 .15.13.28.28.28m4.44 0c.16 0 .28-.12.28-.28v-2.44c0-.15-.13-.28-.28-.28H6.28c-.15 0-.28.13-.28.28v2.44c0 .15.13.28.28.28zm-3 4c.16 0 .28-.12.28-.28v-2.44c0-.15-.13-.28-.28-.28H3.28c-.15 0-.28.13-.28.28v2.44c0 .15.13.28.28.28zm3 0c.16 0 .28-.12.28-.28v-2.44c0-.15-.13-.28-.28-.28H6.28c-.15 0-.28.13-.28.28v2.44c0 .15.13.28.28.28zM24 20.72c0 .15.13.28.28.28h1.44c.16 0 .28-.12.28-.28v-2.44c0-.15-.13-.28-.28-.28h-1.44c-.15 0-.28.13-.28.28zm5 0v-2.44c0-.15-.13-.28-.28-.28h-1.44c-.15 0-.28.13-.28.28v2.44c0 .15.13.28.28.28h1.44c.16 0 .28-.12.28-.28m-3 4v-2.44c0-.15-.13-.28-.28-.28h-1.44c-.15 0-.28.13-.28.28v2.44c0 .15.13.28.28.28h1.44c.16 0 .28-.12.28-.28m3 0v-2.44c0-.15-.13-.28-.28-.28h-1.44c-.15 0-.28.13-.28.28v2.44c0 .15.13.28.28.28h1.44c.16 0 .28-.12.28-.28" />
                                                         </g>
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[7]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[7]?.amenities)
+                                                    }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[8]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -216,7 +229,9 @@
                                                                 d="M12 9V5m2 2h-4" />
                                                         </g>
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[8]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[8]?.amenities)
+                                                        }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[9]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -266,7 +281,9 @@
                                                             class="clr-i-outline clr-i-outline-path-20" />
                                                         <path fill="none" d="M0 0h36v36H0z" />
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[9]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[9]?.amenities)
+                                                    }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
@@ -277,7 +294,9 @@
                                                         <path fill="currentColor"
                                                             d="M4.67 2c-.624 0-1.175.438-1.29 1.068C3.232 3.886 3 5.342 3 6.5c0 1.231.636 2.313 1.595 2.936c.271.177.405.405.405.6v.41q0 .027-.003.054c-.027.26-.151 1.429-.268 2.631C4.614 14.316 4.5 15.581 4.5 16a2 2 0 1 0 4 0c0-.42-.114-1.684-.229-2.869a302 302 0 0 0-.268-2.63L8 10.446v-.41c0-.196.134-.424.405-.6A3.5 3.5 0 0 0 10 6.5c0-1.158-.232-2.614-.38-3.432A1.305 1.305 0 0 0 8.33 2c-.34 0-.65.127-.884.336A1.5 1.5 0 0 0 6.5 2c-.359 0-.688.126-.946.336A1.32 1.32 0 0 0 4.671 2M6 3.5a.5.5 0 0 1 1 0v3a.5.5 0 0 0 1 0V3.33A.33.33 0 0 1 8.33 3c.157 0 .28.108.306.247C8.783 4.06 9 5.439 9 6.5a2.5 2.5 0 0 1-1.14 2.098c-.439.285-.86.786-.86 1.438v.41q0 .08.008.16c.028.258.151 1.424.268 2.622c.118 1.215.224 2.415.224 2.772a1 1 0 1 1-2 0c0-.357.106-1.557.224-2.772c.117-1.198.24-2.364.268-2.622q.008-.08.008-.16v-.41c0-.652-.421-1.153-.86-1.438A2.5 2.5 0 0 1 4 6.5c0-1.06.217-2.44.364-3.253A.305.305 0 0 1 4.671 3A.33.33 0 0 1 5 3.33V6.5a.5.5 0 0 0 1 0zm5 3A4.5 4.5 0 0 1 15.5 2a.5.5 0 0 1 .5.5v6.978l.02.224a626 626 0 0 1 .228 2.696c.124 1.507.252 3.161.252 3.602a2 2 0 1 1-4 0c0-.44.128-2.095.252-3.602c.062-.761.125-1.497.172-2.042l.03-.356H12.5A1.5 1.5 0 0 1 11 8.5zm2.998 3.044l-.021.245l-.057.653c-.047.544-.11 1.278-.172 2.038c-.126 1.537-.248 3.132-.248 3.52a1 1 0 1 0 2 0c0-.388-.122-1.983-.248-3.52a565 565 0 0 0-.229-2.691l-.021-.244v-.001L15 9.5V3.035A3.5 3.5 0 0 0 12 6.5v2a.5.5 0 0 0 .5.5h1a.5.5 0 0 1 .498.544" />
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[10]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[10]?.amenities)
+                                                    }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[11]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -302,7 +321,9 @@
                                                             stroke-linejoin="round" stroke-width="32"
                                                             d="M256 112v192M80 80v288M432 80v288" />
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[11]?.amenities }}<br></small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[11]?.amenities)
+                                                    }}<br></small>
                                                 </p>
                                             </div>
                                         </div>
@@ -331,7 +352,9 @@
                                                                 d="M18 4a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zm0 2H6a1 1 0 0 0-.993.883L5 7v5a1 1 0 0 0 .883.993L6 13v-2a1 1 0 0 1 .883-.993L7 10h10a1 1 0 0 1 .993.883L18 11v2a1 1 0 0 0 .993-.883L19 12V7a1 1 0 0 0-.883-.993zm-2 6H8v1h8zm0-5a1 1 0 1 1 0 2a1 1 0 0 1 0-2m-6 9a1 1 0 0 1 1 1v1.172a3 3 0 0 1-.879 2.12l-.414.415a1 1 0 0 1-1.414-1.414l.414-.414A1 1 0 0 0 9 18.172V17a1 1 0 0 1 1-1m3 1a1 1 0 1 1 2 0v1.172a1 1 0 0 0 .293.707l.414.414a1 1 0 1 1-1.414 1.414l-.414-.414A3 3 0 0 1 13 18.172zm-7-1a1 1 0 0 1 1 1v.613a2 2 0 0 1-1.368 1.897l-1.316.439a1 1 0 0 1-.632-1.898L5 17.613V17a1 1 0 0 1 1-1m11 1a1 1 0 1 1 2 0v.613l1.316.438a1 1 0 0 1-.632 1.898l-1.316-.44A2 2 0 0 1 17 17.614z" />
                                                         </g>
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[13]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[13]?.amenities)
+                                                    }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
@@ -344,7 +367,9 @@
                                                         <path fill="currentColor"
                                                             d="M56.576 11.458c-2.033-3.139-11.885-6.51-20.121-8.088C31.91 2.5 26.963 2 22.883 2c-8.718 0-9.181 2.104-9.323 2.752l-.754 2.786c-.033.089-.06.178-.079.263c-.004.017-.004.04-.007.058l-.03.109a.919.919 0 0 0 .019.488c.041.258.142.552.345.868c1.21 1.867 5.675 3.774 11.054 5.35C15.006 15.973 7 20.02 7 27.236c0 .038.002.076.007.115L9.67 48.623c.013 1.978.707 3.854 1.931 5.545l.222 1.188c.553 2.909 7.667 6.393 10.855 5.615C25.172 61.633 27.904 62 30.77 62c11.604 0 21.05-5.996 21.101-13.377l2.661-21.272a.874.874 0 0 0 .008-.114c0-3.684-2.089-6.54-5.342-8.628c4.935-.046 6.503-.938 7.024-1.809a.907.907 0 0 0 .185-.394l.013-.078a.959.959 0 0 0 .024-.088c.014-.066.022-.145.029-.225l.481-2.842c.124-.561-.004-1.138-.378-1.715M52.75 27.18l-2.662 21.27a.862.862 0 0 0-.006.114c0 6.406-8.664 11.618-19.313 11.618c-2.271 0-4.443-.249-6.471-.686c.889-1.75 1.256-4.48 1.256-4.48l-.267-1.438c-6.335-.852-10.03-4.307-10.03-4.307s-1.807 1.399-2.901 2.789c-.582-1.104-.898-2.279-.898-3.497a.862.862 0 0 0-.007-.114L8.789 27.18c.053-7.326 10.441-10.838 20.582-11.132c.354.082.705.163 1.059.241c-10.533.084-19.018 4.052-19.018 8.934c0 4.936 8.667 8.938 19.357 8.938c10.691 0 19.359-4.002 19.359-8.938c0-2.786-2.763-5.274-7.092-6.913c.617.058 1.221.107 1.811.149c4.483 1.761 7.872 4.569 7.903 8.721m-13.795-1.324c.567-.389 1.152-.785 1.738-1.172c.477-1.48.398-4.025 2.262-4.36c1.144-.206 1.985.563 2.634 1.458c.712-.326 1.222-.465 1.401-.314c.915.769.775 1.918.443 2.875c.504.397 1.156.744 1.783 1.027c-.188 4.287-8.552 7.883-18.447 7.883c-7.3 0-13.756-1.961-16.726-4.708a.246.246 0 0 0 .027-.017c-.829-1.287-1.526-2.629-1.182-3.083c.67-.878 2.063.02 3.323.929c1.205-2.009.899-3.976 2.966-4.508c.851-.22 1.269.353 1.617 1.182c1.354-.501 3.131-.862 4.672-2.546c.697-.761.779 1.092.703 2.993c.268.015.553.164.847.413c.149-.667.37-1.109.669-1.194c1.46-.417 2.115.977 2.723 2.093c1.873-4.076 2.94-3.378 3.046.165c1.047-.956 2.216-2.095 3.509-1.455c.888.44.703 1.299.204 2.18c.636.09 1.258.164 1.788.159m10.749-9.071c1.119-.183 1.808-.493 1.908-.943c.363-1.639-7.013-4.444-16.474-6.265c-9.463-1.822-17.432-1.969-17.795-.33c-.111.499.503 1.106 1.667 1.76c-2.926-1.201-4.468-2.244-4.545-2.79c.005-.01.665-.972 5.9-.972c4.077 0 9.382.586 14.937 1.651c12.629 2.418 19.24 5.775 19.4 6.927c-.003.01-.589.859-4.998.962m5.359-3.155c-3.246-2.548-11.691-5.039-19.43-6.521c-5.658-1.084-11.081-1.682-15.267-1.682c-2.479 0-4.143.206-5.275.516l.203-.751c.064-.291 1.54-1.374 7.588-1.374c3.974 0 8.801.488 13.242 1.339c9.716 1.861 17.646 5.277 18.957 7.3c.116.179.133.287.117.363z" />
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[14]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[14]?.amenities)
+                                                        }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[15]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -353,7 +378,9 @@
                                                         <path fill="currentColor"
                                                             d="M25 66.75V425.8l78-26V92.74zm462 0l-78 25.99V399.8l78 26V267.5c-1 3.2-2.4 6.2-4.2 8.8c-4.1 6.1-10.7 11-18.8 11s-14.7-4.9-18.8-11s-6.2-13.8-6.2-22s2.1-15.9 6.2-22s10.7-11 18.8-11s14.7 4.9 18.8 11c1.8 2.6 3.2 5.6 4.2 8.8zm-366 28.5V397.3h126V95.25zm144 0V397.3h126V95.25zM135 109.3h98v274h-98v-265zm144 0h98v274h-98v-265zm-126 18v110h62v-110zm144 0v110h62v-110zm167 112c-.8 0-2.1.4-3.8 3s-3.2 7-3.2 12s1.5 9.4 3.2 12s3 3 3.8 3s2.1-.4 3.8-3s3.2-7 3.2-12s-1.5-9.4-3.2-12s-3-3-3.8-3m-311 16v110h62v-110zm144 0v110h62v-110zm-184 160v30h286v-30z" />
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[15]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[15]?.amenities)
+                                                        }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
@@ -369,7 +396,9 @@
                                                                 d="M8 6s-2.5 3 0 6s0 6 0 6m4-12s-2.5 3 0 6s0 6 0 6m4-12s-2.5 3 0 6s0 6 0 6" />
                                                         </g>
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[16]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[16]?.amenities)
+                                                    }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[17]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -378,7 +407,9 @@
                                                         <path fill="none" stroke="currentColor"
                                                             d="m12.165 7.835l1.3-1.3a3.536 3.536 0 0 0-5-5l-1.3 1.3c-.437.437-.97.767-1.558.963L3.5 4.5v.25l6.75 6.75h.25l.703-2.107c.195-.587.525-1.12.962-1.558Zm0 0L12.27 8a9.724 9.724 0 0 0 5.365 4.38M6.5 10.5a1.414 1.414 0 1 1-2-2m8.965-6.964L14.6.4M12 20.5c0-.66.113-1.322.415-1.91a10.533 10.533 0 0 1 5.264-4.88M12 20.5c5.5 0 8.5 2 8.5 2v1h-17v-1s3-2 8.5-2Zm5.679-6.79a1.5 1.5 0 1 0-.045-1.33m.044 1.33a1.493 1.493 0 0 1-.044-1.33" />
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[17]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[17]?.amenities)
+                                                    }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
@@ -389,7 +420,9 @@
                                                         <path fill="currentColor"
                                                             d="M6 11v33.74C6 46.21 7.237 48 8.76 48h33.218C43.497 48 45 46.21 45 44.74V11zm19.46 26.776c-5.86 0-10.611-4.594-10.611-10.263S19.6 17.25 25.46 17.25s10.611 4.594 10.611 10.263c0 5.67-4.751 10.263-10.611 10.263M41.978 1H8.76C7.237 1 6 2.033 6 3.505V9h39V3.505C45 2.033 43.497 1 41.978 1M19 7H8V3h11zm19.146-.28c-1.249 0-2.258-.979-2.258-2.188c0-1.207 1.009-2.186 2.258-2.186s2.261.979 2.261 2.186c-.001 1.208-1.012 2.188-2.261 2.188" />
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[18]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[18]?.amenities)
+                                                    }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[19]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -398,7 +431,9 @@
                                                         <path fill="currentColor"
                                                             d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2" />
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[19]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[19]?.amenities)
+                                                    }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
@@ -409,7 +444,8 @@
                                                         <path fill="none" stroke="currentColor" stroke-linecap="round"
                                                             stroke-linejoin="round" stroke-width="2"
                                                             d="M12 3c-3.866 0-7 3.272-7 7v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10c0-3.728-3.134-7-7-7M5 13h14M12 3v18" />
-                                                    </svg> <small>{{ propertyData?.amenities[20]?.amenities }}</small>
+                                                    </svg> <small>{{ addSpacesToCamelCase(
+                                                        propertyData?.amenities[20]?.amenities) }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[21]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -421,14 +457,17 @@
                                                             stroke-linecap="round" stroke-miterlimit="10"
                                                             stroke-width="32" d="M128 416h256" />
                                                     </svg>
-                                                    <small>{{ propertyData?.amenities[21]?.amenities }}</small>
+                                                    <small>{{
+                                                        addSpacesToCamelCase(propertyData?.amenities[21]?.amenities)
+                                                    }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
                                                 <p v-if="propertyData?.amenities[22]?.value == 1"
                                                     class="d-flex align-items-center">
                                                     <i class="fa-solid fa-person-rifle pe-1"></i>
-                                                    <small>{{ propertyData?.amenities[22]?.amenities }}</small>
+                                                    <small>{{ addSpacesToCamelCase(
+                                                        propertyData?.amenities[22]?.amenities) }}</small>
                                                 </p>
                                             </div>
                                         </div>
@@ -437,7 +476,7 @@
                             </div>
                         </div>
                     </div>
-
+                    13
                     <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab"
                         tabindex="0">
                         <hr>
@@ -738,7 +777,7 @@ const getMediabyType = () => {
         .then(response => {
             setTimeout(() => {
                 loading.value = false;
-            }, 2000);
+            }, 5000);
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
@@ -746,7 +785,7 @@ const getMediabyType = () => {
         })
         .then(data => {
 
-            console.log('Success:', data.propertyInfo);
+           
             mediaData.value = data.propertyInfo;
             setTimeout(() => {
                 loading.value = false;
@@ -808,6 +847,10 @@ const getImageUrl = (media) => {
     return `${import.meta.env.VITE_BASE_URL}/${media?.image_uri}`;
 };
 
+
+const addSpacesToCamelCase = (str) => {
+    return str.replace(/([a-z])([A-Z])/g, '$1 $2');
+}
 // Function to handle form submission
 // Function to handle form submission
 
@@ -885,11 +928,11 @@ const validatePhone = (event) => {
         return false;
     }
 
-    if (value.length > 13) {
+    if (value.length > 15) {
         // Truncate the value to 13 characters
-        value = value.slice(0, 13);
+        value = value.slice(0, 15);
         // Update the error message accordingly
-        errors.value.phone = 'Phone number should not exceed 13 digits';
+        errors.value.phone = 'Phone number should not exceed 15 digits';
     } else {
         errors.value.phone = '';
     }
@@ -956,8 +999,11 @@ const handleInquiryFormSubmission = () => {
             return response.json();
         })
         .then(data => {
-            loading.value = false;
-            footerState.setFooterState(true);
+            setTimeout(() => {
+                loading.value = false;
+
+                footerState.setFooterState(true);
+            }, 5000)
             $toast.open({
                 message: 'Query submitted successfully!',
                 type: 'success',
@@ -1027,10 +1073,10 @@ const propertyDetailbyId = () => {
             //   type: 'success',
             //   position: 'top-right',
             // });
-            loading.value = false;
             setTimeout(() => {
+                loading.value = false;
                 footerState.setFooterState(true);
-            }, 2000)
+            }, 5000)
 
 
         })
@@ -1071,7 +1117,11 @@ const enforceMaxLength = (event, maxLength, fieldName) => {
 
 //handling footer here 
 onMounted(() => {
-    footerState.setFooterState(true);
+    loading.value = true;
+    setTimeout(() => {
+
+        footerState.setFooterState(true);
+    }, 5000)
 })
 
 onUnmounted(() => {

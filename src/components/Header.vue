@@ -169,7 +169,7 @@ a {
     box-shadow: rgba(0, 0, 0, 0.171) 0px 3px 8px;
 
     .nav-link {
-        color: #000 !important
+        color: #000
     }
 
     background-color: white;

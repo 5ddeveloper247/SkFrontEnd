@@ -196,7 +196,7 @@ s .mainNavBar {
 }
 
 .nav-link {
-    color: #fff;
+    /* color: #fff; */
     font-size: 14px;
     border-color: var(--bs-nav-tabs-link-hover-border-color) !important;
 }
@@ -707,7 +707,7 @@ s .mainNavBar {
 
 /* =====================Blogs================== */
 .blogs {
-    background  : linear-gradient( rgba(244, 93, 8, 1) 0%, rgba(255, 143, 51, 1) 50%, rgba(244, 93, 8, 1) 100%);
+    background: linear-gradient(rgba(244, 93, 8, 1) 0%, rgba(255, 143, 51, 1) 50%, rgba(244, 93, 8, 1) 100%);
     color: rgba(244, 93, 8, 1);
 }
 

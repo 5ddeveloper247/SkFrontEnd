@@ -426,7 +426,7 @@
             </div>
 
 
-            <div v-if="mediaData.length > 0">
+            <div v-if="mediaData?.length > 0">
                 <swiper :autoplay="autoplay" :speed="1000" :spaceBetween="5" :pagination="{ clickable: true }"
                     :modules="modules" :breakpoints="{
                         320: { slidesPerView: 1, spaceBetween: 5 },
