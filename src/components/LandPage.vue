@@ -117,76 +117,43 @@
                                     </div>
 
                                     <div class="w-100">
-                                        <!-- HOME TYPE -->
-                                        <div class="mt-2">
-                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
-                                                @click="toggleHomeType">
-                                                HOME TYPE
-                                                <i :class="{ 'fa-chevron-right': showHomeType, 'fa-chevron-down': !showHomeType }"
-                                                    class="fa-solid"></i>
-                                            </h6>
-                                        </div>
-                                        <transition name="fade">
-                                            <div v-if="!showHomeType" class="px-4">
-                                                <label class="d-flex align-items-center gap-1">
-                                                    <input type="checkbox" v-model="Landfilters.homeType" value="House">
-                                                    House
-                                                </label>
-                                                <label class="d-flex align-items-center gap-1 mt-1">
-                                                    <input type="checkbox" v-model="Landfilters.homeType" value="Flat">
-                                                    Flat
-                                                </label>
-                                            </div>
-                                        </transition>
-
-                                        <!-- PLOT -->
-                                        <div class="mt-2">
-                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
-                                                @click="togglePlot">
-                                                PLOT
-                                                <i :class="{ 'fa-chevron-right': showPlot, 'fa-chevron-down': !showPlot }"
-                                                    class="fa-solid"></i>
-                                            </h6>
-                                        </div>
-                                        <transition name="fade">
-                                            <div v-if="!showPlot" class="px-4">
-                                                <label class="d-flex align-items-center gap-1">
-                                                    <input type="checkbox" v-model="Landfilters.plot"
-                                                        value="Residential"> Residential Plot
-                                                </label>
-                                                <label class="d-flex align-items-center gap-1 mt-1">
-                                                    <input type="checkbox" v-model="Landfilters.plot"
-                                                        value="Commercial"> Commercial Plot
-                                                </label>
-                                            </div>
-                                        </transition>
-
-                                        <!-- COMMERCIAL -->
-                                        <div class="mt-2">
-                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
-                                                @click="toggleCommercial">
-                                                COMMERCIAL
-                                                <i :class="{ 'fa-chevron-right': showCommercial, 'fa-chevron-down': !showCommercial }"
-                                                    class="fa-solid"></i>
-                                            </h6>
-                                        </div>
-                                        <transition name="fade">
-                                            <div v-if="!showCommercial" class="px-4">
-                                                <label class="d-flex align-items-center gap-1">
-                                                    <input type="checkbox" v-model="Landfilters.commercial"
-                                                        value="Office"> Office
-                                                </label>
-                                                <label class="d-flex align-items-center gap-1 my-1">
-                                                    <input type="checkbox" v-model="Landfilters.commercial"
-                                                        value="Shop"> Shop
-                                                </label>
-                                                <label class="d-flex align-items-center gap-1">
-                                                    <input type="checkbox" v-model="Landfilters.commercial"
-                                                        value="Building"> Building
-                                                </label>
-                                            </div>
-                                        </transition>
-
+    <div class="mt-2">
+      <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+          @click="toggleFilterSection">
+        FILTER OPTIONS
+        <i :class="{ 'fa-chevron-right': showFilterOptions, 'fa-chevron-down': !showFilterOptions }"
+            class="fa-solid"></i>
+      </h6>
+    </div>
+    <transition name="fade">
+      <div v-if="!showFilterOptions" class="px-4">
+        <div class="d-flex flex-column">
+          <label class="d-flex align-items-center gap-1">
+            <input type="radio" v-model="Landfilters.selectedFilterOption" value="House"> House
+          </label>
+          <label class="d-flex align-items-center gap-1 mt-1">
+            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Flat"> Flat
+          </label>
+          <label class="d-flex align-items-center gap-1 mt-1">
+            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Residential"> Residential Plot
+          </label>
+          <label class="d-flex align-items-center gap-1 mt-1">
+            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Commercial"> Commercial Plot
+          </label>
+          <label class="d-flex align-items-center gap-1 mt-1">
+            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Office"> Office
+          </label>
+          <label class="d-flex align-items-center gap-1 mt-1">
+            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Shop"> Shop
+          </label>
+          <label class="d-flex align-items-center gap-1 mt-1">
+            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Building"> Building
+          </label>
+        </div>
+      </div>
+    </transition>
+  </div>
+                                    <div>
                                         <!-- CITY -->
                                         <div class="mt-2">
                                             <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
@@ -416,7 +383,15 @@ const filterMinPrice = ref();
 const filterMaxPrice = ref();
 const initialFetchCompleted = ref(false); // Flag to indicate if the initial fetch is completed
 const notFound = ref(false);
+const showFilterOptions = ref(false);
 
+// State to track the selected filter option
+
+
+// Toggle function to show or hide the filter options
+const toggleFilterSection = () => {
+    showFilterOptions.value = !showFilterOptions.value;
+};
 const Landfilters = ref({
     HomePageFilters: '',
     minPrice: '',
@@ -429,7 +404,8 @@ const Landfilters = ref({
     area: [],
     sector: [],
     location: [],
-    rooms: ''
+    rooms: '',
+    selectedFilterOption:'',
 });
 
 const areaList = ref([]);
@@ -537,7 +513,7 @@ const fetchPropertyData = (HomePagefilterCriteria = null) => {
 
     // If there are filter criteria, fetch filtered results
     if (HomePagefilterCriteria) {
-       
+
         url = `${base_url}/api/frontend/home/property/getByFilters`;
         options = {
             ...options,
@@ -740,30 +716,43 @@ const onCityChange = () => {
     selectedSectors.value = [];
 };
 
-const onAreaChange = () => {
-    const selectedAreaObject = selectedAreas.value.find((area) => area.NAME === Landfilters.value.area[0]);
-    if (selectedAreaObject) {
-        Landfilters.value.location = [];
-        Landfilters.value.sector = [];
-        selectedLocation.value = selectedAreaObject.locations;
-    } else {
-        selectedLocation.value = [];
-    }
-    // Reset dependent values
-    selectedSectors.value = [];
-};
+// const onAreaChange = () => {
+//     const selectedAreaObject = selectedAreas.value.find((area) => area.NAME === Landfilters.value.area[0]);
+//     if (selectedAreaObject) {
+//         Landfilters.value.location = [];
+//         Landfilters.value.sector = [];
+//         selectedLocation.value = selectedAreaObject.locations;
+//     } else {
+//         selectedLocation.value = [];
+//     }
+//     // Reset dependent values
+//     selectedSectors.value = [];
+// };
 
+// const onLocationChange = () => {
+//     const selectedLocationObject = selectedLocation.value.find((location) => location.NAME === Landfilters.value.location[0]);
+//     if (selectedLocationObject) {
+//         Landfilters.value.sector = [];
+//         selectedSectors.value = selectedLocationObject.sectors;
+//     } else {
+//         selectedSectors.value = [];
+//     }
+//     // No dependent values to reset in this function
+// };
 const onLocationChange = () => {
-    const selectedLocationObject = selectedLocation.value.find((location) => location.NAME === Landfilters.value.location[0]);
-    if (selectedLocationObject) {
+    const selectedLocationNames = Landfilters.value.location;
+    const selectedLocationObjects = selectedLocation.value.filter((location) =>
+        selectedLocationNames.includes(location.NAME)
+    );
+    if (selectedLocationObjects.length > 0) {
         Landfilters.value.sector = [];
-        selectedSectors.value = selectedLocationObject.sectors;
+        // Aggregate sectors from all selected locations
+        selectedSectors.value = selectedLocationObjects.flatMap(location => location.sectors);
     } else {
         selectedSectors.value = [];
     }
     // No dependent values to reset in this function
 };
-
 
 
 // get the max price of property for range price 
