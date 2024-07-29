@@ -105,7 +105,7 @@
                             </div>
 
 
-                            <div class="col-6 col-md mb-4"
+                            <!-- <div class="col-6 col-md mb-4"
                                 v-if="filterCriteria.plot == 'House' || filterCriteria.plot == 'Flat'">
                                 <select class="form-select" v-model="filterCriteria.rooms"
                                     aria-label="Default select example">
@@ -115,7 +115,7 @@
                                         {{ num }} Room
                                     </option>
                                 </select>
-                            </div>
+                            </div> -->
 
                             <!-- <div class="col-6 col-md mb-4"
                                 v-if="filterCriteria.homeType !== 'House' && filterCriteria.homeType !== 'Flat'">
