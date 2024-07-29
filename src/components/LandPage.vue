@@ -117,42 +117,49 @@
                                     </div>
 
                                     <div class="w-100">
-    <div class="mt-2">
-      <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
-          @click="toggleFilterSection">
-        FILTER OPTIONS
-        <i :class="{ 'fa-chevron-right': showFilterOptions, 'fa-chevron-down': !showFilterOptions }"
-            class="fa-solid"></i>
-      </h6>
-    </div>
-    <transition name="fade">
-      <div v-if="!showFilterOptions" class="px-4">
-        <div class="d-flex flex-column">
-          <label class="d-flex align-items-center gap-1">
-            <input type="radio" v-model="Landfilters.selectedFilterOption" value="House"> House
-          </label>
-          <label class="d-flex align-items-center gap-1 mt-1">
-            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Flat"> Flat
-          </label>
-          <label class="d-flex align-items-center gap-1 mt-1">
-            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Residential"> Residential Plot
-          </label>
-          <label class="d-flex align-items-center gap-1 mt-1">
-            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Commercial"> Commercial Plot
-          </label>
-          <label class="d-flex align-items-center gap-1 mt-1">
-            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Office"> Office
-          </label>
-          <label class="d-flex align-items-center gap-1 mt-1">
-            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Shop"> Shop
-          </label>
-          <label class="d-flex align-items-center gap-1 mt-1">
-            <input type="radio" v-model="Landfilters.selectedFilterOption" value="Building"> Building
-          </label>
-        </div>
-      </div>
-    </transition>
-  </div>
+                                        <div class="mt-2">
+                                            <h6 class="input-heading px-3 py-2 d-flex align-items-center justify-content-between w-100"
+                                                @click="toggleFilterSection">
+                                                Property Types
+                                                <i :class="{ 'fa-chevron-right': showFilterOptions, 'fa-chevron-down': !showFilterOptions }"
+                                                    class="fa-solid"></i>
+                                            </h6>
+                                        </div>
+                                        <transition name="fade">
+                                            <div v-if="!showFilterOptions" class="px-4">
+                                                <div class="d-flex flex-column">
+                                                    <label class="d-flex align-items-center gap-1">
+                                                        <input type="radio" v-model="Landfilters.selectedFilterOption"
+                                                            value="House"> House
+                                                    </label>
+                                                    <label class="d-flex align-items-center gap-1 mt-1">
+                                                        <input type="radio" v-model="Landfilters.selectedFilterOption"
+                                                            value="Flat"> Flat
+                                                    </label>
+                                                    <label class="d-flex align-items-center gap-1 mt-1">
+                                                        <input type="radio" v-model="Landfilters.selectedFilterOption"
+                                                            value="Residential"> Residential Plot
+                                                    </label>
+                                                    <label class="d-flex align-items-center gap-1 mt-1">
+                                                        <input type="radio" v-model="Landfilters.selectedFilterOption"
+                                                            value="Commercial"> Commercial Plot
+                                                    </label>
+                                                    <label class="d-flex align-items-center gap-1 mt-1">
+                                                        <input type="radio" v-model="Landfilters.selectedFilterOption"
+                                                            value="Office"> Office
+                                                    </label>
+                                                    <label class="d-flex align-items-center gap-1 mt-1">
+                                                        <input type="radio" v-model="Landfilters.selectedFilterOption"
+                                                            value="Shop"> Shop
+                                                    </label>
+                                                    <label class="d-flex align-items-center gap-1 mt-1">
+                                                        <input type="radio" v-model="Landfilters.selectedFilterOption"
+                                                            value="Building"> Building
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </transition>
+                                    </div>
                                     <div>
                                         <!-- CITY -->
                                         <div class="mt-2">
@@ -405,7 +412,7 @@ const Landfilters = ref({
     sector: [],
     location: [],
     rooms: '',
-    selectedFilterOption:'',
+    selectedFilterOption: '',
 });
 
 const areaList = ref([]);
@@ -443,6 +450,8 @@ const generateFilterData = (HomefilterData) => {
     } = HomefilterData;
 
 
+    
+     Landfilters.value.selectedFilterOption=plot;
     // Update Landfilters value
     Landfilters.value.HomePageFilters = HomefilterData;
     Landfilters.value.purpose = purpose || '';
@@ -753,7 +762,22 @@ const onLocationChange = () => {
     }
     // No dependent values to reset in this function
 };
-
+const onAreaChange = () => {
+    const selectedAreaNames = Landfilters.value.area;
+    const selectedAreaObjects = selectedAreas.value.filter((area) =>
+        selectedAreaNames.includes(area.NAME)
+    );
+    if (selectedAreaObjects.length > 0) {
+        Landfilters.value.location = [];
+        Landfilters.value.sector = [];
+        // Aggregate locations from all selected areas
+        selectedLocation.value = selectedAreaObjects.flatMap(area => area.locations);
+    } else {
+        selectedLocation.value = [];
+    }
+    // Reset dependent values
+    selectedSectors.value = [];
+};
 
 // get the max price of property for range price 
 onMounted(() => {

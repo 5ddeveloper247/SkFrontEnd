@@ -80,7 +80,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-6 col-md mb-4"
+                            <!-- <div class="col-6 col-md mb-4"
                                 v-if="filterCriteria.plot !== 'Residential' && filterCriteria.plot !== 'Commercial'">
                                 <select class="form-select" v-model="filterCriteria.homeType"
                                     aria-label="Default select example">
@@ -88,10 +88,25 @@
                                     <option value="House">House</option>
                                     <option value="Flat">Flat</option>
                                 </select>
+                            </div> -->
+
+                            <div class="col-6 col-md mb-4">
+                                <label for="propertyType">Property Type</label>
+                                <select v-model="filterCriteria.plot" id="propertyType" class="form-select">
+                                    <option value="">select type</option>
+                                    <option value="House">House</option>
+                                    <option value="Flat">Flat</option>
+                                    <option value="Residential">Residential Plot</option>
+                                    <option value="Commercial">Commercial Plot</option>
+                                    <option value="Office">Office</option>
+                                    <option value="Shop">Shop</option>
+                                    <option value="Building">Building</option>
+                                </select>
                             </div>
 
+
                             <div class="col-6 col-md mb-4"
-                                v-if="filterCriteria.homeType == 'House' || filterCriteria.homeType == 'Flat'">
+                                v-if="filterCriteria.plot == 'House' || filterCriteria.plot == 'Flat'">
                                 <select class="form-select" v-model="filterCriteria.rooms"
                                     aria-label="Default select example">
 
@@ -102,7 +117,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-6 col-md mb-4"
+                            <!-- <div class="col-6 col-md mb-4"
                                 v-if="filterCriteria.homeType !== 'House' && filterCriteria.homeType !== 'Flat'">
                                 <select class="form-select" v-model="filterCriteria.plot"
                                     aria-label="Default select example">
@@ -110,9 +125,9 @@
                                     <option value="Residential">Residential</option>
                                     <option value="Commercial">Commercial</option>
                                 </select>
-                            </div>
+                            </div> -->
 
-                            <div class="col-6 col-md mb-4" v-if="filterCriteria.plot === 'Commercial'">
+                            <!-- <div class="col-6 col-md mb-4" v-if="filterCriteria.plot === 'Commercial'">
                                 <select class="form-select" v-model="filterCriteria.commercial"
                                     aria-label="Default select example">
                                     <option value="Select commercial type">Select commercial type</option>
@@ -120,7 +135,7 @@
                                     <option value="Shop">Shop</option>
                                     <option value="Building">Building</option>
                                 </select>
-                            </div>
+                            </div> -->
 
 
 
@@ -769,7 +784,7 @@ const filterCriteria = ref({
     purpose: 'Sale',
     city: 'Select city',
     homeType: 'Select home',
-    plot: 'Select plot type',
+    plot: '',
     commercial: 'Select commercial type',
     rooms: 'Select rooms',
     //inactive still

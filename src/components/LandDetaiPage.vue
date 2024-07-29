@@ -150,7 +150,7 @@
                                                     <i class="fa-solid fa-plate-wheat pe-1"></i>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[2]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
@@ -159,21 +159,21 @@
                                                     <i class="fa-solid fa-bolt pe-1"></i>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[3]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[4]?.value == 1"
                                                     class="d-flex align-items-center">
                                                     <i class="fa-solid fa-water pe-1"></i>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[4]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[5]?.value == 1"
                                                     class="d-flex align-items-center">
                                                     <i class="fa-solid fa-fire-flame-simple pe-1"></i>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[5]?.amenities)
-                                                        }}</small>
+                                                    }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
@@ -182,7 +182,7 @@
                                                     <i class="fa-solid fa-border-all pe-1"></i>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[6]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                             </div>
                                         </div>
@@ -208,7 +208,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[7]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[8]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -231,7 +231,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[8]?.amenities)
-                                                        }}</small>
+                                                    }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[9]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -283,7 +283,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[9]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content mt-3">
@@ -296,7 +296,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[10]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[11]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -323,7 +323,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[11]?.amenities)
-                                                    }}<br></small>
+                                                        }}<br></small>
                                                 </p>
                                             </div>
                                         </div>
@@ -354,7 +354,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[13]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
@@ -369,7 +369,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[14]?.amenities)
-                                                        }}</small>
+                                                    }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[15]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -380,7 +380,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[15]?.amenities)
-                                                        }}</small>
+                                                    }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
@@ -398,7 +398,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[16]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[17]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -409,7 +409,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[17]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
@@ -422,7 +422,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[18]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                                 <p v-if="propertyData?.amenities[19]?.value == 1"
                                                     class="d-flex align-items-center">
@@ -433,7 +433,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[19]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
@@ -459,7 +459,7 @@
                                                     </svg>
                                                     <small>{{
                                                         addSpacesToCamelCase(propertyData?.amenities[21]?.amenities)
-                                                    }}</small>
+                                                        }}</small>
                                                 </p>
                                             </div>
                                             <div class="d-flex flex-wrap flex-md-nowrap amenties-content">
@@ -476,7 +476,7 @@
                             </div>
                         </div>
                     </div>
-                    13
+
                     <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab"
                         tabindex="0">
                         <hr>
@@ -785,7 +785,7 @@ const getMediabyType = () => {
         })
         .then(data => {
 
-           
+
             mediaData.value = data.propertyInfo;
             setTimeout(() => {
                 loading.value = false;
